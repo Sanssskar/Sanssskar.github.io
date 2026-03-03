@@ -115,16 +115,17 @@
             --text-primary: #1a1b1f;
             --text-secondary: #5b5c64;
             --text-tertiary: #8e8f96;
-            --accent-1: #ff5e6b;
-            --accent-2: #6c5ce7;
-            --accent-3: #00b894;
-            --gradient-1: linear-gradient(135deg, #ff5e6b, #6c5ce7);
-            --gradient-2: linear-gradient(135deg, #00b894, #6c5ce7);
+            --accent-1: #2e7d32;  /* Dark green */
+            --accent-2: #4caf50;  /* Medium green */
+            --accent-3: #81c784;  /* Light green */
+            --gradient-1: linear-gradient(135deg, #2e7d32, #4caf50);
+            --gradient-2: linear-gradient(135deg, #4caf50, #81c784);
             --border-light: rgba(0, 0, 0, 0.05);
             --border-medium: rgba(0, 0, 0, 0.1);
             --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
             --hover-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.2);
             --blur-bg: rgba(255, 255, 255, 0.7);
+            --sword-glow: rgba(76, 175, 80, 0.6);
         }
 
         body.dark-mode {
@@ -133,16 +134,17 @@
             --text-primary: #ffffff;
             --text-secondary: #b0b1b9;
             --text-tertiary: #6b6c75;
-            --accent-1: #ff7a85;
-            --accent-2: #8a7aff;
-            --accent-3: #20d9a4;
-            --gradient-1: linear-gradient(135deg, #ff7a85, #8a7aff);
-            --gradient-2: linear-gradient(135deg, #20d9a4, #8a7aff);
+            --accent-1: #2e7d32;
+            --accent-2: #4caf50;
+            --accent-3: #81c784;
+            --gradient-1: linear-gradient(135deg, #2e7d32, #4caf50);
+            --gradient-2: linear-gradient(135deg, #4caf50, #81c784);
             --border-light: rgba(255, 255, 255, 0.05);
             --border-medium: rgba(255, 255, 255, 0.1);
             --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
             --hover-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.5);
             --blur-bg: rgba(26, 27, 32, 0.7);
+            --sword-glow: rgba(129, 199, 132, 0.6);
         }
 
         body {
@@ -152,6 +154,105 @@
             line-height: 1.6;
             transition: background-color 0.4s ease, color 0.3s ease;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Sword animation container */
+        .sword-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .sword {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--accent-2);
+            text-shadow: 0 0 15px var(--sword-glow), 0 0 30px var(--accent-1);
+            animation: swordDrop linear forwards;
+            opacity: 0;
+            transform-origin: center;
+            filter: drop-shadow(0 0 8px var(--accent-1));
+            z-index: 9999;
+        }
+
+        @keyframes swordDrop {
+            0% {
+                transform: translateY(-20vh) rotate(0deg) scale(0.8);
+                opacity: 1;
+            }
+            20% {
+                transform: translateY(20vh) rotate(90deg) scale(1.1);
+                opacity: 1;
+            }
+            40% {
+                transform: translateY(60vh) rotate(180deg) scale(1.2);
+                opacity: 1;
+            }
+            60% {
+                transform: translateY(80vh) rotate(270deg) scale(1.1);
+                opacity: 0.8;
+            }
+            80% {
+                transform: translateY(90vh) rotate(360deg) scale(0.9);
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(110vh) rotate(450deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Fighting sparks animation */
+        .spark {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            animation: sparkFade 1s ease-out forwards;
+            box-shadow: 0 0 15px var(--accent-2), 0 0 30px var(--accent-1);
+        }
+
+        @keyframes sparkFade {
+            0% {
+                transform: scale(1) translate(0, 0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5) translate(var(--tx), var(--ty));
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(0) translate(calc(var(--tx) * 2), calc(var(--ty) * 2));
+                opacity: 0;
+            }
+        }
+
+        /* Sword trail effect on hover */
+        .project-card:hover::after {
+            content: '⚔️';
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            font-size: 2rem;
+            color: var(--accent-2);
+            opacity: 0.3;
+            transform: translateY(-50%) rotate(45deg);
+            animation: swordTrail 1s ease infinite;
+            pointer-events: none;
+        }
+
+        @keyframes swordTrail {
+            0%, 100% { transform: translateY(-50%) rotate(45deg) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-50%) rotate(45deg) scale(1.3); opacity: 0.6; }
         }
 
         .container {
@@ -738,16 +839,19 @@
 <body>
     <h1 class="sr-only">Sanskar Shrestha - Laravel & Filament Developer from Dharan, Nepal</h1>
 
+    <!-- Sword animation container -->
+    <div class="sword-container" id="swordContainer"></div>
+
     <div class="cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursorFollower"></div>
 
     <div class="container">
         <nav class="nav-bar">
-            <div class="logo">SanskarHub</div>
+            <div class="logo">SanskarHub ⚔️</div>
             <div class="nav-controls">
                 <div class="control-group">
                     <button class="glass-btn" id="langToggle">
-                        <span id="langText">💜</span>
+                        <span id="langText">⚔️</span>  <!-- Changed to sword emoji -->
                     </button>
                     <button class="glass-btn" id="themeToggle">
                         <i class="fa-regular fa-moon" id="themeIcon"></i>
@@ -759,9 +863,9 @@
         <div class="hero">
             <div class="hero-content">
                 <div class="badge-container">
-                    <span class="skill-bubble">Laravel</span>
-                    <span class="skill-bubble">Filament</span>
-                    <span class="skill-bubble">APIs</span>
+                    <span class="skill-bubble">Laravel ⚔️</span>
+                    <span class="skill-bubble">Filament ⚔️</span>
+                    <span class="skill-bubble">APIs ⚔️</span>
                 </div>
 
                 <div class="name-wrapper">
@@ -769,7 +873,7 @@
                         <div class="flip-container">
                             <div class="flip-content" id="flipName">
                                 <div class="flip-front">Marimo</div>
-                                <div class="flip-back">🦁👑🦁👑</div>
+                                <div class="flip-back">⚔️👑⚔️👑</div>
                             </div>
                         </div>
                     </div>
@@ -795,7 +899,7 @@
 
                 <div class="hero-tagline">
                     <div class="animated-icon"><i class="fa-solid fa-code"></i></div>
-                    <span>Laravel & Filament Developer • Clean & Scalable Web Solutions</span>
+                    <span>Laravel & Filament Developer • Clean & Scalable Web Solutions ⚔️</span>
                 </div>
 
                 <p class="hero-desc">
@@ -827,7 +931,7 @@
 
         <section id="projects">
             <h2 class="section-title">
-                <i class="fa-solid fa-star"></i> Featured Laravel & Filament Projects
+                <i class="fa-solid fa-star"></i> Featured Laravel & Filament Projects ⚔️
             </h2>
             <div class="projects-grid">
                 <div class="project-card">
@@ -843,7 +947,7 @@
                     </div>
                     <div style="margin-top: 1.5rem;">
                         <a href="https://github.com/Sanssskar/login.laravel" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
-                            <i class="fa-brands fa-github"></i> View Repository
+                            <i class="fa-brands fa-github"></i> View Repository ⚔️
                         </a>
                     </div>
                 </div>
@@ -861,7 +965,7 @@
                     </div>
                     <div style="margin-top: 1.5rem;">
                         <a href="https://github.com/Sanssskar/lms" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
-                            <i class="fa-brands fa-github"></i> View Repository
+                            <i class="fa-brands fa-github"></i> View Repository ⚔️
                         </a>
                     </div>
                 </div>
@@ -879,7 +983,7 @@
                     </div>
                     <div style="margin-top: 1.5rem;">
                         <a href="https://github.com/Sanssskar/product" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
-                            <i class="fa-brands fa-github"></i> View Repository
+                            <i class="fa-brands fa-github"></i> View Repository ⚔️
                         </a>
                     </div>
                 </div>
@@ -897,7 +1001,7 @@
                     </div>
                     <div style="margin-top: 1.5rem;">
                         <a href="https://github.com/Sanssskar/ecommerce_project" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
-                            <i class="fa-brands fa-github"></i> View Repository
+                            <i class="fa-brands fa-github"></i> View Repository ⚔️
                         </a>
                     </div>
                 </div>
@@ -906,17 +1010,17 @@
 
         <section>
             <h2 class="section-title">
-                <i class="fa-solid fa-code"></i> Tech Stack & Core Skills
+                <i class="fa-solid fa-code"></i> Tech Stack & Core Skills ⚔️
             </h2>
             <div class="skills-cloud">
-                <span class="skill-bubble">Laravel</span>
-                <span class="skill-bubble">FilamentPHP</span>
-                <span class="skill-bubble">MySQL</span>
-                <span class="skill-bubble">JavaScript</span>
-                <span class="skill-bubble">Tailwind CSS</span>
-                <span class="skill-bubble">RESTful APIs</span>
-                <span class="skill-bubble">Blade</span>
-                <span class="skill-bubble">Admin Panels</span>
+                <span class="skill-bubble">Laravel ⚔️</span>
+                <span class="skill-bubble">FilamentPHP ⚔️</span>
+                <span class="skill-bubble">MySQL ⚔️</span>
+                <span class="skill-bubble">JavaScript ⚔️</span>
+                <span class="skill-bubble">Tailwind CSS ⚔️</span>
+                <span class="skill-bubble">RESTful APIs ⚔️</span>
+                <span class="skill-bubble">Blade ⚔️</span>
+                <span class="skill-bubble">Admin Panels ⚔️</span>
             </div>
         </section>
 
@@ -931,7 +1035,7 @@
             </a>
             <a href="https://github.com/Sanssskar" target="_blank" class="contact-card">
                 <i class="fa-brands fa-github"></i>
-                <span>@Sanssskar</span>
+                <span>@Sanssskar ⚔️</span>
             </a>
             <a href="https://www.facebook.com/davis.nephop" target="_blank" class="contact-card">
                 <i class="fa-brands fa-facebook"></i>
@@ -956,11 +1060,84 @@
         </div>
 
         <footer class="footer">
-            <div>© 2025 Sanskar Shrestha — Laravel & Filament Developer</div>
+            <div>© 2025 Sanskar Shrestha — Laravel & Filament Developer ⚔️</div>
         </footer>
     </div>
 
     <script>
+        // Sword dropping animation
+        function createSword() {
+            const container = document.getElementById('swordContainer');
+            const sword = document.createElement('div');
+            sword.className = 'sword';
+            
+            // Random sword emoji (different sword types)
+            const swords = ['⚔️', '🗡️', '🔪', '⚔️', '🗡️', '🔪'];
+            const randomSword = swords[Math.floor(Math.random() * swords.length)];
+            sword.textContent = randomSword;
+            
+            // Random starting position
+            const left = Math.random() * 100;
+            sword.style.left = left + '%';
+            
+            // Random animation duration between 3 and 8 seconds
+            const duration = 3 + Math.random() * 5;
+            sword.style.animation = `swordDrop ${duration}s linear forwards`;
+            
+            // Random rotation start
+            sword.style.transform = `rotate(${Math.random() * 360}deg)`;
+            
+            container.appendChild(sword);
+            
+            // Remove sword after animation
+            setTimeout(() => {
+                sword.remove();
+            }, duration * 1000);
+        }
+
+        // Create swords periodically
+        setInterval(createSword, 800); // New sword every 800ms
+
+        // Fighting sparks animation on click
+        function createSparks(x, y) {
+            for (let i = 0; i < 8; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.left = x + 'px';
+                spark.style.top = y + 'px';
+                
+                // Random direction for spark
+                const tx = (Math.random() - 0.5) * 100;
+                const ty = (Math.random() - 0.5) * 100;
+                spark.style.setProperty('--tx', tx + 'px');
+                spark.style.setProperty('--ty', ty + 'px');
+                
+                // Random size
+                const size = 2 + Math.random() * 4;
+                spark.style.width = size + 'px';
+                spark.style.height = size + 'px';
+                
+                document.body.appendChild(spark);
+                
+                setTimeout(() => {
+                    spark.remove();
+                }, 1000);
+            }
+        }
+
+        // Add spark effect on clicks
+        document.addEventListener('click', (e) => {
+            createSparks(e.clientX, e.clientY);
+        });
+
+        // Add spark effect on project card hover
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                const rect = card.getBoundingClientRect();
+                createSparks(rect.left + rect.width/2, rect.top + rect.height/2);
+            });
+        });
+
         // Music toggle
         const bgMusic = document.getElementById('bg-music');
         const musicIcon = document.getElementById('music-icon');
@@ -1023,7 +1200,7 @@
 
         function flipLanguage() {
             flipName.classList.toggle('flip');
-            langText.textContent = flipName.classList.contains('flip') ? '💚' : '💜';
+            langText.textContent = flipName.classList.contains('flip') ? '⚔️' : '⚔️'; // Both sword emoji
         }
 
         flipName.addEventListener('click', (e) => {
@@ -1104,6 +1281,10 @@
                 imageCounter.textContent = '1/2';
             }
             isImage1Active = !isImage1Active;
+            
+            // Create sparks on swipe
+            const rect = swipeableShape.getBoundingClientRect();
+            createSparks(rect.left + rect.width/2, rect.top + rect.height/2);
         }
 
         swipeableShape.addEventListener('click', swipeImages);
@@ -1139,7 +1320,7 @@
 
         // Watermark
         const watermark = document.createElement('div');
-        watermark.innerHTML = '© Sanskar Shrestha';
+        watermark.innerHTML = '⚔️ Sanskar Shrestha ⚔️';
         watermark.style.cssText = `
             position: fixed;
             bottom: 10px;
