@@ -15,11 +15,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Prevent text selection */
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
         }
 
         /* Light Mode - Green Theme */
@@ -235,6 +230,10 @@
             background-clip: text;
             color: transparent;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .page-subtitle {
@@ -533,7 +532,7 @@
 
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-title">Skills & Expertise </h1>⚔️
+            <h1 class="page-title">Skills & Expertise ⚔️</h1>
             <p class="page-subtitle">A comprehensive overview of my technical skills as a developer at Code It Nepal</p>
         </div>
 
@@ -794,12 +793,12 @@
         </div>
 
         <!-- Experience Timeline -->
-        <div class="skill-category skill-detailed-card">
+        <div class="skill-category">
             <h2 class="category-title">
                 <i class="fa-solid fa-briefcase"></i> Experience ⚔️
             </h2>
             <div class="timeline">
-                <div class="timeline-item">
+                <div class="timeline-item skill-detailed-card">
                     <div class="timeline-year">2024 - Present</div>
                     <div class="timeline-content">
                         <h3>Developer ⚔️</h3>
@@ -891,59 +890,54 @@
             });
         });
 
-        // Theme Toggle (hidden but functional for dark mode)
+        // Theme Toggle functionality
+        const themeToggle = document.createElement('button');
+        themeToggle.className = 'glass-btn';
+        themeToggle.style.position = 'fixed';
+        themeToggle.style.bottom = '20px';
+        themeToggle.style.left = '20px';
+        themeToggle.style.zIndex = '1000';
+        themeToggle.style.background = 'var(--blur-bg)';
+        themeToggle.style.backdropFilter = 'blur(10px)';
+        themeToggle.style.border = '1px solid var(--border-medium)';
+        themeToggle.style.borderRadius = '50px';
+        themeToggle.style.padding = '0.8rem 1.5rem';
+        themeToggle.style.display = 'flex';
+        themeToggle.style.alignItems = 'center';
+        themeToggle.style.gap = '0.8rem';
+        themeToggle.style.cursor = 'pointer';
+        themeToggle.style.color = 'var(--text-primary)';
+        themeToggle.style.fontWeight = '500';
+        
+        const themeIcon = document.createElement('i');
+        themeIcon.className = 'fa-regular fa-moon';
+        themeToggle.appendChild(themeIcon);
+        themeToggle.appendChild(document.createTextNode(' Theme'));
+        
+        document.body.appendChild(themeToggle);
+
         const body = document.body;
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
         }
 
-        // Disable right click
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            return false;
-        });
-
-        // Disable copy/paste shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Disable Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A, Ctrl+S, Ctrl+P
-            if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'v' || e.key === 'a' || e.key === 's' || e.key === 'p')) {
-                e.preventDefault();
-                return false;
-            }
-            
-            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || (e.ctrlKey && e.key === 'u')) {
-                e.preventDefault();
-                return false;
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
             }
         });
 
-        // Disable drag and drop
-        document.addEventListener('dragstart', function(e) {
-            e.preventDefault();
-            return false;
-        });
-
-        // Disable copy event
-        document.addEventListener('copy', function(e) {
-            e.preventDefault();
-            return false;
-        });
-
-        // Disable cut event
-        document.addEventListener('cut', function(e) {
-            e.preventDefault();
-            return false;
-        });
-
-        // Disable paste event
-        document.addEventListener('paste', function(e) {
-            e.preventDefault();
-            return false;
-        });
-
-        // Add a watermark overlay that doesn't interfere with clicks
+        // Add a watermark overlay
         const watermark = document.createElement('div');
         watermark.innerHTML = '⚔️ Sanskar Shrestha ⚔️';
         watermark.style.cssText = `
