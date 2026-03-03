@@ -21,7 +21,7 @@
     <meta property="og:site_name" content="Sanskar Shrestha - Laravel & Filament Developer">
     <meta property="og:title" content="Sanskar Shrestha - Laravel & Filament Developer | Dharan, Nepal">
     <meta property="og:description" content="Specialized in Laravel, FilamentPHP, clean architecture, APIs, admin panels and modern web apps. Real projects portfolio from Dharan, Nepal.">
-    <meta property="og:image" content="https://sanskarshrestha.com.np/og-image.jpg"> <!-- ← replace with real 1200×630 image -->
+    <meta property="og:image" content="https://sanskarshrestha.com.np/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Sanskar Shrestha - Laravel & Filament Developer Portrait">
@@ -33,7 +33,7 @@
     <meta name="twitter:creator" content="@sanssskar">
     <meta name="twitter:title" content="Sanskar Shrestha - Laravel & Filament Developer Nepal">
     <meta name="twitter:description" content="Laravel + Filament • Full-stack web developer • Dharan, Nepal • Clean & scalable applications">
-    <meta name="twitter:image" content="https://sanskarshrestha.com.np/twitter-card.jpg"> <!-- ← replace with real image -->
+    <meta name="twitter:image" content="https://sanskarshrestha.com.np/twitter-card.jpg">
 
     <!-- Geo Tags - local SEO Nepal -->
     <meta name="geo.region" content="NP-BTM">
@@ -41,7 +41,7 @@
     <meta name="geo.position" content="27.7172;85.3240">
     <meta name="ICBM" content="27.7172, 85.3240">
 
-    <!-- JSON-LD Structured Data (Person schema - very important for portfolios) -->
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -103,10 +103,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
         }
 
         :root {
@@ -851,7 +847,7 @@
             <div class="nav-controls">
                 <div class="control-group">
                     <button class="glass-btn" id="langToggle">
-                        <span id="langText">⚔️</span>  <!-- Changed to sword emoji -->
+                        <span id="langText">⚔️</span>
                     </button>
                     <button class="glass-btn" id="themeToggle">
                         <i class="fa-regular fa-moon" id="themeIcon"></i>
@@ -909,7 +905,7 @@
                 </p>
 
                 <div class="btn-group">
-                    <a href="/skills.html" class="btn btn-primary">
+                    <a href="skills.html" class="btn btn-primary">
                         <i class="fa-regular fa-eye"></i> View Portfolio
                     </a>
                     <a href="https://wa.me/9779814351861" target="_blank" class="btn btn-outline">
@@ -1071,7 +1067,7 @@
             const sword = document.createElement('div');
             sword.className = 'sword';
             
-            // Random sword emoji (different sword types)
+            // Random sword emoji
             const swords = ['⚔️', '🗡️', '🔪', '⚔️', '🗡️', '🔪'];
             const randomSword = swords[Math.floor(Math.random() * swords.length)];
             sword.textContent = randomSword;
@@ -1080,11 +1076,11 @@
             const left = Math.random() * 100;
             sword.style.left = left + '%';
             
-            // Random animation duration between 3 and 8 seconds
+            // Random animation duration
             const duration = 3 + Math.random() * 5;
             sword.style.animation = `swordDrop ${duration}s linear forwards`;
             
-            // Random rotation start
+            // Random rotation
             sword.style.transform = `rotate(${Math.random() * 360}deg)`;
             
             container.appendChild(sword);
@@ -1096,9 +1092,9 @@
         }
 
         // Create swords periodically
-        setInterval(createSword, 800); // New sword every 800ms
+        setInterval(createSword, 800);
 
-        // Fighting sparks animation on click
+        // Fighting sparks animation
         function createSparks(x, y) {
             for (let i = 0; i < 8; i++) {
                 const spark = document.createElement('div');
@@ -1106,13 +1102,11 @@
                 spark.style.left = x + 'px';
                 spark.style.top = y + 'px';
                 
-                // Random direction for spark
                 const tx = (Math.random() - 0.5) * 100;
                 const ty = (Math.random() - 0.5) * 100;
                 spark.style.setProperty('--tx', tx + 'px');
                 spark.style.setProperty('--ty', ty + 'px');
                 
-                // Random size
                 const size = 2 + Math.random() * 4;
                 spark.style.width = size + 'px';
                 spark.style.height = size + 'px';
@@ -1131,7 +1125,7 @@
         });
 
         // Add spark effect on project card hover
-        document.querySelectorAll('.project-card').forEach(card => {
+        document.querySelectorAll('.project-card, .skill-bubble, .contact-card').forEach(card => {
             card.addEventListener('mouseenter', (e) => {
                 const rect = card.getBoundingClientRect();
                 createSparks(rect.left + rect.width/2, rect.top + rect.height/2);
@@ -1200,7 +1194,7 @@
 
         function flipLanguage() {
             flipName.classList.toggle('flip');
-            langText.textContent = flipName.classList.contains('flip') ? '⚔️' : '⚔️'; // Both sword emoji
+            langText.textContent = flipName.classList.contains('flip') ? '⚔️' : '⚔️';
         }
 
         flipName.addEventListener('click', (e) => {
@@ -1247,7 +1241,7 @@
         // Morphing Text Animation
         const morphElement = document.getElementById('morphName');
         let morphIndex = 0;
-        const morphWords = ['Sanskar', 'संस्कार'];
+        const morphWords = ['Sanskar', 'संस्कार', '⚔️'];
 
         function morphEffect() {
             morphElement.style.opacity = '0';
@@ -1282,7 +1276,6 @@
             }
             isImage1Active = !isImage1Active;
             
-            // Create sparks on swipe
             const rect = swipeableShape.getBoundingClientRect();
             createSparks(rect.left + rect.width/2, rect.top + rect.height/2);
         }
@@ -1300,23 +1293,6 @@
                 cursorFollower.style.height = '30px';
             });
         });
-
-        // Disable right-click, copy-paste shortcuts, dev tools, etc.
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && ['c','x','v','a','s','p'].includes(e.key.toLowerCase())) {
-                e.preventDefault();
-            }
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J'].includes(e.key))) {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.key.toLowerCase() === 'u') {
-                e.preventDefault();
-            }
-        });
-
-        document.addEventListener('dragstart', e => e.preventDefault());
-        ['copy','cut','paste'].forEach(event => document.addEventListener(event, e => e.preventDefault()));
 
         // Watermark
         const watermark = document.createElement('div');
