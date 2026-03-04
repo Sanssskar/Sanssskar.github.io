@@ -4,11 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanskar Shrestha - Laravel & Filament Developer from Dharan, Nepal</title>
-    
+    <title>Sanskar Shrestha - Laravel & Filament Developer </title>
+    <!-- Favicon files (all in favicon folder) -->
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="SanskarHub" />
+
+    <!-- Manifest file - using the one in favicon folder (or root? you have two) -->
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <!-- If you want to use the root manifest instead, use: href="site.webmanifest" -->
+
+
     <!-- Meta Tags -->
-    <meta name="description" content="Sanskar Shrestha — expert Laravel & Filament developer from Dharan, Nepal. Building scalable web applications, modern admin panels, REST APIs, LMS, e-commerce & clean code solutions. View projects & get in touch.">
-    <meta name="keywords" content="Sanskar Shrestha, Laravel developer Nepal, Filament developer Dharan, Laravel Filament expert, full stack developer Nepal, PHP developer Dharan, API developer Nepal, LMS developer Nepal, ecommerce Laravel Nepal, web developer portfolio Nepal">
+    <meta name="description"
+        content="Sanskar Shrestha — expert Laravel & Filament developer from Dharan, Nepal. Building scalable web applications, modern admin panels, REST APIs, LMS, e-commerce & clean code solutions. View projects & get in touch.">
+    <meta name="keywords"
+        content="Sanskar Shrestha, Laravel developer Nepal, Filament developer Dharan, Laravel Filament expert, full stack developer Nepal, PHP developer Dharan, API developer Nepal, LMS developer Nepal, ecommerce Laravel Nepal, web developer portfolio Nepal">
     <meta name="author" content="Sanskar Shrestha">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
@@ -29,7 +42,8 @@
     <meta property="og:url" content="https://sanskarshrestha.com.np">
     <meta property="og:site_name" content="Sanskar Shrestha - Laravel & Filament Developer">
     <meta property="og:title" content="Sanskar Shrestha - Laravel & Filament Developer | Dharan, Nepal">
-    <meta property="og:description" content="Specialized in Laravel, FilamentPHP, clean architecture, APIs, admin panels and modern web apps. Real projects portfolio from Dharan, Nepal.">
+    <meta property="og:description"
+        content="Specialized in Laravel, FilamentPHP, clean architecture, APIs, admin panels and modern web apps. Real projects portfolio from Dharan, Nepal.">
     <meta property="og:image" content="https://sanskarshrestha.com.np/og-image.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -41,7 +55,8 @@
     <meta name="twitter:site" content="@sanssskar">
     <meta name="twitter:creator" content="@sanssskar">
     <meta name="twitter:title" content="Sanskar Shrestha - Laravel & Filament Developer Nepal">
-    <meta name="twitter:description" content="Laravel + Filament • Full-stack web developer • Dharan, Nepal • Clean & scalable applications">
+    <meta name="twitter:description"
+        content="Laravel + Filament • Full-stack web developer • Dharan, Nepal • Clean & scalable applications">
     <meta name="twitter:image" content="https://sanskarshrestha.com.np/twitter-card.webp">
 
     <!-- Geo Tags - Dharan, Nepal -->
@@ -50,7 +65,7 @@
     <meta name="geo.position" content="26.8125;87.2833">
     <meta name="ICBM" content="26.8125, 87.2833">
 
-    
+
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -91,11 +106,13 @@
 
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         /* Your existing CSS remains exactly the same */
@@ -222,22 +239,27 @@
                 transform: translateY(-20vh) rotate(0deg) scale(0.8);
                 opacity: 1;
             }
+
             20% {
                 transform: translateY(20vh) rotate(90deg) scale(1.1);
                 opacity: 1;
             }
+
             40% {
                 transform: translateY(60vh) rotate(180deg) scale(1.2);
                 opacity: 1;
             }
+
             60% {
                 transform: translateY(80vh) rotate(270deg) scale(1.1);
                 opacity: 0.8;
             }
+
             80% {
                 transform: translateY(90vh) rotate(360deg) scale(0.9);
                 opacity: 0.4;
             }
+
             100% {
                 transform: translateY(110vh) rotate(450deg) scale(0.5);
                 opacity: 0;
@@ -262,10 +284,12 @@
                 transform: scale(1) translate(0, 0);
                 opacity: 1;
             }
+
             50% {
                 transform: scale(1.5) translate(var(--tx), var(--ty));
                 opacity: 0.8;
             }
+
             100% {
                 transform: scale(0) translate(calc(var(--tx) * 2), calc(var(--ty) * 2));
                 opacity: 0;
@@ -286,8 +310,17 @@
         }
 
         @keyframes swordTrail {
-            0%, 100% { transform: translateY(-50%) rotate(45deg) scale(1); opacity: 0.3; }
-            50% { transform: translateY(-50%) rotate(45deg) scale(1.3); opacity: 0.6; }
+
+            0%,
+            100% {
+                transform: translateY(-50%) rotate(45deg) scale(1);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: translateY(-50%) rotate(45deg) scale(1.3);
+                opacity: 0.6;
+            }
         }
 
         .container {
@@ -484,7 +517,9 @@
         }
 
         @keyframes blink {
-            50% { border-color: transparent; }
+            50% {
+                border-color: transparent;
+            }
         }
 
         .morph-container {
@@ -552,8 +587,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .hero-desc {
@@ -664,8 +706,15 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
         }
 
         .section-title {
@@ -837,16 +886,41 @@
         }
 
         @media (max-width: 768px) {
-            .container { padding: 1rem; }
+            .container {
+                padding: 1rem;
+            }
+
             .name-title,
-            .flip-front, .flip-back, .typing-text, .morph-text { font-size: 2.5rem; }
-            .name-small { font-size: 1.2rem; }
-            .hero-visual { flex: 0 0 250px; }
-            .floating-shape { width: 250px; height: 250px; }
-            .floating-shape i { font-size: 5rem; }
-            .stats-section { grid-template-columns: 1fr; }
+            .flip-front,
+            .flip-back,
+            .typing-text,
+            .morph-text {
+                font-size: 2.5rem;
+            }
+
+            .name-small {
+                font-size: 1.2rem;
+            }
+
+            .hero-visual {
+                flex: 0 0 250px;
+            }
+
+            .floating-shape {
+                width: 250px;
+                height: 250px;
+            }
+
+            .floating-shape i {
+                font-size: 5rem;
+            }
+
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
+
 <body>
     <h1 class="sr-only">Sanskar Shrestha - Laravel & Filament Developer from Dharan, Nepal</h1>
 
@@ -932,8 +1006,10 @@
             <div class="hero-visual">
                 <div class="floating-shape" id="swipeableShape">
                     <div class="image-wrapper">
-                        <img src="sanskar.jpeg" alt="Sanskar Shrestha - Laravel & Filament Developer Portrait" class="swipe-image active-image" id="image1" loading="lazy">
-                        <img src="zoro.jpg" alt="Sanskar Shrestha professional avatar - full stack PHP developer" class="swipe-image" id="image2" loading="lazy">
+                        <img src="sanskar.jpeg" alt="Sanskar Shrestha - Laravel & Filament Developer Portrait"
+                            class="swipe-image active-image" id="image1" loading="lazy">
+                        <img src="zoro.jpg" alt="Sanskar Shrestha professional avatar - full stack PHP developer"
+                            class="swipe-image" id="image2" loading="lazy">
                     </div>
                     <div class="image-counter" id="imageCounter">1/2</div>
                 </div>
@@ -949,7 +1025,8 @@
                     <div class="project-icon"><i class="fa-solid fa-right-to-bracket"></i></div>
                     <h3>Laravel Authentication & Login System</h3>
                     <div class="project-meta">login.laravel · PHP</div>
-                    <p>A dedicated login page and authentication system built with Laravel. Focuses on secure user access and session management fundamentals.</p>
+                    <p>A dedicated login page and authentication system built with Laravel. Focuses on secure user
+                        access and session management fundamentals.</p>
                     <div class="project-tags">
                         <span class="project-tag">Laravel</span>
                         <span class="project-tag">PHP</span>
@@ -957,7 +1034,8 @@
                         <span class="project-tag">Sessions</span>
                     </div>
                     <div style="margin-top: 1.5rem;">
-                        <a href="https://github.com/Sanssskar/login.laravel" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
+                        <a href="https://github.com/Sanssskar/login.laravel" target="_blank"
+                            style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
                             <i class="fa-brands fa-github"></i> View Repository ⚔️
                         </a>
                     </div>
@@ -967,7 +1045,8 @@
                     <div class="project-icon"><i class="fa-solid fa-book-open"></i></div>
                     <h3>Learning Management System (LMS)</h3>
                     <div class="project-meta">lms · JavaScript</div>
-                    <p>A learning management platform built with JavaScript. Designed to manage educational content, courses, and user interactions.</p>
+                    <p>A learning management platform built with JavaScript. Designed to manage educational content,
+                        courses, and user interactions.</p>
                     <div class="project-tags">
                         <span class="project-tag">JavaScript</span>
                         <span class="project-tag">LMS</span>
@@ -975,7 +1054,8 @@
                         <span class="project-tag">Frontend</span>
                     </div>
                     <div style="margin-top: 1.5rem;">
-                        <a href="https://github.com/Sanssskar/lms" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
+                        <a href="https://github.com/Sanssskar/lms" target="_blank"
+                            style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
                             <i class="fa-brands fa-github"></i> View Repository ⚔️
                         </a>
                     </div>
@@ -985,7 +1065,8 @@
                     <div class="project-icon"><i class="fa-solid fa-cube"></i></div>
                     <h3>Product Management</h3>
                     <div class="project-meta">product · PHP</div>
-                    <p>A PHP-based application for managing product data, including CRUD operations, inventory basics, and database interactions.</p>
+                    <p>A PHP-based application for managing product data, including CRUD operations, inventory basics,
+                        and database interactions.</p>
                     <div class="project-tags">
                         <span class="project-tag">PHP</span>
                         <span class="project-tag">CRUD</span>
@@ -993,7 +1074,8 @@
                         <span class="project-tag">Backend</span>
                     </div>
                     <div style="margin-top: 1.5rem;">
-                        <a href="https://github.com/Sanssskar/product" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
+                        <a href="https://github.com/Sanssskar/product" target="_blank"
+                            style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
                             <i class="fa-brands fa-github"></i> View Repository ⚔️
                         </a>
                     </div>
@@ -1003,7 +1085,8 @@
                     <div class="project-icon"><i class="fa-solid fa-cart-shopping"></i></div>
                     <h3>E-Commerce Project</h3>
                     <div class="project-meta">ecommerce_project · Blade</div>
-                    <p>An e-commerce platform template built with Laravel's Blade templating engine. Focuses on frontend views and structure for online stores.</p>
+                    <p>An e-commerce platform template built with Laravel's Blade templating engine. Focuses on frontend
+                        views and structure for online stores.</p>
                     <div class="project-tags">
                         <span class="project-tag">Blade</span>
                         <span class="project-tag">Laravel</span>
@@ -1011,7 +1094,8 @@
                         <span class="project-tag">Frontend</span>
                     </div>
                     <div style="margin-top: 1.5rem;">
-                        <a href="https://github.com/Sanssskar/ecommerce_project" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
+                        <a href="https://github.com/Sanssskar/ecommerce_project" target="_blank"
+                            style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
                             <i class="fa-brands fa-github"></i> View Repository ⚔️
                         </a>
                     </div>
@@ -1036,7 +1120,8 @@
         </section>
 
         <div class="contact-section">
-            <a href="mailto:shresthasakar85@gmail.com?subject=Hello&body=I%20want%20to%20contact%20you" target="_blank" class="contact-card">
+            <a href="mailto:shresthasakar85@gmail.com?subject=Hello&body=I%20want%20to%20contact%20you" target="_blank"
+                class="contact-card">
                 <i class="fa-regular fa-envelope"></i>
                 <span>shresthasakar85</span>
             </a>
@@ -1063,8 +1148,10 @@
             Your browser does not support the audio element.
         </audio>
 
-        <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: var(--accent-1); border-radius: 50px; padding: 0.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">
-            <button onclick="toggleMusic()" style="background: white; color: var(--accent-1); border: none; border-radius: 50px; padding: 0.8rem 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 0.8rem; font-weight: 600;">
+        <div
+            style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: var(--accent-1); border-radius: 50px; padding: 0.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">
+            <button onclick="toggleMusic()"
+                style="background: white; color: var(--accent-1); border: none; border-radius: 50px; padding: 0.8rem 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 0.8rem; font-weight: 600;">
                 <i class="fa-solid fa-play" id="music-icon"></i>
                 <span id="music-text">Play</span>
             </button>
@@ -1077,13 +1164,13 @@
 
     <script>
         // Lazy loading image handler
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const images = document.querySelectorAll('.swipe-image');
             images.forEach(img => {
                 if (img.complete) {
                     img.classList.add('loaded');
                 } else {
-                    img.addEventListener('load', function() {
+                    img.addEventListener('load', function () {
                         this.classList.add('loaded');
                     });
                 }
@@ -1095,21 +1182,21 @@
             const container = document.getElementById('swordContainer');
             const sword = document.createElement('div');
             sword.className = 'sword';
-            
+
             const swords = ['⚔️', '🗡️', '🔪', '⚔️', '🗡️', '🔪'];
             const randomSword = swords[Math.floor(Math.random() * swords.length)];
             sword.textContent = randomSword;
-            
+
             const left = Math.random() * 100;
             sword.style.left = left + '%';
-            
+
             const duration = 3 + Math.random() * 5;
             sword.style.animation = `swordDrop ${duration}s linear forwards`;
-            
+
             sword.style.transform = `rotate(${Math.random() * 360}deg)`;
-            
+
             container.appendChild(sword);
-            
+
             setTimeout(() => {
                 sword.remove();
             }, duration * 1000);
@@ -1124,18 +1211,18 @@
                 spark.className = 'spark';
                 spark.style.left = x + 'px';
                 spark.style.top = y + 'px';
-                
+
                 const tx = (Math.random() - 0.5) * 100;
                 const ty = (Math.random() - 0.5) * 100;
                 spark.style.setProperty('--tx', tx + 'px');
                 spark.style.setProperty('--ty', ty + 'px');
-                
+
                 const size = 2 + Math.random() * 4;
                 spark.style.width = size + 'px';
                 spark.style.height = size + 'px';
-                
+
                 document.body.appendChild(spark);
-                
+
                 setTimeout(() => {
                     spark.remove();
                 }, 1000);
@@ -1149,7 +1236,7 @@
         document.querySelectorAll('.project-card, .skill-bubble, .contact-card').forEach(card => {
             card.addEventListener('mouseenter', (e) => {
                 const rect = card.getBoundingClientRect();
-                createSparks(rect.left + rect.width/2, rect.top + rect.height/2);
+                createSparks(rect.left + rect.width / 2, rect.top + rect.height / 2);
             });
         });
 
@@ -1296,9 +1383,9 @@
                 imageCounter.textContent = '1/2';
             }
             isImage1Active = !isImage1Active;
-            
+
             const rect = swipeableShape.getBoundingClientRect();
-            createSparks(rect.left + rect.width/2, rect.top + rect.height/2);
+            createSparks(rect.left + rect.width / 2, rect.top + rect.height / 2);
         }
 
         swipeableShape.addEventListener('click', swipeImages);
@@ -1332,4 +1419,5 @@
         document.body.appendChild(watermark);
     </script>
 </body>
+
 </html>
