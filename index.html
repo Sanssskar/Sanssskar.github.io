@@ -109,6 +109,193 @@
             position: relative;
         }
 
+        /* Loading Animation Styles */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loader {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        
+        .loader::before,
+        .loader::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+        
+        .loader::before {
+            width: 100%;
+            height: 100%;
+            background: var(--accent-2);
+            opacity: 0.3;
+            animation-delay: -0.4s;
+        }
+        
+        .loader::after {
+            width: 60%;
+            height: 60%;
+            background: var(--accent-1);
+            top: 20%;
+            left: 20%;
+            animation-delay: -0.2s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+        
+        .loader-text {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            color: var(--accent-1);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Animation on Scroll Styles */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .fade-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-up {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .scale-up.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Pagination Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .page-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            color: var(--text-primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .page-btn:hover:not(:disabled) {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+        
+        .page-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .page-numbers {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .page-number {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .page-number:hover:not(.active-page) {
+            background: var(--accent-2);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .page-number.active-page {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+        }
+
         .swipe-image {
             width: 100%;
             height: 100%;
@@ -1137,13 +1324,20 @@
 </head>
 
 <body>
+    <!-- Loading Animation -->
+    <div class="loader-wrapper" id="loaderWrapper">
+        <div class="loader">
+            <div class="loader-text">Loading ⚔️</div>
+        </div>
+    </div>
+
     <h1 class="sr-only">Sanskar Shrestha - Laravel & Filament Developer from Dharan, Nepal</h1>
 
     <div class="sword-container" id="swordContainer"></div>
 
     <div class="container">
         <!-- Top Social Bar with all icons -->
-        <div class="top-social-bar">
+        <div class="top-social-bar fade-up">
             <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook">
                 <i class="fa-brands fa-facebook-f"></i>
             </a>
@@ -1165,7 +1359,7 @@
             </a>
         </div>
 
-        <nav class="nav-bar">
+        <nav class="nav-bar fade-up">
             <div class="logo">SanskarHub ⚔️</div>
             <div class="nav-controls">
                 <a target="_blank" href="https://www.sudamshrestha.com.np/"><button class="glass-btn team-btn"
@@ -1179,7 +1373,7 @@
         </nav>
 
         <div class="hero">
-            <div class="hero-content">
+            <div class="hero-content fade-left">
                 <div class="name-wrapper">
                     <div class="name-title">
                         <div class="flip-container">
@@ -1232,7 +1426,7 @@
                 </div>
             </div>
 
-            <div class="hero-visual">
+            <div class="hero-visual fade-right">
                 <div class="floating-shape" id="swipeableShape">
                     <div class="image-wrapper">
                         <img src="images/sanskar.jpeg" alt="Sanskar Shrestha Full Stack Developer"
@@ -1247,7 +1441,7 @@
 
         <!-- About Me Section -->
         <section id="about">
-            <div class="about-section">
+            <div class="about-section scale-up">
                 <div class="about-header">
                     <i class="fa-solid fa-user-astronaut"></i>
                     <h2>About Me ⚔️</h2>
@@ -1293,16 +1487,18 @@
         </section>
 
         <section id="projects">
-            <h2 class="section-title">
+            <h2 class="section-title fade-up">
                 <i class="fa-solid fa-star"></i> Featured Projects ⚔️
             </h2>
             <div class="projects-grid" id="projectsGrid">
                 <!-- Projects will be injected via JavaScript -->
             </div>
+            <!-- Pagination Container -->
+            <div class="pagination-container" id="paginationContainer"></div>
         </section>
 
         <section>
-            <h2 class="section-title">
+            <h2 class="section-title fade-up">
                 <i class="fa-solid fa-code"></i> Tech Stack & Core Skills ⚔️
             </h2>
             <div class="skills-cloud">
@@ -1316,7 +1512,7 @@
         </section>
 
         <!-- Social Links Section -->
-        <div class="social-section">
+        <div class="social-section fade-up">
             <a href="https://www.facebook.com/davis.nephop" target="_blank" class="social-card">
                 <i class="fa-brands fa-facebook"></i>
                 <span>Facebook</span>
@@ -1360,7 +1556,7 @@
 
     <script>
         // Projects Data with Image, Title, Description
-        const projects = [
+        const allProjects = [
             {
                 title: "Home Link Services Pvt.Ltd",
                 description: "The issue was that the website had become outdated and lacked features, so I modernized it by adding dynamic and responsive elements.",
@@ -1391,18 +1587,27 @@
             }
         ];
 
-        // Render Projects
+        // Pagination variables
+        let currentPage = 1;
+        const projectsPerPage = 3;
+        let totalPages = Math.ceil(allProjects.length / projectsPerPage);
+
+        // Render Projects with Pagination
         function renderProjects() {
             const grid = document.getElementById('projectsGrid');
             if (!grid) return;
 
-            grid.innerHTML = projects.map(project => `
-                <div class="project-card">
+            const startIndex = (currentPage - 1) * projectsPerPage;
+            const endIndex = startIndex + projectsPerPage;
+            const currentProjects = allProjects.slice(startIndex, endIndex);
+
+            grid.innerHTML = currentProjects.map(project => `
+                <div class="project-card scale-up">
                     <img class="project-img" src="${project.image}" alt="${project.title}" loading="lazy">
                     <h3>${project.title}</h3>
                     <p>${project.description}</p>
                     <div class="project-tags">
-                   ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                        ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
                     </div>
                     <div style="margin-top: 1.5rem;">
                         <a href="${project.repo}" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
@@ -1411,9 +1616,97 @@
                     </div>
                 </div>
             `).join('');
+
+            // Trigger scroll animations for new cards
+            setTimeout(() => {
+                document.querySelectorAll('.scale-up').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 100);
         }
 
-        renderProjects();
+        // Render Pagination Controls
+        function renderPagination() {
+            const paginationContainer = document.getElementById('paginationContainer');
+            if (!paginationContainer || totalPages <= 1) {
+                if (paginationContainer) paginationContainer.style.display = 'none';
+                return;
+            }
+            
+            paginationContainer.style.display = 'flex';
+            
+            let paginationHTML = `
+                <button class="page-btn" id="prevPage" ${currentPage === 1 ? 'disabled' : ''}>
+                    <i class="fa-solid fa-chevron-left"></i> Previous
+                </button>
+                <div class="page-numbers">
+            `;
+            
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `
+                    <button class="page-number ${currentPage === i ? 'active-page' : ''}" data-page="${i}">
+                        ${i}
+                    </button>
+                `;
+            }
+            
+            paginationHTML += `
+                </div>
+                <button class="page-btn" id="nextPage" ${currentPage === totalPages ? 'disabled' : ''}>
+                    Next <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            `;
+            
+            paginationContainer.innerHTML = paginationHTML;
+            
+            // Add event listeners
+            document.getElementById('prevPage')?.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderProjects();
+                    renderPagination();
+                    window.scrollTo({ top: document.getElementById('projects').offsetTop - 100, behavior: 'smooth' });
+                }
+            });
+            
+            document.getElementById('nextPage')?.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderProjects();
+                    renderPagination();
+                    window.scrollTo({ top: document.getElementById('projects').offsetTop - 100, behavior: 'smooth' });
+                }
+            });
+            
+            document.querySelectorAll('.page-number').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const page = parseInt(e.target.getAttribute('data-page'));
+                    if (page && page !== currentPage) {
+                        currentPage = page;
+                        renderProjects();
+                        renderPagination();
+                        window.scrollTo({ top: document.getElementById('projects').offsetTop - 100, behavior: 'smooth' });
+                    }
+                });
+            });
+        }
+
+        // Animation on Scroll Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
         // Lazy loading image handler
         document.addEventListener('DOMContentLoaded', function () {
@@ -1427,6 +1720,32 @@
                     });
                 }
             });
+            
+            // Initial render
+            renderProjects();
+            renderPagination();
+            
+            // Observe elements for scroll animation
+            document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up').forEach(el => {
+                observer.observe(el);
+                // Check if already visible
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+            
+            // Hide loader after page loads
+            setTimeout(() => {
+                const loader = document.getElementById('loaderWrapper');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.visibility = 'hidden';
+                        loader.style.display = 'none';
+                    }, 500);
+                }
+            }, 800);
         });
 
         // Sword dropping animation
