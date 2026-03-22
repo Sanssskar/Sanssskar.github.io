@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanskar Shrestha - Laravel & Filament Developer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sanskar Shrestha - Full Stack Developer</title>
     <!-- Favicon files -->
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
@@ -21,7 +21,6 @@
         content="Sanskar Shrestha, Full Stack Developer Nepal, Laravel Developer Nepal, Web Developer Dharan, Filament PHP Developer, API Developer Nepal, Website Development Nepal, Tailwind CSS Developer, Freelance Web Developer Nepal">
     <meta name="author" content="Sanskar Shrestha">
     <meta name="robots" content="index, follow">
-
 
     <meta property="og:title" content="Sanskar Shrestha - Full Stack Developer Nepal">
     <meta property="og:description"
@@ -254,11 +253,40 @@
             border: 1px solid var(--border-medium);
         }
 
+        /* Individual brand colors on hover */
         .top-social-link:hover {
-            background: var(--gradient-1);
-            color: white;
             transform: translateY(-3px);
             border-color: transparent;
+        }
+
+        .top-social-link[title="Facebook"]:hover {
+            background: #1877f2;
+            color: white;
+        }
+
+        .top-social-link[title="Instagram"]:hover {
+            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
+            color: white;
+        }
+
+        .top-social-link[title="LinkedIn"]:hover {
+            background: #0077b5;
+            color: white;
+        }
+
+        .top-social-link[title="GitHub"]:hover {
+            background: #333;
+            color: white;
+        }
+
+        .top-social-link[title="WhatsApp"]:hover {
+            background: #25D366;
+            color: white;
+        }
+
+        .top-social-link[title="Email"]:hover {
+            background: #ea4335;
+            color: white;
         }
 
         .nav-bar {
@@ -343,7 +371,7 @@
 
         .hero-content {
             flex: 1;
-            min-width: 350px;
+            min-width: 280px;
         }
 
         .name-wrapper {
@@ -632,6 +660,7 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .about-header i {
@@ -708,6 +737,7 @@
             display: flex;
             align-items: center;
             gap: 0.8rem;
+            flex-wrap: wrap;
         }
 
         .section-title i {
@@ -719,7 +749,7 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
@@ -851,6 +881,57 @@
             z-index: 1;
         }
 
+        /* Individual brand colors for bottom social cards */
+        .social-card[href*="facebook"]:hover {
+            background: #1877f2;
+            color: white;
+        }
+
+        .social-card[href*="facebook"]:hover i,
+        .social-card[href*="facebook"]:hover span {
+            color: white;
+        }
+
+        .social-card[href*="instagram"]:hover {
+            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
+            color: white;
+        }
+
+        .social-card[href*="instagram"]:hover i,
+        .social-card[href*="instagram"]:hover span {
+            color: white;
+        }
+
+        .social-card[href*="linkedin"]:hover {
+            background: #0077b5;
+            color: white;
+        }
+
+        .social-card[href*="linkedin"]:hover i,
+        .social-card[href*="linkedin"]:hover span {
+            color: white;
+        }
+
+        .social-card[href*="github"]:hover {
+            background: #333;
+            color: white;
+        }
+
+        .social-card[href*="github"]:hover i,
+        .social-card[href*="github"]:hover span {
+            color: white;
+        }
+
+        .social-card[href*="wa.me"]:hover {
+            background: #25D366;
+            color: white;
+        }
+
+        .social-card[href*="wa.me"]:hover i,
+        .social-card[href*="wa.me"]:hover span {
+            color: white;
+        }
+
         .footer {
             border-top: 1px solid var(--border-medium);
             padding: 1.5rem 0;
@@ -863,6 +944,25 @@
             font-size: 0.9rem;
         }
 
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .name-title,
+            .flip-front,
+            .flip-back,
+            .typing-text,
+            .morph-text {
+                font-size: 3.5rem;
+            }
+            
+            .name-small {
+                font-size: 1.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -873,11 +973,11 @@
             .flip-back,
             .typing-text,
             .morph-text {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
-
+            
             .name-small {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
 
             .hero-visual {
@@ -891,6 +991,128 @@
 
             .top-social-bar {
                 justify-content: center;
+            }
+            
+            .nav-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .hero-content {
+                text-align: center;
+            }
+            
+            .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .btn-group {
+                justify-content: center;
+            }
+            
+            .hero-tagline {
+                justify-content: center;
+            }
+            
+            .badge-container {
+                justify-content: center;
+            }
+            
+            .name-title {
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .about-header {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .about-text {
+                text-align: center;
+            }
+            
+            .about-highlights {
+                align-items: center;
+            }
+            
+            .highlight-item {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .skills-cloud {
+                justify-content: center;
+            }
+            
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name-title,
+            .flip-front,
+            .flip-back,
+            .typing-text,
+            .morph-text {
+                font-size: 1.8rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.1rem;
+            }
+            
+            .hero-desc {
+                font-size: 0.95rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            
+            .glass-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .project-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .social-card {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .top-social-link {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -958,16 +1180,6 @@
 
         <div class="hero">
             <div class="hero-content">
-                <!-- <div class="badge-container">
-                    <span class="skill-bubble">HTML ⚔️</span>
-                    <span class="skill-bubble">CSS ⚔️</span>
-                    <span class="skill-bubble">TAILWIND ⚔️</span>
-                    <span class="skill-bubble">JAVASCRIPT ⚔️</span>
-                    <span class="skill-bubble">Laravel ⚔️</span>
-                    <span class="skill-bubble">Filament ⚔️</span>
-                    <span class="skill-bubble">APIs ⚔️</span>
-                </div> -->
-
                 <div class="name-wrapper">
                     <div class="name-title">
                         <div class="flip-container">
@@ -1005,7 +1217,7 @@
                 </div>
 
                 <p class="hero-desc">
-                    I’m Sanskar Shrestha, a passionate full-stack web developer who enjoys turning ideas into real,
+                    I'm Sanskar Shrestha, a passionate full-stack web developer who enjoys turning ideas into real,
                     working products. I work with modern technologies like HTML, CSS, JavaScript, Tailwind, and Laravel
                     to build clean, fast, and user-friendly websites and applications.
                 </p>
@@ -1042,7 +1254,7 @@
                 </div>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>👋 <strong>I specialize</strong>, in full-stack development with a strong focus on both
+                        <p>👋 <strong>I specialize</strong> in full-stack development with a strong focus on both
                             frontend and backend. From designing responsive interfaces using Tailwind CSS to building
                             powerful backends and APIs with Laravel and Filament, I handle the complete development
                             process.</p>
@@ -1050,9 +1262,9 @@
                             functional but also smooth and enjoyable to use. Whether it's a simple website or a complex
                             web application, I aim to deliver clean code and real value.</p>
                         <p>🎯 <strong>What drives me:</strong> I'm passionate about delivering high-quality work,
-                            meeting deadlines, and constantly learning new technologies. As i enjoying coding and am
-                            more than happpy to learn more than typing "Hello world"😂.</p>
-                        <p>⚔️ When I'm not coding, i love traveling and enjoying my peaceful time with nature🌿.</p>
+                            meeting deadlines, and constantly learning new technologies. As I enjoy coding, I'm more
+                            than happy to learn beyond just typing "Hello world" 😂.</p>
+                        <p>⚔️ When I'm not coding, I love traveling and enjoying my peaceful time with nature 🌿.</p>
                     </div>
                     <div class="about-highlights">
                         <div class="highlight-item">
@@ -1151,7 +1363,7 @@
         const projects = [
             {
                 title: "Home Link Services Pvt.Ltd",
-                description: "Here the problem was that the website became too old fashioned with less features, so i made the looks modern with dynamic features added to the website",
+                description: "Here the problem was that the website became too old fashioned with less features, so i made it looks modern with dynamic and responsive features added to the website",
                 image: "images/homelink.png",
                 tags: ["Laravel", "Filament", "Frontend"],
                 repo: "https://homelinkservice.com/"
@@ -1190,7 +1402,7 @@
                     <h3>${project.title}</h3>
                     <p>${project.description}</p>
                     <div class="project-tags">
-                        ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                   ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
                     </div>
                     <div style="margin-top: 1.5rem;">
                         <a href="${project.repo}" target="_blank" style="color: var(--accent-1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
