@@ -77,7 +77,6 @@
             --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
             --hover-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.2);
             --blur-bg: rgba(255, 255, 255, 0.7);
-            --sword-glow: rgba(76, 175, 80, 0.6);
         }
 
         body.dark-mode {
@@ -96,7 +95,6 @@
             --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
             --hover-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.5);
             --blur-bg: rgba(26, 27, 32, 0.7);
-            --sword-glow: rgba(129, 199, 132, 0.6);
         }
 
         body {
@@ -323,61 +321,6 @@
             z-index: 1;
         }
 
-        .sword-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            overflow: hidden;
-        }
-
-        .sword {
-            position: absolute;
-            font-size: 2rem;
-            color: var(--accent-2);
-            text-shadow: 0 0 15px var(--sword-glow), 0 0 30px var(--accent-1);
-            animation: swordDrop linear forwards;
-            opacity: 0;
-            transform-origin: center;
-            filter: drop-shadow(0 0 8px var(--accent-1));
-            z-index: 9999;
-        }
-
-        @keyframes swordDrop {
-            0% {
-                transform: translateY(-20vh) rotate(0deg) scale(0.8);
-                opacity: 1;
-            }
-
-            20% {
-                transform: translateY(20vh) rotate(90deg) scale(1.1);
-                opacity: 1;
-            }
-
-            40% {
-                transform: translateY(60vh) rotate(180deg) scale(1.2);
-                opacity: 1;
-            }
-
-            60% {
-                transform: translateY(80vh) rotate(270deg) scale(1.1);
-                opacity: 0.8;
-            }
-
-            80% {
-                transform: translateY(90vh) rotate(360deg) scale(0.9);
-                opacity: 0.4;
-            }
-
-            100% {
-                transform: translateY(110vh) rotate(450deg) scale(0.5);
-                opacity: 0;
-            }
-        }
-
         .spark {
             position: fixed;
             width: 4px;
@@ -395,12 +338,6 @@
                 transform: scale(1) translate(0, 0);
                 opacity: 1;
             }
-
-            50% {
-                transform: scale(1.5) translate(var(--tx), var(--ty));
-                opacity: 0.8;
-            }
-
             100% {
                 transform: scale(0) translate(calc(var(--tx) * 2), calc(var(--ty) * 2));
                 opacity: 0;
@@ -440,7 +377,6 @@
             border: 1px solid var(--border-medium);
         }
 
-        /* Individual brand colors on hover */
         .top-social-link:hover {
             transform: translateY(-3px);
             border-color: transparent;
@@ -605,7 +541,6 @@
             width: fit-content;
             height: fit-content;
             backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
             display: block;
             background: var(--gradient-1);
             -webkit-background-clip: text;
@@ -713,12 +648,9 @@
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: scale(1);
             }
-
             50% {
                 transform: scale(1.1);
             }
@@ -816,12 +748,9 @@
         }
 
         @keyframes float {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translateY(0) rotate(0deg);
             }
-
             50% {
                 transform: translateY(-20px) rotate(5deg);
             }
@@ -1068,7 +997,6 @@
             z-index: 1;
         }
 
-        /* Individual brand colors for bottom social cards */
         .social-card[href*="facebook"]:hover {
             background: #1877f2;
             color: white;
@@ -1131,12 +1059,10 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive Styles */
         @media (max-width: 1024px) {
             .container {
                 padding: 1.5rem;
             }
-            
             .name-title,
             .flip-front,
             .flip-back,
@@ -1144,7 +1070,6 @@
             .morph-text {
                 font-size: 3.5rem;
             }
-            
             .name-small {
                 font-size: 1.5rem;
             }
@@ -1154,7 +1079,6 @@
             .container {
                 padding: 1rem;
             }
-
             .name-title,
             .flip-front,
             .flip-back,
@@ -1162,93 +1086,73 @@
             .morph-text {
                 font-size: 2.2rem;
             }
-            
             .name-small {
                 font-size: 1rem;
             }
-
             .hero-visual {
                 flex: 0 0 250px;
             }
-
             .floating-shape {
                 width: 250px;
                 height: 250px;
             }
-
             .top-social-bar {
                 justify-content: center;
             }
-            
             .nav-bar {
                 flex-direction: column;
                 text-align: center;
             }
-            
             .logo::after {
                 left: 50%;
                 transform: translateX(-50%);
             }
-            
             .hero {
                 flex-direction: column-reverse;
                 text-align: center;
                 gap: 2rem;
             }
-            
             .hero-content {
                 text-align: center;
             }
-            
             .hero-desc {
                 margin-left: auto;
                 margin-right: auto;
             }
-            
             .btn-group {
                 justify-content: center;
             }
-            
             .hero-tagline {
                 justify-content: center;
             }
-            
             .badge-container {
                 justify-content: center;
             }
-            
             .name-title {
                 justify-content: center;
             }
-            
             .section-title {
                 font-size: 1.8rem;
                 justify-content: center;
                 text-align: center;
             }
-            
             .about-header {
                 justify-content: center;
                 text-align: center;
             }
-            
             .about-text {
                 text-align: center;
             }
-            
             .about-highlights {
                 align-items: center;
             }
-            
             .highlight-item {
                 width: 100%;
                 justify-content: center;
             }
-            
             .skills-cloud {
                 justify-content: center;
             }
-            
             .footer {
                 flex-direction: column;
                 text-align: center;
@@ -1264,38 +1168,30 @@
             .morph-text {
                 font-size: 1.8rem;
             }
-            
             .hero-tagline {
                 font-size: 1.1rem;
             }
-            
             .hero-desc {
                 font-size: 0.95rem;
             }
-            
             .btn {
                 padding: 0.6rem 1.2rem;
                 font-size: 0.85rem;
             }
-            
             .glass-btn {
                 padding: 0.5rem 1rem;
                 font-size: 0.8rem;
             }
-            
             .section-title {
                 font-size: 1.5rem;
             }
-            
             .project-card h3 {
                 font-size: 1.2rem;
             }
-            
             .social-card {
                 padding: 0.5rem 1rem;
                 font-size: 0.8rem;
             }
-            
             .top-social-link {
                 width: 32px;
                 height: 32px;
@@ -1332,8 +1228,6 @@
     </div>
 
     <h1 class="sr-only">Sanskar Shrestha - Laravel & Filament Developer from Dharan, Nepal</h1>
-
-    <div class="sword-container" id="swordContainer"></div>
 
     <div class="container">
         <!-- Top Social Bar with all icons -->
@@ -1561,21 +1455,21 @@
                 title: "Home Link Services Pvt.Ltd",
                 description: "The issue was that the website had become outdated and lacked features, so I modernized it by adding dynamic and responsive elements.",
                 image: "images/homelink.png",
-                tags: ["Laravel", "Filament", "Frontend"],
+                tags: ["Backend", "Frontend"],
                 repo: "https://homelinkservice.com/"
             },
             {
                 title: "Koseli Express",
                 description: "The challenge in this project was that it was difficult to determine which products were in stock or not. To address this, I created a feature that displays a product as 'out of stock 'when the quantity falls below two.",
                 image: "images/koseli.png",
-                tags: ["Frontend"],
+                tags: ["Frontend","Backend"],
                 repo: "https://www.koselixpress.com.np/"
             },
             {
                 title: "Product API",
                 description: "Regarding mobile app development, I developed a product API with user authentication, orders, cart management, products, categories, and payment processing. You can view it on my LinkedIn profile.",
                 image: "images/api.jpg",
-                tags: ["Postman", "Database", "Backend"],
+                tags: ["Postman", "Backend"],
                 repo: "https://www.linkedin.com/posts/sanskar-shrestha-a750933b1_laravel-filament-restapi-activity-7431273261516173312-mFtI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGSRwzkByM1AUXPvtz5AVeC1r3zaNsVxRC8"
             },
             {
@@ -1747,33 +1641,6 @@
                 }
             }, 800);
         });
-
-        // Sword dropping animation
-        function createSword() {
-            const container = document.getElementById('swordContainer');
-            const sword = document.createElement('div');
-            sword.className = 'sword';
-
-            const swords = ['⚔️', '🗡️', '🔪', '⚔️', '🗡️', '🔪'];
-            const randomSword = swords[Math.floor(Math.random() * swords.length)];
-            sword.textContent = randomSword;
-
-            const left = Math.random() * 100;
-            sword.style.left = left + '%';
-
-            const duration = 3 + Math.random() * 5;
-            sword.style.animation = `swordDrop ${duration}s linear forwards`;
-
-            sword.style.transform = `rotate(${Math.random() * 360}deg)`;
-
-            container.appendChild(sword);
-
-            setTimeout(() => {
-                sword.remove();
-            }, duration * 1000);
-        }
-
-        setInterval(createSword, 800);
 
         // Fighting sparks animation
         function createSparks(x, y) {
