@@ -4,15 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Sanskar Shrestha | Laravel Developer in Nepal</title>
+    <title>Contact | Sanskar Shrestha | Laravel & Filament Developer</title>
     <meta name="description"
-        content="Get in touch with Sanskar Shrestha for Laravel development, Filament admin panels, REST APIs, and freelance web development projects.">
+        content="Get in touch with Sanskar Shrestha for Laravel development, Filament admin panels, REST APIs, and freelance web development projects. Fast response guaranteed.">
     <link rel="icon" type="image/png" href="favicon/favicon-96x96.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
     <style>
         .page-header {
             text-align: center;
@@ -28,45 +32,331 @@
             color: transparent;
         }
 
-        .info-grid {
+        /* Contact Main Layout */
+        .contact-main {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
             margin: 2rem 0;
         }
 
-        .info-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-medium);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s;
+        /* Left Side - Info & Services */
+        .contact-info-side {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
-        .info-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-1);
-        }
-
-        .info-card i {
+        .welcome-text h2 {
             font-size: 2rem;
-            color: var(--accent-1);
+            font-weight: 700;
             margin-bottom: 0.8rem;
+            color: var(--text-primary);
         }
 
-        .info-card h4 {
+        .welcome-text p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .response-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--accent-1);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        /* Direct Contact Cards */
+        .direct-contact {
+            background: var(--bg-secondary);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid var(--border-medium);
+        }
+
+        .direct-contact h3 {
             font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.6rem;
+            border-radius: 0.8rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .contact-method:hover {
+            background: var(--bg-primary);
+            transform: translateX(5px);
+        }
+
+        .contact-method i {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .contact-method div h4 {
+            font-size: 0.85rem;
             font-weight: 600;
+            margin-bottom: 0.1rem;
+        }
+
+        .contact-method div p {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Services Reminder Section */
+        .services-reminder {
+            background: var(--gradient-1);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            color: white;
+        }
+
+        .services-reminder h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reminder-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .reminder-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        /* Right Side - Contact Form */
+        .contact-form-side {
+            background: var(--bg-secondary);
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            border: 1px solid var(--border-medium);
+        }
+
+        .contact-form-side h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 0.3rem;
         }
 
-        .info-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .form-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            margin-bottom: 1.5rem;
         }
 
-        /* Social Links Hover */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 0.8rem;
+            border: 1px solid var(--border-medium);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-1);
+            box-shadow: 0 0 0 3px var(--glow);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-tertiary);
+            opacity: 0.7;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 0.8rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px var(--accent-1);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .response-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .security-note {
+            text-align: center;
+            margin-top: 0.8rem;
+            font-size: 0.65rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 1rem 1.5rem;
+            border-radius: 0.8rem;
+            box-shadow: var(--hover-shadow);
+            z-index: 10000;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-left: 4px solid var(--accent-1);
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-notification.success {
+            border-left-color: #4caf50;
+        }
+
+        .toast-notification.error {
+            border-left-color: #f44336;
+        }
+
+        .toast-notification i {
+            font-size: 1.2rem;
+        }
+
+        /* Social Links Section */
+        .social-links-section {
+            margin-top: 1rem;
+        }
+
+        .social-links-section h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-icons-row {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-link {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            text-decoration: none;
+            border: 1px solid var(--border-light);
+        }
+
+        .social-icon-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .social-icon-link[title="GitHub"]:hover { background: #333; color: white; }
+        .social-icon-link[title="LinkedIn"]:hover { background: #0077b5; color: white; }
+        .social-icon-link[title="Instagram"]:hover { background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5); color: white; }
+        .social-icon-link[title="Facebook"]:hover { background: #1877f2; color: white; }
+
+        /* Top Social Bar */
         .top-social-link {
             display: inline-flex;
             align-items: center;
@@ -87,55 +377,31 @@
             border-color: transparent;
         }
 
-        .top-social-link[title="Facebook"]:hover {
-            background: #1877f2;
-            color: white;
-        }
+        .top-social-link[title="Facebook"]:hover { background: #1877f2; color: white; }
+        .top-social-link[title="Instagram"]:hover { background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5); color: white; }
+        .top-social-link[title="LinkedIn"]:hover { background: #0077b5; color: white; }
+        .top-social-link[title="GitHub"]:hover { background: #333; color: white; }
+        .top-social-link[title="WhatsApp"]:hover { background: #25D366; color: white; }
+        .top-social-link[title="Email"]:hover { background: #ea4335; color: white; }
 
-        .top-social-link[title="Instagram"]:hover {
-            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
-            color: white;
-        }
-
-        .top-social-link[title="LinkedIn"]:hover {
-            background: #0077b5;
-            color: white;
-        }
-
-        .top-social-link[title="GitHub"]:hover {
-            background: #333;
-            color: white;
-        }
-
-        .top-social-link[title="WhatsApp"]:hover {
-            background: #25D366;
-            color: white;
-        }
-
-        .top-social-link[title="Email"]:hover {
-            background: #ea4335;
-            color: white;
+        @media (max-width: 1024px) {
+            .contact-main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
+            .page-header h1 { font-size: 2rem; }
+            .welcome-text h2 { font-size: 1.5rem; }
+            .form-row { grid-template-columns: 1fr; gap: 0.8rem; }
+            .contact-form-side { padding: 1.2rem; }
         }
 
         @media (max-width: 480px) {
-            .page-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .info-card {
-                padding: 1rem;
-            }
+            .page-header h1 { font-size: 1.8rem; }
+            .welcome-text h2 { font-size: 1.3rem; }
+            .contact-form-side { padding: 1rem; }
         }
     </style>
 </head>
@@ -148,7 +414,7 @@
     </div>
 
     <div class="container">
-        <!-- TOP SOCIAL BAR - FIXED with title attributes -->
+        <!-- TOP SOCIAL BAR -->
         <div class="top-social-bar fade-up">
             <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i
                     class="fa-brands fa-facebook-f"></i></a>
@@ -187,66 +453,162 @@
         </nav>
 
         <div class="page-header fade-up">
-            <h1>Let's Connect</h1>
-            <p style="color: var(--text-secondary);">Have a project? Let's discuss how I can help ⚔️</p>
+            <h1>Let's Build Something Amazing</h1>
+            <p style="color: var(--text-secondary);">Tell me about your project and I'll help you bring it to life ⚔️</p>
         </div>
 
-        <div class="contact-section scale-up" style="margin-top: 0;">
-            <div class="contact-text">
-                <h2>Work With Me</h2>
-                <p>Need a <strong>Laravel web app</strong>, <strong>Filament admin panel</strong>, or <strong>REST
-                        API</strong>? I'm available for freelance work across Nepal and remotely worldwide.</p>
-                <p><strong>Response Time:</strong> I typically respond within 24 hours.</p>
-                <a href="https://wa.me/9779814351861" target="_blank" class="btn btn-primary"
-                    style="margin-top: 0.5rem;"><i class="fa-brands fa-whatsapp"></i> Start a Project</a>
-            </div>
-            <div class="contact-links">
-                <a href="mailto:shresthasakar85@gmail.com" class="contact-link-item">
-                    <i class="fa-regular fa-envelope"></i>
-                    <div><span>Email Me</span><small>shresthasakar85@gmail.com</small></div>
-                </a>
-                <a href="https://wa.me/9779814351861" target="_blank" class="contact-link-item">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <div><span>WhatsApp</span><small>+977 9814351861</small></div>
-                </a>
-                <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank"
-                    class="contact-link-item">
-                    <i class="fa-brands fa-linkedin"></i>
-                    <div><span>LinkedIn</span><small>Connect professionally</small></div>
-                </a>
-                <a href="https://github.com/Sanssskar" target="_blank" class="contact-link-item">
-                    <i class="fa-brands fa-github"></i>
-                    <div><span>GitHub</span><small>See my open-source work</small></div>
-                </a>
-            </div>
-        </div>
+        <!-- Main Contact Layout -->
+        <div class="contact-main">
+            <!-- Left Side - Info & Services -->
+            <div class="contact-info-side">
+                <div class="welcome-text">
+                    <div class="response-badge">
+                        <i class="fa-solid fa-bolt"></i> Quick response — usually within 24 hours
+                    </div>
+                </div>
 
-        <div class="info-grid fade-up">
-            <div class="info-card"><i class="fa-solid fa-clock"></i>
-                <h4>Working Hours</h4>
-                <p>Mon-Fri, 9:00 AM – 6:00 PM (NPT)</p>
+                <!-- Direct Contact Info -->
+                <div class="direct-contact">
+                    <h3><i class="fa-solid fa-address-card"></i> Direct Contact</h3>
+                    <div class="contact-methods">
+                        <a href="mailto:shresthasakar85@gmail.com" class="contact-method">
+                            <i class="fa-regular fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>shresthasakar85@gmail.com</p>
+                            </div>
+                        </a>
+                        <a href="https://wa.me/9779814351861" target="_blank" class="contact-method">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <p>+977 9814351861</p>
+                            </div>
+                        </a>
+                        <div class="contact-method">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Dharan, Nepal (Remote Worldwide)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Reminder Section -->
+                <div class="services-reminder">
+                    <h3><i class="fa-solid fa-bolt"></i> What I can help you with:</h3>
+                    <div class="reminder-tags">
+                        <span class="reminder-tag">📊 Custom Admin Dashboards (Filament)</span>
+                        <span class="reminder-tag">⚡ Full Stack Web Development</span>
+                        <span class="reminder-tag">🔌 REST API Development</span>
+                        <span class="reminder-tag">🎨 UI/UX Design</span>
+                        <span class="reminder-tag">🛒 E-Commerce Solutions</span>
+                        <span class="reminder-tag">📚 LMS Platforms</span>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="social-links-section">
+                    <h3><i class="fa-solid fa-share-alt"></i> Connect with me</h3>
+                    <div class="social-icons-row">
+                        <a href="https://github.com/Sanssskar" target="_blank" class="social-icon-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="social-icon-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="social-icon-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/davis.nephop" target="_blank" class="social-icon-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="info-card"><i class="fa-solid fa-location-dot"></i>
-                <h4>Location</h4>
-                <p>Dharan, Nepal (Remote Worldwide)</p>
-            </div>
-            <div class="info-card"><i class="fa-solid fa-dollar-sign"></i>
-                <h4>Payment</h4>
-                <p>Bank Transfer, eSewa, Khalti, International</p>
-            </div>
-            <div class="info-card"><i class="fa-solid fa-headset"></i>
-                <h4>Support</h4>
-                <p>Post-launch support & maintenance</p>
+
+            <!-- Right Side - Contact Form -->
+            <div class="contact-form-side">
+                <h3>Let's Talk About Your Project</h3>
+                <div class="form-subtitle">Fill out the form and I'll get back to you within 24 hours.</div>
+                
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" name="name" id="name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number (Optional)</label>
+                            <input type="tel" name="phone" id="phone" placeholder="Enter your phone">
+                        </div>
+                        <div class="form-group">
+                            <label>Project Type</label>
+                            <select name="project_type" id="project_type">
+                                <option value="">Select project type</option>
+                                <option value="Website / Landing Page">🌐 Website / Landing Page</option>
+                                <option value="Web Application">⚡ Web Application</option>
+                                <option value="Admin Dashboard (Filament)">📊 Admin Dashboard (Filament)</option>
+                                <option value="REST API">🔌 REST API</option>
+                                <option value="E-Commerce Platform">🛒 E-Commerce Platform</option>
+                                <option value="LMS Platform">📚 LMS Platform</option>
+                                <option value="Other">❓ Other / Not Sure</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Budget Range (Optional)</label>
+                            <select name="budget" id="budget">
+                                <option value="">Select budget range</option>
+                                <option value="Rs. 10,000 - Rs. 25,000">Rs. 10,000 - Rs. 25,000 </option>
+                                <option value="Rs. 25,000 - Rs. 50,000">Rs. 25,000 - Rs. 50,000 </option>
+                                <option value="Rs. 50,000 - Rs. 75,000">Rs. 50,000 - Rs. 75,000 </option>
+                                <option value="Rs. 75,000 - Rs. 1,00,000">Rs. 75,000 - Rs. 1,00,000 </option>
+                                <option value="Rs. 1,00,000+">Rs. 1,00,000+</option>
+                                <option value="Flexible / Discuss">🤝Flexible / Let's Discuss</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject (Optional)</label>
+                            <input type="text" name="subject" id="subject" placeholder="Enter the subject">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tell me about your project *</label>
+                        <textarea name="message" id="message" rows="4" placeholder="Enter your message for related enquiries." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                    </button>
+                    
+                    <div class="response-note">
+                        <i class="fa-solid fa-clock"></i> I usually respond within 24 hours
+                    </div>
+                    
+                    <div class="security-note">
+                        <i class="fa-solid fa-lock"></i> Your information is safe & confidential
+                    </div>
+                </form>
             </div>
         </div>
 
         <footer class="footer">
-            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer ⚔️</div>
+            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer | Laravel & Filament Expert ⚔️</div>
             <nav><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a
                     href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
             </nav>
             <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
         </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-notification">
+        <i id="toastIcon" class="fa-solid fa-check-circle"></i>
+        <span id="toastMessage">Message sent successfully!</span>
     </div>
 
     <audio id="bg-music" loop style="display: none;">
@@ -259,7 +621,122 @@
             <span id="music-text">Play</span>
         </button>
     </div>
+    
     <script src="js/main.js"></script>
+    <script>
+        // Initialize EmailJS with your User ID
+        (function() {
+            emailjs.init('zW73_JIPhDTVGhJXv');
+        })();
+
+        // Show toast notification
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toastIcon');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastIcon.className = isSuccess ? 'fa-solid fa-check-circle' : 'fa-solid fa-exclamation-triangle';
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            toast.className = `toast-notification ${isSuccess ? 'success' : 'error'} show`;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5000);
+        }
+
+        // Send email using EmailJS
+        async function sendEmail(formData) {
+            const serviceId = 'service_4pks7ak';
+            const templateId = 'template_1rt0ebc';
+            
+            // Prepare template parameters
+            const templateParams = {
+                from_name: formData.name,
+                from_email: formData.email,
+                from_phone: formData.phone || 'Not provided',
+                project_type: formData.projectType || 'Not specified',
+                budget: formData.budget || 'Not specified',
+                subject: formData.subject || 'No subject',
+                message: formData.message,
+                reply_to: formData.email
+            };
+            
+            try {
+                const response = await emailjs.send(serviceId, templateId, templateParams);
+                console.log('Email sent successfully!', response);
+                return true;
+            } catch (error) {
+                console.error('Email failed:', error);
+                throw error;
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('contactForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Get form values
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                projectType: document.getElementById('project_type').value,
+                budget: document.getElementById('budget').value,
+                subject: document.getElementById('subject').value.trim(),
+                message: document.getElementById('message').value.trim()
+            };
+            
+            // Validate
+            if (!formData.name || !formData.email || !formData.message) {
+                showToast('Please fill in all required fields', false);
+                return;
+            }
+            
+            if (!formData.email.includes('@')) {
+                showToast('Please enter a valid email address', false);
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            
+            try {
+                // Send email via EmailJS
+                await sendEmail(formData);
+                
+                // Show success message
+                showToast('✓ Message sent! I\'ll get back to you within 24 hours.', true);
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showToast(' Something went wrong. Please try again or contact me directly via WhatsApp.', false);
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+        
+        // Active nav highlight
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const currentPage = currentPath.split('/').pop() || 'contact.html';
+            document.querySelectorAll('.nav-links li a').forEach(link => {
+                const linkHref = link.getAttribute('href').split('/').pop();
+                if (linkHref === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
