@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Sanskar Shrestha | Laravel Developer in Nepal</title>
+    <meta name="description"
+        content="Get in touch with Sanskar Shrestha for Laravel development, Filament admin panels, REST APIs, and freelance web development projects.">
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-1);
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: var(--accent-1);
+            margin-bottom: 0.8rem;
+        }
+
+        .info-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Social Links Hover */
+        .top-social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border: 1px solid var(--border-medium);
+        }
+
+        .top-social-link:hover {
+            transform: translateY(-3px);
+            border-color: transparent;
+        }
+
+        .top-social-link[title="Facebook"]:hover {
+            background: #1877f2;
+            color: white;
+        }
+
+        .top-social-link[title="Instagram"]:hover {
+            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
+            color: white;
+        }
+
+        .top-social-link[title="LinkedIn"]:hover {
+            background: #0077b5;
+            color: white;
+        }
+
+        .top-social-link[title="GitHub"]:hover {
+            background: #333;
+            color: white;
+        }
+
+        .top-social-link[title="WhatsApp"]:hover {
+            background: #25D366;
+            color: white;
+        }
+
+        .top-social-link[title="Email"]:hover {
+            background: #ea4335;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader-wrapper" id="loaderWrapper">
+        <div class="loader">
+            <div class="loader-text">Loading ⚔️</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- TOP SOCIAL BAR - FIXED with title attributes -->
+        <div class="top-social-bar fade-up">
+            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i
+                    class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i
+                    class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link"
+                title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i
+                    class="fa-brands fa-github"></i></a>
+            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i
+                    class="fa-brands fa-whatsapp"></i></a>
+            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i
+                    class="fa-regular fa-envelope"></i></a>
+        </div>
+
+        <div class="main-navbar fade-up">
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-user"></i> About</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+                <li><a href="projects.html"><i class="fa-solid fa-star"></i> Projects</a></li>
+                <li><a href="blog.html"><i class="fa-solid fa-pen-nib"></i> Blog</a></li>
+                <li><a href="contact.html" class="active"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+
+        <nav class="nav-bar fade-up">
+            <a style="text-decoration: none;" href="index.html">
+                <div class="logo">SanskarHub ⚔️</div>
+            </a>
+            <div class="nav-controls">
+                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i
+                            class="fa-solid fa-users"></i> Our Team</button></a>
+                <button class="glass-btn" id="themeToggle"><i class="fa-regular fa-moon" id="themeIcon"></i></button>
+            </div>
+        </nav>
+
+        <div class="page-header fade-up">
+            <h1>Let's Connect</h1>
+            <p style="color: var(--text-secondary);">Have a project? Let's discuss how I can help ⚔️</p>
+        </div>
+
+        <div class="contact-section scale-up" style="margin-top: 0;">
+            <div class="contact-text">
+                <h2>Work With Me</h2>
+                <p>Need a <strong>Laravel web app</strong>, <strong>Filament admin panel</strong>, or <strong>REST
+                        API</strong>? I'm available for freelance work across Nepal and remotely worldwide.</p>
+                <p><strong>Response Time:</strong> I typically respond within 24 hours.</p>
+                <a href="https://wa.me/9779814351861" target="_blank" class="btn btn-primary"
+                    style="margin-top: 0.5rem;"><i class="fa-brands fa-whatsapp"></i> Start a Project</a>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:shresthasakar85@gmail.com" class="contact-link-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <div><span>Email Me</span><small>shresthasakar85@gmail.com</small></div>
+                </a>
+                <a href="https://wa.me/9779814351861" target="_blank" class="contact-link-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <div><span>WhatsApp</span><small>+977 9814351861</small></div>
+                </a>
+                <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank"
+                    class="contact-link-item">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <div><span>LinkedIn</span><small>Connect professionally</small></div>
+                </a>
+                <a href="https://github.com/Sanssskar" target="_blank" class="contact-link-item">
+                    <i class="fa-brands fa-github"></i>
+                    <div><span>GitHub</span><small>See my open-source work</small></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="info-grid fade-up">
+            <div class="info-card"><i class="fa-solid fa-clock"></i>
+                <h4>Working Hours</h4>
+                <p>Mon-Fri, 9:00 AM – 6:00 PM (NPT)</p>
+            </div>
+            <div class="info-card"><i class="fa-solid fa-location-dot"></i>
+                <h4>Location</h4>
+                <p>Dharan, Nepal (Remote Worldwide)</p>
+            </div>
+            <div class="info-card"><i class="fa-solid fa-dollar-sign"></i>
+                <h4>Payment</h4>
+                <p>Bank Transfer, eSewa, Khalti, International</p>
+            </div>
+            <div class="info-card"><i class="fa-solid fa-headset"></i>
+                <h4>Support</h4>
+                <p>Post-launch support & maintenance</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer ⚔️</div>
+            <nav><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a
+                    href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+            </nav>
+            <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
+        </footer>
+    </div>
+
+    <audio id="bg-music" loop style="display: none;">
+        <source src="music/music.mpeg" type="audio/mpeg">
+    </audio>
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <button onclick="toggleMusic()" id="musicBtn"
+            style="background: var(--accent-1); color: white; border: none; border-radius: 50px; padding: 0.8rem 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 0.8rem; font-weight: 600;">
+            <i class="fa-solid fa-play" id="music-icon"></i>
+            <span id="music-text">Play</span>
+        </button>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

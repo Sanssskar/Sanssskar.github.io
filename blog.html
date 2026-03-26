@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Sanskar Shrestha – Laravel & Filament Developer Insights</title>
+    <meta name="description" content="Practical articles about Laravel development, Filament admin panels, web design tips, SEO strategies, and real project case studies from a full-stack developer in Nepal.">
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Blog Categories Tabs */
+        .blog-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0 2rem;
+        }
+        .category-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-secondary);
+        }
+        .category-btn:hover, .category-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        
+        .blog-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            border-radius: 1.2rem;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--accent-1);
+        }
+        
+        .blog-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent-1);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            z-index: 2;
+        }
+        
+        .blog-emoji { 
+            font-size: 2.8rem; 
+            padding: 1.5rem 1.5rem 0;
+            background: linear-gradient(135deg, var(--bg-primary), transparent);
+        }
+        .blog-card-body { 
+            padding: 1.2rem 1.5rem 1.5rem; 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .blog-meta { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.6rem; 
+            margin-bottom: 0.8rem; 
+            flex-wrap: wrap; 
+        }
+        .blog-tag { 
+            background: var(--gradient-1); 
+            color: white; 
+            font-size: 0.65rem; 
+            font-weight: 600; 
+            padding: 0.2rem 0.7rem; 
+            border-radius: 50px; 
+            text-transform: uppercase;
+        }
+        .blog-date { 
+            font-size: 0.7rem; 
+            color: var(--text-tertiary); 
+        }
+        .blog-card h3 { 
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            margin-bottom: 0.6rem; 
+            line-height: 1.4; 
+        }
+        .blog-card p { 
+            font-size: 0.85rem; 
+            color: var(--text-secondary); 
+            line-height: 1.6; 
+            flex: 1; 
+            margin-bottom: 1rem; 
+        }
+        .blog-read-more { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            margin-top: 0.3rem; 
+            color: var(--accent-1); 
+            font-weight: 600; 
+            font-size: 0.85rem; 
+            text-decoration: none; 
+            transition: all 0.2s ease; 
+        }
+        .blog-read-more:hover { 
+            gap: 0.8rem; 
+            color: var(--accent-2); 
+        }
+        .blog-read-more:hover i { 
+            transform: translateX(3px); 
+        }
+        
+        /* Social Links Hover */
+        .top-social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border: 1px solid var(--border-medium);
+        }
+        .top-social-link:hover {
+            transform: translateY(-3px);
+            border-color: transparent;
+        }
+        .top-social-link[title="Facebook"]:hover { background: #1877f2; color: white; }
+        .top-social-link[title="Instagram"]:hover { background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5); color: white; }
+        .top-social-link[title="LinkedIn"]:hover { background: #0077b5; color: white; }
+        .top-social-link[title="GitHub"]:hover { background: #333; color: white; }
+        .top-social-link[title="WhatsApp"]:hover { background: #25D366; color: white; }
+        .top-social-link[title="Email"]:hover { background: #ea4335; color: white; }
+        
+        .scale-up { opacity: 0; transform: scale(0.95); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        .scale-up.visible { opacity: 1; transform: scale(1); }
+        
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .blog-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .blog-card h3 { font-size: 1.1rem; }
+            .category-btn { padding: 0.4rem 1rem; font-size: 0.75rem; }
+        }
+        @media (max-width: 480px) {
+            .page-header h1 { font-size: 1.8rem; }
+            .blog-emoji { font-size: 2rem; padding: 1rem 1rem 0; }
+            .blog-card-body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-wrapper" id="loaderWrapper"><div class="loader"><div class="loader-text">Loading Blogs⚔️</div></div></div>
+
+    <div class="container">
+        <!-- TOP SOCIAL BAR -->
+        <div class="top-social-bar fade-up">
+            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+
+        <div class="main-navbar fade-up">
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-user"></i> About</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+                <li><a href="projects.html"><i class="fa-solid fa-star"></i> Projects</a></li>
+                <li><a href="blog.html" class="active"><i class="fa-solid fa-pen-nib"></i> Blog</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+
+        <nav class="nav-bar fade-up">
+            <a style="text-decoration: none;" href="index.html"><div class="logo">SanskarHub ⚔️</div></a>
+            <div class="nav-controls">
+                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i class="fa-solid fa-users"></i> Our Team</button></a>
+                <button class="glass-btn" id="themeToggle"><i class="fa-regular fa-moon" id="themeIcon"></i></button>
+            </div>
+        </nav>
+
+        <div class="page-header fade-up">
+            <h1>Blog & Insights</h1>
+            <p style="color: var(--text-secondary);">Practical advice from a developer who actually builds things ⚔️</p>
+        </div>
+
+        <!-- Blog Categories -->
+        <div class="blog-categories fade-up">
+            <button class="category-btn active" data-cat="all">All</button>
+            <button class="category-btn" data-cat="laravel">Laravel / Filament</button>
+            <button class="category-btn" data-cat="uiux">UI/UX & Design</button>
+            <button class="category-btn" data-cat="seo">SEO & Performance</button>
+            <button class="category-btn" data-cat="business">Business & Clients</button>
+            <button class="category-btn" data-cat="case-study">Case Studies</button>
+        </div>
+
+        <div class="blog-grid" id="blogGrid"></div>
+
+        <div style="text-align: center; margin: 2rem 0; padding: 1.5rem; background: var(--bg-secondary); border-radius: 1rem; border: 1px solid var(--border-light);">
+            <i class="fa-solid fa-newspaper" style="font-size: 1.5rem; color: var(--accent-1); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">📝 I publish new articles regularly. Follow me on <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" style="color: var(--accent-1); font-weight: 600;">LinkedIn</a> to stay updated!</p>
+            <p style="color: var(--text-tertiary); font-size: 0.8rem; margin-top: 0.5rem;">⚡ Need a custom dashboard or web app? <a href="contact.html" style="color: var(--accent-1);">Let's talk →</a></p>
+        </div>
+
+        <footer class="footer">
+            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer | Laravel & Filament Expert ⚔️</div>
+            <nav><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav>
+            <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
+        </footer>
+    </div>
+   <audio id="bg-music" loop style="display: none;">
+        <source src="music/music.mpeg" type="audio/mpeg">
+    </audio>
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <button onclick="toggleMusic()" id="musicBtn"
+            style="background: var(--accent-1); color: white; border: none; border-radius: 50px; padding: 0.8rem 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 0.8rem; font-weight: 600;">
+            <i class="fa-solid fa-play" id="music-icon"></i>
+            <span id="music-text">Play</span>
+        </button>
+    </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Blog data - High-impact, problem-solver style articles
+        const blogs = [
+            // Laravel / Filament Category
+            { title: "How I Built a Student Portal Using Laravel & Filament (Full Breakdown)", description: "From student registration to fee tracking and certificate generation — here's exactly how I built a complete student management system. Plus the mistakes I made so you don't have to.", date: "Mar 2025", tag: "Laravel", category: "laravel", emoji: "🎓", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Why I Use Filament for Every Admin Panel (It Cut My Dev Time by 60%)", description: "If you're struggling to build admin dashboards that clients actually like using, here's why Filament changed everything for me. Real examples from actual client projects.", date: "Feb 2025", tag: "Filament", category: "laravel", emoji: "⚡", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Laravel vs WordPress: Which One Should You Choose in 2026?", description: "Stop guessing. Here's a practical guide on when to use Laravel and when WordPress makes sense. Based on real client projects — both have their place.", date: "Jan 2025", tag: "Laravel", category: "laravel", emoji: "⚔️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Step-by-Step Guide: Building an Admin Dashboard with Filament in 1 Hour", description: "No theory. Just a practical walkthrough of building a working admin dashboard with user management, roles, and permissions using Filament PHP.", date: "Dec 2024", tag: "Filament", category: "laravel", emoji: "🛠️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Top 10 Laravel Tips That Actually Saved My Ass (Not Just Tutorial Stuff)", description: "Real tips from 2+ years of Laravel development — things I wish someone told me when I started. Database optimization, queue handling, and debugging tricks.", date: "Nov 2024", tag: "Laravel", category: "laravel", emoji: "💡", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            
+            // UI/UX & Design Category
+            { title: "5 UI Mistakes That Make Your Website Look Unprofessional (And How to Fix Them)", description: "I see these mistakes everywhere — even on sites built by agencies. Here's what makes people click away and how to fix it without being a designer.", date: "Feb 2025", tag: "Design", category: "uiux", emoji: "🎨", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "How Good UI/UX Can Increase Your Business Sales (Real Examples)", description: "A clean, easy-to-use interface isn't just about looking good — it directly affects your bottom line. Here's how design impacts conversion rates.", date: "Jan 2025", tag: "UI/UX", category: "uiux", emoji: "📈", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Why Simplicity Wins in Web Design (And Clients Love It)", description: "I've learned the hard way that overcomplicating things doesn't impress clients. Here's why simple, clean designs actually work better.", date: "Dec 2024", tag: "Design", category: "uiux", emoji: "✨", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            
+            // SEO & Performance Category
+            { title: "How to Make Your Website Rank on Google (Beginner Guide)", description: "No SEO jargon. Just practical steps you can take today to get your business website seen on Google. Based on what actually works.", date: "Feb 2025", tag: "SEO", category: "seo", emoji: "🔍", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "10 Simple SEO Tips for Small Business Websites", description: "You don't need to be an SEO expert. Here are 10 things you can do yourself that make a real difference. Most clients ignore these — that's why their sites don't rank.", date: "Jan 2025", tag: "SEO", category: "seo", emoji: "📊", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Why Your Website is Slow (And How to Fix It)", description: "Slow websites kill conversions. Here's how I diagnose and fix performance issues in Laravel apps — from database queries to asset optimization.", date: "Nov 2024", tag: "Performance", category: "seo", emoji: "🚀", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            
+            // Business & Clients Category
+            { title: "Why Most Websites Fail (And How to Avoid It)", description: "I've seen so many websites that look nice but don't actually do anything for the business. Here's what actually makes a website work.", date: "Mar 2025", tag: "Business", category: "business", emoji: "💼", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Common Mistakes I Made as a Developer (So You Don't Have To)", description: "From underquoting projects to overcomplicating solutions — here's what I learned the hard way in 2+ years of freelancing.", date: "Feb 2025", tag: "Lessons", category: "business", emoji: "📝", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "What Every Business Needs Before Building a Website", description: "Before you hire a developer, here are 5 things you should figure out first. Saves time, money, and headaches later.", date: "Dec 2024", tag: "Clients", category: "business", emoji: "📋", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Why Your Business Needs a Custom Admin Dashboard (Not Just a Website)", description: "If you're managing data manually with spreadsheets, you're wasting time. Here's how a custom dashboard can save you hours every week.", date: "Nov 2024", tag: "Business", category: "business", emoji: "📊", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Website vs Web App: What Does Your Business Actually Need?", description: "Not every business needs a complex web app. Here's how to figure out what actually makes sense for your situation.", date: "Oct 2024", tag: "Strategy", category: "business", emoji: "🤔", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            
+            // Case Studies Category
+            { title: "Behind the Scenes: Building a Student Portal API from Scratch", description: "A detailed breakdown of how I built the Student Portal API — the challenges, the tech decisions, and what I'd do differently next time.", date: "Mar 2025", tag: "Case Study", category: "case-study", emoji: "🎯", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "How I Built SudamHub (Full Project Breakdown)", description: "From idea to deployment — here's how I built SudamHub, a team website with blogs and project showcases using Laravel Filament.", date: "Jan 2025", tag: "Case Study", category: "case-study", emoji: "🏗️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "From Idea to Deployment: My Complete Web Development Process", description: "How I take a client from 'I have an idea' to a live, working application. A transparent look at my workflow.", date: "Dec 2024", tag: "Process", category: "case-study", emoji: "⚙️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" }
+        ];
+
+        let currentCategory = "all";
+
+        function renderBlogs() {
+            const grid = document.getElementById('blogGrid');
+            const filtered = currentCategory === "all" ? blogs : blogs.filter(b => b.category === currentCategory);
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fa-solid fa-folder-open" style="font-size:2rem; color:var(--text-tertiary);"></i><p style="margin-top:1rem; color:var(--text-secondary);">No articles in this category yet. Coming soon!</p></div>`;
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(blog => `
+                <article class="blog-card scale-up">
+                    <div class="blog-badge">${blog.tag}</div>
+                    <div class="blog-emoji">${blog.emoji}</div>
+                    <div class="blog-card-body">
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="fa-regular fa-calendar"></i> ${blog.date}</span>
+                        </div>
+                        <h3>${blog.title}</h3>
+                        <p>${blog.description}</p>
+                        <a href="${blog.link}" target="_blank" class="blog-read-more">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            `).join('');
+            
+            // Trigger animations
+            setTimeout(() => {
+                document.querySelectorAll('.scale-up').forEach(el => {
+                    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 100);
+        }
+
+        // Category filter functionality
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.cat;
+                renderBlogs();
+                // Scroll to top of blogs
+                document.getElementById('blogGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Initial render
+        renderBlogs();
+
+        // Active nav and animation observer
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const currentPage = currentPath.split('/').pop() || 'blog.html';
+            
+            document.querySelectorAll('.nav-links li a').forEach(link => {
+                const linkHref = link.getAttribute('href').split('/').pop();
+                if (linkHref === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            
+            document.querySelectorAll('.scale-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
