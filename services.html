@@ -268,117 +268,145 @@
     </div>
 
     <script src="js/main.js"></script>
-    <script>
-        const allProjects = [
-            { title: "Home Link Services Pvt.Ltd", description: "Modernized outdated website with dynamic and responsive elements. Added modern UI components and improved performance.", image: "images/homelink.png", tags: ["Laravel", "Tailwind CSS", "JavaScript"], repo: "https://homelinkservice.com/" },
-            { title: "Koseli Express", description: "E-commerce platform with inventory tracking and out-of-stock indicators. Implemented real-time stock management and order processing.", image: "images/koseli.png", tags: ["Laravel", "MySQL", "Payment Gateway"], repo: "https://www.koselixpress.com.np/" },
-            { title: "Product API", description: "REST API with authentication, cart management, orders, products, categories, and payment processing for mobile applications.", image: "images/api.jpg", tags: ["Laravel", "REST API", "Sanctum"], repo: "https://www.linkedin.com/posts/sanskar-shrestha-a750933b1_laravel-filament-restapi-activity-7431273261516173312-mFtI" },
-            { title: "Student Portal API", description: "API for students to access paid courses, purchase new ones, and receive certificates via email. Complete learning management system backend.", image: "images/studentport.png", tags: ["Laravel", "REST API", "Mail Integration"], repo: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "SudamHub", description: "Dynamic team website with blogs, team profiles, and project showcases using Laravel Filament, HTML, Tailwind CSS, and JavaScript.", image: "images/sudamhub.png", tags: ["Laravel", "Filament", "Tailwind CSS"], repo: "https://sudamhub.com/" }
-        ];
+   <script>
+    const allProjects = [
+        { title: "Home Link Services Pvt.Ltd", description: "Modernized outdated website with dynamic and responsive elements. Added modern UI components and improved performance.", image: "images/homelink.png", tags: ["Laravel", "Tailwind CSS", "JavaScript"], repo: "https://homelinkservice.com/" },
+        { title: "Koseli Express", description: "E-commerce platform with inventory tracking and out-of-stock indicators. Implemented real-time stock management and order processing.", image: "images/koseli.png", tags: ["Laravel", "MySQL", "Payment Gateway"], repo: "https://www.koselixpress.com.np/" },
+        { title: "Product API", description: "REST API with authentication, cart management, orders, products, categories, and payment processing for mobile applications.", image: "images/api.jpg", tags: ["Laravel", "REST API", "Sanctum"], repo: "https://www.linkedin.com/posts/sanskar-shrestha-a750933b1_laravel-filament-restapi-activity-7431273261516173312-mFtI" },
+        { title: "Student Portal API", description: "API for students to access paid courses, purchase new ones, and receive certificates via email. Complete learning management system backend.", image: "images/studentport.png", tags: ["Laravel", "REST API", "Mail Integration"], repo: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+        { title: "SudamHub", description: "Dynamic team website with blogs, team profiles, and project showcases using Laravel Filament, HTML, Tailwind CSS, and JavaScript.", image: "images/sudamhub.png", tags: ["Laravel", "Filament", "Tailwind CSS"], repo: "https://sudamhub.com/" }
+    ];
 
-        let currentPage = 1;
-        const projectsPerPage = 3;
-        let totalPages = Math.ceil(allProjects.length / projectsPerPage);
+    let currentPage = 1;
+    const projectsPerPage = 3;
+    let totalPages = Math.ceil(allProjects.length / projectsPerPage);
 
-        function renderProjects() {
-            const grid = document.getElementById('projectsGrid');
-            const currentProjects = allProjects.slice((currentPage - 1) * projectsPerPage, currentPage * projectsPerPage);
-            grid.innerHTML = currentProjects.map(p => `
-                <div class="project-card">
-                    <img class="project-img" src="${p.image}" alt="${p.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x200?text=${encodeURIComponent(p.title)}'">
-                    <h3>${p.title}</h3>
-                    <p>${p.description}</p>
-                    <div class="project-tags">${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}</div>
-                    <div style="margin-top:1rem;">
-                        <a href="${p.repo}" target="_blank" style="color:var(--accent-1);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;font-weight:600;">
-                            <i class="fa-solid fa-external-link"></i> View Project ⚔️
-                        </a>
-                    </div>
-                </div>
-            `).join('');
-        }
+    function renderProjects() {
+        const grid = document.getElementById('projectsGrid');
+        if (!grid) return;
 
-        function renderPagination() {
-            const c = document.getElementById('paginationContainer');
-            if (!c || totalPages <= 1) { 
-                if (c) c.style.display = 'none'; 
-                return; 
-            }
-            c.style.display = 'flex';
-            let html = `<button class="page-btn" id="prevPage" ${currentPage === 1 ? 'disabled' : ''}><i class="fa-solid fa-chevron-left"></i> Previous</button>
-                        <div class="page-numbers">`;
-            for (let i = 1; i <= totalPages; i++) {
-                html += `<button class="page-number ${currentPage === i ? 'active-page' : ''}" data-page="${i}">${i}</button>`;
-            }
-            html += `</div><button class="page-btn" id="nextPage" ${currentPage === totalPages ? 'disabled' : ''}>Next <i class="fa-solid fa-chevron-right"></i></button>`;
-            c.innerHTML = html;
-            
-            const scrollToProjects = () => { 
-                const projectsSection = document.getElementById('projectsGrid'); 
-                if (projectsSection) { 
-                    window.scrollTo({ top: projectsSection.offsetTop - 100, behavior: 'smooth' }); 
-                } 
-            };
-            
-            // Remove old event listeners and add new ones
-            const prevBtn = document.getElementById('prevPage');
-            const nextBtn = document.getElementById('nextPage');
-            
-            if (prevBtn) {
-                prevBtn.replaceWith(prevBtn.cloneNode(true));
-                const newPrevBtn = document.getElementById('prevPage');
-                newPrevBtn.addEventListener('click', () => { 
-                    if (currentPage > 1) { 
-                        currentPage--; 
-                        renderProjects(); 
-                        renderPagination(); 
-                        scrollToProjects(); 
-                    } 
-                });
-            }
-            
-            if (nextBtn) {
-                nextBtn.replaceWith(nextBtn.cloneNode(true));
-                const newNextBtn = document.getElementById('nextPage');
-                newNextBtn.addEventListener('click', () => { 
-                    if (currentPage < totalPages) { 
-                        currentPage++; 
-                        renderProjects(); 
-                        renderPagination(); 
-                        scrollToProjects(); 
-                    } 
-                });
-            }
-            
-            document.querySelectorAll('.page-number').forEach(btn => {
-                btn.replaceWith(btn.cloneNode(true));
-            });
-            
-            document.querySelectorAll('.page-number').forEach(btn => {
-                btn.addEventListener('click', e => { 
-                    const page = parseInt(e.target.getAttribute('data-page')); 
-                    if (page && page !== currentPage) { 
-                        currentPage = page; 
-                        renderProjects(); 
-                        renderPagination(); 
-                        scrollToProjects(); 
-                    } 
-                });
-            });
-        }
-
-        renderProjects();
-        renderPagination();
+        const currentProjects = allProjects.slice((currentPage - 1) * projectsPerPage, currentPage * projectsPerPage);
         
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentPath = window.location.pathname;
-            const currentPageName = currentPath.split('/').pop() || 'projects.html';
-            document.querySelectorAll('.nav-links li a').forEach(link => {
-                const linkHref = link.getAttribute('href').split('/').pop();
-                if (linkHref === currentPageName) link.classList.add('active');
+        grid.innerHTML = currentProjects.map(p => `
+            <div class="project-card">
+                <img class="project-img" 
+                     src="${p.image}" 
+                     alt="${p.title}" 
+                     loading="lazy"
+                     onerror="this.src='https://via.placeholder.com/400x200?text=${encodeURIComponent(p.title)}'">
+                <h3>${p.title}</h3>
+                <p>${p.description}</p>
+                <div class="project-tags">${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}</div>
+                <div style="margin-top:1rem;">
+                    <a href="${p.repo}" target="_blank" style="color:var(--accent-1);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;font-weight:600;">
+                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                    </a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderPagination() {
+        const container = document.getElementById('paginationContainer');
+        if (!container || totalPages <= 1) {
+            if (container) container.style.display = 'none';
+            return;
+        }
+
+        container.style.display = 'flex';
+
+        let html = `
+            <button class="page-btn" id="prevPage" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fa-solid fa-chevron-left"></i> Previous
+            </button>
+            <div class="page-numbers">
+        `;
+
+        for (let i = 1; i <= totalPages; i++) {
+            html += `
+                <button class="page-number ${currentPage === i ? 'active-page' : ''}" data-page="${i}">
+                    ${i}
+                </button>
+            `;
+        }
+
+        html += `
+            </div>
+            <button class="page-btn" id="nextPage" ${currentPage === totalPages ? 'disabled' : ''}>
+                Next <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        `;
+
+        container.innerHTML = html;
+
+        // Event Listeners
+        const prevBtn = document.getElementById('prevPage');
+        const nextBtn = document.getElementById('nextPage');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderProjects();
+                    renderPagination();
+                    scrollToProjects();
+                }
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderProjects();
+                    renderPagination();
+                    scrollToProjects();
+                }
+            });
+        }
+
+        document.querySelectorAll('.page-number').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const page = parseInt(btn.dataset.page);
+                if (page && page !== currentPage) {
+                    currentPage = page;
+                    renderProjects();
+                    renderPagination();
+                    scrollToProjects();
+                }
             });
         });
-    </script>
+    }
+
+    function scrollToProjects() {
+        const grid = document.getElementById('projectsGrid');
+        if (grid) {
+            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // Initial Render
+    renderProjects();
+    renderPagination();
+
+    // ==================== FIXED NAVIGATION ACTIVE LOGIC ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPath = window.location.pathname;
+        const currentFile = currentPath.split('/').pop() || 'index.html';
+
+        document.querySelectorAll('.nav-links li a').forEach(link => {
+            const linkHref = link.getAttribute('href');
+            const linkFile = linkHref.split('/').pop() || 'index.html';
+
+            // Remove active from all first
+            link.classList.remove('active');
+
+            // Add active only if exact match
+            if (linkFile === currentFile) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
 </body>
 </html>
