@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Sanskar Shrestha | Full Stack Developer – Laravel & Filament</title>
-    <meta name="description" content="View featured projects by Sanskar Shrestha including e-commerce platforms, LMS, REST APIs, and Filament admin panels.">
+    <title>Services | Sanskar Shrestha | Laravel & Filament Developer</title>
+    <meta name="description" content="I offer custom admin panels, full-stack web development, REST APIs, CMS systems, and more. Specializing in Laravel and Filament PHP.">
     <link rel="icon" type="image/png" href="favicon/favicon-96x96.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,148 +23,150 @@
             color: transparent;
         }
         
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+        /* Service Categories */
+        .service-category {
+            margin: 2.5rem 0 1.5rem;
         }
-
-        .project-card {
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-medium);
+        }
+        .category-title i {
+            color: var(--accent-1);
+            font-size: 1.3rem;
+        }
+        .category-sub {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Enhanced Service Grid */
+        .services-grid-enhanced {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .service-card {
             background: var(--bg-secondary);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
             border: 1px solid var(--border-medium);
-            transition: all 0.4s;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
-
-        .project-card::before {
+        
+        .service-card::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            width: 100%;
-            height: 5px;
+            width: 0;
+            height: 3px;
             background: var(--gradient-1);
-            transform: translateX(-100%);
-            transition: transform 0.4s;
+            transition: width 0.3s;
         }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--hover-shadow);
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-1);
         }
-
-        .project-card:hover::before {
-            transform: translateX(0);
-        }
-
-        .project-img {
+        
+        .service-card:hover::after {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 1rem;
+        }
+        
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 1rem;
         }
-
-        .project-card h3 {
-            font-size: 1.5rem;
+        
+        .service-icon i {
+            font-size: 1.4rem;
+            color: white;
+        }
+        
+        .service-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            color: var(--text-primary);
         }
-
-        .project-card p {
-            font-size: 0.9rem;
+        
+        .service-card p {
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
         }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tag {
+        
+        .service-tag {
+            display: inline-block;
             background: var(--bg-primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-light);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            color: var(--accent-1);
+            font-weight: 500;
         }
-
-        /* Pagination */
-        .pagination-container {
+        
+        .pricing-note {
+            background: var(--bg-primary);
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 1rem;
-            margin: 2rem 0 1rem;
-            flex-wrap: wrap;
+            border-left: 4px solid var(--accent-1);
         }
-
-        .page-btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-medium);
-            color: var(--text-primary);
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
+        
+        .pricing-note p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
-
-        .page-btn:hover:not(:disabled) {
+        
+        .pricing-note i {
+            color: var(--accent-1);
+            margin-right: 0.3rem;
+        }
+        
+        /* Hero Banner */
+        .services-hero {
             background: var(--gradient-1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
             color: white;
-            transform: translateY(-2px);
         }
-
-        .page-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        
+        .services-hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
         }
-
-        .page-numbers {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+        
+        .services-hero p {
+            opacity: 0.9;
+            font-size: 0.95rem;
         }
-
-        .page-number {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-medium);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .page-number:hover {
-            background: var(--accent-2);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .page-number.active-page {
-            background: var(--gradient-1);
-            color: white;
-            border-color: transparent;
-        }
-
-        /* Social Links Hover */
+        
         .top-social-link {
             display: inline-flex;
             align-items: center;
@@ -189,30 +191,20 @@
         .top-social-link[title="GitHub"]:hover { background: #333; color: white; }
         .top-social-link[title="WhatsApp"]:hover { background: #25D366; color: white; }
         .top-social-link[title="Email"]:hover { background: #ea4335; color: white; }
-
-        /* Fix for scale-up animation on dynamic content */
-        .project-card {
-            opacity: 1 !important;
-            transform: scale(1) !important;
-        }
-
+        
         @media (max-width: 768px) {
-            .projects-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .project-card h3 { font-size: 1.3rem; }
+            .services-grid-enhanced { grid-template-columns: 1fr; }
+            .category-title { font-size: 1.2rem; }
+            .services-hero h2 { font-size: 1.3rem; }
             .page-header h1 { font-size: 2rem; }
-        }
-        @media (max-width: 480px) {
-            .project-img { height: 160px; }
-            .project-card { padding: 1rem; }
-            .page-header h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
-    <div class="loader-wrapper" id="loaderWrapper"><div class="loader"><div class="loader-text">Loading Projects⚔️</div></div></div>
+    <div class="loader-wrapper" id="loaderWrapper"><div class="loader"><div class="loader-text">Loading Services⚔️</div></div></div>
 
     <div class="container">
-        <!-- TOP SOCIAL BAR - FIXED with title attributes -->
+        <!-- TOP SOCIAL BAR -->
         <div class="top-social-bar fade-up">
             <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -226,8 +218,8 @@
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
                 <li><a href="about.html"><i class="fa-solid fa-user"></i> About</a></li>
-                <li><a href="services.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
-                <li><a href="projects.html" class="active"><i class="fa-solid fa-star"></i> Projects</a></li>
+                <li><a href="services.html" class="active"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+                <li><a href="projects.html"><i class="fa-solid fa-star"></i> Projects</a></li>
                 <li><a href="blog.html"><i class="fa-solid fa-pen-nib"></i> Blog</a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
             </ul>
@@ -242,21 +234,162 @@
         </nav>
 
         <div class="page-header fade-up">
-            <h1>Featured Projects</h1>
-            <p style="color: var(--text-secondary);">Real-world applications built with Laravel & Filament ⚔️</p>
+            <h1>What I Can Build For You</h1>
+            <p style="color: var(--text-secondary);">Clean code. Powerful dashboards. Apps that actually work. ⚔️</p>
         </div>
 
-        <div class="projects-grid" id="projectsGrid"></div>
-        <div class="pagination-container" id="paginationContainer"></div>
+        <!-- Hero Banner - Smart Positioning -->
+        <div class="services-hero fade-up">
+            <h2>⚡ Your Business Needs More Than Just Code</h2>
+            <p>I build systems that solve real problems — not just websites that sit there. From managing your entire business in one dashboard to handling thousands of users, I've got you covered.</p>
+        </div>
+
+        <!-- 1. Custom Admin Panels (BIGGEST STRENGTH) -->
+        <div class="service-category fade-up">
+            <div class="category-title">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Custom Admin Panels — My Superpower</span>
+            </div>
+            <div class="category-sub">"I build clean, powerful admin dashboards to manage your entire business."</div>
+            <div class="services-grid-enhanced">
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-chart-line"></i></div><h3>Business Dashboards</h3><p>See your business at a glance — sales, customers, inventory, all in one place.</p><span class="service-tag">Filament</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-users"></i></div><h3>CRM Systems</h3><p>Manage customers, track interactions, never lose a lead again.</p><span class="service-tag">Customer Management</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-boxes"></i></div><h3>Inventory Management</h3><p>Track stock, get low-stock alerts, manage suppliers — all from one dashboard.</p><span class="service-tag">Real-time Updates</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-school"></i></div><h3>School / Student Portals</h3><p>Student records, attendance, fees, results — everything organized.</p><span class="service-tag">Education</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-building"></i></div><h3>Internal Company Tools</h3><p>Custom tools that make your team's work 10x easier. Task tracking, approvals, you name it.</p><span class="service-tag">Team Efficiency</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-shield-alt"></i></div><h3>Role-Based Access</h3><p>Admin, manager, user — different people see different things. Security built-in.</p><span class="service-tag">Permissions</span></div>
+            </div>
+        </div>
+
+        <!-- 2. Custom Web Applications (Higher Value) -->
+        <div class="service-category fade-up">
+            <div class="category-title">
+                <i class="fa-solid fa-cube"></i>
+                <span>Custom Web Applications</span>
+            </div>
+            <div class="category-sub">Built from scratch, tailored to your exact needs.</div>
+            <div class="services-grid-enhanced">
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-calendar-check"></i></div><h3>Booking Systems</h3><p>Hotels, doctor appointments, service bookings — let customers book online.</p><span class="service-tag">Real-time Availability</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-graduation-cap"></i></div><h3>E-Learning Platforms</h3><p>Course management, student progress, certificates — complete LMS.</p><span class="service-tag">Laravel</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-briefcase"></i></div><h3>Job Portals</h3><p>Post jobs, apply, track applications — connect employers with talent.</p><span class="service-tag">Recruitment</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-crown"></i></div><h3>SaaS Products</h3><p>Subscription-based platforms with payment integration and user management.</p><span class="service-tag">Scalable</span></div>
+            </div>
+        </div>
+
+        <!-- 3. Full Stack Web Development -->
+        <div class="service-category fade-up">
+            <div class="category-title">
+                <i class="fa-solid fa-laptop-code"></i>
+                <span>Full Stack Web Development</span>
+            </div>
+            <div class="category-sub">Laravel backend + responsive frontend. SEO-optimized. Fast. Works on all devices.</div>
+            <div class="services-grid-enhanced">
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-store"></i></div><h3>Business Websites</h3><p>Showcase your business, attract customers, look professional.</p><span class="service-tag">SEO Ready</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-user"></i></div><h3>Portfolio Websites</h3><p>Stand out. Show your work. Get noticed.</p><span class="service-tag">Custom Design</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-building"></i></div><h3>Company Websites</h3><p>Corporate presence that builds trust and credibility.</p><span class="service-tag">Responsive</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-newspaper"></i></div><h3>Blog Systems</h3><p>Multi-author blogs, SEO-friendly, easy to manage.</p><span class="service-tag">Content Management</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-mobile-alt"></i></div><h3>Landing Pages</h3><p>Convert visitors into customers. Fast loading, beautiful design.</p><span class="service-tag">High Conversion</span></div>
+            </div>
+        </div>
+
+        <!-- 4. API Development -->
+        <div class="service-category fade-up">
+            <div class="category-title">
+                <i class="fa-solid fa-plug"></i>
+                <span>API Development</span>
+            </div>
+            <div class="category-sub">Power mobile apps, React frontends, or third-party integrations.</div>
+            <div class="services-grid-enhanced">
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-mobile-screen"></i></div><h3>Mobile App Backend</h3><p>REST APIs for Flutter, React Native, or iOS apps.</p><span class="service-tag">Scalable</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-brands fa-react"></i></div><h3>Backend for React Apps</h3><p>Clean, documented APIs that your frontend team will love.</p><span class="service-tag">REST API</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-credit-card"></i></div><h3>Payment Integrations</h3><p>Khalti, eSewa, Stripe, PayPal — whatever you need.</p><span class="service-tag">Secure</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-envelope"></i></div><h3>Third-Party Integrations</h3><p>SMS, email, WhatsApp — connect your app to everything.</p><span class="service-tag">Automation</span></div>
+            </div>
+        </div>
+
+        <!-- 5. Authentication & User Systems -->
+        <div class="service-category fade-up">
+            <div class="category-title">
+                <i class="fa-solid fa-lock"></i>
+                <span>Authentication & User Systems</span>
+            </div>
+            <div class="category-sub">Every app needs security. I build it right.</div>
+            <div class="services-grid-enhanced">
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-right-to-bracket"></i></div><h3>Login / Registration Systems</h3><p>Secure, user-friendly, works every time.</p><span class="service-tag">Laravel Sanctum</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-user-lock"></i></div><h3>Role-Based Access Control</h3><p>Admin, Editor, User — different permissions for different people.</p><span class="service-tag">RBAC</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-brands fa-google"></i></div><h3>Social Login</h3><p>Sign in with Google, Facebook — make it easy for users.</p><span class="service-tag">OAuth</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-key"></i></div><h3>Password Reset & Recovery</h3><p>Users lose passwords. Make sure they can get back in.</p><span class="service-tag">Email Notifications</span></div>
+            </div>
+        </div>
+
+        <!-- 6. CMS & Blog Systems -->
+        <div class="service-category fade-up">
+            <div class="category-title">
+                <i class="fa-solid fa-pen-fancy"></i>
+                <span>CMS & Blog Systems</span>
+            </div>
+            <div class="category-sub">Better than WordPress for clients who want something custom and manageable.</div>
+            <div class="services-grid-enhanced">
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-blog"></i></div><h3>Custom CMS</h3><p>Control your content your way. No WordPress headaches.</p><span class="service-tag">Custom Built</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-users"></i></div><h3>Multi-Author Blog</h3><p>Multiple writers, editors, approval workflows — full control.</p><span class="service-tag">Team Ready</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-chart-simple"></i></div><h3>SEO-Friendly Systems</h3><p>Meta tags, sitemaps, clean URLs — built to rank.</p><span class="service-tag">SEO Optimized</span></div>
+            </div>
+        </div>
+
+        <!-- 7. Website Maintenance & Optimization (Recurring Income) -->
+        <div class="service-category fade-up">
+            <div class="category-title">
+                <i class="fa-solid fa-gear"></i>
+                <span>Maintenance & Optimization</span>
+            </div>
+            <div class="category-sub">Keep your site running fast, secure, and up-to-date.</div>
+            <div class="services-grid-enhanced">
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-bug"></i></div><h3>Bug Fixing</h3><p>Something broken? I'll find it and fix it.</p><span class="service-tag">Quick Response</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-gauge-high"></i></div><h3>Performance Optimization</h3><p>Make your site load faster. Keep users happy.</p><span class="service-tag">Speed Matters</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-shield-haltered"></i></div><h3>Security Updates</h3><p>Laravel updates, security patches — sleep better.</p><span class="service-tag">Protected</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-database"></i></div><h3>Backup Systems</h3><p>Automated backups. If something goes wrong, you're safe.</p><span class="service-tag">Peace of Mind</span></div>
+            </div>
+        </div>
+
+        <!-- 8. Database Design & Backend Logic -->
+        <div class="service-category fade-up">
+            <div class="category-title">
+                <i class="fa-solid fa-database"></i>
+                <span>Database Design & Backend Logic</span>
+            </div>
+            <div class="category-sub">The foundation of every great app. Get it right from the start.</div>
+            <div class="services-grid-enhanced">
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div><h3>Database Architecture</h3><p>Clean structure, efficient queries — built to scale.</p><span class="service-tag">MySQL/PostgreSQL</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-chart-line"></i></div><h3>Query Optimization</h3><p>Slow queries? Let's make them fast.</p><span class="service-tag">Performance</span></div>
+                <div class="service-card"><div class="service-icon"><i class="fa-solid fa-brain"></i></div><h3>Scalable Backend Logic</h3><p>Business logic that handles growth without breaking.</p><span class="service-tag">Built to Last</span></div>
+            </div>
+        </div>
+
+        <!-- Pricing Note -->
+        <div class="pricing-note fade-up">
+            <div><i class="fa-solid fa-circle-info"></i> Every project is different — I'll give you a custom quote based on your needs.</div>
+            <a href="https://www.linkedin.com/feed/" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.8rem;">Get a Quote →</a>
+        </div>
+
+        <div class="contact-section scale-up" style="margin-top: 2rem;">
+            <div class="contact-text">
+                <h2>Ready to Build Something?</h2>
+                <p>Whether you need a full admin dashboard, a custom web app, or just someone to fix your existing site — I'm here to help. Let's talk about what you need.</p>
+                <a href="contact.html" class="btn btn-primary"><i class="fa-solid fa-message"></i> Let's Talk</a>
+            </div>
+            <div class="contact-links">
+                <a href="https://wa.me/9779814351861" target="_blank" class="contact-link-item"><i class="fa-brands fa-whatsapp"></i><div><span>Quick Chat</span><small>Reply within hours</small></div></a>
+                <a href="mailto:shresthasakar85@gmail.com" class="contact-link-item"><i class="fa-regular fa-envelope"></i><div><span>Email Me</span><small>shresthasakar85@gmail.com</small></div></a>
+            </div>
+        </div>
 
         <footer class="footer">
-            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer ⚔️</div>
+            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer⚔️</div>
             <nav><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav>
             <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
         </footer>
     </div>
-
-    <audio id="bg-music" loop style="display: none;">
+   <audio id="bg-music" loop style="display: none;">
         <source src="music/music.mpeg" type="audio/mpeg">
     </audio>
     <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
@@ -268,145 +401,5 @@
     </div>
 
     <script src="js/main.js"></script>
-   <script>
-    const allProjects = [
-        { title: "Home Link Services Pvt.Ltd", description: "Modernized outdated website with dynamic and responsive elements. Added modern UI components and improved performance.", image: "images/homelink.png", tags: ["Laravel", "Tailwind CSS", "JavaScript"], repo: "https://homelinkservice.com/" },
-        { title: "Koseli Express", description: "E-commerce platform with inventory tracking and out-of-stock indicators. Implemented real-time stock management and order processing.", image: "images/koseli.png", tags: ["Laravel", "MySQL", "Payment Gateway"], repo: "https://www.koselixpress.com.np/" },
-        { title: "Product API", description: "REST API with authentication, cart management, orders, products, categories, and payment processing for mobile applications.", image: "images/api.jpg", tags: ["Laravel", "REST API", "Sanctum"], repo: "https://www.linkedin.com/posts/sanskar-shrestha-a750933b1_laravel-filament-restapi-activity-7431273261516173312-mFtI" },
-        { title: "Student Portal API", description: "API for students to access paid courses, purchase new ones, and receive certificates via email. Complete learning management system backend.", image: "images/studentport.png", tags: ["Laravel", "REST API", "Mail Integration"], repo: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-        { title: "SudamHub", description: "Dynamic team website with blogs, team profiles, and project showcases using Laravel Filament, HTML, Tailwind CSS, and JavaScript.", image: "images/sudamhub.png", tags: ["Laravel", "Filament", "Tailwind CSS"], repo: "https://sudamhub.com/" }
-    ];
-
-    let currentPage = 1;
-    const projectsPerPage = 3;
-    let totalPages = Math.ceil(allProjects.length / projectsPerPage);
-
-    function renderProjects() {
-        const grid = document.getElementById('projectsGrid');
-        if (!grid) return;
-
-        const currentProjects = allProjects.slice((currentPage - 1) * projectsPerPage, currentPage * projectsPerPage);
-        
-        grid.innerHTML = currentProjects.map(p => `
-            <div class="project-card">
-                <img class="project-img" 
-                     src="${p.image}" 
-                     alt="${p.title}" 
-                     loading="lazy"
-                     onerror="this.src='https://via.placeholder.com/400x200?text=${encodeURIComponent(p.title)}'">
-                <h3>${p.title}</h3>
-                <p>${p.description}</p>
-                <div class="project-tags">${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}</div>
-                <div style="margin-top:1rem;">
-                    <a href="${p.repo}" target="_blank" style="color:var(--accent-1);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;font-weight:600;">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
-                    </a>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function renderPagination() {
-        const container = document.getElementById('paginationContainer');
-        if (!container || totalPages <= 1) {
-            if (container) container.style.display = 'none';
-            return;
-        }
-
-        container.style.display = 'flex';
-
-        let html = `
-            <button class="page-btn" id="prevPage" ${currentPage === 1 ? 'disabled' : ''}>
-                <i class="fa-solid fa-chevron-left"></i> Previous
-            </button>
-            <div class="page-numbers">
-        `;
-
-        for (let i = 1; i <= totalPages; i++) {
-            html += `
-                <button class="page-number ${currentPage === i ? 'active-page' : ''}" data-page="${i}">
-                    ${i}
-                </button>
-            `;
-        }
-
-        html += `
-            </div>
-            <button class="page-btn" id="nextPage" ${currentPage === totalPages ? 'disabled' : ''}>
-                Next <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        `;
-
-        container.innerHTML = html;
-
-        // Event Listeners
-        const prevBtn = document.getElementById('prevPage');
-        const nextBtn = document.getElementById('nextPage');
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                if (currentPage > 1) {
-                    currentPage--;
-                    renderProjects();
-                    renderPagination();
-                    scrollToProjects();
-                }
-            });
-        }
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    renderProjects();
-                    renderPagination();
-                    scrollToProjects();
-                }
-            });
-        }
-
-        document.querySelectorAll('.page-number').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const page = parseInt(btn.dataset.page);
-                if (page && page !== currentPage) {
-                    currentPage = page;
-                    renderProjects();
-                    renderPagination();
-                    scrollToProjects();
-                }
-            });
-        });
-    }
-
-    function scrollToProjects() {
-        const grid = document.getElementById('projectsGrid');
-        if (grid) {
-            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-
-    // Initial Render
-    renderProjects();
-    renderPagination();
-
-    // ==================== FIXED NAVIGATION ACTIVE LOGIC ====================
-    document.addEventListener('DOMContentLoaded', function() {
-        const currentPath = window.location.pathname;
-        const currentFile = currentPath.split('/').pop() || 'index.html';
-
-        document.querySelectorAll('.nav-links li a').forEach(link => {
-            const linkHref = link.getAttribute('href');
-            const linkFile = linkHref.split('/').pop() || 'index.html';
-
-            // Remove active from all first
-            link.classList.remove('active');
-
-            // Add active only if exact match
-            if (linkFile === currentFile) {
-                link.classList.add('active');
-            }
-        });
-    });
-</script>
 </body>
 </html>
