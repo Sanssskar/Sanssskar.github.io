@@ -190,3 +190,61 @@ window.toggleMusic = function() {
     }
     isPlaying = !isPlaying;
 };
+// Video Intro Preloader - Plays Before Website Opens
+document.addEventListener('DOMContentLoaded', function() {
+    const preloader = document.getElementById('videoPreloader');
+    const mainContent = document.getElementById('mainContent');
+    const introVideo = document.getElementById('introVideo');
+    const skipBtn = document.getElementById('skipBtn');
+    const loaderWrapper = document.getElementById('loaderWrapper');
+
+    if (!introVideo) return;
+
+    // When video naturally ends
+    introVideo.addEventListener('ended', hidePreloader);
+
+    // Skip button click
+    if (skipBtn) {
+        skipBtn.addEventListener('click', hidePreloader);
+    }
+
+    function hidePreloader() {
+        introVideo.pause();
+        
+        preloader.style.transition = 'opacity 0.9s ease';
+        preloader.style.opacity = '0';
+
+        setTimeout(() => {
+            preloader.style.display = 'none';
+            mainContent.style.display = 'block';
+
+            // Smooth fade in
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+            }, 30);
+
+            // Show original loader briefly then hide
+            if (loaderWrapper) {
+                loaderWrapper.style.display = 'flex';
+                setTimeout(() => {
+                    loaderWrapper.style.opacity = '0';
+                    setTimeout(() => {
+                        loaderWrapper.style.display = 'none';
+                    }, 500);
+                }, 600);
+            }
+        }, 800);
+    }
+
+    // Safety timeout - max 12 seconds
+    setTimeout(() => {
+        if (preloader.style.display !== 'none') {
+            hidePreloader();
+        }
+    }, 12000);
+
+    // Try to autoplay the video
+    introVideo.play().catch(() => {
+        console.log("Intro video autoplay blocked by browser");
+    });
+});
