@@ -184,6 +184,11 @@
             font-weight: 600;
             margin-bottom: 0.5rem;
             display: inline-block;
+            text-decoration: none;
+        }
+
+        .company-name:hover {
+            text-decoration: underline;
         }
 
         .role-period {
@@ -193,6 +198,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .role-description {
@@ -340,6 +346,145 @@
             background: #ea4335;
             color: white;
         }
+
+        /* Mobile Fixes - Logo Centered & About Section Layout */
+        @media (max-width: 768px) {
+            /* Logo centered on mobile */
+            .nav-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                text-align: center;
+            }
+            
+            .logo::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .nav-controls {
+                justify-content: center;
+            }
+            
+            /* About section - description first, tags below */
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text {
+                order: 1;
+            }
+            
+            .about-highlights {
+                order: 2;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+            
+            .highlight-item {
+                width: auto;
+                min-width: 140px;
+            }
+            
+            /* Current work section - mobile layout */
+            .current-role {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .company-logo {
+                margin-bottom: 0.5rem;
+            }
+            
+            .role-badge {
+                display: inline-flex;
+            }
+            
+            .work-highlights {
+                justify-content: center;
+            }
+            
+            .role-period {
+                justify-content: center;
+            }
+            
+            /* Education section */
+            .education-detail {
+                padding-left: 1rem;
+            }
+            
+            /* Journey items - mobile */
+            .journey-item {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+            
+            .journey-icon {
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Skills */
+            .skills-list {
+                justify-content: center;
+            }
+            
+            /* Page header */
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-highlights {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .highlight-item {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .work-highlights {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .work-highlight {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .journey-item {
+                text-align: center;
+                align-items: center;
+            }
+            
+            .journey-content {
+                text-align: center;
+            }
+            
+            .education-detail {
+                text-align: center;
+                border-left: none;
+                padding-left: 0;
+            }
+            
+            .education-detail .institution {
+                text-align: center;
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 
@@ -461,9 +606,8 @@
                         <i class="fa-solid fa-calendar-check"></i> Active
                     </div>
                     <h4>Full Stack Developer</h4>
-                    <a href="https://codeit.com.np/" target="_blank">
+                    <a href="https://codeit.com.np/" target="_blank" style="text-decoration: none;">
                         <span class="company-name">CodeIT Nepal</span>
-
                     </a>
                     <div class="role-period">
                         <i class="fa-regular fa-calendar"></i> 2026 – Present
@@ -566,7 +710,7 @@
         </div>
 
         <footer class="footer">
-            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer⚔️</div>
+            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer ⚔️</div>
             <nav><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a
                     href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
             </nav>
@@ -586,6 +730,22 @@
     </div>
 
     <script src="js/main.js"></script>
+    <script>
+        // Set active class based on current page URL
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPath = window.location.pathname;
+            const currentPage = currentPath.split('/').pop() || 'about.html';
+
+            document.querySelectorAll('.nav-links li a').forEach(link => {
+                const linkHref = link.getAttribute('href').split('/').pop();
+                if (linkHref === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
