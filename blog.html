@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Sanskar Shrestha – Laravel & Filament Developer Insights</title>
     <meta name="description" content="Practical articles about Laravel development, Filament admin panels, web design tips, SEO strategies, and real project case studies from a full-stack developer in Nepal.">
+    <meta name="keywords" content="Laravel blog Nepal, Filament PHP tutorials, web development tips, Laravel developer blog, full stack developer Nepal, REST API tutorials">
+    <meta name="author" content="Sanskar Shrestha">
     <link rel="icon" type="image/png" href="favicon/favicon-96x96.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -150,6 +152,16 @@
             transform: translateX(3px); 
         }
         
+        /* New Blog Badge */
+        .new-badge {
+            background: #ff4757;
+            margin-left: 0.5rem;
+            font-size: 0.6rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
         /* Social Links Hover */
         .top-social-link {
             display: inline-flex;
@@ -189,6 +201,24 @@
             .page-header h1 { font-size: 1.8rem; }
             .blog-emoji { font-size: 2rem; padding: 1rem 1rem 0; }
             .blog-card-body { padding: 1rem; }
+        }
+        
+        /* Mobile Fixes for Blog Page */
+        @media (max-width: 768px) {
+            .nav-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .logo {
+                text-align: center;
+            }
+            .logo::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .nav-controls {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -238,6 +268,7 @@
             <button class="category-btn" data-cat="seo">SEO & Performance</button>
             <button class="category-btn" data-cat="business">Business & Clients</button>
             <button class="category-btn" data-cat="case-study">Case Studies</button>
+            <button class="category-btn" data-cat="latest">Latest 🔥</button>
         </div>
 
         <div class="blog-grid" id="blogGrid"></div>
@@ -254,7 +285,8 @@
             <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
         </footer>
     </div>
-   <audio id="bg-music" loop style="display: none;">
+    
+    <audio id="bg-music" loop style="display: none;">
         <source src="music/music.mpeg" type="audio/mpeg">
     </audio>
     <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
@@ -264,47 +296,97 @@
             <span id="music-text">Play</span>
         </button>
     </div>
-    </div>
 
     <script src="js/main.js"></script>
     <script>
-        // Blog data - High-impact, problem-solver style articles
+        // Blog data - High-impact, problem-solver style articles with NEWEST content
         const blogs = [
-            // Laravel / Filament Category
-            { title: "How I Built a Student Portal Using Laravel & Filament (Full Breakdown)", description: "From student registration to fee tracking and certificate generation — here's exactly how I built a complete student management system. Plus the mistakes I made so you don't have to.", date: "Mar 2025", tag: "Laravel", category: "laravel", emoji: "🎓", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "Why I Use Filament for Every Admin Panel (It Cut My Dev Time by 60%)", description: "If you're struggling to build admin dashboards that clients actually like using, here's why Filament changed everything for me. Real examples from actual client projects.", date: "Feb 2025", tag: "Filament", category: "laravel", emoji: "⚡", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "Laravel vs WordPress: Which One Should You Choose in 2026?", description: "Stop guessing. Here's a practical guide on when to use Laravel and when WordPress makes sense. Based on real client projects — both have their place.", date: "Jan 2025", tag: "Laravel", category: "laravel", emoji: "⚔️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "Step-by-Step Guide: Building an Admin Dashboard with Filament in 1 Hour", description: "No theory. Just a practical walkthrough of building a working admin dashboard with user management, roles, and permissions using Filament PHP.", date: "Dec 2024", tag: "Filament", category: "laravel", emoji: "🛠️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "Top 10 Laravel Tips That Actually Saved My Ass (Not Just Tutorial Stuff)", description: "Real tips from 2+ years of Laravel development — things I wish someone told me when I started. Database optimization, queue handling, and debugging tricks.", date: "Nov 2024", tag: "Laravel", category: "laravel", emoji: "💡", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            // NEWEST BLOGS - March/April 2026
+            { 
+                title: "How to Deploy Laravel on a VPS: Step-by-Step Guide for Nepali Developers", 
+                description: "Stop paying for expensive hosting. Learn how to deploy your Laravel apps on a VPS (DigitalOcean, Linode, or local Nepali hosting) with proper security, SSL, and performance optimization. Perfect for Nepali developers and freelancers.", 
+                date: "Apr 2026", 
+                tag: "Deployment", 
+                category: "laravel", 
+                emoji: "🚀", 
+                isNew: true,
+                link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" 
+            },
+            { 
+                title: "Filament v3 vs v4: What's New and Should You Upgrade?", 
+                description: "Filament v4 just dropped with new features like improved theming, better performance, and enhanced form builders. Here's my honest take on whether you should upgrade your existing projects and what to watch out for.", 
+                date: "Mar 2026", 
+                tag: "Filament", 
+                category: "laravel", 
+                emoji: "⚡", 
+                isNew: true,
+                link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" 
+            },
+            { 
+                title: "Building a SaaS Product with Laravel: Lessons from Building 3 SaaS Platforms", 
+                description: "After building 3 SaaS products for clients, here's what I learned about subscriptions, multi-tenancy, handling payments (eSewa/Khalti/Stripe), and scaling user growth. Real talk about mistakes and wins.", 
+                date: "Mar 2026", 
+                tag: "SaaS", 
+                category: "business", 
+                emoji: "🏢", 
+                isNew: true,
+                link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" 
+            },
+            { 
+                title: "How to Price Your Web Development Services in Nepal (2026 Guide)", 
+                description: "Nepali clients are price-sensitive, but you shouldn't undervalue yourself. Here's how I price projects, handle negotiations, and structure payment terms. Includes sample pricing for different project sizes.", 
+                date: "Feb 2026", 
+                tag: "Freelancing", 
+                category: "business", 
+                emoji: "💰", 
+                isNew: true,
+                link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" 
+            },
+            
+            // Laravel / Filament Category (Updated)
+            { title: "How I Built a Student Portal Using Laravel & Filament (Full Breakdown)", description: "From student registration to fee tracking and certificate generation — here's exactly how I built a complete student management system. Plus the mistakes I made so you don't have to.", date: "Jan 2026", tag: "Laravel", category: "laravel", emoji: "🎓", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Why I Use Filament for Every Admin Panel (It Cut My Dev Time by 60%)", description: "If you're struggling to build admin dashboards that clients actually like using, here's why Filament changed everything for me. Real examples from actual client projects.", date: "Dec 2025", tag: "Filament", category: "laravel", emoji: "⚡", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Laravel vs WordPress: Which One Should You Choose in 2026?", description: "Stop guessing. Here's a practical guide on when to use Laravel and when WordPress makes sense. Based on real client projects — both have their place.", date: "Nov 2025", tag: "Laravel", category: "laravel", emoji: "⚔️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Step-by-Step Guide: Building an Admin Dashboard with Filament in 1 Hour", description: "No theory. Just a practical walkthrough of building a working admin dashboard with user management, roles, and permissions using Filament PHP.", date: "Oct 2025", tag: "Filament", category: "laravel", emoji: "🛠️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Top 10 Laravel Tips That Actually Saved My Ass (Not Just Tutorial Stuff)", description: "Real tips from 2+ years of Laravel development — things I wish someone told me when I started. Database optimization, queue handling, and debugging tricks.", date: "Sep 2025", tag: "Laravel", category: "laravel", emoji: "💡", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
             
             // UI/UX & Design Category
-            { title: "5 UI Mistakes That Make Your Website Look Unprofessional (And How to Fix Them)", description: "I see these mistakes everywhere — even on sites built by agencies. Here's what makes people click away and how to fix it without being a designer.", date: "Feb 2025", tag: "Design", category: "uiux", emoji: "🎨", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "How Good UI/UX Can Increase Your Business Sales (Real Examples)", description: "A clean, easy-to-use interface isn't just about looking good — it directly affects your bottom line. Here's how design impacts conversion rates.", date: "Jan 2025", tag: "UI/UX", category: "uiux", emoji: "📈", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "Why Simplicity Wins in Web Design (And Clients Love It)", description: "I've learned the hard way that overcomplicating things doesn't impress clients. Here's why simple, clean designs actually work better.", date: "Dec 2024", tag: "Design", category: "uiux", emoji: "✨", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "5 UI Mistakes That Make Your Website Look Unprofessional (And How to Fix Them)", description: "I see these mistakes everywhere — even on sites built by agencies. Here's what makes people click away and how to fix it without being a designer.", date: "Jan 2026", tag: "Design", category: "uiux", emoji: "🎨", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "How Good UI/UX Can Increase Your Business Sales (Real Examples)", description: "A clean, easy-to-use interface isn't just about looking good — it directly affects your bottom line. Here's how design impacts conversion rates.", date: "Dec 2025", tag: "UI/UX", category: "uiux", emoji: "📈", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Why Simplicity Wins in Web Design (And Clients Love It)", description: "I've learned the hard way that overcomplicating things doesn't impress clients. Here's why simple, clean designs actually work better.", date: "Nov 2025", tag: "Design", category: "uiux", emoji: "✨", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
             
             // SEO & Performance Category
-            { title: "How to Make Your Website Rank on Google (Beginner Guide)", description: "No SEO jargon. Just practical steps you can take today to get your business website seen on Google. Based on what actually works.", date: "Feb 2025", tag: "SEO", category: "seo", emoji: "🔍", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "10 Simple SEO Tips for Small Business Websites", description: "You don't need to be an SEO expert. Here are 10 things you can do yourself that make a real difference. Most clients ignore these — that's why their sites don't rank.", date: "Jan 2025", tag: "SEO", category: "seo", emoji: "📊", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "Why Your Website is Slow (And How to Fix It)", description: "Slow websites kill conversions. Here's how I diagnose and fix performance issues in Laravel apps — from database queries to asset optimization.", date: "Nov 2024", tag: "Performance", category: "seo", emoji: "🚀", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "How to Make Your Website Rank on Google (Beginner Guide)", description: "No SEO jargon. Just practical steps you can take today to get your business website seen on Google. Based on what actually works.", date: "Dec 2025", tag: "SEO", category: "seo", emoji: "🔍", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "10 Simple SEO Tips for Small Business Websites", description: "You don't need to be an SEO expert. Here are 10 things you can do yourself that make a real difference. Most clients ignore these — that's why their sites don't rank.", date: "Oct 2025", tag: "SEO", category: "seo", emoji: "📊", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Why Your Website is Slow (And How to Fix It)", description: "Slow websites kill conversions. Here's how I diagnose and fix performance issues in Laravel apps — from database queries to asset optimization.", date: "Aug 2025", tag: "Performance", category: "seo", emoji: "🚀", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
             
             // Business & Clients Category
-            { title: "Why Most Websites Fail (And How to Avoid It)", description: "I've seen so many websites that look nice but don't actually do anything for the business. Here's what actually makes a website work.", date: "Mar 2025", tag: "Business", category: "business", emoji: "💼", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "Common Mistakes I Made as a Developer (So You Don't Have To)", description: "From underquoting projects to overcomplicating solutions — here's what I learned the hard way in 2+ years of freelancing.", date: "Feb 2025", tag: "Lessons", category: "business", emoji: "📝", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "What Every Business Needs Before Building a Website", description: "Before you hire a developer, here are 5 things you should figure out first. Saves time, money, and headaches later.", date: "Dec 2024", tag: "Clients", category: "business", emoji: "📋", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "Why Your Business Needs a Custom Admin Dashboard (Not Just a Website)", description: "If you're managing data manually with spreadsheets, you're wasting time. Here's how a custom dashboard can save you hours every week.", date: "Nov 2024", tag: "Business", category: "business", emoji: "📊", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "Website vs Web App: What Does Your Business Actually Need?", description: "Not every business needs a complex web app. Here's how to figure out what actually makes sense for your situation.", date: "Oct 2024", tag: "Strategy", category: "business", emoji: "🤔", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Why Most Websites Fail (And How to Avoid It)", description: "I've seen so many websites that look nice but don't actually do anything for the business. Here's what actually makes a website work.", date: "Jan 2026", tag: "Business", category: "business", emoji: "💼", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Common Mistakes I Made as a Developer (So You Don't Have To)", description: "From underquoting projects to overcomplicating solutions — here's what I learned the hard way in 2+ years of freelancing.", date: "Nov 2025", tag: "Lessons", category: "business", emoji: "📝", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "What Every Business Needs Before Building a Website", description: "Before you hire a developer, here are 5 things you should figure out first. Saves time, money, and headaches later.", date: "Sep 2025", tag: "Clients", category: "business", emoji: "📋", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Why Your Business Needs a Custom Admin Dashboard (Not Just a Website)", description: "If you're managing data manually with spreadsheets, you're wasting time. Here's how a custom dashboard can save you hours every week.", date: "Jul 2025", tag: "Business", category: "business", emoji: "📊", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "Website vs Web App: What Does Your Business Actually Need?", description: "Not every business needs a complex web app. Here's how to figure out what actually makes sense for your situation.", date: "May 2025", tag: "Strategy", category: "business", emoji: "🤔", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
             
             // Case Studies Category
-            { title: "Behind the Scenes: Building a Student Portal API from Scratch", description: "A detailed breakdown of how I built the Student Portal API — the challenges, the tech decisions, and what I'd do differently next time.", date: "Mar 2025", tag: "Case Study", category: "case-study", emoji: "🎯", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "How I Built SudamHub (Full Project Breakdown)", description: "From idea to deployment — here's how I built SudamHub, a team website with blogs and project showcases using Laravel Filament.", date: "Jan 2025", tag: "Case Study", category: "case-study", emoji: "🏗️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
-            { title: "From Idea to Deployment: My Complete Web Development Process", description: "How I take a client from 'I have an idea' to a live, working application. A transparent look at my workflow.", date: "Dec 2024", tag: "Process", category: "case-study", emoji: "⚙️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" }
+            { title: "Behind the Scenes: Building a Student Portal API from Scratch", description: "A detailed breakdown of how I built the Student Portal API — the challenges, the tech decisions, and what I'd do differently next time.", date: "Dec 2025", tag: "Case Study", category: "case-study", emoji: "🎯", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "How I Built SudamHub (Full Project Breakdown)", description: "From idea to deployment — here's how I built SudamHub, a team website with blogs and project showcases using Laravel Filament.", date: "Oct 2025", tag: "Case Study", category: "case-study", emoji: "🏗️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" },
+            { title: "From Idea to Deployment: My Complete Web Development Process", description: "How I take a client from 'I have an idea' to a live, working application. A transparent look at my workflow.", date: "Aug 2025", tag: "Process", category: "case-study", emoji: "⚙️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/" }
         ];
 
         let currentCategory = "all";
 
         function renderBlogs() {
             const grid = document.getElementById('blogGrid');
-            const filtered = currentCategory === "all" ? blogs : blogs.filter(b => b.category === currentCategory);
+            let filtered = currentCategory === "all" ? blogs : blogs.filter(b => b.category === currentCategory);
+            
+            // For "latest" category, show newest 6 posts
+            if (currentCategory === "latest") {
+                filtered = [...blogs].sort((a, b) => {
+                    const dateA = new Date(a.date);
+                    const dateB = new Date(b.date);
+                    return dateB - dateA;
+                }).slice(0, 6);
+            }
             
             if (filtered.length === 0) {
                 grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fa-solid fa-folder-open" style="font-size:2rem; color:var(--text-tertiary);"></i><p style="margin-top:1rem; color:var(--text-secondary);">No articles in this category yet. Coming soon!</p></div>`;
@@ -313,7 +395,7 @@
             
             grid.innerHTML = filtered.map(blog => `
                 <article class="blog-card scale-up">
-                    <div class="blog-badge">${blog.tag}</div>
+                    <div class="blog-badge">${blog.tag}${blog.isNew ? '<span class="new-badge">NEW</span>' : ''}</div>
                     <div class="blog-emoji">${blog.emoji}</div>
                     <div class="blog-card-body">
                         <div class="blog-meta">
@@ -343,7 +425,6 @@
                 btn.classList.add('active');
                 currentCategory = btn.dataset.cat;
                 renderBlogs();
-                // Scroll to top of blogs
                 document.getElementById('blogGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
