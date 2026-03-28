@@ -3,11 +3,38 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>About | Sanskar Shrestha | Full Stack Developer – Laravel & Filament</title>
     <meta name="description"
         content="Learn more about Sanskar Shrestha, a full-stack Laravel & Filament developer from Dharan, Nepal with a Bachelor's in Information Management and 2+ years of freelancing experience.">
-    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png">
+    <meta name="keywords"
+        content="Sanskar Shrestha About, Laravel Developer Dharan Nepal, BIM Graduate Nepal, Full Stack Developer Freelancer Nepal">
+    <meta name="author" content="Sanskar Shrestha">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2e7d32">
+
+    <link rel="canonical" href="https://www.shresthasanskar.com.np/about.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="About Sanskar Shrestha | Laravel Developer from Dharan, Nepal">
+    <meta property="og:description"
+        content="Learn more about Sanskar Shrestha, a full-stack Laravel & Filament developer from Dharan, Nepal with a Bachelor's in Information Management and 2+ years of experience.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.shresthasanskar.com.np/about.html">
+    <meta property="og:image" content="https://www.shresthasanskar.com.np/images/sanskar.jpeg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Sanskar Shrestha | Laravel Developer Nepal">
+    <meta name="twitter:description"
+        content="BIM Graduate & Full Stack Laravel Developer from Dharan, Nepal. 2+ years freelancing experience.">
+    <meta name="twitter:image" content="https://www.shresthasanskar.com.np/images/sanskar.jpeg">
+    <!-- favicon  -->
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
@@ -349,34 +376,35 @@
 
         /* Mobile Fixes - Logo Centered & About Section Layout */
         @media (max-width: 768px) {
+
             /* Logo centered on mobile */
             .nav-bar {
                 flex-direction: column;
                 text-align: center;
             }
-            
+
             .logo {
                 text-align: center;
             }
-            
+
             .logo::after {
                 left: 50%;
                 transform: translateX(-50%);
             }
-            
+
             .nav-controls {
                 justify-content: center;
             }
-            
+
             /* About section - description first, tags below */
             .about-content {
                 flex-direction: column;
             }
-            
+
             .about-text {
                 order: 1;
             }
-            
+
             .about-highlights {
                 order: 2;
                 flex-direction: row;
@@ -384,56 +412,56 @@
                 justify-content: center;
                 gap: 0.8rem;
             }
-            
+
             .highlight-item {
                 width: auto;
                 min-width: 140px;
             }
-            
+
             /* Current work section - mobile layout */
             .current-role {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
-            
+
             .company-logo {
                 margin-bottom: 0.5rem;
             }
-            
+
             .role-badge {
                 display: inline-flex;
             }
-            
+
             .work-highlights {
                 justify-content: center;
             }
-            
+
             .role-period {
                 justify-content: center;
             }
-            
+
             /* Education section */
             .education-detail {
                 padding-left: 1rem;
             }
-            
+
             /* Journey items - mobile */
             .journey-item {
                 flex-direction: column;
                 align-items: flex-start;
                 text-align: left;
             }
-            
+
             .journey-icon {
                 margin-bottom: 0.5rem;
             }
-            
+
             /* Skills */
             .skills-list {
                 justify-content: center;
             }
-            
+
             /* Page header */
             .page-header h1 {
                 font-size: 2rem;
@@ -445,47 +473,74 @@
                 flex-direction: column;
                 align-items: stretch;
             }
-            
+
             .highlight-item {
                 width: 100%;
                 justify-content: center;
             }
-            
+
             .work-highlights {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .work-highlight {
                 width: 100%;
                 justify-content: center;
             }
-            
+
             .journey-item {
                 text-align: center;
                 align-items: center;
             }
-            
+
             .journey-content {
                 text-align: center;
             }
-            
+
             .education-detail {
                 text-align: center;
                 border-left: none;
                 padding-left: 0;
             }
-            
+
             .education-detail .institution {
                 text-align: center;
                 display: block;
             }
-            
+
             .page-header h1 {
                 font-size: 1.8rem;
             }
         }
     </style>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sanskar Shrestha",
+  "url": "https://www.shresthasanskar.com.np",
+  "image": "https://www.shresthasanskar.com.np/images/sanskar.jpeg",
+  "jobTitle": "Full Stack Developer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Freelance / CodeIT Nepal"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dharan",
+    "addressRegion": "Province 1",
+    "addressCountry": "NP"
+  },
+  "description": "Full Stack Laravel & Filament PHP Developer from Dharan, Nepal with 2+ years of experience building web applications and admin panels.",
+  "sameAs": [
+    "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/",
+    "https://github.com/Sanssskar",
+    "https://www.instagram.com/_marimo_0/"
+  ],
+  "knowsAbout": ["Laravel", "Filament PHP", "Tailwind CSS", "PHP", "MySQL", "REST API Development"]
+}
+</script>
 </head>
 
 <body>
