@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sanskarshrestha.com.np/sitemap.xml
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://www.shresthasanskar.com.np/sitemap.xml
