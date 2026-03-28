@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
-
 Disallow: /admin/
 Disallow: /private/
+
+Content-Signal: search=yes,ai-train=no
 
 Sitemap: https://www.shresthasanskar.com.np/sitemap.xml
