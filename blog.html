@@ -697,7 +697,7 @@
                     <button class="share-btn" data-social="facebook" onclick="shareOnFacebook()"><i
                             class="fa-brands fa-facebook-f"></i></button>
                 </div>
-                <a href="#" id="modalReadMoreLink" class="modal-action-btn" target="_blank">Read Full Article <i
+                <a href="#" id="modalReadMoreLink" class="modal-action-btn" target="_blank">Follow for More.. <i
                         class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
@@ -741,54 +741,49 @@
             { title: "From Idea to Deployment: My Complete Web Development Process", description: "How I take a client from 'I have an idea' to a live, working application. A transparent look at my workflow.", date: "Aug 2025", tag: "Process", category: "case-study", emoji: "⚙️", link: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/", fullContent: "Development process..." }
         ];
 
-        // Pagination settings
-        const postsPerPage = 6;
-        let currentPage = 1;
-        let currentCategory = "all";
-        let filteredBlogs = [...blogs];
+   const postsPerPage = 6;
+let currentPage = 1;
+let currentCategory = "all";
+let filteredBlogs = [...blogs];
 
-        function renderBlogs() {
-            const grid = document.getElementById('blogGrid');
+function renderBlogs() {
+    const grid = document.getElementById('blogGrid');
+    
+    if (currentCategory === "all") {
+        filteredBlogs = [...blogs];
+    } else {
+        filteredBlogs = blogs.filter(b => b.category === currentCategory);
+    }
 
-            // Filter by category
-            if (currentCategory === "all") {
-                filteredBlogs = [...blogs];
-            } else {
-                filteredBlogs = blogs.filter(b => b.category === currentCategory);
-            }
+    const totalPages = Math.ceil(filteredBlogs.length / postsPerPage);
+    const startIndex = (currentPage - 1) * postsPerPage;
+    const endIndex = startIndex + postsPerPage;
+    const currentBlogs = filteredBlogs.slice(startIndex, endIndex);
 
-            // Pagination logic
-            const totalPages = Math.ceil(filteredBlogs.length / postsPerPage);
-            const startIndex = (currentPage - 1) * postsPerPage;
-            const endIndex = startIndex + postsPerPage;
-            const currentBlogs = filteredBlogs.slice(startIndex, endIndex);
+    if (currentBlogs.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fa-solid fa-folder-open" style="font-size:2rem; color:var(--text-tertiary);"></i><p style="margin-top:1rem; color:var(--text-secondary);">No articles in this category yet. Coming soon!</p></div>`;
+        document.getElementById('pagination').innerHTML = '';
+        return;
+    }
 
-            if (currentBlogs.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fa-solid fa-folder-open" style="font-size:2rem; color:var(--text-tertiary);"></i><p style="margin-top:1rem; color:var(--text-secondary);">No articles in this category yet. Coming soon!</p></div>`;
-                document.getElementById('pagination').innerHTML = '';
-                return;
-            }
+    grid.innerHTML = currentBlogs.map(blog => `
+        <article class="blog-card scale-up visible">
+            <div class="blog-badge">${blog.tag}${blog.isNew ? '<span class="new-badge">NEW</span>' : ''}</div>
+            <div class="blog-emoji">${blog.emoji}</div>
+            <div class="blog-card-body">
+                <div class="blog-meta">
+                    <span class="blog-date"><i class="fa-regular fa-calendar"></i> ${blog.date}</span>
+                </div>
+                <h3>${blog.title}</h3>
+                <p>${blog.description}</p>
+                <button class="blog-read-more" onclick='openModal(${JSON.stringify(blog).replace(/'/g, "&#39;")})'>
+                    Read Article <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </article>
+    `).join('');
 
-            // Render blogs
-            grid.innerHTML = currentBlogs.map(blog => `
-                <article class="blog-card scale-up">
-                    <div class="blog-badge">${blog.tag}${blog.isNew ? '<span class="new-badge">NEW</span>' : ''}</div>
-                    <div class="blog-emoji">${blog.emoji}</div>
-                    <div class="blog-card-body">
-                        <div class="blog-meta">
-                            <span class="blog-date"><i class="fa-regular fa-calendar"></i> ${blog.date}</span>
-                        </div>
-                        <h3>${blog.title}</h3>
-                        <p>${blog.description}</p>
-                        <button class="blog-read-more" onclick='openModal(${JSON.stringify(blog).replace(/'/g, "&#39;")})'>
-                            Read Article <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </article>
-            `).join('');
-
-            // Render pagination
-            renderPagination(totalPages);
+    renderPagination(totalPages);
 
             // Animation
             setTimeout(() => {
@@ -929,15 +924,6 @@
 
         // Initialize
         renderBlogs();
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.scale-up').forEach(el => observer.observe(el));
-        });
     </script>
 </body>
 
