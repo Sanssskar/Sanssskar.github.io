@@ -46,8 +46,8 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* ============================================
-   HOME PAGE SPECIFIC CSS
-   ============================================ */
+           HOME PAGE SPECIFIC CSS
+        ============================================ */
 
         /* Hero Section */
         .hero {
@@ -282,7 +282,7 @@
             z-index: 10;
         }
 
-        /* About Section */
+        /* About Section - ORIGINAL LAYOUT (Desktop) */
         .about-section {
             background: var(--bg-secondary);
             border-radius: 2rem;
@@ -318,6 +318,7 @@
             font-weight: 700;
         }
 
+        /* ORIGINAL: Desktop layout - flex with text first, highlights on right */
         .about-content {
             display: flex;
             gap: 2rem;
@@ -654,8 +655,8 @@
         }
 
         /* ============================================
-   HOME PAGE RESPONSIVE
-   ============================================ */
+           HOME PAGE RESPONSIVE - ONLY MOBILE CHANGES
+        ============================================ */
         @media (max-width: 1024px) {
             .hero {
                 gap: 2rem;
@@ -744,6 +745,7 @@
                 font-size: 0.85rem;
             }
 
+            /* ========== ABOUT SECTION - MOBILE ONLY CHANGES ========== */
             .about-section {
                 padding: 1.5rem;
                 margin: 2rem 0;
@@ -759,8 +761,15 @@
                 font-size: 1.5rem;
             }
 
+            /* MOBILE: Stack vertically - text first, then highlights in 2 columns */
+            .about-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
             .about-text {
                 text-align: center;
+                order: 1;
             }
 
             .about-text p {
@@ -768,19 +777,26 @@
             }
 
             .about-highlights {
-                align-items: center;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
+                order: 2;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 0.8rem;
             }
 
             .highlight-item {
-                width: auto;
-                min-width: 140px;
+                padding: 0.8rem;
                 justify-content: center;
             }
 
+            .highlight-item i {
+                font-size: 1.2rem;
+            }
+
+            .highlight-item span {
+                font-size: 0.85rem;
+            }
+
+            /* Quick Access Section */
             .quick-title {
                 font-size: 1.5rem;
             }
@@ -827,6 +843,7 @@
                 margin-top: 0.3rem;
             }
 
+            /* Projects Section */
             .projects-preview {
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -844,9 +861,22 @@
                 font-size: 0.8rem;
             }
 
+            /* Blogs Section */
             .blogs-preview {
                 grid-template-columns: 1fr;
                 gap: 1rem;
+            }
+        }
+
+        /* Small Mobile (480px and below) - Highlights become single column */
+        @media (max-width: 550px) {
+            .about-highlights {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            
+            .highlight-item {
+                justify-content: flex-start;
             }
         }
 
@@ -889,10 +919,6 @@
                 font-size: 0.85rem;
             }
 
-            .highlight-item span {
-                font-size: 0.85rem;
-            }
-
             .quick-card {
                 padding: 0.7rem 0.8rem;
                 flex-direction: column;
@@ -916,15 +942,6 @@
 
             .preview-img {
                 height: 140px;
-            }
-
-            .about-highlights {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .highlight-item {
-                width: 100%;
             }
         }
     </style>
@@ -1019,10 +1036,9 @@
             </div>
         </nav>
 
-        <!-- Hero Section - FIXED H1 ALIGNMENT -->
+        <!-- Hero Section -->
         <div class="hero">
             <div class="hero-content fade-left">
-                <!-- Marimo / Zoro Flip -->
                 <div class="name-wrapper">
                     <div class="name-title">
                         <div class="flip-container">
@@ -1034,7 +1050,6 @@
                     </div>
                 </div>
 
-                <!-- FIXED: Sanskar Shrestha H1 - Properly aligned -->
                 <div class="name-wrapper">
                     <div class="name-title">
                         <h1>
@@ -1045,7 +1060,6 @@
                     </div>
                 </div>
 
-                <!-- Hero Tagline -->
                 <div class="hero-tagline">
                     <div class="animated-icon"><i class="fa-brands fa-dev"></i></div>
                     <span>Full Stack Developer — Laravel & Filament ⚔️</span>
@@ -1079,7 +1093,8 @@
         <!-- About Section -->
         <section id="about">
             <div class="about-section scale-up">
-                <div class="about-header"><i class="fa-solid fa-user-astronaut"></i>
+                <div class="about-header">
+                    <i class="fa-solid fa-user-astronaut"></i>
                     <h2>About Me – Web Developer from Nepal ⚔️</h2>
                 </div>
                 <div class="about-content">
@@ -1096,20 +1111,31 @@
                         <p>⚔️ When I'm not coding, I love traveling and enjoying my peaceful time with nature 🌿.</p>
                     </div>
                     <div class="about-highlights">
-                        <div class="highlight-item"><i class="fa-solid fa-location-dot"></i><span>📍 Dharan,
-                                Nepal</span></div>
-                        <div class="highlight-item"><i class="fa-solid fa-calendar-alt"></i><span>📅 2+ Years
-                                Experience</span></div>
-                        <div class="highlight-item"><i class="fa-solid fa-rocket"></i><span>🚀 10+ Projects
-                                Delivered</span></div>
-                        <div class="highlight-item"><i class="fa-solid fa-code-branch"></i><span>⚡ Web Developer in
-                                Dharan</span></div>
-                        <div class="highlight-item"><i class="fa-solid fa-heart"></i><span>🛠️ Full Stack Web Developer
-                                Nepal</span></div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>📍 Dharan, Nepal</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-calendar-alt"></i>
+                            <span>📅 2+ Years Experience</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-rocket"></i>
+                            <span>🚀 10+ Projects Delivered</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-code-branch"></i>
+                            <span>⚡ Web Developer in Dharan</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-heart"></i>
+                            <span>🛠️ Full Stack Developer</span>
+                        </div>
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 1.5rem;"><a href="about.html" class="btn btn-outline">Read
-                        More About Me <i class="fa-solid fa-arrow-right"></i></a></div>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <a href="about.html" class="btn btn-outline">Read More About Me <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
         </section>
 
