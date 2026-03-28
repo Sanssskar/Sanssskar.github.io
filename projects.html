@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
     <title>Projects | Sanskar Shrestha | Full Stack Developer – Laravel & Filament</title>
     <meta name="description"
@@ -42,6 +42,35 @@
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sanskar Shrestha",
+      "url": "https://www.shresthasanskar.com.np",
+      "image": "https://www.shresthasanskar.com.np/images/sanskar.jpeg",
+      "jobTitle": "Full Stack Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance / CodeIT Nepal"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dharan",
+        "addressRegion": "Province 1",
+        "addressCountry": "NP"
+      },
+      "description": "Full Stack Laravel & Filament PHP Developer from Dharan, Nepal with 2+ years of experience building web applications and admin panels.",
+      "sameAs": [
+        "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/",
+        "https://github.com/Sanssskar",
+        "https://www.instagram.com/_marimo_0/"
+      ],
+      "knowsAbout": ["Laravel", "Filament PHP", "Tailwind CSS", "PHP", "MySQL", "REST API Development"]
+    }
+    </script>
+
     <style>
         .page-header {
             text-align: center;
@@ -133,71 +162,6 @@
             border: 1px solid var(--border-light);
         }
 
-        /* Pagination */
-        .pagination-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0 1rem;
-            flex-wrap: wrap;
-        }
-
-        .page-btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-medium);
-            color: var(--text-primary);
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .page-btn:hover:not(:disabled) {
-            background: var(--gradient-1);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .page-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .page-numbers {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .page-number {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-medium);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .page-number:hover {
-            background: var(--accent-2);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .page-number.active-page {
-            background: var(--gradient-1);
-            color: white;
-            border-color: transparent;
-        }
-
         /* Social Links Hover */
         .top-social-link {
             display: inline-flex;
@@ -219,92 +183,25 @@
             border-color: transparent;
         }
 
-        .top-social-link[title="Facebook"]:hover {
-            background: #1877f2;
-            color: white;
-        }
-
-        .top-social-link[title="Instagram"]:hover {
-            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
-            color: white;
-        }
-
-        .top-social-link[title="LinkedIn"]:hover {
-            background: #0077b5;
-            color: white;
-        }
-
-        .top-social-link[title="GitHub"]:hover {
-            background: #333;
-            color: white;
-        }
-
-        .top-social-link[title="WhatsApp"]:hover {
-            background: #25D366;
-            color: white;
-        }
-
-        .top-social-link[title="Email"]:hover {
-            background: #ea4335;
-            color: white;
-        }
+        .top-social-link[title="Facebook"]:hover { background: #1877f2; color: white; }
+        .top-social-link[title="Instagram"]:hover { background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5); color: white; }
+        .top-social-link[title="LinkedIn"]:hover { background: #0077b5; color: white; }
+        .top-social-link[title="GitHub"]:hover { background: #333; color: white; }
+        .top-social-link[title="WhatsApp"]:hover { background: #25D366; color: white; }
+        .top-social-link[title="Email"]:hover { background: #ea4335; color: white; }
 
         @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .project-card h3 {
-                font-size: 1.3rem;
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
+            .projects-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .project-card h3 { font-size: 1.3rem; }
+            .page-header h1 { font-size: 2rem; }
         }
 
         @media (max-width: 480px) {
-            .project-img {
-                height: 160px;
-            }
-
-            .project-card {
-                padding: 1rem;
-            }
-
-            .page-header h1 {
-                font-size: 1.8rem;
-            }
+            .project-img { height: 160px; }
+            .project-card { padding: 1rem; }
+            .page-header h1 { font-size: 1.8rem; }
         }
     </style>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Sanskar Shrestha",
-  "url": "https://www.shresthasanskar.com.np",
-  "image": "https://www.shresthasanskar.com.np/images/sanskar.jpeg",
-  "jobTitle": "Full Stack Developer",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Freelance / CodeIT Nepal"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Dharan",
-    "addressRegion": "Province 1",
-    "addressCountry": "NP"
-  },
-  "description": "Full Stack Laravel & Filament PHP Developer from Dharan, Nepal with 2+ years of experience building web applications and admin panels.",
-  "sameAs": [
-    "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/",
-    "https://github.com/Sanssskar",
-    "https://www.instagram.com/_marimo_0/"
-  ],
-  "knowsAbout": ["Laravel", "Filament PHP", "Tailwind CSS", "PHP", "MySQL", "REST API Development"]
-}
-</script>
 </head>
 
 <body>
@@ -315,20 +212,14 @@
     </div>
 
     <div class="container">
-        <!-- TOP SOCIAL BAR - FIXED with title attributes -->
+        <!-- TOP SOCIAL BAR -->
         <div class="top-social-bar fade-up">
-            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i
-                    class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i
-                    class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link"
-                title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i
-                    class="fa-brands fa-github"></i></a>
-            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i
-                    class="fa-brands fa-whatsapp"></i></a>
-            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i
-                    class="fa-regular fa-envelope"></i></a>
+            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i class="fa-regular fa-envelope"></i></a>
         </div>
 
         <div class="main-navbar fade-up">
@@ -347,8 +238,7 @@
                 <div class="logo">SanskarHub ⚔️</div>
             </a>
             <div class="nav-controls">
-                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i
-                            class="fa-solid fa-users"></i> Our Team</button></a>
+                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i class="fa-solid fa-users"></i> Our Team</button></a>
                 <button class="glass-btn" id="themeToggle"><i class="fa-regular fa-moon" id="themeIcon"></i></button>
             </div>
         </nav>
@@ -358,13 +248,133 @@
             <p style="color: var(--text-secondary);">Real-world applications built with Laravel & Filament ⚔️</p>
         </div>
 
-        <div class="projects-grid" id="projectsGrid"></div>
-        <div class="pagination-container" id="paginationContainer"></div>
+        <!-- Static HTML Projects Grid - SEO Friendly -->
+        <div class="projects-grid">
+
+            <!-- Project 1: Home Link Services -->
+            <div class="project-card">
+                <img class="project-img"
+                     src="images/homelink.png"
+                     alt="Home Link Services Pvt.Ltd - Laravel Website Redesign"
+                     width="400" height="200"
+                     loading="lazy">
+                <h3>Home Link Services Pvt.Ltd</h3>
+                <p>Modernized outdated website with dynamic and responsive elements. Added modern UI components and improved performance.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Laravel</span>
+                    <span class="project-tag">Tailwind CSS</span>
+                    <span class="project-tag">JavaScript</span>
+                </div>
+                <div style="margin-top:1rem;">
+                    <a href="https://homelinkservice.com/" target="_blank" rel="noopener"
+                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2: Koseli Express -->
+            <div class="project-card">
+                <img class="project-img"
+                     src="images/koseli.png"
+                     alt="Koseli Express - Laravel E-commerce Platform with Inventory Management"
+                     width="400" height="200"
+                     loading="lazy">
+                <h3>Koseli Express</h3>
+                <p>E-commerce platform with inventory tracking and out-of-stock indicators. Implemented real-time stock management and order processing.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Laravel</span>
+                    <span class="project-tag">MySQL</span>
+                    <span class="project-tag">Payment Gateway</span>
+                </div>
+                <div style="margin-top:1rem;">
+                    <a href="https://www.koselixpress.com.np/" target="_blank" rel="noopener"
+                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 3: Product API -->
+            <div class="project-card">
+                <img class="project-img"
+                     src="images/api.jpg"
+                     alt="Product REST API - Laravel Sanctum Authentication for Mobile Apps"
+                     width="400" height="200"
+                     loading="lazy">
+                <h3>Product API</h3>
+                <p>REST API with authentication, cart management, orders, products, categories, and payment processing for mobile applications.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Laravel</span>
+                    <span class="project-tag">REST API</span>
+                    <span class="project-tag">Sanctum</span>
+                </div>
+                <div style="margin-top:1rem;">
+                    <a href="https://www.linkedin.com/posts/sanskar-shrestha-a750933b1_laravel-filament-restapi-activity-7431273261516173312-mFtI"
+                       target="_blank" rel="noopener"
+                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 4: Student Portal API -->
+            <div class="project-card">
+                <img class="project-img"
+                     src="images/studentport.png"
+                     alt="Student Portal API - Laravel LMS Backend with Certificate Generation"
+                     width="400" height="200"
+                     loading="lazy">
+                <h3>Student Portal API</h3>
+                <p>API for students to access paid courses, purchase new ones, and receive certificates via email. Complete learning management system backend.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Laravel</span>
+                    <span class="project-tag">REST API</span>
+                    <span class="project-tag">Mail Integration</span>
+                </div>
+                <div style="margin-top:1rem;">
+                    <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/"
+                       target="_blank" rel="noopener"
+                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 5: SudamHub -->
+            <div class="project-card">
+                <img class="project-img"
+                     src="images/sudamhub.png"
+                     alt="SudamHub - Laravel Filament Team Website with Blog and Project Showcase"
+                     width="400" height="200"
+                     loading="lazy">
+                <h3>SudamHub</h3>
+                <p>Dynamic team website with blogs, team profiles, and project showcases using Laravel Filament, HTML, Tailwind CSS, and JavaScript.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Laravel</span>
+                    <span class="project-tag">Filament</span>
+                    <span class="project-tag">Tailwind CSS</span>
+                </div>
+                <div style="margin-top:1rem;">
+                    <a href="https://sudamhub.com/" target="_blank" rel="noopener"
+                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Projects Grid -->
 
         <footer class="footer">
             <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer ⚔️</div>
-            <nav><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a
-                    href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="projects.html">Projects</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
             </nav>
             <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
         </footer>
@@ -383,170 +393,6 @@
 
     <script src="js/main.js"></script>
     <script>
-        const allProjects = [
-            {
-                title: "Home Link Services Pvt.Ltd",
-                description: "Modernized outdated website with dynamic and responsive elements. Added modern UI components and improved performance.",
-                image: "images/homelink.png",
-                tags: ["Laravel", "Tailwind CSS", "JavaScript"],
-                repo: "https://homelinkservice.com/"
-            },
-            {
-                title: "Koseli Express",
-                description: "E-commerce platform with inventory tracking and out-of-stock indicators. Implemented real-time stock management and order processing.",
-                image: "images/koseli.png",
-                tags: ["Laravel", "MySQL", "Payment Gateway"],
-                repo: "https://www.koselixpress.com.np/"
-            },
-            {
-                title: "Product API",
-                description: "REST API with authentication, cart management, orders, products, categories, and payment processing for mobile applications.",
-                image: "images/api.jpg",
-                tags: ["Laravel", "REST API", "Sanctum"],
-                repo: "https://www.linkedin.com/posts/sanskar-shrestha-a750933b1_laravel-filament-restapi-activity-7431273261516173312-mFtI"
-            },
-            {
-                title: "Student Portal API",
-                description: "API for students to access paid courses, purchase new ones, and receive certificates via email. Complete learning management system backend.",
-                image: "images/studentport.png",
-                tags: ["Laravel", "REST API", "Mail Integration"],
-                repo: "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/"
-            },
-            {
-                title: "SudamHub",
-                description: "Dynamic team website with blogs, team profiles, and project showcases using Laravel Filament, HTML, Tailwind CSS, and JavaScript.",
-                image: "images/sudamhub.png",
-                tags: ["Laravel", "Filament", "Tailwind CSS"],
-                repo: "https://sudamhub.com/"
-            }
-        ];
-
-        let currentPage = 1;
-        const projectsPerPage = 3;
-        let totalPages = Math.ceil(allProjects.length / projectsPerPage);
-
-        function renderProjects() {
-            const grid = document.getElementById('projectsGrid');
-            if (!grid) return;
-
-            const start = (currentPage - 1) * projectsPerPage;
-            const currentProjects = allProjects.slice(start, start + projectsPerPage);
-
-            grid.innerHTML = currentProjects.map(p => `
-            <div class="project-card">
-                <img class="project-img" 
-                     src="${p.image}" 
-                     alt="${p.title}" 
-                     loading="lazy"
-                     onerror="this.src='https://via.placeholder.com/400x200?text=${encodeURIComponent(p.title)}'">
-                <h3>${p.title}</h3>
-                <p>${p.description}</p>
-                <div class="project-tags">
-                    ${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
-                </div>
-                <div style="margin-top:1rem;">
-                    <a href="${p.repo}" target="_blank" style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
-                    </a>
-                </div>
-            </div>
-        `).join('');
-        }
-
-        function renderPagination() {
-            const container = document.getElementById('paginationContainer');
-            if (!container) return;
-
-            if (totalPages <= 1) {
-                container.style.display = 'none';
-                return;
-            }
-
-            container.style.display = 'flex';
-
-            let html = `
-            <button class="page-btn" id="prevPage" ${currentPage === 1 ? 'disabled' : ''}>
-                <i class="fa-solid fa-chevron-left"></i> Previous
-            </button>
-            <div class="page-numbers">
-        `;
-
-            for (let i = 1; i <= totalPages; i++) {
-                html += `
-                <button class="page-number ${currentPage === i ? 'active-page' : ''}" data-page="${i}">
-                    ${i}
-                </button>
-            `;
-            }
-
-            html += `
-            </div>
-            <button class="page-btn" id="nextPage" ${currentPage === totalPages ? 'disabled' : ''}>
-                Next <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        `;
-
-            container.innerHTML = html;
-
-            // Add event listeners AFTER the HTML is inserted
-            const prevBtn = document.getElementById('prevPage');
-            const nextBtn = document.getElementById('nextPage');
-
-            if (prevBtn) {
-                prevBtn.addEventListener('click', () => {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        renderProjects();
-                        renderPagination();
-                        scrollToProjects();
-                    }
-                });
-            }
-
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => {
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        renderProjects();
-                        renderPagination();
-                        scrollToProjects();
-                    }
-                });
-            }
-
-            // Page number buttons
-            document.querySelectorAll('.page-number').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const page = parseInt(btn.getAttribute('data-page'));
-                    if (page && page !== currentPage) {
-                        currentPage = page;
-                        renderProjects();
-                        renderPagination();
-                        scrollToProjects();
-                    }
-                });
-            });
-        }
-
-        function scrollToProjects() {
-            const projectsSection = document.getElementById('projectsGrid');
-            if (projectsSection) {
-                const offset = 100;
-                const elementPosition = projectsSection.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.scrollY - offset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        // Initial render
-        renderProjects();
-        renderPagination();
-
-        // Navbar active link
         document.addEventListener('DOMContentLoaded', function () {
             const currentPath = window.location.pathname;
             const currentPageName = currentPath.split('/').pop() || 'projects.html';
