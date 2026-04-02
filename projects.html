@@ -162,6 +162,106 @@
             border: 1px solid var(--border-light);
         }
 
+        /* Project Actions - Share Buttons */
+        .project-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .project-link {
+            color: var(--accent-1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            gap: 0.8rem;
+            color: var(--accent-2);
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .share-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-medium);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .share-btn[data-social="linkedin"]:hover {
+            background: #0077b5;
+            color: white;
+            border-color: transparent;
+        }
+
+        .share-btn[data-social="twitter"]:hover {
+            background: #1DA1F2;
+            color: white;
+            border-color: transparent;
+        }
+
+        .share-btn[data-social="facebook"]:hover {
+            background: #1877f2;
+            color: white;
+            border-color: transparent;
+        }
+
+        .share-btn[data-social="whatsapp"]:hover {
+            background: #25D366;
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent-1);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 10000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
         /* Social Links Hover */
         .top-social-link {
             display: inline-flex;
@@ -194,6 +294,8 @@
             .projects-grid { grid-template-columns: 1fr; gap: 1.5rem; }
             .project-card h3 { font-size: 1.3rem; }
             .page-header h1 { font-size: 2rem; }
+            .project-actions { flex-direction: column; align-items: stretch; }
+            .share-buttons { justify-content: flex-start; }
         }
 
         @media (max-width: 480px) {
@@ -248,11 +350,11 @@
             <p style="color: var(--text-secondary);">Real-world applications built with Laravel & Filament ⚔️</p>
         </div>
 
-        <!-- Static HTML Projects Grid - SEO Friendly -->
+        <!-- Projects Grid with Share Buttons -->
         <div class="projects-grid">
 
             <!-- Project 1: Home Link Services -->
-            <div class="project-card">
+            <div class="project-card" data-project="Home Link Services Pvt.Ltd" data-url="https://homelinkservice.com/">
                 <img class="project-img"
                      src="images/homelink.png"
                      alt="Home Link Services Pvt.Ltd - Laravel Website Redesign"
@@ -265,16 +367,21 @@
                     <span class="project-tag">Tailwind CSS</span>
                     <span class="project-tag">JavaScript</span>
                 </div>
-                <div style="margin-top:1rem;">
-                    <a href="https://homelinkservice.com/" target="_blank" rel="noopener"
-                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                <div class="project-actions">
+                    <a href="https://homelinkservice.com/" target="_blank" rel="noopener" class="project-link">
                         <i class="fa-solid fa-external-link"></i> View Project ⚔️
                     </a>
+                    <div class="share-buttons">
+                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
+                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
+                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
+                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                    </div>
                 </div>
             </div>
 
             <!-- Project 2: Koseli Express -->
-            <div class="project-card">
+            <div class="project-card" data-project="Koseli Express" data-url="https://www.koselixpress.com.np/">
                 <img class="project-img"
                      src="images/koseli.png"
                      alt="Koseli Express - Laravel E-commerce Platform with Inventory Management"
@@ -287,16 +394,21 @@
                     <span class="project-tag">MySQL</span>
                     <span class="project-tag">Payment Gateway</span>
                 </div>
-                <div style="margin-top:1rem;">
-                    <a href="https://www.koselixpress.com.np/" target="_blank" rel="noopener"
-                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                <div class="project-actions">
+                    <a href="https://www.koselixpress.com.np/" target="_blank" rel="noopener" class="project-link">
                         <i class="fa-solid fa-external-link"></i> View Project ⚔️
                     </a>
+                    <div class="share-buttons">
+                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
+                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
+                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
+                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                    </div>
                 </div>
             </div>
 
             <!-- Project 3: Product API -->
-            <div class="project-card">
+            <div class="project-card" data-project="Product REST API" data-url="https://www.linkedin.com/posts/sanskar-shrestha-a750933b1_laravel-filament-restapi-activity-7431273261516173312-mFtI">
                 <img class="project-img"
                      src="images/api.jpg"
                      alt="Product REST API - Laravel Sanctum Authentication for Mobile Apps"
@@ -309,17 +421,22 @@
                     <span class="project-tag">REST API</span>
                     <span class="project-tag">Sanctum</span>
                 </div>
-                <div style="margin-top:1rem;">
+                <div class="project-actions">
                     <a href="https://www.linkedin.com/posts/sanskar-shrestha-a750933b1_laravel-filament-restapi-activity-7431273261516173312-mFtI"
-                       target="_blank" rel="noopener"
-                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                       target="_blank" rel="noopener" class="project-link">
                         <i class="fa-solid fa-external-link"></i> View Project ⚔️
                     </a>
+                    <div class="share-buttons">
+                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
+                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
+                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
+                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                    </div>
                 </div>
             </div>
 
             <!-- Project 4: Student Portal API -->
-            <div class="project-card">
+            <div class="project-card" data-project="Student Portal API" data-url="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/">
                 <img class="project-img"
                      src="images/studentport.png"
                      alt="Student Portal API - Laravel LMS Backend with Certificate Generation"
@@ -332,17 +449,22 @@
                     <span class="project-tag">REST API</span>
                     <span class="project-tag">Mail Integration</span>
                 </div>
-                <div style="margin-top:1rem;">
+                <div class="project-actions">
                     <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/recent-activity-all/"
-                       target="_blank" rel="noopener"
-                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                       target="_blank" rel="noopener" class="project-link">
                         <i class="fa-solid fa-external-link"></i> View Project ⚔️
                     </a>
+                    <div class="share-buttons">
+                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
+                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
+                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
+                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                    </div>
                 </div>
             </div>
 
             <!-- Project 5: SudamHub -->
-            <div class="project-card">
+            <div class="project-card" data-project="SudamHub" data-url="https://sudamhub.com/">
                 <img class="project-img"
                      src="images/sudamhub.png"
                      alt="SudamHub - Laravel Filament Team Website with Blog and Project Showcase"
@@ -355,11 +477,16 @@
                     <span class="project-tag">Filament</span>
                     <span class="project-tag">Tailwind CSS</span>
                 </div>
-                <div style="margin-top:1rem;">
-                    <a href="https://sudamhub.com/" target="_blank" rel="noopener"
-                       style="color:var(--accent-1); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:600;">
+                <div class="project-actions">
+                    <a href="https://sudamhub.com/" target="_blank" rel="noopener" class="project-link">
                         <i class="fa-solid fa-external-link"></i> View Project ⚔️
                     </a>
+                    <div class="share-buttons">
+                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
+                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
+                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
+                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                    </div>
                 </div>
             </div>
 
@@ -380,6 +507,11 @@
         </footer>
     </div>
 
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-notification">
+        <i class="fa-solid fa-share-alt"></i> Link copied to clipboard!
+    </div>
+
     <audio id="bg-music" loop style="display: none;">
         <source src="music/music.mpeg" type="audio/mpeg">
     </audio>
@@ -393,6 +525,60 @@
 
     <script src="js/main.js"></script>
     <script>
+        // Share Functionality
+        function shareProject(button) {
+            const projectCard = button.closest('.project-card');
+            const projectName = projectCard.getAttribute('data-project');
+            const projectUrl = projectCard.getAttribute('data-url');
+            const social = button.getAttribute('data-social');
+            
+            let shareUrl = '';
+            const text = `Check out this amazing project: ${projectName} by Sanskar Shrestha, a Full Stack Laravel Developer from Nepal.`;
+            const fullUrl = encodeURIComponent(projectUrl);
+            const fullText = encodeURIComponent(text);
+            
+            switch(social) {
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${fullUrl}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${fullText}&url=${fullUrl}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${fullUrl}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${fullText}%20${fullUrl}`;
+                    break;
+                default:
+                    return;
+            }
+            
+            window.open(shareUrl, '_blank', 'width=600,height=500');
+        }
+
+        // Copy Link Functionality (optional - can be added)
+        function copyProjectLink(button) {
+            const projectCard = button.closest('.project-card');
+            const projectUrl = projectCard.getAttribute('data-url');
+            
+            navigator.clipboard.writeText(projectUrl).then(() => {
+                showToast('Project link copied to clipboard! ✓');
+            }).catch(() => {
+                showToast('Failed to copy link');
+            });
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            toast.innerHTML = `<i class="fa-solid fa-check-circle"></i> ${message}`;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const currentPath = window.location.pathname;
             const currentPageName = currentPath.split('/').pop() || 'projects.html';
