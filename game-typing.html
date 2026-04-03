@@ -131,7 +131,7 @@
             border: 1px solid var(--border-medium);
         }
         
-        /* FIXED: Text display - better mobile visibility */
+        /* Text display - better mobile visibility */
         .text-display {
             background: var(--bg-primary);
             padding: 1.5rem;
@@ -149,7 +149,6 @@
             word-break: break-word;
         }
         
-        /* Better character styling for mobile */
         .char {
             display: inline;
             font-family: inherit;
@@ -166,11 +165,35 @@
         
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
         
-        .stats { display: flex; justify-content: space-between; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
+        /* Stats - Desktop: horizontal row */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
         
-        .stat-card { flex: 1; background: var(--bg-primary); padding: 0.8rem; border-radius: 1rem; text-align: center; }
-        .stat-label { font-size: 0.7rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 1px; }
-        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-1); }
+        .stat-card {
+            flex: 1;
+            background: var(--bg-primary);
+            padding: 0.8rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-1);
+        }
         
         textarea {
             width: 100%;
@@ -321,7 +344,7 @@
         .footer a:hover { color: var(--accent-1); }
 
         /* ============================================
-           MOBILE FIXES - Better text visibility
+           MOBILE FIXES - Stats moved to bottom
         ============================================ */
         @media (max-width: 768px) {
             .container {
@@ -339,7 +362,7 @@
                 font-size: 1rem;
                 padding: 1rem;
                 line-height: 1.6;
-                max-height: 400px;
+                max-height: 350px;
                 min-height: 200px;
             }
             
@@ -348,25 +371,42 @@
                 line-height: 1.6;
             }
             
+            /* IMPORTANT: Stats moved to bottom on mobile */
             .stats {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 0.5rem;
+                flex-direction: column;
+                gap: 0.6rem;
+                margin: 1rem 0;
+                order: 3;
             }
             
             .stat-card {
-                padding: 0.5rem;
-                min-width: calc(50% - 0.5rem);
-                flex: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.6rem 1rem;
+                text-align: left;
+            }
+            
+            .stat-label {
+                font-size: 0.7rem;
+                margin-bottom: 0;
             }
             
             .stat-value {
                 font-size: 1.2rem;
             }
             
-            .stat-label {
-                font-size: 0.6rem;
-            }
+            /* Reorder elements on mobile */
+            .difficulty-buttons { order: 0; }
+            .hard-mode-warning { order: 1; }
+            .text-display { order: 2; }
+            .progress-bar { order: 4; }
+            .stats { order: 5; }
+            textarea { order: 6; }
+            .action-buttons { order: 7; }
+            #result { order: 8; }
+            p:has(#bestWPM) { order: 9; }
+            .btn-back { order: 10; }
             
             .simple-header {
                 flex-direction: column;
@@ -473,7 +513,8 @@
             .text-display {
                 font-size: 0.9rem;
                 padding: 0.8rem;
-                max-height: 350px;
+                max-height: 300px;
+                min-height: 180px;
             }
             
             .char {
@@ -481,7 +522,11 @@
             }
             
             .stat-card {
-                min-width: 100%;
+                padding: 0.5rem 0.8rem;
+            }
+            
+            .stat-value {
+                font-size: 1rem;
             }
             
             .games-grid {
@@ -497,12 +542,22 @@
         /* Landscape mode fix */
         @media (max-width: 900px) and (orientation: landscape) {
             .text-display {
-                max-height: 250px;
-                min-height: 150px;
+                max-height: 200px;
+                min-height: 120px;
             }
             
             .game-container {
                 margin: 0.5rem auto;
+            }
+            
+            .stats {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .stat-card {
+                flex: 1;
+                min-width: calc(25% - 0.5rem);
             }
         }
     </style>
@@ -547,14 +602,15 @@
                 <i class="fa-solid fa-exclamation-triangle"></i> HARD MODE: You cannot delete or backspace! Type carefully!
             </div>
 
-            <!-- Text display -->
+            <!-- Text display - This is the most important part, now visible first -->
             <div class="text-display" id="textDisplay"></div>
 
+            <!-- Progress Bar -->
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
 
-            <!-- Stats -->
+            <!-- Stats - MOVED AFTER TEXT on mobile, but will be reordered by CSS -->
             <div class="stats">
                 <div class="stat-card">
                     <div class="stat-label">Accuracy</div>
