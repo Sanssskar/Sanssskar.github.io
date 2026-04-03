@@ -131,32 +131,36 @@
             border: 1px solid var(--border-medium);
         }
         
+        /* FIXED: Text display - better mobile visibility */
         .text-display {
             background: var(--bg-primary);
-            padding: 1.8rem;
+            padding: 1.5rem;
             border-radius: 1rem;
             font-family: 'Space Grotesk', 'Courier New', monospace;
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.7;
             margin: 1rem 0;
             text-align: left;
-            max-height: 280px;
+            max-height: 350px;
             overflow-y: auto;
             border: 1px solid var(--border-medium);
             word-wrap: break-word;
             white-space: pre-wrap;
+            word-break: break-word;
         }
         
+        /* Better character styling for mobile */
         .char {
             display: inline;
             font-family: inherit;
             font-size: inherit;
             transition: all 0.1s ease;
             white-space: pre-wrap;
+            word-break: break-word;
         }
         
-        .char.correct { color: #4caf50; background: rgba(76, 175, 80, 0.15); }
-        .char.incorrect { color: #f44336; background: rgba(244, 67, 54, 0.15); text-decoration: underline; text-decoration-color: #f44336; text-decoration-thickness: 2px; }
+        .char.correct { color: #4caf50; background: rgba(76, 175, 80, 0.2); }
+        .char.incorrect { color: #f44336; background: rgba(244, 67, 54, 0.2); text-decoration: underline; text-decoration-color: #f44336; text-decoration-thickness: 2px; }
         .char.current { background: var(--accent-1); color: white; padding: 0 2px; border-radius: 4px; animation: blink 1s infinite; }
         .char.pending { color: var(--text-secondary); }
         
@@ -176,10 +180,11 @@
             border: 2px solid var(--border-medium);
             color: var(--text-primary);
             font-family: 'Space Grotesk', monospace;
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.5;
             resize: vertical;
             transition: all 0.3s;
+            -webkit-appearance: none;
         }
         
         textarea:focus { outline: none; border-color: var(--accent-1); }
@@ -195,9 +200,9 @@
         .difficulty-buttons { display: flex; gap: 0.8rem; justify-content: center; margin: 1rem 0; flex-wrap: wrap; }
         
         .difficulty-btn { 
-            padding: 0.5rem 1.5rem; 
+            padding: 0.5rem 1.2rem; 
             border-radius: 50px; 
-            font-size: 0.9rem; 
+            font-size: 0.85rem; 
             font-weight: 600;
             cursor: pointer; 
             transition: all 0.3s; 
@@ -208,13 +213,13 @@
         .difficulty-btn.active { background: var(--gradient-1); color: white; border-color: transparent; }
         .difficulty-btn:hover { transform: translateY(-2px); }
         
-        .action-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+        .action-buttons { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
         .btn-stop { background: #f44336; color: white; }
         .btn-stop:hover { background: #d32f2f; transform: translateY(-2px); }
         
         .btn-back { background: var(--gradient-1); color: white; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; }
         
-        /* Other Games Section - At the end of page */
+        /* Other Games Section */
         .other-games-section {
             margin: 3rem 0 2rem;
             padding: 1.5rem;
@@ -224,7 +229,7 @@
         }
         
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             display: flex;
@@ -241,14 +246,14 @@
         
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
         }
         
         .game-card {
             background: var(--bg-primary);
             border-radius: 1rem;
-            padding: 1rem;
+            padding: 0.8rem;
             border: 1px solid var(--border-medium);
             transition: all 0.3s;
             text-decoration: none;
@@ -265,7 +270,7 @@
         }
         
         .game-emoji {
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
         
         .game-info {
@@ -273,14 +278,14 @@
         }
         
         .game-name {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 0.2rem;
         }
         
         .game-difficulty {
-            font-size: 0.65rem;
-            padding: 0.15rem 0.5rem;
+            font-size: 0.6rem;
+            padding: 0.15rem 0.4rem;
             border-radius: 20px;
             display: inline-block;
         }
@@ -315,15 +320,190 @@
         .footer a { color: var(--text-tertiary); text-decoration: none; transition: color 0.3s; }
         .footer a:hover { color: var(--accent-1); }
 
+        /* ============================================
+           MOBILE FIXES - Better text visibility
+        ============================================ */
         @media (max-width: 768px) {
-            .game-container { margin: 1rem; padding: 1rem; }
-            .text-display { font-size: 1rem; padding: 1rem; line-height: 1.6; }
-            .char { font-size: 1rem; }
-            .stats { flex-direction: column; }
-            .stat-value { font-size: 1.2rem; }
-            .simple-header { flex-direction: column; text-align: center; }
-            .logo::after { left: 50%; transform: translateX(-50%); }
-            .games-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+            .container {
+                padding: 0.5rem;
+            }
+            
+            .game-container {
+                margin: 0.5rem;
+                padding: 1rem;
+                border-radius: 1rem;
+            }
+            
+            /* FIXED: Larger text display area for mobile */
+            .text-display {
+                font-size: 1rem;
+                padding: 1rem;
+                line-height: 1.6;
+                max-height: 400px;
+                min-height: 200px;
+            }
+            
+            .char {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .stats {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .stat-card {
+                padding: 0.5rem;
+                min-width: calc(50% - 0.5rem);
+                flex: none;
+            }
+            
+            .stat-value {
+                font-size: 1.2rem;
+            }
+            
+            .stat-label {
+                font-size: 0.6rem;
+            }
+            
+            .simple-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .logo::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .top-social-bar {
+                justify-content: center;
+            }
+            
+            .top-social-link {
+                width: 34px;
+                height: 34px;
+                font-size: 1rem;
+            }
+            
+            .difficulty-buttons {
+                gap: 0.5rem;
+            }
+            
+            .difficulty-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.75rem;
+            }
+            
+            .action-buttons {
+                gap: 0.5rem;
+            }
+            
+            .action-buttons .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            textarea {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+                min-height: 120px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .game-card {
+                padding: 0.6rem;
+            }
+            
+            .game-emoji {
+                font-size: 1.5rem;
+            }
+            
+            .game-name {
+                font-size: 0.75rem;
+            }
+            
+            .other-games-section {
+                margin: 2rem 0 1rem;
+                padding: 1rem;
+            }
+            
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+                padding: 1rem 0;
+            }
+            
+            .footer nav {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            #result {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 0.8rem;
+            }
+            
+            .text-display {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+                max-height: 350px;
+            }
+            
+            .char {
+                font-size: 0.9rem;
+            }
+            
+            .stat-card {
+                min-width: 100%;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .difficulty-btn {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.7rem;
+            }
+        }
+        
+        /* Landscape mode fix */
+        @media (max-width: 900px) and (orientation: landscape) {
+            .text-display {
+                max-height: 250px;
+                min-height: 150px;
+            }
+            
+            .game-container {
+                margin: 0.5rem auto;
+            }
         }
     </style>
 </head>
@@ -394,7 +574,7 @@
                 </div>
             </div>
 
-            <textarea id="userInput" rows="5" placeholder="Click 'Start Challenge' and begin typing here..." disabled></textarea>
+            <textarea id="userInput" rows="5" placeholder="Click 'Start' and begin typing here..." disabled></textarea>
 
             <div class="action-buttons">
                 <button id="startBtn" class="btn btn-primary"><i class="fa-solid fa-play"></i> Start</button>
@@ -404,7 +584,7 @@
 
             <p id="result" style="margin-top: 1rem; font-weight: bold;"></p>
             <p>🏆 Best WPM: <strong><span id="bestWPM" style="color: var(--accent-1); font-size: 1.2rem;">0</span></strong></p>
-            <p style="font-size: 0.8rem; color: var(--text-tertiary);">
+            <p style="font-size: 0.75rem; color: var(--text-tertiary);">
                 🟢 Green = correct | 🔴 Red = incorrect | 🟡 Highlighted = current position
                 <span id="hardModeNote" style="display: none;"> | ⛔ Backspace disabled in Hard mode</span>
             </p>
@@ -413,7 +593,7 @@
             <a href="games.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Games</a>
         </div>
 
-        <!-- OTHER GAMES SECTION - At the end of page above footer -->
+        <!-- OTHER GAMES SECTION -->
         <div class="other-games-section">
             <div class="section-title">
                 <i class="fa-solid fa-gamepad"></i>
@@ -498,7 +678,7 @@
     <script src="js/main.js"></script>
     <script>
         // ============================================
-        // TYPING SPEED TEST — EASY MODE DEFAULT
+        // TYPING SPEED TEST — FULL GAME LOGIC
         // ============================================
         
         const paragraphs = {
