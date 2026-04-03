@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .game-container {
-            max-width: 600px;
+            max-width: 900px;
             margin: 2rem auto;
             padding: 2rem;
             background: var(--bg-secondary);
@@ -17,23 +17,152 @@
             text-align: center;
             border: 1px solid var(--border-medium);
         }
+        
+        /* Paragraph text display */
         .text-display {
             background: var(--bg-primary);
-            padding: 1rem;
+            padding: 1.8rem;
             border-radius: 1rem;
-            font-family: monospace;
-            font-size: 1.1rem;
+            font-family: 'Space Grotesk', 'Courier New', monospace;
+            font-size: 1.2rem;
+            line-height: 1.8;
             margin: 1rem 0;
+            text-align: left;
+            max-height: 280px;
+            overflow-y: auto;
+            border: 1px solid var(--border-medium);
+            word-wrap: break-word;
+            white-space: pre-wrap;
         }
+        
+        /* Character styling */
+        .char {
+            display: inline;
+            font-family: inherit;
+            font-size: inherit;
+            transition: all 0.1s ease;
+            white-space: pre-wrap;
+        }
+        
+        .char.correct {
+            color: #4caf50;
+            background: rgba(76, 175, 80, 0.15);
+        }
+        
+        .char.incorrect {
+            color: #f44336;
+            background: rgba(244, 67, 54, 0.15);
+            text-decoration: underline;
+            text-decoration-color: #f44336;
+            text-decoration-thickness: 2px;
+        }
+        
+        .char.current {
+            background: var(--accent-1);
+            color: white;
+            padding: 0 2px;
+            border-radius: 4px;
+            animation: blink 1s infinite;
+        }
+        
+        .char.pending {
+            color: var(--text-secondary);
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Stats area */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            flex: 1;
+            background: var(--bg-primary);
+            padding: 0.8rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-1);
+        }
+        
         textarea {
             width: 100%;
-            padding: 0.8rem;
-            border-radius: 0.8rem;
+            padding: 1rem;
+            border-radius: 1rem;
             background: var(--bg-primary);
-            border: 1px solid var(--border-medium);
+            border: 2px solid var(--border-medium);
             color: var(--text-primary);
-            font-family: monospace;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s;
         }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-1);
+        }
+        
+        textarea.correct-input {
+            border-color: #4caf50;
+        }
+        
+        textarea.incorrect-input {
+            border-color: #f44336;
+        }
+        
+        /* Hard mode warning */
+        .hard-mode-warning {
+            background: #f44336;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+            display: none;
+        }
+        
+        .hard-mode-warning.show {
+            display: block;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-1);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        
         .btn-back {
             background: var(--gradient-1);
             color: white;
@@ -45,9 +174,59 @@
             gap: 0.5rem;
             margin-top: 1rem;
         }
+        
+        .difficulty-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .difficulty-btn {
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--border-medium);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+        }
+        
+        .difficulty-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .difficulty-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .btn-stop {
+            background: #f44336;
+            color: white;
+        }
+        
+        .btn-stop:hover {
+            background: #d32f2f;
+            transform: translateY(-2px);
+        }
+        
         @media (max-width: 768px) {
             .game-container { margin: 1rem; padding: 1rem; }
-            .text-display { font-size: 0.9rem; }
+            .text-display { font-size: 1rem; padding: 1rem; line-height: 1.6; }
+            .char { font-size: 1rem; }
+            .stats { flex-direction: column; }
+            .stat-value { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -55,77 +234,395 @@
     <div class="container">
         <div class="game-container">
             <h1><i class="fa-solid fa-keyboard"></i> Typing Speed Test ⚔️</h1>
-            <div class="text-display" id="textDisplay">Click Start to begin</div>
-            <textarea id="userInput" rows="3" placeholder="Type here..." disabled></textarea>
-            <div style="margin-top: 1rem;">
-                <button id="startBtn" class="btn btn-primary">Start Challenge</button>
-                <button id="resetBtn" class="btn btn-outline">Reset</button>
+            <p>Type the paragraph below as fast and accurately as you can!</p>
+            
+            <!-- Difficulty Selection -->
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" data-difficulty="easy">🐣 Easy</button>
+                <button class="difficulty-btn active" data-difficulty="medium">⚡ Medium</button>
+                <button class="difficulty-btn" data-difficulty="hard">🔥 Hard </button>
             </div>
-            <p id="result" style="margin-top: 1rem;"></p>
-            <p>Best WPM: <span id="bestWPM" style="font-weight: bold; color: var(--accent-1);">0</span></p>
+            
+            <!-- Hard Mode Warning -->
+            <div id="hardWarning" class="hard-mode-warning">
+                <i class="fa-solid fa-exclamation-triangle"></i> HARD MODE: You cannot delete or backspace! Type carefully!
+            </div>
+            
+            <!-- Paragraph Text Display -->
+            <div class="text-display" id="textDisplay"></div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">Accuracy</div>
+                    <div class="stat-value" id="accuracyStat">100%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">WPM</div>
+                    <div class="stat-value" id="wpmStat">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Time</div>
+                    <div class="stat-value" id="timeStat">0s</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Errors</div>
+                    <div class="stat-value" id="errorsStat">0</div>
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <textarea id="userInput" rows="5" placeholder="Start typing the paragraph here..." disabled></textarea>
+            
+            <div class="action-buttons">
+                <button id="startBtn" class="btn btn-primary"><i class="fa-solid fa-play"></i> Start Challenge</button>
+                <button id="stopBtn" class="btn btn-stop"><i class="fa-solid fa-stop"></i> Stop Challenge</button>
+                <button id="resetBtn" class="btn btn-outline"><i class="fa-solid fa-rotate-right"></i> New Paragraph</button>
+            </div>
+            
+            <p id="result" style="margin-top: 1rem; font-weight: bold;"></p>
+            <p>🏆 Best WPM: <span id="bestWPM" style="font-weight: bold; color: var(--accent-1); font-size: 1.2rem;">0</span></p>
+            <p style="font-size: 0.8rem; color: var(--text-tertiary);">
+                <i class="fa-solid fa-info-circle"></i> 🟢 Green = correct | 🔴 Red = incorrect | 🟡 Highlighted = current position
+                <span id="hardModeNote" style="display: none;"> | ⛔ Backspace disabled in Hard mode</span>
+            </p>
             <br>
             <a href="games.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Games</a>
         </div>
     </div>
 
     <script>
-        const phrases = [
-            "Laravel is the best PHP framework for web artisans.",
-            "Filament PHP makes admin panels fun and easy to build.",
-            "Full stack development requires both frontend and backend skills.",
-            "Clean code is not just about working, it's about maintainability.",
-            "Debugging is like being a detective in a crime movie.",
-            "The only way to go fast is to go well."
-        ];
+        // ============================================
+        // TYPING SPEED TEST - WITH STOP FUNCTION & HARD MODE NO DELETE
+        // ============================================
         
+        // Difficulty-based paragraphs
+        const paragraphs = {
+            easy: [
+                "The quick brown fox jumps over the lazy dog near the river bank.",
+                "Coding is fun and creative. You can build amazing things with just a few lines of code.",
+                "Practice makes perfect. Keep typing every day to improve your speed and accuracy.",
+                "Laravel makes PHP development enjoyable and powerful for web artisans around the world.",
+                "Filament PHP helps developers create beautiful admin panels fast and efficiently."
+            ],
+            medium: [
+                "Laravel is a powerful PHP framework that follows the MVC architectural pattern. It provides elegant syntax and powerful tools for building modern web applications efficiently. Many developers choose Laravel for its expressive syntax and robust ecosystem.",
+                
+                "Filament PHP is a collection of tools for rapidly building beautiful admin panels and forms. It saves hours of development time and makes complex tasks simple. The TALL stack integration makes it incredibly powerful for full-stack developers.",
+                
+                "Full stack development requires knowledge of both frontend and backend technologies. You need to understand databases, servers, APIs, and user interfaces. It's a challenging but rewarding career path for many programmers.",
+                
+                "Clean code is not just about making it work. It's about writing code that is readable, maintainable, and understandable by other developers. Following best practices and design patterns helps achieve this goal.",
+                
+                "Debugging is an essential skill for every developer. It involves systematically identifying and fixing errors in your code. Patience and logical thinking are your best tools when hunting down bugs."
+            ],
+            hard: [
+                "The Laravel framework provides an expressive and elegant syntax for building web applications. It includes features like Eloquent ORM for database interactions, Blade templating for dynamic views, and a powerful routing system. Many developers prefer it over other frameworks because of its simplicity and robust ecosystem. The community support is also outstanding.",
+                
+                "Filament PHP has revolutionized how developers create admin panels for their applications. With its TALL stack integration, you can build complex interfaces in minutes rather than days. The form builder allows you to create forms with validation, the table builder handles data display efficiently, and the notification system provides user feedback. It's truly a game changer.",
+                
+                "In modern web development, mastering both frontend and backend technologies is crucial for success. Frontend frameworks like React or Vue combine with backend frameworks like Laravel to create powerful applications. You also need to understand database design, caching strategies, security best practices, and performance optimization techniques. It's a continuous learning journey.",
+                
+                "Writing clean and maintainable code is an art form that requires discipline and practice. It demands a deep understanding of programming principles and design patterns. Following SOLID principles, writing meaningful comments, maintaining consistent formatting, and conducting regular code reviews all contribute to higher code quality. Your future self will thank you.",
+                
+                "The debugging process is often more challenging than writing the initial code. You need to think critically about what might be going wrong. Tools like Xdebug can help you step through code execution. Reading error messages carefully is essential. Sometimes you may need to rewrite entire sections. Patience and systematic thinking are your best allies when hunting bugs."
+            ]
+        };
+        
+        let currentDifficulty = 'medium';
+        let currentParagraph = '';
+        let currentChars = [];
         let active = false;
         let startTime = null;
+        let timerInterval = null;
+        let currentPosition = 0;
+        let errors = 0;
+        let totalTyped = 0;
+        let previousInputLength = 0;
         let bestWPM = localStorage.getItem('bestWPM') ? parseInt(localStorage.getItem('bestWPM')) : 0;
+        
         document.getElementById('bestWPM').innerText = bestWPM;
         
-        function getRandomPhrase() {
-            return phrases[Math.floor(Math.random() * phrases.length)];
+        // Update difficulty buttons
+        document.querySelectorAll('.difficulty-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentDifficulty = btn.dataset.difficulty;
+                
+                // Show/hide hard mode warning
+                const hardWarning = document.getElementById('hardWarning');
+                const hardModeNote = document.getElementById('hardModeNote');
+                if (currentDifficulty === 'hard') {
+                    hardWarning.classList.add('show');
+                    hardModeNote.style.display = 'inline';
+                } else {
+                    hardWarning.classList.remove('show');
+                    hardModeNote.style.display = 'none';
+                }
+                
+                resetGame();
+            });
+        });
+        
+        function getRandomParagraph() {
+            const paragraphList = paragraphs[currentDifficulty];
+            return paragraphList[Math.floor(Math.random() * paragraphList.length)];
         }
         
-        document.getElementById('startBtn').addEventListener('click', () => {
-            const phrase = getRandomPhrase();
-            document.getElementById('textDisplay').innerHTML = phrase;
+        function updateDisplay() {
+            const display = document.getElementById('textDisplay');
+            display.innerHTML = currentChars.map((char, index) => {
+                let className = 'char';
+                if (char.char === ' ') className += ' space';
+                
+                if (index < currentPosition) {
+                    className += char.isCorrect ? ' correct' : ' incorrect';
+                } else if (index === currentPosition && active) {
+                    className += ' current';
+                } else {
+                    className += ' pending';
+                }
+                
+                const displayChar = char.char === ' ' ? '&nbsp;' : char.char;
+                return `<span class="${className}">${displayChar}</span>`;
+            }).join('');
+            
+            const progress = (currentPosition / currentChars.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            
+            if (totalTyped > 0) {
+                const accuracy = ((totalTyped - errors) / totalTyped) * 100;
+                document.getElementById('accuracyStat').innerText = `${Math.round(accuracy)}%`;
+            }
+            document.getElementById('errorsStat').innerText = errors;
+        }
+        
+        function updateWPMAndTime() {
+            if (!active || !startTime) return;
+            const elapsed = (Date.now() - startTime) / 1000;
+            document.getElementById('timeStat').innerText = `${elapsed.toFixed(1)}s`;
+            
+            const minutes = elapsed / 60;
+            const wordsTyped = currentPosition / 5;
+            const wpm = Math.round(wordsTyped / minutes);
+            document.getElementById('wpmStat').innerText = isNaN(wpm) ? 0 : wpm;
+        }
+        
+        function checkInput() {
+            if (!active) return;
+            
+            const input = document.getElementById('userInput').value;
+            const inputChars = input.split('');
+            const expectedChars = currentChars.map(c => c.char);
+            const currentLength = inputChars.length;
+            
+            // HARD MODE: Prevent deletion (backspace)
+            if (currentDifficulty === 'hard' && currentLength < previousInputLength) {
+                // Restore previous value
+                document.getElementById('userInput').value = previousInputValue;
+                return;
+            }
+            
+            previousInputLength = currentLength;
+            previousInputValue = input;
+            
+            // Update current position and errors
+            let newPosition = 0;
+            let newErrors = 0;
+            
+            for (let i = 0; i < inputChars.length && i < expectedChars.length; i++) {
+                const isCorrect = inputChars[i] === expectedChars[i];
+                if (!isCorrect) newErrors++;
+                newPosition = i + 1;
+            }
+            
+            if (inputChars.length > expectedChars.length) {
+                newErrors += (inputChars.length - expectedChars.length);
+            }
+            
+            currentPosition = newPosition;
+            errors = newErrors;
+            totalTyped = inputChars.length;
+            
+            // Mark each character as correct/incorrect
+            for (let i = 0; i < currentChars.length; i++) {
+                if (i < inputChars.length) {
+                    currentChars[i].isCorrect = inputChars[i] === currentChars[i].char;
+                } else {
+                    currentChars[i].isCorrect = null;
+                }
+            }
+            
+            updateDisplay();
+            updateWPMAndTime();
+            
+            // Check if completed
+            if (currentPosition === currentChars.length) {
+                completeTest();
+            }
+            
+            // Update textarea border color
+            const textarea = document.getElementById('userInput');
+            if (currentPosition < currentChars.length && inputChars[currentPosition] !== undefined) {
+                const isCurrentCorrect = inputChars[currentPosition] === currentChars[currentPosition].char;
+                if (isCurrentCorrect) {
+                    textarea.classList.add('correct-input');
+                    textarea.classList.remove('incorrect-input');
+                } else {
+                    textarea.classList.add('incorrect-input');
+                    textarea.classList.remove('correct-input');
+                }
+            } else {
+                textarea.classList.remove('correct-input', 'incorrect-input');
+            }
+        }
+        
+        let previousInputValue = '';
+        
+        function completeTest() {
+            if (!active) return;
+            
+            const endTime = Date.now();
+            const seconds = (endTime - startTime) / 1000;
+            const minutes = seconds / 60;
+            const wordsTyped = currentChars.length / 5;
+            const wpm = Math.round(wordsTyped / minutes);
+            const accuracy = ((totalTyped - errors) / totalTyped) * 100;
+            
+            active = false;
+            document.getElementById('userInput').disabled = true;
+            
+            let resultMessage = '';
+            if (wpm > bestWPM) {
+                bestWPM = wpm;
+                localStorage.setItem('bestWPM', bestWPM);
+                document.getElementById('bestWPM').innerText = bestWPM;
+                resultMessage = `🎉 NEW RECORD! 🎉 `;
+            }
+            
+            document.getElementById('result').innerHTML = `
+                ${resultMessage}✅ Paragraph Completed!<br>
+                📊 Speed: ${wpm} WPM | ⏱️ Time: ${seconds.toFixed(1)}s | 🎯 Accuracy: ${Math.round(accuracy)}% | ❌ Errors: ${errors}
+            `;
+            
+            if (accuracy === 100) {
+                document.getElementById('result').innerHTML += `<br>🏆 PERFECT TYPING! Amazing accuracy! 🏆`;
+            }
+            
+            if (timerInterval) clearInterval(timerInterval);
+        }
+        
+        function stopTest() {
+            if (!active) return;
+            
+            const stopTime = Date.now();
+            const seconds = (stopTime - startTime) / 1000;
+            const minutes = seconds / 60;
+            const wordsTyped = currentPosition / 5;
+            const wpm = Math.round(wordsTyped / minutes);
+            const accuracy = totalTyped > 0 ? ((totalTyped - errors) / totalTyped) * 100 : 0;
+            
+            active = false;
+            document.getElementById('userInput').disabled = true;
+            
+            if (timerInterval) clearInterval(timerInterval);
+            
+            document.getElementById('result').innerHTML = `
+                ⏹️ Challenge Stopped!<br>
+                📊 Progress: ${Math.round((currentPosition / currentChars.length) * 100)}% complete<br>
+                📈 Current Speed: ${isNaN(wpm) ? 0 : wpm} WPM | 🎯 Accuracy: ${Math.round(accuracy)}%<br>
+                <i class="fa-solid fa-info-circle"></i> Click "Start Challenge" to try again!
+            `;
+        }
+        
+        function startTest() {
+            if (active) {
+                // If already active, ask if user wants to restart
+                if (confirm('A challenge is already in progress. Do you want to restart?')) {
+                    resetGame();
+                    startTest();
+                }
+                return;
+            }
+            
+            // Reset everything
+            currentParagraph = getRandomParagraph();
+            currentChars = currentParagraph.split('').map(char => ({
+                char: char,
+                isCorrect: null
+            }));
+            currentPosition = 0;
+            errors = 0;
+            totalTyped = 0;
+            previousInputLength = 0;
+            previousInputValue = '';
+            active = true;
+            startTime = Date.now();
+            
+            // Clear and enable input
             document.getElementById('userInput').value = '';
             document.getElementById('userInput').disabled = false;
             document.getElementById('userInput').focus();
             document.getElementById('result').innerHTML = '';
-            active = true;
-            startTime = Date.now();
-        });
-        
-        document.getElementById('userInput').addEventListener('input', () => {
-            if (!active) return;
-            const userText = document.getElementById('userInput').value;
-            const originalText = document.getElementById('textDisplay').innerHTML;
             
-            if (userText === originalText) {
-                const endTime = Date.now();
-                const seconds = (endTime - startTime) / 1000;
-                const wpm = Math.round((originalText.split(' ').length / seconds) * 60);
-                document.getElementById('result').innerHTML = `✅ Completed! Your speed: ${wpm} WPM in ${seconds.toFixed(1)} seconds!`;
-                if (wpm > bestWPM) {
-                    bestWPM = wpm;
-                    localStorage.setItem('bestWPM', bestWPM);
-                    document.getElementById('bestWPM').innerText = bestWPM;
-                    document.getElementById('result').innerHTML += ` 🎉 NEW RECORD! 🎉`;
-                }
-                active = false;
-                document.getElementById('userInput').disabled = true;
-            }
-        });
+            // Reset stats display
+            document.getElementById('accuracyStat').innerText = '100%';
+            document.getElementById('wpmStat').innerText = '0';
+            document.getElementById('timeStat').innerText = '0s';
+            document.getElementById('errorsStat').innerText = '0';
+            
+            // Update display
+            updateDisplay();
+            
+            // Start timer updates
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (active) updateWPMAndTime();
+            }, 100);
+        }
         
-        document.getElementById('resetBtn').addEventListener('click', () => {
+        function resetGame() {
+            if (timerInterval) clearInterval(timerInterval);
             active = false;
-            document.getElementById('userInput').disabled = true;
+            currentPosition = 0;
+            errors = 0;
+            totalTyped = 0;
+            previousInputLength = 0;
+            previousInputValue = '';
+            
+            // Get new paragraph for selected difficulty
+            currentParagraph = getRandomParagraph();
+            currentChars = currentParagraph.split('').map(char => ({
+                char: char,
+                isCorrect: null
+            }));
+            
             document.getElementById('userInput').value = '';
-            document.getElementById('textDisplay').innerHTML = 'Click Start to begin';
+            document.getElementById('userInput').disabled = true;
             document.getElementById('result').innerHTML = '';
-        });
+            document.getElementById('accuracyStat').innerText = '100%';
+            document.getElementById('wpmStat').innerText = '0';
+            document.getElementById('timeStat').innerText = '0s';
+            document.getElementById('errorsStat').innerText = '0';
+            document.getElementById('progressFill').style.width = '0%';
+            
+            updateDisplay();
+        }
+        
+        // Event listeners
+        document.getElementById('startBtn').addEventListener('click', startTest);
+        document.getElementById('stopBtn').addEventListener('click', stopTest);
+        document.getElementById('resetBtn').addEventListener('click', resetGame);
+        document.getElementById('userInput').addEventListener('input', checkInput);
+        
+        // Initialize
+        resetGame();
     </script>
 </body>
 </html>
