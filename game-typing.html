@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Typing Speed Test | Sanskar Shrestha Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .game-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 2rem;
+            text-align: center;
+            border: 1px solid var(--border-medium);
+        }
+        .text-display {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 1rem;
+            font-family: monospace;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+        }
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-medium);
+            color: var(--text-primary);
+            font-family: monospace;
+        }
+        .btn-back {
+            background: var(--gradient-1);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 768px) {
+            .game-container { margin: 1rem; padding: 1rem; }
+            .text-display { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game-container">
+            <h1><i class="fa-solid fa-keyboard"></i> Typing Speed Test ⚔️</h1>
+            <div class="text-display" id="textDisplay">Click Start to begin</div>
+            <textarea id="userInput" rows="3" placeholder="Type here..." disabled></textarea>
+            <div style="margin-top: 1rem;">
+                <button id="startBtn" class="btn btn-primary">Start Challenge</button>
+                <button id="resetBtn" class="btn btn-outline">Reset</button>
+            </div>
+            <p id="result" style="margin-top: 1rem;"></p>
+            <p>Best WPM: <span id="bestWPM" style="font-weight: bold; color: var(--accent-1);">0</span></p>
+            <br>
+            <a href="games.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Games</a>
+        </div>
+    </div>
+
+    <script>
+        const phrases = [
+            "Laravel is the best PHP framework for web artisans.",
+            "Filament PHP makes admin panels fun and easy to build.",
+            "Full stack development requires both frontend and backend skills.",
+            "Clean code is not just about working, it's about maintainability.",
+            "Debugging is like being a detective in a crime movie.",
+            "The only way to go fast is to go well."
+        ];
+        
+        let active = false;
+        let startTime = null;
+        let bestWPM = localStorage.getItem('bestWPM') ? parseInt(localStorage.getItem('bestWPM')) : 0;
+        document.getElementById('bestWPM').innerText = bestWPM;
+        
+        function getRandomPhrase() {
+            return phrases[Math.floor(Math.random() * phrases.length)];
+        }
+        
+        document.getElementById('startBtn').addEventListener('click', () => {
+            const phrase = getRandomPhrase();
+            document.getElementById('textDisplay').innerHTML = phrase;
+            document.getElementById('userInput').value = '';
+            document.getElementById('userInput').disabled = false;
+            document.getElementById('userInput').focus();
+            document.getElementById('result').innerHTML = '';
+            active = true;
+            startTime = Date.now();
+        });
+        
+        document.getElementById('userInput').addEventListener('input', () => {
+            if (!active) return;
+            const userText = document.getElementById('userInput').value;
+            const originalText = document.getElementById('textDisplay').innerHTML;
+            
+            if (userText === originalText) {
+                const endTime = Date.now();
+                const seconds = (endTime - startTime) / 1000;
+                const wpm = Math.round((originalText.split(' ').length / seconds) * 60);
+                document.getElementById('result').innerHTML = `✅ Completed! Your speed: ${wpm} WPM in ${seconds.toFixed(1)} seconds!`;
+                if (wpm > bestWPM) {
+                    bestWPM = wpm;
+                    localStorage.setItem('bestWPM', bestWPM);
+                    document.getElementById('bestWPM').innerText = bestWPM;
+                    document.getElementById('result').innerHTML += ` 🎉 NEW RECORD! 🎉`;
+                }
+                active = false;
+                document.getElementById('userInput').disabled = true;
+            }
+        });
+        
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            active = false;
+            document.getElementById('userInput').disabled = true;
+            document.getElementById('userInput').value = '';
+            document.getElementById('textDisplay').innerHTML = 'Click Start to begin';
+            document.getElementById('result').innerHTML = '';
+        });
+    </script>
+</body>
+</html>

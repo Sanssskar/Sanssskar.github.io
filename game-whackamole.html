@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Whack-a-Mole | Sanskar Shrestha Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .game-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 2rem;
+            text-align: center;
+            border: 1px solid var(--border-medium);
+        }
+        .hole-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .hole {
+            background: #5d4037;
+            height: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: all 0.2s;
+        }
+        .hole:hover { transform: scale(1.05); }
+        .score { font-size: 2rem; font-weight: bold; color: var(--accent-1); }
+        .timer { font-size: 1.5rem; margin: 1rem 0; }
+        .btn-back {
+            background: var(--gradient-1);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 768px) {
+            .hole { height: 70px; font-size: 2rem; }
+            .game-container { margin: 1rem; padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game-container">
+            <h1><i class="fa-solid fa-paw"></i> Whack-a-Mole ⚔️</h1>
+            <p>Score: <span id="score" class="score">0</span></p>
+            <p class="timer">Time: <span id="timer">30</span>s</p>
+            <div class="hole-grid" id="holeGrid"></div>
+            <button id="startBtn" class="btn btn-primary">Start Game</button>
+            <button id="resetBtn" class="btn btn-outline">Reset</button>
+            <br><br>
+            <a href="games.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Games</a>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let timeLeft = 30;
+        let gameActive = false;
+        let moleInterval;
+        let timerInterval;
+        let currentMole = null;
+
+        const holes = document.getElementById('holeGrid');
+        
+        function createHoles() {
+            holes.innerHTML = '';
+            for (let i = 0; i < 6; i++) {
+                const hole = document.createElement('div');
+                hole.className = 'hole';
+                hole.dataset.index = i;
+                hole.addEventListener('click', () => whack(i));
+                holes.appendChild(hole);
+            }
+        }
+
+        function whack(index) {
+            if (!gameActive) return;
+            if (currentMole === index) {
+                score++;
+                document.getElementById('score').innerText = score;
+                holes.children[index].innerHTML = '💥';
+                setTimeout(() => {
+                    if (holes.children[index] && holes.children[index].innerHTML === '💥') {
+                        holes.children[index].innerHTML = '';
+                    }
+                }, 200);
+                createParticle(event);
+            }
+        }
+
+        function showMole() {
+            if (!gameActive) return;
+            if (currentMole !== null) {
+                holes.children[currentMole].innerHTML = '';
+            }
+            const randomHole = Math.floor(Math.random() * 6);
+            currentMole = randomHole;
+            holes.children[randomHole].innerHTML = '🐭';
+        }
+
+        function startGame() {
+            if (gameActive) return;
+            score = 0;
+            timeLeft = 30;
+            gameActive = true;
+            document.getElementById('score').innerText = '0';
+            document.getElementById('timer').innerText = '30';
+            
+            timerInterval = setInterval(() => {
+                if (!gameActive) return;
+                timeLeft--;
+                document.getElementById('timer').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    clearInterval(moleInterval);
+                    gameActive = false;
+                    if (currentMole !== null) holes.children[currentMole].innerHTML = '';
+                    alert(`Game Over! Your score: ${score}`);
+                }
+            }, 1000);
+            
+            moleInterval = setInterval(showMole, 800);
+        }
+
+        function resetGame() {
+            clearInterval(timerInterval);
+            clearInterval(moleInterval);
+            gameActive = false;
+            score = 0;
+            timeLeft = 30;
+            document.getElementById('score').innerText = '0';
+            document.getElementById('timer').innerText = '30';
+            if (currentMole !== null) holes.children[currentMole].innerHTML = '';
+            currentMole = null;
+        }
+
+        function createParticle(e) {
+            const particle = document.createElement('div');
+            particle.innerHTML = '💥';
+            particle.style.position = 'fixed';
+            particle.style.left = e.clientX + 'px';
+            particle.style.top = e.clientY + 'px';
+            particle.style.fontSize = '30px';
+            particle.style.pointerEvents = 'none';
+            particle.style.animation = 'floatUp 0.5s ease-out forwards';
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 500);
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `@keyframes floatUp { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-50px); opacity: 0; } }`;
+        document.head.appendChild(style);
+
+        document.getElementById('startBtn').addEventListener('click', startGame);
+        document.getElementById('resetBtn').addEventListener('click', resetGame);
+        
+        createHoles();
+    </script>
+</body>
+</html>
