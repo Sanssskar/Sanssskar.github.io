@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Piggy On The Run | Sanskar Shrestha Games</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0f1c0a;
+      --bg-secondary: #1a2a14;
+      --accent-1: #ff9800;
+      --text-primary: #f0f4e8;
+      --text-secondary: #a3b18f;
+      --border: #3a5a2f;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      touch-action: manipulation;
+    }
+
+    .main-container {
+      max-width: 1120px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .game-wrapper {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .game-container {
+      flex: 1;
+      max-width: 720px;
+      background: var(--bg-secondary);
+      padding: 2rem;
+      border-radius: 2rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: var(--bg-secondary);
+      padding: 1.8rem;
+      border-radius: 2rem;
+      border: 1px solid var(--border);
+      position: sticky;
+      top: 2rem;
+    }
+
+    canvas {
+      background: linear-gradient(180deg, #2d5a1e 0%, #1a3a10 100%);
+      border-radius: 1rem;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    .controls-info {
+      display: flex;
+      justify-content: center;
+      gap: 1.6rem;
+      margin: 1.2rem 0;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      flex-wrap: wrap;
+    }
+
+    .score-board {
+      font-size: 1.45rem;
+      margin: 0.6rem 0;
+      font-weight: 600;
+    }
+
+    .highscore {
+      font-size: 1.25rem;
+      color: var(--accent-1);
+      margin-bottom: 1rem;
+    }
+
+    .audio-controls {
+      margin: 1.2rem 0;
+      background: #24381f;
+      padding: 1.2rem;
+      border-radius: 1.2rem;
+      border: 1px solid var(--border);
+    }
+
+    .audio-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .audio-option label {
+      min-width: 140px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      accent-color: var(--accent-1);
+      height: 6px;
+      border-radius: 999px;
+    }
+
+    .volume-value {
+      width: 42px;
+      text-align: right;
+      font-size: 0.9rem;
+      color: var(--accent-1);
+      font-weight: 500;
+    }
+
+    .touch-controls {
+      margin: 1rem 0;
+      display: none;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .touch-btn {
+      background: rgba(255, 152, 0, 0.25);
+      color: white;
+      border: 2px solid var(--accent-1);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      min-width: 110px;
+    }
+
+    @media (max-width: 768px) {
+      .touch-controls { display: flex; }
+      canvas { width: 100%; height: auto; }
+      .controls-info { gap: 1rem; font-size: 0.78rem; }
+    }
+
+    .leaderboard {
+      background: #24381f;
+      padding: 1.3rem;
+      border-radius: 1.2rem;
+    }
+
+    .leaderboard h3 {
+      margin: 0 0 10px 0;
+      color: var(--accent-1);
+      text-align: center;
+      font-size: 1.25rem;
+    }
+
+    .leaderboard ol {
+      margin: 0;
+      padding-left: 20px;
+      list-style: none;
+    }
+
+    .leaderboard li {
+      padding: 7px 0;
+      font-size: 1.03rem;
+      border-bottom: 1px solid #334a2c;
+    }
+
+    .leaderboard li:last-child { border-bottom: none; }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      cursor: pointer;
+      margin: 0.5rem;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff9800, #f57c00);
+      color: white;
+    }
+
+    .btn-back {
+      background: #3a5a2f;
+      color: white;
+      padding: 0.8rem 1.6rem;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    /* Game Over Overlay */
+    #gameOverScreen {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      border-radius: 1rem;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      z-index: 10;
+    }
+
+    #gameOverScreen h2 {
+      color: #ff5555;
+      margin: 0 0 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="game-wrapper">
+      
+      <!-- Game Area -->
+      <div class="game-container">
+        <h1><i class="fa-solid fa-piggy-bank"></i> Piggy On The Run 🐗</h1>
+        <p>Guide the pig! Avoid moths & snakes • Collect apples!</p>
+
+        <div class="highscore">High Score: <span id="highScoreDisplay">0</span></div>
+        <div class="score-board">Score: <span id="score">0</span></div>
+
+        <canvas id="gameCanvas" width="700" height="400"></canvas>
+
+        <!-- Audio Controls -->
+        <div class="audio-controls">
+          <h4 style="margin: 0 0 12px 0; color: var(--accent-1); text-align: center;">
+            🔊 Sound Effects
+          </h4>
+          <div class="audio-option">
+            <label><i class="fa-solid fa-volume-high"></i> Volume</label>
+            <input type="range" id="sfxVolume" min="0" max="1" step="0.01" value="0.8">
+            <span id="sfxVolumeValue" class="volume-value">80%</span>
+          </div>
+        </div>
+
+        <!-- Touch Controls for Mobile -->
+        <div class="touch-controls">
+          <button class="touch-btn" id="leftBtn">← Left</button>
+          <button class="touch-btn" id="jumpBtn">↑ Jump</button>
+          <button class="touch-btn" id="rightBtn">Right →</button>
+        </div>
+
+        <div class="controls-info">
+          <span><i class="fa-solid fa-arrow-left"></i> <i class="fa-solid fa-arrow-right"></i> Move</span>
+          <span><i class="fa-solid fa-arrow-up"></i> Jump (Double Jump!)</span>
+          <span><i class="fa-solid fa-forward-step"></i> Swipe Up = Strong Dash</span>
+        </div>
+
+        <button id="restartBtn" class="btn btn-primary">Restart Game</button>
+        <br><br>
+        <a href="games.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Games</a>
+
+        <!-- Game Over Overlay -->
+        <div id="gameOverScreen">
+          <h2>GAME OVER</h2>
+          <p style="font-size:1.4rem; margin:10px 0;">Your Score: <strong id="finalScore">0</strong></p>
+          <button id="restartFromOver" class="btn btn-primary">Play Again</button>
+        </div>
+      </div>
+
+      <!-- Leaderboard Sidebar -->
+      <div class="sidebar">
+        <div class="leaderboard">
+          <h3>🏆 Leaderboard (Top 5)</h3>
+          <ol id="leaderboardList"></ol>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let score = 0;
+    let gameRunning = false;
+    let animationId;
+    let gameSpeed = 2.8;
+    let spawnRate = 85;
+
+    // Audio
+    const jumpSound = new Audio('https://orangefreesounds.com/wp-content/uploads/2025/04/Cartoon-jump-sound-effect.mp3');
+    const oinkSound = new Audio('https://assets.mixkit.co/sfx/preview/2397/2397.wav');
+    const hitSound = new Audio('https://assets.mixkit.co/sfx/preview/1315/1315.wav');
+
+    let sfxVolume = 0.8;
+
+    // Game Data
+    let highScore = parseInt(localStorage.getItem('piggyHighScore')) || 0;
+    let leaderboard = JSON.parse(localStorage.getItem('piggyLeaderboard')) || [];
+
+    function updateHighScoreDisplay() {
+      document.getElementById('highScoreDisplay').textContent = highScore;
+    }
+
+    function updateLeaderboardDisplay() {
+      const list = document.getElementById('leaderboardList');
+      list.innerHTML = '';
+      if (leaderboard.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = "Play to set records!";
+        li.style.opacity = "0.5";
+        list.appendChild(li);
+        return;
+      }
+      leaderboard.forEach((entry, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>#${i+1}</strong> — ${entry.score} pts`;
+        list.appendChild(li);
+      });
+      for (let i = leaderboard.length; i < 5; i++) {
+        const li = document.createElement('li');
+        li.style.opacity = '0.3';
+        li.textContent = `#${i+1} — —`;
+        list.appendChild(li);
+      }
+    }
+
+    function saveScore(newScore) {
+      leaderboard.push({ score: newScore });
+      leaderboard.sort((a, b) => b.score - a.score);
+      leaderboard = leaderboard.slice(0, 5);
+      localStorage.setItem('piggyLeaderboard', JSON.stringify(leaderboard));
+
+      if (newScore > highScore) {
+        highScore = newScore;
+        localStorage.setItem('piggyHighScore', highScore);
+        updateHighScoreDisplay();
+      }
+      updateLeaderboardDisplay();
+    }
+
+    function updateAudioVolumes() {
+      jumpSound.volume = sfxVolume;
+      oinkSound.volume = sfxVolume;
+      hitSound.volume = sfxVolume;
+    }
+
+    const pig = {
+      x: 100, y: 300, width: 30, height: 30,
+      vy: 0, gravity: 0.75, jumpPower: -14,
+      grounded: true, canDoubleJump: true,
+      dashCooldown: false, speed: 5.5
+    };
+
+    let obstacles = [];
+    let powerups = [];
+    let frameCount = 0;
+
+    // Touch variables
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let lastTap = 0;
+
+    function spawnObstacle() {
+      const types = [
+        { width: 26, height: 22, y: 335, emoji: '🦋' },
+        { width: 38, height: 16, y: 368, emoji: '🐍' }
+      ];
+      const type = types[Math.floor(Math.random() * types.length)];
+      obstacles.push({ x: canvas.width + 30, y: type.y, width: type.width, height: type.height, emoji: type.emoji });
+    }
+
+    function spawnPowerup() {
+      if (Math.random() < 0.35) {
+        powerups.push({
+          x: canvas.width + 30,
+          y: 160 + Math.random() * 140,
+          width: 22,
+          height: 22,
+          emoji: '🍎'
+        });
+      }
+    }
+
+    function updateDifficulty() {
+      const level = Math.floor(score / 12);
+      gameSpeed = 2.8 + (level * 0.25);
+      spawnRate = Math.max(55, 85 - (level * 3));
+    }
+
+    function update() {
+      if (!gameRunning) return;
+
+      updateDifficulty();
+
+      pig.vy += pig.gravity;
+      pig.y += pig.vy;
+
+      if (pig.y >= canvas.height - pig.height - 20) {
+        pig.y = canvas.height - pig.height - 20;
+        pig.vy = 0;
+        pig.grounded = true;
+        pig.canDoubleJump = true;
+      } else {
+        pig.grounded = false;
+      }
+      if (pig.y < 0) pig.y = 0;
+
+      for (let i = 0; i < obstacles.length; i++) {
+        obstacles[i].x -= gameSpeed;
+        if (obstacles[i].x + obstacles[i].width < 0) {
+          obstacles.splice(i, 1); i--; 
+          score++;
+          document.getElementById('score').innerText = score;
+        }
+      }
+
+      for (let i = 0; i < powerups.length; i++) {
+        powerups[i].x -= gameSpeed * 0.9;
+        if (powerups[i].x + powerups[i].width < 0) {
+          powerups.splice(i, 1); i--;
+        }
+      }
+
+      // Collisions
+      for (let obs of obstacles) {
+        if (
+          pig.x < obs.x + obs.width && pig.x + pig.width > obs.x &&
+          pig.y < obs.y + obs.height && pig.y + pig.height > obs.y
+        ) {
+          hitSound.currentTime = 0;
+          hitSound.play().catch(() => {});
+          endGame();
+          return;
+        }
+      }
+
+      // Collect apples
+      for (let i = 0; i < powerups.length; i++) {
+        const p = powerups[i];
+        if (
+          pig.x < p.x + p.width && pig.x + pig.width > p.x &&
+          pig.y < p.y + p.height && pig.y + pig.height > p.y
+        ) {
+          score += 50;
+          document.getElementById('score').innerText = score;
+          powerups.splice(i, 1); i--;
+          break;
+        }
+      }
+
+      frameCount++;
+      if (frameCount > spawnRate) {
+        frameCount = 0;
+        spawnObstacle();
+        if (score > 60 && Math.random() < 0.4) spawnObstacle();
+        spawnPowerup();
+      }
+
+      draw();
+      animationId = requestAnimationFrame(update);
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#2d5a1e';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#1a3a10';
+      for (let i = 0; i < 18; i++) ctx.fillRect(i * 42, canvas.height - 42, 26, 42);
+
+      for (let obs of obstacles) {
+        ctx.fillStyle = obs.emoji === '🦋' ? '#8B4513' : '#228B22';
+        ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+        ctx.font = '24px Arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText(obs.emoji, obs.x + 4, obs.y + obs.height - 3);
+      }
+
+      for (let p of powerups) {
+        ctx.font = '26px Arial';
+        ctx.fillText(p.emoji, p.x, p.y + 20);
+      }
+
+      ctx.fillStyle = '#ff9800';
+      ctx.fillRect(pig.x, pig.y, pig.width, pig.height);
+      ctx.font = '29px Arial';
+      ctx.fillStyle = 'white';
+      ctx.fillText('🐷', pig.x + 1, pig.y + 28);
+    }
+
+    function endGame() {
+      gameRunning = false;
+      saveScore(score);
+      document.getElementById('finalScore').textContent = score;
+      document.getElementById('gameOverScreen').style.display = 'flex';
+    }
+
+    // ==================== IMPROVED DASH FUNCTION ====================
+    function performDash() {
+      if (pig.dashCooldown) return;
+      
+      pig.dashCooldown = true;
+      const originalSpeed = pig.speed;
+      pig.speed = 28;                    // Much stronger dash!
+      
+      setTimeout(() => {
+        pig.speed = originalSpeed;
+        pig.dashCooldown = false;
+      }, 280); // Dash duration
+    }
+
+    // ==================== KEYBOARD CONTROLS ====================
+    document.addEventListener('keydown', (e) => {
+      if (!gameRunning) return;
+
+      if (e.key === 'ArrowLeft') pig.x = Math.max(0, pig.x - pig.speed);
+      if (e.key === 'ArrowRight') pig.x = Math.min(canvas.width - pig.width, pig.x + pig.speed);
+      
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (pig.grounded) {
+          pig.vy = pig.jumpPower;
+          pig.grounded = false;
+          jumpSound.currentTime = 0; jumpSound.play().catch(() => {});
+          oinkSound.currentTime = 0; oinkSound.play().catch(() => {});
+        } else if (pig.canDoubleJump) {
+          pig.vy = pig.jumpPower;
+          pig.canDoubleJump = false;
+          jumpSound.currentTime = 0; jumpSound.play().catch(() => {});
+        }
+      }
+
+      if (e.key === 'Shift') performDash();
+    });
+
+    // ==================== TOUCH CONTROLS ====================
+    canvas.addEventListener('touchstart', (e) => {
+      if (!gameRunning) return;
+      e.preventDefault();
+
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTap;
+
+      if (tapLength < 400 && tapLength > 0) {
+        // Double tap = Jump / Double Jump
+        if (pig.grounded) {
+          pig.vy = pig.jumpPower;
+          pig.grounded = false;
+          jumpSound.currentTime = 0; jumpSound.play().catch(() => {});
+          oinkSound.currentTime = 0; oinkSound.play().catch(() => {});
+        } else if (pig.canDoubleJump) {
+          pig.vy = pig.jumpPower;
+          pig.canDoubleJump = false;
+          jumpSound.currentTime = 0; jumpSound.play().catch(() => {});
+        }
+      }
+      lastTap = currentTime;
+    });
+
+    canvas.addEventListener('touchmove', (e) => {
+      if (!gameRunning) return;
+      e.preventDefault();
+
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+
+      // Horizontal movement
+      if (Math.abs(deltaX) > 30) {
+        if (deltaX > 0) {
+          pig.x = Math.min(canvas.width - pig.width, pig.x + 12);
+        } else {
+          pig.x = Math.max(0, pig.x - 12);
+        }
+        touchStartX = touch.clientX; // Update start for continuous movement
+      }
+
+      // Strong Dash on quick upward swipe
+      if (deltaY < -80 && Math.abs(deltaX) < 60) {
+        performDash();
+        touchStartY = touch.clientY;
+      }
+    });
+
+    // Button controls for mobile
+    document.getElementById('leftBtn').addEventListener('touchstart', () => {
+      if (gameRunning) pig.x = Math.max(0, pig.x - 18);
+    });
+
+    document.getElementById('rightBtn').addEventListener('touchstart', () => {
+      if (gameRunning) pig.x = Math.min(canvas.width - pig.width, pig.x + 18);
+    });
+
+    document.getElementById('jumpBtn').addEventListener('touchstart', () => {
+      if (!gameRunning) return;
+      if (pig.grounded) {
+        pig.vy = pig.jumpPower;
+        pig.grounded = false;
+        jumpSound.currentTime = 0; jumpSound.play().catch(() => {});
+        oinkSound.currentTime = 0; oinkSound.play().catch(() => {});
+      } else if (pig.canDoubleJump) {
+        pig.vy = pig.jumpPower;
+        pig.canDoubleJump = false;
+        jumpSound.currentTime = 0; jumpSound.play().catch(() => {});
+      }
+    });
+
+    // Sound Effects Volume
+    const sfxSlider = document.getElementById('sfxVolume');
+    const sfxValueDisplay = document.getElementById('sfxVolumeValue');
+
+    sfxSlider.addEventListener('input', () => {
+      sfxVolume = parseFloat(sfxSlider.value);
+      sfxValueDisplay.textContent = Math.round(sfxVolume * 100) + '%';
+      updateAudioVolumes();
+    });
+
+    // Restart
+    document.getElementById('restartBtn').addEventListener('click', resetAndStartGame);
+    document.getElementById('restartFromOver').addEventListener('click', () => {
+      document.getElementById('gameOverScreen').style.display = 'none';
+      resetAndStartGame();
+    });
+
+    function resetAndStartGame() {
+      gameRunning = true;
+      score = 0;
+      gameSpeed = 2.8;
+      spawnRate = 85;
+      obstacles = [];
+      powerups = [];
+      pig.x = 100;
+      pig.y = 300;
+      pig.vy = 0;
+      pig.grounded = true;
+      pig.canDoubleJump = true;
+      frameCount = 0;
+
+      document.getElementById('score').innerText = '0';
+      document.getElementById('gameOverScreen').style.display = 'none';
+
+      cancelAnimationFrame(animationId);
+      updateAudioVolumes();
+      update();
+    }
+
+    window.onload = () => {
+      updateHighScoreDisplay();
+      updateLeaderboardDisplay();
+      updateAudioVolumes();
+      
+      setTimeout(() => {
+        resetAndStartGame();
+      }, 600);
+    };
+  </script>
+</body>
+</html>
