@@ -472,9 +472,10 @@
             <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i class="fa-regular fa-envelope"></i></a>
         </div>
 
-         <div class="main-navbar fade-up">
+        <div class="main-navbar fade-up">
             <ul class="nav-links">
-                <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+                <!-- REMOVED hardcoded active class from Home -->
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
                 <li><a href="about.html"><i class="fa-solid fa-user"></i> About</a></li>
                 <li><a href="services.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
                 <li><a href="projects.html"><i class="fa-solid fa-star"></i> Projects</a></li>
@@ -848,8 +849,7 @@
                     `;
                 }
                 
-                // Fetch commit stats (using a proxy service since GitHub API doesn't directly give total commits)
-                // For demo, we'll show sample stats or fetch from a cache
+                // Fetch commit stats
                 const commitsResponse = await fetch(`https://api.github.com/repos/Sanssskar/Sanssskar/commits?per_page=1`);
                 const linkHeader = commitsResponse.headers.get('Link');
                 let totalCommits = '100+';
@@ -898,13 +898,27 @@
             return 'just now';
         }
 
+        // FIXED: Active navigation highlighting - only one active link at a time
         document.addEventListener('DOMContentLoaded', function () {
             const currentPath = window.location.pathname;
-            const currentPageName = currentPath.split('/').pop() || 'projects.html';
-
+            // Get the current page filename (e.g., "projects.html", "index.html")
+            let currentPage = currentPath.split('/').pop();
+            
+            // If no page specified (root domain), default to index.html
+            if (currentPage === '' || currentPage === '/') {
+                currentPage = 'index.html';
+            }
+            
+            console.log('Current page:', currentPage); // For debugging
+            
             document.querySelectorAll('.nav-links li a').forEach(link => {
                 const linkHref = link.getAttribute('href').split('/').pop();
-                if (linkHref === currentPageName) {
+                
+                // Remove any existing active class first
+                link.classList.remove('active');
+                
+                // Add active class if the link matches current page
+                if (linkHref === currentPage) {
                     link.classList.add('active');
                 }
             });
