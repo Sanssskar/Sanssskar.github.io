@@ -1356,44 +1356,9 @@
 
     <script src="js/main.js"></script>
     <script>
-        // Video Preloader Logic
-        const videoPreloader = document.getElementById('videoPreloader');
-        const introVideo = document.getElementById('introVideo');
-        const skipBtn = document.getElementById('skipBtn');
+     
         const mainContent = document.getElementById('mainContent');
         const loaderWrapper = document.getElementById('loaderWrapper');
-
-        function hidePreloader() {
-            if (videoPreloader) {
-                videoPreloader.style.opacity = '0';
-                setTimeout(() => {
-                    videoPreloader.style.display = 'none';
-                    if (mainContent) {
-                        mainContent.style.opacity = '1';
-                    }
-                    if (loaderWrapper) {
-                        loaderWrapper.style.display = 'none';
-                    }
-                }, 500);
-            }
-        }
-
-        if (introVideo) {
-            introVideo.addEventListener('ended', hidePreloader);
-            introVideo.addEventListener('error', hidePreloader);
-            setTimeout(() => {
-                if (videoPreloader && videoPreloader.style.display !== 'none') {
-                    hidePreloader();
-                }
-            }, 8000);
-        }
-
-        if (skipBtn) {
-            skipBtn.addEventListener('click', () => {
-                if (introVideo) introVideo.pause();
-                hidePreloader();
-            });
-        }
 
         // Set active class based on current page URL
         document.addEventListener('DOMContentLoaded', function () {
