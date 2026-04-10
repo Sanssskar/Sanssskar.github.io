@@ -13,22 +13,33 @@ window.addEventListener('load', () => {
     }
 });
 
-// Intersection Observer for scroll animations
+// Intersection Observer for scroll animations - FIXED (no re-triggering)
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
             entry.target.classList.add('visible');
         }
     });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Exclude footer from animations to prevent flickering
     document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up').forEach(el => {
+        // Skip footer elements
+        if (el.closest('footer')) return;
         observer.observe(el);
+        // Check if already visible
         if (el.getBoundingClientRect().top < window.innerHeight - 100) {
             el.classList.add('visible');
         }
     });
+    
+    // Ensure footer is always visible (no animation)
+    const footer = document.querySelector('footer');
+    if (footer) {
+        footer.style.opacity = '1';
+        footer.style.transform = 'none';
+    }
 });
 
 // Spark Effect
@@ -50,8 +61,8 @@ function createSparks(x, y) {
 
 document.addEventListener('click', (e) => createSparks(e.clientX, e.clientY));
 
-// Hover sparks
-document.querySelectorAll('.project-card, .skill-bubble, .social-card, .service-card, .blog-card').forEach(c => {
+// Hover sparks - Fixed to check if elements exist
+document.querySelectorAll('.project-card, .skill-bubble, .social-card, .service-card, .blog-card, .preview-card, .blog-preview-card').forEach(c => {
     c.addEventListener('mouseenter', () => {
         const r = c.getBoundingClientRect();
         createSparks(r.left + r.width / 2, r.top + r.height / 2);
@@ -72,10 +83,10 @@ if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
         if (body.classList.contains('dark-mode')) {
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
+            if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
             localStorage.setItem('theme', 'dark');
         } else {
-            themeIcon.classList.replace('fa-sun', 'fa-moon');
+            if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
             localStorage.setItem('theme', 'light');
         }
     });
