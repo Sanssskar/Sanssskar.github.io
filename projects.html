@@ -731,138 +731,228 @@
     </div>
 
     <script src="js/main.js"></script>
-    <script>
-        // Share Functionality
+  <script>
+        // ─────────────────────────────────────────────────────────
+        //  SHARE PROJECT
+        // ─────────────────────────────────────────────────────────
         function shareProject(button) {
-            const projectCard = button.closest('.project-card');
-            const projectName = projectCard.getAttribute('data-project');
-            const projectUrl = projectCard.getAttribute('data-url');
-            const social = button.getAttribute('data-social');
-            
-            let shareUrl = '';
-            const text = `Check out this amazing project: ${projectName} by Sanskar Shrestha, a Full Stack Laravel Developer from Nepal.`;
+            const card       = button.closest('.project-card');
+            const projectName = card.getAttribute('data-project');
+            const projectUrl  = card.getAttribute('data-url');
+            const social      = button.getAttribute('data-social');
+
+            const text    = `Check out this amazing project: ${projectName} by Sanskar Shrestha, a Full Stack Laravel Developer from Nepal.`;
             const fullUrl = encodeURIComponent(projectUrl);
-            const fullText = encodeURIComponent(text);
-            
-            switch(social) {
-                case 'linkedin':
-                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${fullUrl}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${fullText}&url=${fullUrl}`;
-                    break;
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${fullUrl}`;
-                    break;
-                case 'whatsapp':
-                    shareUrl = `https://wa.me/?text=${fullText}%20${fullUrl}`;
-                    break;
-                default:
-                    return;
-            }
-            
-            window.open(shareUrl, '_blank', 'width=600,height=500');
+            const fullTxt = encodeURIComponent(text);
+
+            const urls = {
+                linkedin : `https://www.linkedin.com/sharing/share-offsite/?url=${fullUrl}`,
+                twitter  : `https://twitter.com/intent/tweet?text=${fullTxt}&url=${fullUrl}`,
+                facebook : `https://www.facebook.com/sharer/sharer.php?u=${fullUrl}`,
+                whatsapp : `https://wa.me/?text=${fullTxt}%20${fullUrl}`
+            };
+
+            if (urls[social]) window.open(urls[social], '_blank', 'width=600,height=500');
         }
 
-        // Toast Notification
+        // ─────────────────────────────────────────────────────────
+        //  TOAST NOTIFICATION
+        // ─────────────────────────────────────────────────────────
         function showToast(message) {
             const toast = document.getElementById('toastNotification');
             toast.innerHTML = `<i class="fa-solid fa-check-circle"></i> ${message}`;
             toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // Fetch GitHub Stats using GitHub API
+        // ─────────────────────────────────────────────────────────
+        //  TIME AGO HELPER
+        // ─────────────────────────────────────────────────────────
+        function getTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            const intervals = {
+                year: 31536000, month: 2592000, week: 604800,
+                day: 86400, hour: 3600, minute: 60
+            };
+            for (const [unit, s] of Object.entries(intervals)) {
+                const n = Math.floor(seconds / s);
+                if (n >= 1) return `${n} ${unit}${n === 1 ? '' : 's'} ago`;
+            }
+            return 'just now';
+        }
+
+        // ─────────────────────────────────────────────────────────
+        //  GITHUB STATS
+        //  Strategy:
+        //  1. Fetch user profile → public_repos count
+        //  2. Fetch ALL repos (paginated, 100 per page)
+        //  3. For each repo, use the Contributors API to find
+        //     Sanssskar's total commit count — this is the only
+        //     reliable way without authentication
+        //  4. Sum everything up
+        //  5. For "This Year" use the Events API (last 90 events)
+        //     and count PushEvents in 2026
+        // ─────────────────────────────────────────────────────────
         async function fetchGitHubStats() {
             const username = 'Sanssskar';
-            
+            const headers  = { 'Accept': 'application/vnd.github.v3+json' };
+
             try {
-                // Fetch user data
-                const userResponse = await fetch(`https://api.github.com/users/${username}`);
-                const userData = await userResponse.json();
-                
-                // Update repo count
-                document.getElementById('reposCount').innerText = userData.public_repos || 0;
-                
-                // Fetch events for activity feed
-                const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public`);
-                const events = await eventsResponse.json();
-                
-                // Display recent activity
-                const activityFeed = document.getElementById('activityFeed');
-                if (events && events.length > 0) {
-                    const recentEvents = events.slice(0, 5);
-                    activityFeed.innerHTML = recentEvents.map(event => {
-                        let icon = 'fa-code-branch';
-                        let text = '';
-                        
-                        switch(event.type) {
-                            case 'PushEvent':
-                                icon = 'fa-code-commit';
-                                text = `Pushed ${event.payload.commits?.length || 1} commit(s) to <strong>${event.repo.name}</strong>`;
-                                break;
-                            case 'CreateEvent':
-                                icon = 'fa-plus-circle';
-                                text = `Created <strong>${event.payload.ref_type}</strong> in <strong>${event.repo.name}</strong>`;
-                                break;
-                            case 'WatchEvent':
-                                icon = 'fa-star';
-                                text = `Starred <strong>${event.repo.name}</strong>`;
-                                break;
-                            case 'IssuesEvent':
-                                icon = 'fa-exclamation-circle';
-                                text = `${event.payload.action} issue in <strong>${event.repo.name}</strong>`;
-                                break;
-                            case 'PullRequestEvent':
-                                icon = 'fa-code-pull-request';
-                                text = `${event.payload.action} pull request in <strong>${event.repo.name}</strong>`;
-                                break;
-                            default:
-                                icon = 'fa-code-branch';
-                                text = `Activity in <strong>${event.repo.name}</strong>`;
-                        }
-                        
-                        const date = new Date(event.created_at);
-                        const timeAgo = getTimeAgo(date);
-                        
-                        return `
-                            <div class="activity-item">
-                                <div class="activity-icon"><i class="fa-solid ${icon}"></i></div>
-                                <div class="activity-content">
-                                    <div class="activity-text">${text}</div>
-                                    <div class="activity-date">${timeAgo}</div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('');
-                } else {
-                    activityFeed.innerHTML = `
-                        <div class="activity-item">
-                            <div class="activity-icon"><i class="fa-solid fa-info-circle"></i></div>
-                            <div class="activity-content">
-                                <div class="activity-text">No recent public activity found</div>
-                                <div class="activity-date">Check back later</div>
-                            </div>
-                        </div>
-                    `;
+                // ── 1. User profile ──────────────────────────────
+                const userRes  = await fetch(`https://api.github.com/users/${username}`, { headers });
+                const userData = await userRes.json();
+                document.getElementById('reposCount').innerText = userData.public_repos ?? '--';
+
+                // ── 2. Fetch all repos (paginated) ───────────────
+                let allRepos = [];
+                let page = 1;
+                while (true) {
+                    const reposRes  = await fetch(
+                        `https://api.github.com/users/${username}/repos?per_page=100&page=${page}`,
+                        { headers }
+                    );
+                    const reposData = await reposRes.json();
+                    if (!Array.isArray(reposData) || reposData.length === 0) break;
+                    allRepos = allRepos.concat(reposData);
+                    if (reposData.length < 100) break;
+                    page++;
                 }
-                
-                // Fetch commit stats
-                const commitsResponse = await fetch(`https://api.github.com/repos/Sanssskar/Sanssskar/commits?per_page=1`);
-                const linkHeader = commitsResponse.headers.get('Link');
-                let totalCommits = '100+';
-                if (linkHeader && linkHeader.includes('rel="last"')) {
-                    const match = linkHeader.match(/page=(\d+)>; rel="last"/);
-                    if (match) totalCommits = match[1];
+
+                // ── 3. Count total commits across all repos ───────
+                // The Contributors API returns an array of contributors
+                // with their total commit count — no auth needed.
+                // We run requests in parallel (batches of 5) to stay
+                // within rate limits.
+                let totalCommits = 0;
+
+                async function getCommitsForRepo(repo) {
+                    try {
+                        const res  = await fetch(
+                            `https://api.github.com/repos/${username}/${repo.name}/contributors?per_page=100`,
+                            { headers }
+                        );
+                        if (!res.ok) return 0;
+                        const contributors = await res.json();
+                        if (!Array.isArray(contributors)) return 0;
+                        // Find this user's entry (case-insensitive)
+                        const me = contributors.find(
+                            c => c.login.toLowerCase() === username.toLowerCase()
+                        );
+                        return me ? me.contributions : 0;
+                    } catch {
+                        return 0;
+                    }
                 }
-                
+
+                // Process in batches of 5 to avoid flooding the API
+                const batchSize = 5;
+                for (let i = 0; i < allRepos.length; i += batchSize) {
+                    const batch   = allRepos.slice(i, i + batchSize);
+                    const results = await Promise.all(batch.map(getCommitsForRepo));
+                    totalCommits += results.reduce((sum, n) => sum + n, 0);
+
+                    // Update the counter live as batches come in
+                    document.getElementById('totalCommits').innerText = totalCommits + '+';
+                }
+
+                // Final update without the "+"
                 document.getElementById('totalCommits').innerText = totalCommits;
-                document.getElementById('thisYearCommits').innerText = '50+';
-                
+
+                // ── 4. "This Year" from Events API ───────────────
+                // Events API only returns the last ~90 public events,
+                // so we count PushEvents in the current year as a
+                // commit indicator (each PushEvent has N commits).
+                let thisYearCommits = 0;
+                const currentYear   = new Date().getFullYear();
+
+                try {
+                    const eventsRes  = await fetch(
+                        `https://api.github.com/users/${username}/events/public?per_page=100`,
+                        { headers }
+                    );
+                    const events = await eventsRes.json();
+
+                    if (Array.isArray(events)) {
+                        events.forEach(e => {
+                            if (
+                                e.type === 'PushEvent' &&
+                                new Date(e.created_at).getFullYear() === currentYear
+                            ) {
+                                thisYearCommits += e.payload?.commits?.length ?? 1;
+                            }
+                        });
+                    }
+                } catch { /* silently skip */ }
+
+                // Show "200+" style label if count is a round estimate
+                document.getElementById('thisYearCommits').innerText =
+                    thisYearCommits > 0 ? `${thisYearCommits}+` : 'N/A';
+
+                // ── 5. Recent activity feed ───────────────────────
+                try {
+                    const eventsRes2 = await fetch(
+                        `https://api.github.com/users/${username}/events/public?per_page=10`,
+                        { headers }
+                    );
+                    const events2 = await eventsRes2.json();
+                    const feed    = document.getElementById('activityFeed');
+
+                    if (Array.isArray(events2) && events2.length > 0) {
+                        feed.innerHTML = events2.slice(0, 5).map(event => {
+                            let icon = 'fa-code-branch', text = '';
+
+                            switch (event.type) {
+                                case 'PushEvent':
+                                    icon = 'fa-code-commit';
+                                    text = `Pushed ${event.payload.commits?.length ?? 1} commit(s) to <strong>${event.repo.name.split('/')[1]}</strong>`;
+                                    break;
+                                case 'CreateEvent':
+                                    icon = 'fa-plus-circle';
+                                    text = `Created ${event.payload.ref_type} in <strong>${event.repo.name.split('/')[1]}</strong>`;
+                                    break;
+                                case 'WatchEvent':
+                                    icon = 'fa-star';
+                                    text = `Starred <strong>${event.repo.name.split('/')[1]}</strong>`;
+                                    break;
+                                case 'IssuesEvent':
+                                    icon = 'fa-exclamation-circle';
+                                    text = `${event.payload.action} issue in <strong>${event.repo.name.split('/')[1]}</strong>`;
+                                    break;
+                                case 'PullRequestEvent':
+                                    icon = 'fa-code-pull-request';
+                                    text = `${event.payload.action} pull request in <strong>${event.repo.name.split('/')[1]}</strong>`;
+                                    break;
+                                default:
+                                    icon = 'fa-code-branch';
+                                    text = `Activity in <strong>${event.repo.name.split('/')[1]}</strong>`;
+                            }
+
+                            return `
+                                <div class="activity-item">
+                                    <div class="activity-icon"><i class="fa-solid ${icon}"></i></div>
+                                    <div class="activity-content">
+                                        <div class="activity-text">${text}</div>
+                                        <div class="activity-date">${getTimeAgo(new Date(event.created_at))}</div>
+                                    </div>
+                                </div>`;
+                        }).join('');
+                    } else {
+                        feed.innerHTML = `
+                            <div class="activity-item">
+                                <div class="activity-icon"><i class="fa-solid fa-info-circle"></i></div>
+                                <div class="activity-content">
+                                    <div class="activity-text">No recent public activity found</div>
+                                    <div class="activity-date">Check back later</div>
+                                </div>
+                            </div>`;
+                    }
+                } catch { /* feed stays as loading */ }
+
             } catch (error) {
-                console.error('Error fetching GitHub data:', error);
+                console.error('GitHub fetch error:', error);
+                ['totalCommits','thisYearCommits','reposCount'].forEach(id => {
+                    document.getElementById(id).innerText = '--';
+                });
                 document.getElementById('activityFeed').innerHTML = `
                     <div class="activity-item">
                         <div class="activity-icon"><i class="fa-solid fa-exclamation-triangle"></i></div>
@@ -870,60 +960,24 @@
                             <div class="activity-text">Unable to load GitHub activity</div>
                             <div class="activity-date">Visit GitHub profile directly</div>
                         </div>
-                    </div>
-                `;
-                document.getElementById('totalCommits').innerText = '--';
-                document.getElementById('thisYearCommits').innerText = '--';
-                document.getElementById('reposCount').innerText = '--';
+                    </div>`;
             }
-        }
-        
-        function getTimeAgo(date) {
-            const seconds = Math.floor((new Date() - date) / 1000);
-            const intervals = {
-                year: 31536000,
-                month: 2592000,
-                week: 604800,
-                day: 86400,
-                hour: 3600,
-                minute: 60
-            };
-            
-            for (const [unit, secondsInUnit] of Object.entries(intervals)) {
-                const interval = Math.floor(seconds / secondsInUnit);
-                if (interval >= 1) {
-                    return `${interval} ${unit}${interval === 1 ? '' : 's'} ago`;
-                }
-            }
-            return 'just now';
         }
 
-        // FIXED: Active navigation highlighting - only one active link at a time
+        // ─────────────────────────────────────────────────────────
+        //  ACTIVE NAV LINK
+        // ─────────────────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', function () {
-            const currentPath = window.location.pathname;
-            // Get the current page filename (e.g., "projects.html", "index.html")
-            let currentPage = currentPath.split('/').pop();
-            
-            // If no page specified (root domain), default to index.html
-            if (currentPage === '' || currentPage === '/') {
-                currentPage = 'index.html';
-            }
-            
-            console.log('Current page:', currentPage); // For debugging
-            
+            // Highlight the current page in the nav
+            let currentPage = window.location.pathname.split('/').pop() || 'index.html';
             document.querySelectorAll('.nav-links li a').forEach(link => {
-                const linkHref = link.getAttribute('href').split('/').pop();
-                
-                // Remove any existing active class first
                 link.classList.remove('active');
-                
-                // Add active class if the link matches current page
-                if (linkHref === currentPage) {
+                if (link.getAttribute('href').split('/').pop() === currentPage) {
                     link.classList.add('active');
                 }
             });
-            
-            // Fetch GitHub stats
+
+            // Kick off GitHub stats fetch
             fetchGitHubStats();
         });
     </script>
