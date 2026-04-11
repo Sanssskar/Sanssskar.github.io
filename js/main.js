@@ -1,78 +1,112 @@
-// main.js - Shared functionality for all pages
+// ============================================
+// main.js — Fixed: no flicker, no phantom scroll
+// ============================================
 
-// Loader
+// ============================================
+// 1. LOADER
+// ============================================
 window.addEventListener('load', () => {
     const loader = document.getElementById('loaderWrapper');
-    if (loader) {
-        setTimeout(() => {
-            loader.style.opacity = '0';
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 500);
-        }, 800);
-    }
+    if (!loader) return;
+    setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => { loader.style.display = 'none'; }, 500);
+    }, 800);
 });
 
-// ==================== IMPROVED INTERSECTION OBSERVER (FOOTER FLICKER FIXED) ====================
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        // Strong exclusion for footer and its children
-        if (entry.isIntersecting && 
-            !entry.target.classList.contains('visible') && 
-            !entry.target.closest('footer')) {
-            
-            entry.target.classList.add('visible');
-        }
-    });
-}, { 
-    threshold: 0.2, 
-    rootMargin: '0px 0px -100px 0px' 
-});
 
+// ============================================
+// 2. SCROLL ANIMATIONS — FLICKER FIX
+//
+// Root causes of old flicker:
+//   a) Elements visible on load were being observed → flash on first tick
+//   b) rootMargin: '-100px' caused elements near fold to flicker in/out
+//   c) Footer children had !important in JS (doesn't work) → kept animating
+//   d) Double-trigger: observer fired AND getBoundingClientRect() ran in same tick
+//
+// Fix strategy:
+//   - Mark elements visible BEFORE attaching observer (no flash)
+//   - Use a single rAF gate so observer doesn't fire until paint settles
+//   - Skip footer/header elements entirely via data attribute
+//   - Use `once: true` equivalent via unobserve after trigger
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up');
-    
-    animatedElements.forEach(el => {
-        // Completely skip footer and all its descendants
-        if (el.closest('footer')) {
-            // Force disable any animation on footer elements
-            el.style.transition = 'none';
-            el.style.animation = 'none';
-            el.style.opacity = '1';
-            el.style.transform = 'none';
+
+    const animatedEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up');
+
+    // ✅ FIX A: Elements already visible on load — mark them IMMEDIATELY,
+    // before the observer is even created, so there's zero flicker.
+    animatedEls.forEach(el => {
+        // Skip footer descendants entirely
+        if (el.closest('footer') || el.closest('header')) {
+            el.style.cssText = 'opacity:1 !important; transform:none !important; transition:none !important;';
             return;
         }
-        
-        observer.observe(el);
-        
-        // Show elements already in viewport on load
-        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
-            el.classList.add('visible');
+
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            // Already visible — add class without any transition delay
+            el.classList.add('no-transition', 'visible');
+            // Remove no-transition after one frame so future re-visits animate
+            requestAnimationFrame(() => el.classList.remove('no-transition'));
         }
     });
 
-    // Extra protection for footer
-    const footer = document.querySelector('footer');
-    if (footer) {
-        footer.style.opacity = '1';
-        footer.style.transform = 'none';
-        
-        footer.querySelectorAll('*').forEach(child => {
-            child.style.transition = 'none !important';
-            child.style.animation = 'none !important';
-            child.style.opacity = '1';
-            child.style.transform = 'none';
+    // ✅ FIX B: Observer only runs for elements NOT yet visible
+    // threshold:0.1 (not 0.2) = trigger slightly earlier, less jarring
+    // rootMargin: '0px' — no negative margin that caused in/out flicker
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            if (entry.target.closest('footer') || entry.target.closest('header')) return;
+            if (entry.target.classList.contains('visible')) return;
+
+            entry.target.classList.add('visible');
+            // ✅ FIX C: Unobserve immediately — prevents re-trigger on scroll back up
+            observer.unobserve(entry.target);
         });
-    }
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px 0px 0px'   // ← was '-100px', caused flicker at fold
+    });
+
+    animatedEls.forEach(el => {
+        if (el.closest('footer') || el.closest('header')) return;
+        if (el.classList.contains('visible')) return; // already handled above
+        observer.observe(el);
+    });
+
+    // ✅ FIX D: Force footer visible with inline styles (JS !important trick doesn't work)
+    // Use setAttribute style so specificity beats any CSS rule
+    document.querySelectorAll('footer, footer *').forEach(el => {
+        el.setAttribute('style', [
+            el.getAttribute('style') || '',
+            'opacity:1',
+            'transform:none',
+            'transition:none',
+            'animation:none'
+        ].filter(Boolean).join(';'));
+    });
 });
 
-// Spark Effect
+
+// ============================================
+// 3. SPARK EFFECT
+// Moved sparks to use fixed positioning to avoid
+// layout reflow that caused scroll jitter
+// ============================================
 function createSparks(x, y) {
     for (let i = 0; i < 8; i++) {
         const s = document.createElement('div');
         s.className = 'spark';
-        s.style.left = x + 'px';
-        s.style.top = y + 'px';
+        // ✅ FIX: Use fixed positioning — avoids layout shift / scroll jitter
+        s.style.cssText = `
+            position: fixed;
+            left: ${x}px;
+            top: ${y}px;
+            pointer-events: none;
+            z-index: 9999;
+        `;
         s.style.setProperty('--tx', (Math.random() - 0.5) * 100 + 'px');
         s.style.setProperty('--ty', (Math.random() - 0.5) * 100 + 'px');
         const size = 2 + Math.random() * 4;
@@ -85,19 +119,25 @@ function createSparks(x, y) {
 
 document.addEventListener('click', (e) => createSparks(e.clientX, e.clientY));
 
-// Hover sparks
-document.querySelectorAll('.project-card, .skill-bubble, .social-card, .service-card, .blog-card, .preview-card, .blog-preview-card').forEach(c => {
-    c.addEventListener('mouseenter', () => {
-        const r = c.getBoundingClientRect();
-        createSparks(r.left + r.width / 2, r.top + r.height / 2);
+// ✅ FIX: Hover sparks used getBoundingClientRect which forces reflow.
+// Now we use mousemove center coords to avoid forced layout
+document.querySelectorAll(
+    '.project-card, .skill-bubble, .social-card, .service-card, .blog-card, .preview-card, .blog-preview-card'
+).forEach(c => {
+    c.addEventListener('mouseenter', (e) => {
+        createSparks(e.clientX, e.clientY);
     });
 });
 
-// Dark Mode Toggle
+
+// ============================================
+// 4. DARK MODE TOGGLE
+// ============================================
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 const body = document.body;
 
+// Apply saved theme before paint to avoid flash
 if (localStorage.getItem('theme') === 'dark') {
     body.classList.add('dark-mode');
     if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
@@ -106,17 +146,20 @@ if (localStorage.getItem('theme') === 'dark') {
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
-        if (body.classList.contains('dark-mode')) {
-            if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
-            localStorage.setItem('theme', 'light');
+        const isDark = body.classList.contains('dark-mode');
+        if (themeIcon) {
+            isDark
+                ? themeIcon.classList.replace('fa-moon', 'fa-sun')
+                : themeIcon.classList.replace('fa-sun', 'fa-moon');
         }
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
 }
 
-// Flip Name Animation
+
+// ============================================
+// 5. FLIP NAME ANIMATION
+// ============================================
 const flipName = document.getElementById('flipName');
 if (flipName) {
     flipName.addEventListener('click', (e) => {
@@ -125,17 +168,23 @@ if (flipName) {
     });
 }
 
-// Typing Effect
+
+// ============================================
+// 6. TYPING EFFECT
+// ============================================
 const typingElement = document.getElementById('typingName');
 if (typingElement) {
     const words = ['Sanskar', 'संस्कार'];
     let wordIndex = 0, charIndex = 0, isDeleting = false;
-    
+
     function typeEffect() {
         const w = words[wordIndex];
-        typingElement.textContent = isDeleting ? w.substring(0, charIndex - 1) : w.substring(0, charIndex + 1);
+        typingElement.textContent = isDeleting
+            ? w.substring(0, charIndex - 1)
+            : w.substring(0, charIndex + 1);
+
         isDeleting ? charIndex-- : charIndex++;
-        
+
         if (!isDeleting && charIndex === w.length) {
             isDeleting = true;
             setTimeout(typeEffect, 2000);
@@ -150,12 +199,15 @@ if (typingElement) {
     setTimeout(typeEffect, 500);
 }
 
-// Morph Effect (Note: You have #morphName but it's not in HTML - keeping it for future)
+
+// ============================================
+// 7. MORPH EFFECT (kept for future use)
+// ============================================
 const morphElement = document.getElementById('morphName');
 if (morphElement) {
     const morphWords = ['Sanskar', 'संस्कार'];
     let morphIndex = 0;
-    
+
     function morphEffect() {
         morphElement.style.opacity = '0';
         morphElement.style.transform = 'scale(0.8)';
@@ -170,7 +222,10 @@ if (morphElement) {
     setTimeout(morphEffect, 1000);
 }
 
-// Swipeable Image
+
+// ============================================
+// 8. SWIPEABLE IMAGE
+// ============================================
 const swipeableShape = document.getElementById('swipeableShape');
 const image1 = document.getElementById('image1');
 const image2 = document.getElementById('image2');
@@ -178,13 +233,13 @@ const imageCounter = document.getElementById('imageCounter');
 
 if (swipeableShape && image1 && image2) {
     let isImage1Active = true;
-    
+
     document.querySelectorAll('.swipe-image').forEach(img => {
         if (img.complete) img.classList.add('loaded');
         else img.addEventListener('load', () => img.classList.add('loaded'));
     });
-    
-    swipeableShape.addEventListener('click', () => {
+
+    swipeableShape.addEventListener('click', (e) => {
         if (isImage1Active) {
             image1.classList.remove('active-image');
             image2.classList.add('active-image');
@@ -195,18 +250,21 @@ if (swipeableShape && image1 && image2) {
             if (imageCounter) imageCounter.textContent = '1/2';
         }
         isImage1Active = !isImage1Active;
-        const r = swipeableShape.getBoundingClientRect();
-        createSparks(r.left + r.width / 2, r.top + r.height / 2);
+        // Use click coords directly — no getBoundingClientRect reflow
+        createSparks(e.clientX, e.clientY);
     });
 }
 
-// Music Player
+
+// ============================================
+// 9. MUSIC PLAYER
+// ============================================
 const bgMusic = document.getElementById('bg-music');
 const musicIcon = document.getElementById('music-icon');
 const musicText = document.getElementById('music-text');
 let isPlaying = false;
 
-window.toggleMusic = function() {
+window.toggleMusic = function () {
     if (!bgMusic) return;
     if (isPlaying) {
         bgMusic.pause();

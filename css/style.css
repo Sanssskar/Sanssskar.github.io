@@ -7,6 +7,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+.no-transition {
+    transition: none !important;
+    animation: none !important;
+}
 
 :root {
     --bg-primary: #f8f7f4;
@@ -47,9 +51,17 @@ body {
     transition: background-color 0.4s ease, color 0.3s ease;
     overflow-x: hidden;
 }
-
-html {
-    scroll-behavior: smooth;
+.spark {
+    position: fixed;          /* was probably 'absolute' — causes scroll jitter */
+    border-radius: 50%;
+    background: var(--accent-1);
+    pointer-events: none;
+    z-index: 9999;
+    animation: sparkFly 1s ease-out forwards;
+}
+@keyframes sparkFly {
+    0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
 }
 
 button,
