@@ -13,32 +13,56 @@ window.addEventListener('load', () => {
     }
 });
 
-// Intersection Observer for scroll animations - FIXED (no re-triggering)
+// ==================== IMPROVED INTERSECTION OBSERVER (FOOTER FLICKER FIXED) ====================
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+        // Strong exclusion for footer and its children
+        if (entry.isIntersecting && 
+            !entry.target.classList.contains('visible') && 
+            !entry.target.closest('footer')) {
+            
             entry.target.classList.add('visible');
         }
     });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+}, { 
+    threshold: 0.2, 
+    rootMargin: '0px 0px -100px 0px' 
+});
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Exclude footer from animations to prevent flickering
-    document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up').forEach(el => {
-        // Skip footer elements
-        if (el.closest('footer')) return;
+    const animatedElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up');
+    
+    animatedElements.forEach(el => {
+        // Completely skip footer and all its descendants
+        if (el.closest('footer')) {
+            // Force disable any animation on footer elements
+            el.style.transition = 'none';
+            el.style.animation = 'none';
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            return;
+        }
+        
         observer.observe(el);
-        // Check if already visible
-        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+        
+        // Show elements already in viewport on load
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
             el.classList.add('visible');
         }
     });
-    
-    // Ensure footer is always visible (no animation)
+
+    // Extra protection for footer
     const footer = document.querySelector('footer');
     if (footer) {
         footer.style.opacity = '1';
         footer.style.transform = 'none';
+        
+        footer.querySelectorAll('*').forEach(child => {
+            child.style.transition = 'none !important';
+            child.style.animation = 'none !important';
+            child.style.opacity = '1';
+            child.style.transform = 'none';
+        });
     }
 });
 
@@ -61,7 +85,7 @@ function createSparks(x, y) {
 
 document.addEventListener('click', (e) => createSparks(e.clientX, e.clientY));
 
-// Hover sparks - Fixed to check if elements exist
+// Hover sparks
 document.querySelectorAll('.project-card, .skill-bubble, .social-card, .service-card, .blog-card, .preview-card, .blog-preview-card').forEach(c => {
     c.addEventListener('mouseenter', () => {
         const r = c.getBoundingClientRect();
@@ -126,7 +150,7 @@ if (typingElement) {
     setTimeout(typeEffect, 500);
 }
 
-// Morph Effect
+// Morph Effect (Note: You have #morphName but it's not in HTML - keeping it for future)
 const morphElement = document.getElementById('morphName');
 if (morphElement) {
     const morphWords = ['Sanskar', 'संस्कार'];
@@ -155,15 +179,9 @@ const imageCounter = document.getElementById('imageCounter');
 if (swipeableShape && image1 && image2) {
     let isImage1Active = true;
     
-    // Load images
     document.querySelectorAll('.swipe-image').forEach(img => {
-        if (img.complete) {
-            img.classList.add('loaded');
-        } else {
-            img.addEventListener('load', function() {
-                this.classList.add('loaded');
-            });
-        }
+        if (img.complete) img.classList.add('loaded');
+        else img.addEventListener('load', () => img.classList.add('loaded'));
     });
     
     swipeableShape.addEventListener('click', () => {
