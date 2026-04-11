@@ -1,8 +1,24 @@
+# Allow all crawlers full access
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
-
-Content-Signal: search=yes,ai-train=no
-
+ 
+# Block AI training bots specifically
+User-agent: GPTBot
+Disallow: /
+ 
+User-agent: Google-Extended
+Disallow: /
+ 
+User-agent: CCBot
+Disallow: /
+ 
+User-agent: anthropic-ai
+Disallow: /
+ 
+User-agent: Omgilibot
+Disallow: /
+ 
+# Sitemap location
 Sitemap: https://shresthasanskar.com.np/sitemap.xml
