@@ -231,7 +231,7 @@
 
         <nav class="main-navbar fade-up" aria-label="Main navigation">
             <ul class="nav-links">
-                <li><a href="index.html" class="active" aria-current="page"><i class="fa-solid fa-house"
+                <li><a href="/" class="active" aria-current="page"><i class="fa-solid fa-house"
                             aria-hidden="true"></i> Home</a></li>
                 <li><a href="about.html"><i class="fa-solid fa-user" aria-hidden="true"></i> About</a></li>
                 <li><a href="services.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Services</a></li>
@@ -243,7 +243,7 @@
         </nav>
 
         <div class="nav-bar fade-up">
-            <a style="text-decoration: none;" href="index.html" aria-label="SanskarHub Home">
+            <a style="text-decoration: none;" href="/" aria-label="SanskarHub Home">
                 <div class="logo">SanskarHub ⚔️</div>
             </a>
             <div class="nav-controls">
@@ -640,7 +640,7 @@
         <footer class="footer" style="opacity: 1; transform: none;">
             <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Laravel Developer ⚔️</div>
             <nav aria-label="Footer navigation">
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
                 <a href="about.html">About</a>
                 <a href="services.html">Services</a>
                 <a href="projects.html">Projects</a>
@@ -665,7 +665,7 @@
 
     <script src="js/main.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () { const currentPath = window.location.pathname; const currentPage = currentPath.split('/').pop() || 'index.html'; document.querySelectorAll('.nav-links li a').forEach(link => { const linkHref = link.getAttribute('href').split('/').pop(); if (linkHref === currentPage) { link.classList.add('active'); link.setAttribute('aria-current', 'page'); } else { link.classList.remove('active'); link.removeAttribute('aria-current'); } }); });
+        document.addEventListener('DOMContentLoaded', function () { const currentPath = window.location.pathname; const currentPage = currentPath.split('/').pop() || '/'; document.querySelectorAll('.nav-links li a').forEach(link => { const linkHref = link.getAttribute('href').split('/').pop(); if (linkHref === currentPage) { link.classList.add('active'); link.setAttribute('aria-current', 'page'); } else { link.classList.remove('active'); link.removeAttribute('aria-current'); } }); });
     </script>
 </body>
 

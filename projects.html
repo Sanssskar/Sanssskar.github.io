@@ -502,7 +502,7 @@
         <div class="main-navbar fade-up">
             <ul class="nav-links">
                 <!-- REMOVED hardcoded active class from Home -->
-                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
                 <li><a href="about.html"><i class="fa-solid fa-user"></i> About</a></li>
                 <li><a href="services.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
                 <li><a href="projects.html"><i class="fa-solid fa-star"></i> Projects</a></li>
@@ -513,7 +513,7 @@
         </div>
 
         <nav class="nav-bar fade-up">
-            <a style="text-decoration: none;" href="index.html">
+            <a style="text-decoration: none;" href="/">
                 <div class="logo">SanskarHub ⚔️</div>
             </a>
             <div class="nav-controls">
@@ -730,7 +730,7 @@
         <footer class="footer">
             <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer ⚔️</div>
             <nav>
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
                 <a href="about.html">About</a>
                 <a href="services.html">Services</a>
                 <a href="projects.html">Projects</a>
@@ -996,7 +996,7 @@
         // ─────────────────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', function () {
             // Highlight the current page in the nav
-            let currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            let currentPage = window.location.pathname.split('/').pop() || '/';
             document.querySelectorAll('.nav-links li a').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href').split('/').pop() === currentPage) {
