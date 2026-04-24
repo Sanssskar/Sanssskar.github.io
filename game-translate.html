@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Free Language Translator | Translate Text Online - Sanskar Shrestha</title>
+    <meta name="description"
+        content="Free online language translator. Instantly translate text between 20+ languages including English, Nepali, Spanish, French, Japanese, and more. No sign-up required.">
+    <meta name="keywords"
+        content="free language translator, online translator, translate text, English to Nepali, translate online, language tool, free translation">
+    <meta name="author" content="Sanskar Shrestha">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2e7d32">
+
+    <link rel="canonical" href="https://shresthasanskar.com.np/game-translate.html">
+    <link rel="alternate" hreflang="en" href="https://shresthasanskar.com.np/game-translate.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Free Language Translator | Translate Online">
+    <meta property="og:description" content="Translate text between 20+ languages instantly. Free, fast, no sign-up.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shresthasanskar.com.np/game-translate.html">
+    <meta property="og:site_name" content="Sanskar Shrestha - Full Stack Developer">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ─── Page Header ─── */
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* ─── Translator Card ─── */
+        .translator-wrapper {
+            max-width: 900px;
+            margin: 0 auto 2rem;
+        }
+
+        .translator-card {
+            background: var(--bg-secondary);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .translator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+        }
+
+        /* ─── Language Selector Bar ─── */
+        .lang-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .lang-select-wrap {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .lang-select-wrap label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.4rem;
+        }
+
+        .lang-select-wrap select {
+            width: 100%;
+            padding: 0.65rem 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-medium);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .lang-select-wrap select:focus {
+            border-color: var(--accent-1);
+        }
+
+        .swap-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-medium);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            margin-top: 1.4rem;
+            font-size: 1rem;
+        }
+
+        .swap-btn:hover {
+            background: var(--accent-1);
+            color: white;
+            border-color: transparent;
+            transform: rotate(180deg);
+        }
+
+        /* ─── Text Areas ─── */
+        .text-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .text-panel-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .text-panel textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-medium);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        .text-panel textarea:focus {
+            border-color: var(--accent-1);
+        }
+
+        .text-panel textarea[readonly] {
+            cursor: default;
+            opacity: 0.85;
+        }
+
+        .text-panel textarea::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        .icon-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-medium);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: var(--accent-1);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* ─── Translate Button ─── */
+        .translate-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .translate-btn {
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.85rem 2.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .translate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .translate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .clear-btn {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-medium);
+            border-radius: 50px;
+            padding: 0.85rem 1.8rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .clear-btn:hover {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* ─── Status / Loading ─── */
+        .status-bar {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-top: 1rem;
+            min-height: 1.2em;
+            transition: color 0.2s;
+        }
+
+        .status-bar.success { color: #4caf50; }
+        .status-bar.error   { color: #f44336; }
+        .status-bar.loading { color: var(--accent-1); }
+
+        /* ─── Char Count ─── */
+        .char-count {
+            font-size: 0.72rem;
+            color: var(--text-tertiary);
+            text-align: right;
+        }
+
+        /* ─── Quick Languages ─── */
+        .quick-langs {
+            margin-top: 2rem;
+        }
+
+        .quick-langs-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8rem;
+        }
+
+        .quick-lang-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .lang-chip {
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-medium);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-chip:hover,
+        .lang-chip.active {
+            background: var(--accent-1);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* ─── Info Section ─── */
+        .info-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-medium);
+        }
+
+        .info-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .info-section h3 {
+            font-size: 1.1rem;
+            margin: 1rem 0 0.4rem;
+            color: var(--text-primary);
+        }
+
+        .info-section p,
+        .info-section li {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .info-section ul {
+            margin-left: 1.5rem;
+        }
+
+        .info-section li { margin-bottom: 0.4rem; }
+
+        /* ─── Social Links ─── */
+        .top-social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border: 1px solid var(--border-medium);
+        }
+
+        .top-social-link:hover { transform: translateY(-3px); border-color: transparent; }
+        .top-social-link[title="Facebook"]:hover  { background: #1877f2; color: white; }
+        .top-social-link[title="Instagram"]:hover { background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5); color: white; }
+        .top-social-link[title="LinkedIn"]:hover  { background: #0077b5; color: white; }
+        .top-social-link[title="GitHub"]:hover    { background: #333; color: white; }
+        .top-social-link[title="WhatsApp"]:hover  { background: #25D366; color: white; }
+        .top-social-link[title="Email"]:hover     { background: #ea4335; color: white; }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 700px) {
+            .text-panels {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 { font-size: 2rem; }
+
+            .lang-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .swap-btn { margin: 0 auto; }
+
+            .translator-card { padding: 1.2rem; }
+
+            .info-section { padding: 1.2rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader-wrapper" id="loaderWrapper">
+        <div class="loader">
+            <div class="loader-text">Loading Translator 🌐</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- TOP SOCIAL BAR -->
+        <div class="top-social-bar fade-up">
+            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i><span class="sr-only">Facebook</span></a>
+            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i><span class="sr-only">Instagram</span></a>
+            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i><span class="sr-only">LinkedIn</span></a>
+            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i class="fa-brands fa-github"></i><span class="sr-only">GitHub</span></a>
+            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i><span class="sr-only">WhatsApp</span></a>
+            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i class="fa-regular fa-envelope"></i><span class="sr-only">Email</span></a>
+        </div>
+
+        <!-- NAVBAR -->
+        <div class="main-navbar fade-up">
+            <ul class="nav-links">
+                <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-user"></i> About</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+                <li><a href="projects.html"><i class="fa-solid fa-star"></i> Projects</a></li>
+                <li><a href="blog.html"><i class="fa-solid fa-pen-nib"></i> Blog</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                <li><a href="games.html" class="active"><i class="fa-solid fa-gamepad"></i> Games</a></li>
+            </ul>
+        </div>
+
+        <nav class="nav-bar fade-up">
+            <a style="text-decoration: none;" href="/">
+                <div class="logo">SanskarHub ⚔️</div>
+            </a>
+            <div class="nav-controls">
+                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i class="fa-solid fa-users"></i> Our Team</button></a>
+                <button class="glass-btn" id="themeToggle"><i class="fa-regular fa-moon" id="themeIcon"></i></button>
+            </div>
+        </nav>
+
+        <!-- PAGE HEADER -->
+        <div class="page-header fade-up">
+            <h1><i class="fa-solid fa-language"></i> Language Translator</h1>
+            <p>Instantly translate text between 20+ languages — free, fast, no sign-up needed! 🌐</p>
+        </div>
+
+        <!-- TRANSLATOR -->
+        <div class="translator-wrapper">
+            <div class="translator-card fade-up">
+
+                <!-- Language Selector Bar -->
+                <div class="lang-bar">
+                    <div class="lang-select-wrap">
+                        <label for="sourceLang">Translate From</label>
+                        <select id="sourceLang">
+                            <option value="auto">🌐 Auto Detect</option>
+                            <option value="en" selected>🇬🇧 English</option>
+                            <option value="ne">🇳🇵 Nepali</option>
+                            <option value="hi">🇮🇳 Hindi</option>
+                            <option value="es">🇪🇸 Spanish</option>
+                            <option value="fr">🇫🇷 French</option>
+                            <option value="de">🇩🇪 German</option>
+                            <option value="it">🇮🇹 Italian</option>
+                            <option value="pt">🇵🇹 Portuguese</option>
+                            <option value="ru">🇷🇺 Russian</option>
+                            <option value="ja">🇯🇵 Japanese</option>
+                            <option value="ko">🇰🇷 Korean</option>
+                            <option value="zh">🇨🇳 Chinese (Simplified)</option>
+                            <option value="ar">🇸🇦 Arabic</option>
+                            <option value="tr">🇹🇷 Turkish</option>
+                            <option value="nl">🇳🇱 Dutch</option>
+                            <option value="pl">🇵🇱 Polish</option>
+                            <option value="sv">🇸🇪 Swedish</option>
+                            <option value="id">🇮🇩 Indonesian</option>
+                            <option value="th">🇹🇭 Thai</option>
+                            <option value="vi">🇻🇳 Vietnamese</option>
+                            <option value="uk">🇺🇦 Ukrainian</option>
+                        </select>
+                    </div>
+
+                    <button class="swap-btn" id="swapBtn" title="Swap languages">
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    </button>
+
+                    <div class="lang-select-wrap">
+                        <label for="targetLang">Translate To</label>
+                        <select id="targetLang">
+                            <option value="ne" selected>🇳🇵 Nepali</option>
+                            <option value="en">🇬🇧 English</option>
+                            <option value="hi">🇮🇳 Hindi</option>
+                            <option value="es">🇪🇸 Spanish</option>
+                            <option value="fr">🇫🇷 French</option>
+                            <option value="de">🇩🇪 German</option>
+                            <option value="it">🇮🇹 Italian</option>
+                            <option value="pt">🇵🇹 Portuguese</option>
+                            <option value="ru">🇷🇺 Russian</option>
+                            <option value="ja">🇯🇵 Japanese</option>
+                            <option value="ko">🇰🇷 Korean</option>
+                            <option value="zh">🇨🇳 Chinese (Simplified)</option>
+                            <option value="ar">🇸🇦 Arabic</option>
+                            <option value="tr">🇹🇷 Turkish</option>
+                            <option value="nl">🇳🇱 Dutch</option>
+                            <option value="pl">🇵🇱 Polish</option>
+                            <option value="sv">🇸🇪 Swedish</option>
+                            <option value="id">🇮🇩 Indonesian</option>
+                            <option value="th">🇹🇭 Thai</option>
+                            <option value="vi">🇻🇳 Vietnamese</option>
+                            <option value="uk">🇺🇦 Ukrainian</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Text Panels -->
+                <div class="text-panels">
+                    <div class="text-panel">
+                        <span class="text-panel-label">Source Text</span>
+                        <textarea id="sourceText" placeholder="Type or paste text here to translate…" maxlength="5000"></textarea>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div class="panel-actions">
+                                <button class="icon-btn" id="pasteBtn" title="Paste from clipboard">
+                                    <i class="fa-regular fa-clipboard"></i> Paste
+                                </button>
+                                <button class="icon-btn" id="speakSourceBtn" title="Listen">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                            </div>
+                            <span class="char-count"><span id="charCount">0</span> / 5000</span>
+                        </div>
+                    </div>
+
+                    <div class="text-panel">
+                        <span class="text-panel-label">Translation</span>
+                        <textarea id="outputText" readonly placeholder="Translation will appear here…"></textarea>
+                        <div class="panel-actions">
+                            <button class="icon-btn" id="copyBtn" title="Copy translation">
+                                <i class="fa-regular fa-copy"></i> Copy
+                            </button>
+                            <button class="icon-btn" id="speakOutputBtn" title="Listen">
+                                <i class="fa-solid fa-volume-high"></i> Listen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="translate-actions">
+                    <button class="clear-btn" id="clearBtn">
+                        <i class="fa-solid fa-xmark"></i> Clear
+                    </button>
+                    <button class="translate-btn" id="translateBtn">
+                        <i class="fa-solid fa-language"></i> Translate
+                    </button>
+                </div>
+
+                <div class="status-bar" id="statusBar">Enter text above and click Translate ✨</div>
+
+                <!-- Quick Language Chips -->
+                <div class="quick-langs">
+                    <div class="quick-langs-title">Quick Target Language</div>
+                    <div class="quick-lang-chips">
+                        <button class="lang-chip active" data-lang="ne">🇳🇵 Nepali</button>
+                        <button class="lang-chip" data-lang="en">🇬🇧 English</button>
+                        <button class="lang-chip" data-lang="hi">🇮🇳 Hindi</button>
+                        <button class="lang-chip" data-lang="es">🇪🇸 Spanish</button>
+                        <button class="lang-chip" data-lang="fr">🇫🇷 French</button>
+                        <button class="lang-chip" data-lang="ja">🇯🇵 Japanese</button>
+                        <button class="lang-chip" data-lang="ko">🇰🇷 Korean</button>
+                        <button class="lang-chip" data-lang="zh">🇨🇳 Chinese</button>
+                        <button class="lang-chip" data-lang="ar">🇸🇦 Arabic</button>
+                        <button class="lang-chip" data-lang="de">🇩🇪 German</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section fade-up">
+            <h2>About the Free Language Translator</h2>
+            <p>This is a free online language translator that lets you instantly convert text between <strong>20+ languages</strong>. No login, no downloads — just type and translate!</p>
+
+            <h3>🌍 Supported Languages</h3>
+            <p>English, Nepali, Hindi, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese (Simplified), Arabic, Turkish, Dutch, Polish, Swedish, Indonesian, Thai, Vietnamese, and Ukrainian.</p>
+
+            <h3>✨ Features</h3>
+            <ul>
+                <li><strong>Auto Detect:</strong> Let the translator automatically identify your source language.</li>
+                <li><strong>Text-to-Speech:</strong> Listen to both source and translated text using your browser's built-in speech engine.</li>
+                <li><strong>Swap Languages:</strong> Quickly swap source and target languages with one click.</li>
+                <li><strong>Copy to Clipboard:</strong> Copy your translation instantly.</li>
+                <li><strong>Quick Chips:</strong> Jump to a target language with one tap.</li>
+                <li><strong>Up to 5000 characters</strong> per translation.</li>
+            </ul>
+
+            <h3>💡 How to Use</h3>
+            <ul>
+                <li>Select your source and target languages (or leave source on Auto Detect).</li>
+                <li>Type or paste your text into the Source Text box.</li>
+                <li>Click <strong>Translate</strong> — your translation appears instantly!</li>
+                <li>Use <strong>Listen</strong> to hear the text spoken aloud.</li>
+                <li>Use <strong>Copy</strong> to copy the result to your clipboard.</li>
+            </ul>
+
+            <p style="margin-top:1rem;">Powered by the <strong>MyMemory Translation API</strong> — a free, widely-used translation service. For highly technical or critical content, always verify with a professional translator.</p>
+
+            <p>Want to suggest new features? <a href="contact.html" style="color: var(--accent-1);">Contact me here</a>.</p>
+        </div>
+
+        <div style="text-align: center; margin: 2rem 0; padding: 1.5rem; background: var(--bg-secondary); border-radius: 1rem; border: 1px solid var(--border-light);">
+            <i class="fa-solid fa-globe" style="font-size: 1.5rem; color: var(--accent-1); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">🌐 Break language barriers — translate anything, anytime! 🌐</p>
+            <p style="color: var(--text-tertiary); font-size: 0.8rem; margin-top: 0.5rem;">Also check out our other <a href="games.html" style="color: var(--accent-1);">free arcade games</a>!</p>
+        </div>
+
+        <footer class="footer">
+            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer | Free Language Translator ⚔️</div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="projects.html">Projects</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+                <a href="games.html">Games</a>
+            </nav>
+            <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
+        </footer>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop style="display: none;">
+        <source src="music/music.mpeg" type="audio/mpeg">
+    </audio>
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <button onclick="toggleMusic()" id="musicBtn"
+            style="background: var(--accent-1); color: white; border: none; border-radius: 50px; padding: 0.8rem 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 0.8rem; font-weight: 600;">
+            <i class="fa-solid fa-play" id="music-icon"></i>
+            <span id="music-text">Play</span>
+        </button>
+    </div>
+
+    <script src="js/main.js"></script>
+
+    <script>
+        // ── Active Nav ──
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPath = window.location.pathname;
+            const currentPageName = currentPath.split('/').pop() || 'games.html';
+            document.querySelectorAll('.nav-links li a').forEach(link => {
+                const linkHref = link.getAttribute('href').split('/').pop();
+                if (linkHref === currentPageName || linkHref === 'games.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ── DOM refs ──
+        const sourceText    = document.getElementById('sourceText');
+        const outputText    = document.getElementById('outputText');
+        const sourceLang    = document.getElementById('sourceLang');
+        const targetLang    = document.getElementById('targetLang');
+        const translateBtn  = document.getElementById('translateBtn');
+        const clearBtn      = document.getElementById('clearBtn');
+        const swapBtn       = document.getElementById('swapBtn');
+        const copyBtn       = document.getElementById('copyBtn');
+        const pasteBtn      = document.getElementById('pasteBtn');
+        const speakSrcBtn   = document.getElementById('speakSourceBtn');
+        const speakOutBtn   = document.getElementById('speakOutputBtn');
+        const statusBar     = document.getElementById('statusBar');
+        const charCountEl   = document.getElementById('charCount');
+        const langChips     = document.querySelectorAll('.lang-chip');
+
+        // ── Char counter ──
+        sourceText.addEventListener('input', () => {
+            charCountEl.textContent = sourceText.value.length;
+        });
+
+        // ── Quick lang chips ──
+        langChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                langChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                targetLang.value = chip.dataset.lang;
+            });
+        });
+
+        // Keep chips in sync with select
+        targetLang.addEventListener('change', () => {
+            langChips.forEach(c => {
+                c.classList.toggle('active', c.dataset.lang === targetLang.value);
+            });
+        });
+
+        // ── Swap ──
+        swapBtn.addEventListener('click', () => {
+            const srcVal = sourceLang.value === 'auto' ? 'en' : sourceLang.value;
+            const tgtVal = targetLang.value;
+
+            sourceLang.value = tgtVal;
+            targetLang.value = srcVal;
+
+            // Also swap text if translation exists
+            const srcText = sourceText.value;
+            const outText = outputText.value;
+            if (outText) {
+                sourceText.value = outText;
+                outputText.value = srcText;
+                charCountEl.textContent = sourceText.value.length;
+            }
+
+            // Sync chips
+            langChips.forEach(c => {
+                c.classList.toggle('active', c.dataset.lang === targetLang.value);
+            });
+        });
+
+        // ── Translate ──
+        async function translate() {
+            const text = sourceText.value.trim();
+            if (!text) {
+                setStatus('Please enter some text first! ✍️', 'error');
+                return;
+            }
+
+            const src = sourceLang.value;
+            const tgt = targetLang.value;
+
+            if (src !== 'auto' && src === tgt) {
+                setStatus('Source and target languages are the same!', 'error');
+                return;
+            }
+
+            setStatus('Translating… ⏳', 'loading');
+            translateBtn.disabled = true;
+            outputText.value = '';
+
+            try {
+                const langPair = src === 'auto' ? `en|${tgt}` : `${src}|${tgt}`;
+                const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langPair}`;
+                const res = await fetch(url);
+                const data = await res.json();
+
+                if (data.responseStatus === 200) {
+                    outputText.value = data.responseData.translatedText;
+                    setStatus('Translation complete! ✅', 'success');
+                } else {
+                    setStatus('Translation failed. Please try again.', 'error');
+                }
+            } catch (err) {
+                setStatus('Network error — check your connection and try again.', 'error');
+            } finally {
+                translateBtn.disabled = false;
+            }
+        }
+
+        translateBtn.addEventListener('click', translate);
+
+        // Ctrl/Cmd + Enter shortcut
+        sourceText.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') translate();
+        });
+
+        // ── Clear ──
+        clearBtn.addEventListener('click', () => {
+            sourceText.value = '';
+            outputText.value = '';
+            charCountEl.textContent = '0';
+            setStatus('Cleared! Enter new text to translate. ✨', '');
+        });
+
+        // ── Copy ──
+        copyBtn.addEventListener('click', async () => {
+            if (!outputText.value) {
+                setStatus('Nothing to copy yet!', 'error');
+                return;
+            }
+            try {
+                await navigator.clipboard.writeText(outputText.value);
+                setStatus('Copied to clipboard! 📋', 'success');
+            } catch {
+                outputText.select();
+                document.execCommand('copy');
+                setStatus('Copied! 📋', 'success');
+            }
+        });
+
+        // ── Paste ──
+        pasteBtn.addEventListener('click', async () => {
+            try {
+                const text = await navigator.clipboard.readText();
+                sourceText.value = text;
+                charCountEl.textContent = text.length;
+                setStatus('Pasted! Click Translate to continue. ✍️', 'success');
+            } catch {
+                setStatus('Could not access clipboard — please paste manually (Ctrl+V).', 'error');
+            }
+        });
+
+        // ── Text-to-Speech ──
+        function speak(text, langCode) {
+            if (!text) {
+                setStatus('Nothing to speak!', 'error');
+                return;
+            }
+            if (!('speechSynthesis' in window)) {
+                setStatus('Text-to-speech not supported in this browser.', 'error');
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const utt = new SpeechSynthesisUtterance(text);
+            utt.lang = langCode === 'auto' ? 'en' : langCode;
+            window.speechSynthesis.speak(utt);
+            setStatus('Speaking… 🔊', 'loading');
+            utt.onend = () => setStatus('Done speaking ✅', 'success');
+        }
+
+        speakSrcBtn.addEventListener('click', () => speak(sourceText.value, sourceLang.value));
+        speakOutBtn.addEventListener('click', () => speak(outputText.value, targetLang.value));
+
+        // ── Status helper ──
+        function setStatus(msg, type = '') {
+            statusBar.textContent = msg;
+            statusBar.className = 'status-bar ' + type;
+        }
+    </script>
+</body>
+
+</html>
