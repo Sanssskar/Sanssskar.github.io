@@ -53,6 +53,11 @@
     <link rel="stylesheet" href="css/style.css">
     
     <style>
+          /* Breadcrumb */
+        .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-tertiary); margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .breadcrumb a { color: var(--accent-1); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb i { font-size: 0.65rem; }
         /* Header with Logo and Social Links Only */
         .simple-header {
             display: flex;
@@ -557,21 +562,46 @@
         </div>
     </div>
 
-    <div class="container" id="mainContent">
-        <!-- SIMPLE HEADER: Logo + Social Links Only -->
-        <div class="simple-header">
-            <a href="/" style="text-decoration: none;">
-                <div class="logo">SanskarHub ⚔️</div>
-            </a>
-            <div class="top-social-bar">
-                <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i class="fa-regular fa-envelope"></i></a>
-            </div>
+    <div class="container">
+        <!-- TOP SOCIAL BAR -->
+        <div class="top-social-bar fade-up">
+            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i><span class="sr-only">Facebook</span></a>
+            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i><span class="sr-only">Instagram</span></a>
+            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i><span class="sr-only">LinkedIn</span></a>
+            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i class="fa-brands fa-github"></i><span class="sr-only">GitHub</span></a>
+            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i><span class="sr-only">WhatsApp</span></a>
+            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i class="fa-regular fa-envelope"></i><span class="sr-only">Email</span></a>
         </div>
+
+        <!-- NAVBAR -->
+        <div class="main-navbar fade-up">
+            <ul class="nav-links">
+                <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-user"></i> About</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+                <li><a href="projects.html"><i class="fa-solid fa-star"></i> Projects</a></li>
+                <li><a href="blog.html"><i class="fa-solid fa-pen-nib"></i> Blog</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                <li><a href="games.html" class="active"><i class="fa-solid fa-gamepad"></i> Games</a></li>
+            </ul>
+        </div>
+
+        <nav class="nav-bar fade-up">
+            <a style="text-decoration: none;" href="/"><div class="logo">SanskarHub ⚔️</div></a>
+            <div class="nav-controls">
+                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i class="fa-solid fa-users"></i> Our Team</button></a>
+                <button class="glass-btn" id="themeToggle"><i class="fa-regular fa-moon" id="themeIcon"></i></button>
+            </div>
+        </nav>
+
+        <!-- BREADCRUMB — SEO + UX navigation signal -->
+        <nav class="breadcrumb fade-up" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="games.html">Tools &amp; Games</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>Nepali to English Translator</span>
+        </nav>
 
         <!-- MAIN GAME CONTAINER -->
         <div class="game-container">
