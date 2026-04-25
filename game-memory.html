@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>One Piece Memory Match | Sanskar Shrestha Games</title>
-    <meta name="description" content="Play One Piece Memory Match game online for free! Flip cards and match pairs of your favorite Straw Hat Pirates. Test your memory with Luffy, Zoro, Nami and more!">
-    <meta name="keywords" content="one piece memory match, memory game, one piece game, straw hat pirates, card matching game, brain training, memory test">
+    <meta name="description"
+        content="Play One Piece Memory Match game online for free! Flip cards and match pairs of your favorite Straw Hat Pirates. Test your memory with Luffy, Zoro, Nami and more!">
+    <meta name="keywords"
+        content="one piece memory match, memory game, one piece game, straw hat pirates, card matching game, brain training, memory test">
     <meta name="author" content="Sanskar Shrestha">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#2e7d32">
@@ -14,7 +17,8 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="One Piece Memory Match | Play Free Online | Sanskar Shrestha">
-    <meta property="og:description" content="Play One Piece Memory Match game online for free! Flip cards and match pairs of your favorite Straw Hat Pirates.">
+    <meta property="og:description"
+        content="Play One Piece Memory Match game online for free! Flip cards and match pairs of your favorite Straw Hat Pirates.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shresthasanskar.com.np/game-memory.html">
     <meta property="og:image" content="https://shresthasanskar.com.np/images/one-piece-memory-og.jpg">
@@ -34,9 +38,10 @@
     <link rel="manifest" href="/favicon/site.webmanifest">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    
+
     <style>
         /* Header with Logo and Social Links */
         .simple-header {
@@ -48,7 +53,7 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-        
+
         .logo {
             font-size: 2rem;
             font-weight: 700;
@@ -59,7 +64,7 @@
             position: relative;
             text-decoration: none;
         }
-        
+
         .logo::after {
             content: '';
             position: absolute;
@@ -70,14 +75,14 @@
             background: var(--gradient-1);
             border-radius: 2px;
         }
-        
+
         .top-social-bar {
             display: flex;
             align-items: center;
             gap: 1rem;
             flex-wrap: wrap;
         }
-        
+
         .top-social-link {
             display: inline-flex;
             align-items: center;
@@ -92,19 +97,42 @@
             text-decoration: none;
             border: 1px solid var(--border-medium);
         }
-        
+
         .top-social-link:hover {
             transform: translateY(-3px);
             border-color: transparent;
         }
-        
-        .top-social-link[title="Facebook"]:hover { background: #1877f2; color: white; }
-        .top-social-link[title="Instagram"]:hover { background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5); color: white; }
-        .top-social-link[title="LinkedIn"]:hover { background: #0077b5; color: white; }
-        .top-social-link[title="GitHub"]:hover { background: #333; color: white; }
-        .top-social-link[title="WhatsApp"]:hover { background: #25D366; color: white; }
-        .top-social-link[title="Email"]:hover { background: #ea4335; color: white; }
-        
+
+        .top-social-link[title="Facebook"]:hover {
+            background: #1877f2;
+            color: white;
+        }
+
+        .top-social-link[title="Instagram"]:hover {
+            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
+            color: white;
+        }
+
+        .top-social-link[title="LinkedIn"]:hover {
+            background: #0077b5;
+            color: white;
+        }
+
+        .top-social-link[title="GitHub"]:hover {
+            background: #333;
+            color: white;
+        }
+
+        .top-social-link[title="WhatsApp"]:hover {
+            background: #25D366;
+            color: white;
+        }
+
+        .top-social-link[title="Email"]:hover {
+            background: #ea4335;
+            color: white;
+        }
+
         /* Game Container */
         .game-container {
             max-width: 750px;
@@ -115,7 +143,7 @@
             text-align: center;
             border: 1px solid var(--border-medium);
         }
-        
+
         /* Memory Grid - 4x4 */
         .memory-grid {
             display: grid;
@@ -123,7 +151,7 @@
             gap: 1rem;
             margin: 2rem 0;
         }
-        
+
         /* Cards with Images */
         .memory-card {
             background: linear-gradient(135deg, #ff6b35, #f7931e);
@@ -134,34 +162,34 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             position: relative;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             overflow: hidden;
         }
-        
+
         .memory-card:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
         }
-        
+
         .memory-card.flipped {
             background: linear-gradient(135deg, #2e7d32, #4caf50);
             transform: scale(1.02);
         }
-        
+
         .memory-card.matched {
             background: linear-gradient(135deg, #1b5e20, #2e7d32);
             cursor: default;
             opacity: 0.85;
             transform: scale(0.98);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .memory-card.matched:hover {
             transform: scale(0.98);
         }
-        
+
         .card-image {
             width: 85%;
             height: 85%;
@@ -169,19 +197,19 @@
             border-radius: 0.7rem;
             transition: all 0.3s ease;
         }
-        
+
         .card-back {
             font-size: 3rem;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            background: rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
             width: 100%;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
+
         /* Score Board */
         .score-board {
             display: flex;
@@ -192,24 +220,24 @@
             border-radius: 1rem;
             margin: 1rem 0;
         }
-        
+
         .score-item {
             text-align: center;
         }
-        
+
         .score-label {
             font-size: 0.7rem;
             color: var(--text-tertiary);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .score-value {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--accent-1);
         }
-        
+
         .btn-game {
             padding: 0.6rem 1.5rem;
             margin: 0.3rem;
@@ -219,17 +247,17 @@
             transition: all 0.3s;
             border: none;
         }
-        
+
         .btn-primary {
             background: var(--gradient-1);
             color: white;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
+
         /* Other Games Section */
         .other-games-section {
             margin: 3rem 0 2rem;
@@ -238,7 +266,7 @@
             border-radius: 1.5rem;
             border: 1px solid var(--border-medium);
         }
-        
+
         .section-title {
             font-size: 1.3rem;
             font-weight: 700;
@@ -247,20 +275,20 @@
             align-items: center;
             gap: 0.8rem;
         }
-        
+
         .section-title i {
             background: var(--gradient-1);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
+
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
         }
-        
+
         .game-card {
             background: var(--bg-primary);
             border-radius: 1rem;
@@ -273,48 +301,59 @@
             gap: 0.8rem;
             color: var(--text-primary);
         }
-        
+
         .game-card:hover {
             transform: translateY(-3px);
             border-color: var(--accent-1);
             box-shadow: var(--card-shadow);
         }
-        
+
         .game-emoji {
             font-size: 1.8rem;
         }
-        
+
         .game-info {
             flex: 1;
         }
-        
+
         .game-name {
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 0.2rem;
         }
-        
+
         .game-difficulty {
             font-size: 0.6rem;
             padding: 0.15rem 0.4rem;
             border-radius: 20px;
             display: inline-block;
         }
-        
-        .difficulty-easy { background: #4caf50; color: white; }
-        .difficulty-medium { background: #ff9800; color: white; }
-        .difficulty-hard { background: #f44336; color: white; }
-        
+
+        .difficulty-easy {
+            background: #4caf50;
+            color: white;
+        }
+
+        .difficulty-medium {
+            background: #ff9800;
+            color: white;
+        }
+
+        .difficulty-hard {
+            background: #f44336;
+            color: white;
+        }
+
         .game-arrow {
             color: var(--accent-1);
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+
         .game-card:hover .game-arrow {
             opacity: 1;
         }
-        
+
         .footer {
             border-top: 1px solid var(--border-medium);
             padding: 1.5rem 0;
@@ -326,11 +365,23 @@
             color: var(--text-tertiary);
             font-size: 0.9rem;
         }
-        
-        .footer nav { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .footer a { color: var(--text-tertiary); text-decoration: none; transition: color 0.3s; }
-        .footer a:hover { color: var(--accent-1); }
-        
+
+        .footer nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer a {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent-1);
+        }
+
         .btn-back {
             background: var(--gradient-1);
             color: white;
@@ -342,7 +393,7 @@
             gap: 0.5rem;
             margin-top: 1rem;
         }
-        
+
         /* Victory Modal */
         .victory-overlay {
             position: fixed;
@@ -350,14 +401,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(8px);
             z-index: 1000;
             display: none;
             justify-content: center;
             align-items: center;
         }
-        
+
         .victory-card {
             background: var(--bg-secondary);
             border-radius: 2rem;
@@ -366,33 +417,110 @@
             animation: bounceIn 0.5s ease;
             border: 1px solid var(--border-medium);
         }
-        
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-1);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb i {
+            font-size: 0.65rem;
+        }
+
         @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        
+
         @media (max-width: 768px) {
-            .game-container { margin: 1rem; padding: 1rem; }
-            .memory-grid { gap: 0.6rem; }
-            .card-image { width: 80%; height: 80%; }
-            .card-back { font-size: 1.8rem; }
-            .score-value { font-size: 1.2rem; }
-            .simple-header { flex-direction: column; text-align: center; }
-            .logo::after { left: 50%; transform: translateX(-50%); }
-            .top-social-bar { justify-content: center; }
-            .games-grid { grid-template-columns: repeat(2, 1fr); }
+            .game-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .memory-grid {
+                gap: 0.6rem;
+            }
+
+            .card-image {
+                width: 80%;
+                height: 80%;
+            }
+
+            .card-back {
+                font-size: 1.8rem;
+            }
+
+            .score-value {
+                font-size: 1.2rem;
+            }
+
+            .simple-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .top-social-bar {
+                justify-content: center;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-        
+
         @media (max-width: 480px) {
-            .memory-grid { gap: 0.5rem; }
-            .card-image { width: 75%; height: 75%; }
-            .card-back { font-size: 1.4rem; }
-            .games-grid { grid-template-columns: 1fr; }
+            .memory-grid {
+                gap: 0.5rem;
+            }
+
+            .card-image {
+                width: 75%;
+                height: 75%;
+            }
+
+            .card-back {
+                font-size: 1.4rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="loader-wrapper" id="loaderWrapper">
         <div class="loader">
@@ -400,23 +528,24 @@
         </div>
     </div>
 
-    <div class="container" id="mainContent">
-        <!-- SIMPLE HEADER: Logo + Social Links -->
-        <div class="simple-header">
-            <a href="/" style="text-decoration: none;">
-                <div class="logo">SanskarHub ⚔️</div>
-            </a>
-            <div class="top-social-bar">
-                <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i class="fa-regular fa-envelope"></i></a>
-            </div>
+    <div class="container">
+        <!-- TOP SOCIAL BAR -->
+        <div class="top-social-bar fade-up">
+            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i
+                    class="fa-brands fa-facebook-f"></i><span class="sr-only">Facebook</span></a>
+            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i
+                    class="fa-brands fa-instagram"></i><span class="sr-only">Instagram</span></a>
+            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link"
+                title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i><span class="sr-only">LinkedIn</span></a>
+            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i
+                    class="fa-brands fa-github"></i><span class="sr-only">GitHub</span></a>
+            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i
+                    class="fa-brands fa-whatsapp"></i><span class="sr-only">WhatsApp</span></a>
+            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i
+                    class="fa-regular fa-envelope"></i><span class="sr-only">Email</span></a>
         </div>
 
-        <!-- MAIN NAVBAR -->
+        <!-- NAVBAR -->
         <div class="main-navbar fade-up">
             <ul class="nav-links">
                 <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
@@ -429,22 +558,31 @@
             </ul>
         </div>
 
-        <!-- SECONDARY NAV BAR -->
         <nav class="nav-bar fade-up">
             <a style="text-decoration: none;" href="/">
                 <div class="logo">SanskarHub ⚔️</div>
             </a>
             <div class="nav-controls">
-                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i class="fa-solid fa-users"></i> Our Team</button></a>
+                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i
+                            class="fa-solid fa-users"></i> Our Team</button></a>
                 <button class="glass-btn" id="themeToggle"><i class="fa-regular fa-moon" id="themeIcon"></i></button>
             </div>
+        </nav>
+
+        <!-- BREADCRUMB — SEO + UX navigation signal -->
+        <nav class="breadcrumb fade-up" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="games.html">Tools &amp; Games</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>Memory Game</span>
         </nav>
 
         <!-- GAME CONTAINER -->
         <div class="game-container">
             <h1><i class="fa-solid fa-brain"></i> One Piece Memory Match ⚔️</h1>
             <p style="color: var(--text-secondary);">Match the Straw Hat Pirates! 🏴‍☠️</p>
-            
+
             <div class="score-board">
                 <div class="score-item">
                     <div class="score-label">MOVES</div>
@@ -455,13 +593,14 @@
                     <div class="score-value" id="matches">0/8</div>
                 </div>
             </div>
-            
+
             <div class="memory-grid" id="memoryGrid"></div>
-            
+
             <div>
-                <button id="resetBtn" class="btn-game btn-primary"><i class="fa-solid fa-rotate-right"></i> New Game</button>
+                <button id="resetBtn" class="btn-game btn-primary"><i class="fa-solid fa-rotate-right"></i> New
+                    Game</button>
             </div>
-            
+
             <br>
             <a href="games.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Games</a>
         </div>
@@ -481,7 +620,7 @@
                     </div>
                     <div class="game-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </a>
-                
+
                 <a href="game-whackamole.html" target="_blank" class="game-card">
                     <div class="game-emoji">🐭🔨</div>
                     <div class="game-info">
@@ -490,7 +629,7 @@
                     </div>
                     <div class="game-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </a>
-                
+
                 <a href="game-snake.html" target="_blank" class="game-card">
                     <div class="game-emoji">🐍🍎</div>
                     <div class="game-info">
@@ -499,7 +638,7 @@
                     </div>
                     <div class="game-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </a>
-                
+
                 <a href="game-blockpig.html" target="_blank" class="game-card">
                     <div class="game-emoji">🐷🧱</div>
                     <div class="game-info">
@@ -508,7 +647,7 @@
                     </div>
                     <div class="game-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </a>
-                
+
                 <a href="game-piggyrun.html" target="_blank" class="game-card">
                     <div class="game-emoji">🐗🏃</div>
                     <div class="game-info">
@@ -541,10 +680,13 @@
         <div class="victory-card">
             <i class="fa-solid fa-trophy" style="font-size: 3rem; color: #ffd700;"></i>
             <h2>You Won! 🎉</h2>
-            <p>You completed the game in <strong id="finalMoves" style="font-size: 2rem; color: var(--accent-1);">0</strong> moves!</p>
+            <p>You completed the game in <strong id="finalMoves"
+                    style="font-size: 2rem; color: var(--accent-1);">0</strong> moves!</p>
             <p style="font-size: 0.9rem;">🏴‍☠️ The One Piece is real! 🏴‍☠️</p>
             <button id="playAgainBtn" class="btn-game btn-primary"><i class="fa-solid fa-play"></i> Play Again</button>
-            <button id="closeModalBtn" class="btn-game btn-reset" style="background: var(--bg-primary); margin-top: 0.5rem;"><i class="fa-solid fa-times"></i> Close</button>
+            <button id="closeModalBtn" class="btn-game btn-reset"
+                style="background: var(--bg-primary); margin-top: 0.5rem;"><i class="fa-solid fa-times"></i>
+                Close</button>
         </div>
     </div>
 
@@ -571,10 +713,10 @@
             { name: 'Robin', img: 'images/robin.jpg', alt: 'Nico Robin' },
             { name: 'Franky', img: 'images/franky.jpg', alt: 'Franky' }
         ];
-        
+
         // Fallback emojis if images fail to load
         const fallbackEmojis = ['🏴‍☠️', '⚔️', '🗺️', '🎯', '🍳', '🌸', '🎭', '⚙️'];
-        
+
         let cards = [];
         let flippedCards = [];
         let lockedBoard = false;
@@ -615,13 +757,13 @@
                 const isFlipped = flippedCards.includes(index);
                 const isMatched = matchedIndices.includes(index);
                 let additionalClass = '';
-                
+
                 if (isMatched) {
                     additionalClass = 'matched';
                 } else if (isFlipped) {
                     additionalClass = 'flipped';
                 }
-                
+
                 // Show image if flipped or matched, otherwise show question mark
                 let content = '';
                 if (isMatched || isFlipped) {
@@ -629,14 +771,14 @@
                 } else {
                     content = `<div class="card-back">❓</div>`;
                 }
-                
+
                 return `
                     <div class="memory-card ${additionalClass}" data-index="${index}" data-pair-id="${card.pairId}">
                         ${content}
                     </div>
                 `;
             }).join('');
-            
+
             document.querySelectorAll('.memory-card').forEach(card => {
                 if (!card.classList.contains('matched')) {
                     card.addEventListener('click', () => handleCardClick(parseInt(card.dataset.index)));
@@ -649,17 +791,17 @@
             if (flippedCards.includes(index)) return;
             if (flippedCards.length === 2) return;
             if (matchedIndices.includes(index)) return;
-            
+
             flippedCards.push(index);
             moves++;
             document.getElementById('moves').innerText = moves;
             renderBoard();
-            
+
             if (flippedCards.length === 2) {
                 lockedBoard = true;
                 const card1Id = cards[flippedCards[0]].pairId;
                 const card2Id = cards[flippedCards[1]].pairId;
-                
+
                 if (card1Id === card2Id) {
                     // Match found
                     matchedPairs++;
@@ -668,10 +810,10 @@
                     flippedCards = [];
                     lockedBoard = false;
                     renderBoard();
-                    
+
                     // Vibration on match (if supported)
                     if (navigator.vibrate) navigator.vibrate(50);
-                    
+
                     if (matchedPairs === 8) {
                         // Game completed
                         setTimeout(() => {
@@ -701,14 +843,15 @@
         document.getElementById('closeModalBtn').addEventListener('click', () => {
             document.getElementById('victoryModal').style.display = 'none';
         });
-        
+
         // Hide loader
         setTimeout(() => {
             const loader = document.getElementById('loaderWrapper');
             if (loader) loader.style.display = 'none';
         }, 500);
-        
+
         initGame();
     </script>
 </body>
+
 </html>
