@@ -409,7 +409,7 @@
                 </div>
 
                 <div class="status-bar" id="statusBar" role="status" aria-live="polite">
-                    Enter text above and click Translate ✨ &nbsp;|&nbsp; Shortcut: Ctrl + Enter
+                    Start typing — translation happens automatically ✨
                 </div>
 
                 <div class="quick-langs">
@@ -600,18 +600,41 @@
         const charCountEl  = document.getElementById('charCount');
         const langChips    = document.querySelectorAll('.lang-chip');
 
-        sourceText.addEventListener('input', () => { charCountEl.textContent = sourceText.value.length; });
+        // ── Char counter + auto-translate debounce ──
+        let debounceTimer = null;
+        sourceText.addEventListener('input', () => {
+            charCountEl.textContent = sourceText.value.length;
+            scheduleTranslate();
+        });
+
+        function scheduleTranslate() {
+            clearTimeout(debounceTimer);
+            const text = sourceText.value.trim();
+            if (!text) {
+                outputText.value = '';
+                setStatus('Start typing to auto-translate ✨', '');
+                return;
+            }
+            setStatus('Waiting for you to stop typing… ⌛', 'loading');
+            debounceTimer = setTimeout(translate, 800); // 800ms after last keystroke
+        }
 
         langChips.forEach(chip => {
             chip.addEventListener('click', () => {
                 langChips.forEach(c => c.classList.remove('active'));
                 chip.classList.add('active');
                 targetLang.value = chip.dataset.lang;
+                if (sourceText.value.trim()) translate(); // re-translate immediately on lang change
             });
         });
 
         targetLang.addEventListener('change', () => {
             langChips.forEach(c => c.classList.toggle('active', c.dataset.lang === targetLang.value));
+            if (sourceText.value.trim()) translate();
+        });
+
+        sourceLang.addEventListener('change', () => {
+            if (sourceText.value.trim()) translate();
         });
 
         swapBtn.addEventListener('click', () => {
@@ -622,16 +645,17 @@
             const srcText = sourceText.value, outText = outputText.value;
             if (outText) { sourceText.value = outText; outputText.value = srcText; charCountEl.textContent = sourceText.value.length; }
             langChips.forEach(c => c.classList.toggle('active', c.dataset.lang === targetLang.value));
+            if (sourceText.value.trim()) translate();
         });
 
         async function translate() {
+            clearTimeout(debounceTimer);
             const text = sourceText.value.trim();
-            if (!text) { setStatus('Please enter some text first! ✍️', 'error'); return; }
+            if (!text) { outputText.value = ''; setStatus('Start typing to auto-translate ✨', ''); return; }
             const src = sourceLang.value, tgt = targetLang.value;
             if (src !== 'auto' && src === tgt) { setStatus('Source and target languages are the same!', 'error'); return; }
             setStatus('Translating… ⏳', 'loading');
             translateBtn.disabled = true;
-            outputText.value = '';
             try {
                 const langPair = src === 'auto' ? `ne|${tgt}` : `${src}|${tgt}`;
                 const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langPair}`);
@@ -646,8 +670,7 @@
             finally { translateBtn.disabled = false; }
         }
 
-        translateBtn.addEventListener('click', translate);
-        sourceText.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') translate(); });
+        translateBtn.addEventListener('click', translate); // manual button still works
 
         clearBtn.addEventListener('click', () => { sourceText.value = ''; outputText.value = ''; charCountEl.textContent = '0'; setStatus('Cleared! Enter new text to translate. ✨', ''); });
 
@@ -658,7 +681,12 @@
         });
 
         pasteBtn.addEventListener('click', async () => {
-            try { const text = await navigator.clipboard.readText(); sourceText.value = text; charCountEl.textContent = text.length; setStatus('Pasted! Click Translate to continue. ✍️', 'success'); }
+            try {
+                const text = await navigator.clipboard.readText();
+                sourceText.value = text;
+                charCountEl.textContent = text.length;
+                scheduleTranslate();
+            }
             catch { setStatus('Could not access clipboard — please paste manually (Ctrl+V).', 'error'); }
         });
 
