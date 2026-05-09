@@ -1,10 +1,4 @@
-// ============================================
-// main.js — Fixed: no flicker, no phantom scroll
-// ============================================
 
-// ============================================
-// 1. LOADER
-// ============================================
 window.addEventListener('load', () => {
     const loader = document.getElementById('loaderWrapper');
     if (!loader) return;
@@ -15,27 +9,12 @@ window.addEventListener('load', () => {
 });
 
 
-// ============================================
-// 2. SCROLL ANIMATIONS — FLICKER FIX
-//
-// Root causes of old flicker:
-//   a) Elements visible on load were being observed → flash on first tick
-//   b) rootMargin: '-100px' caused elements near fold to flicker in/out
-//   c) Footer children had !important in JS (doesn't work) → kept animating
-//   d) Double-trigger: observer fired AND getBoundingClientRect() ran in same tick
-//
-// Fix strategy:
-//   - Mark elements visible BEFORE attaching observer (no flash)
-//   - Use a single rAF gate so observer doesn't fire until paint settles
-//   - Skip footer/header elements entirely via data attribute
-//   - Use `once: true` equivalent via unobserve after trigger
-// ============================================
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const animatedEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up');
 
-    // ✅ FIX A: Elements already visible on load — mark them IMMEDIATELY,
-    // before the observer is even created, so there's zero flicker.
+   
     animatedEls.forEach(el => {
         // Skip footer descendants entirely
         if (el.closest('footer') || el.closest('header')) {
@@ -52,9 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ✅ FIX B: Observer only runs for elements NOT yet visible
-    // threshold:0.1 (not 0.2) = trigger slightly earlier, less jarring
-    // rootMargin: '0px' — no negative margin that caused in/out flicker
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
@@ -76,8 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // ✅ FIX D: Force footer visible with inline styles (JS !important trick doesn't work)
-    // Use setAttribute style so specificity beats any CSS rule
+ 
     document.querySelectorAll('footer, footer *').forEach(el => {
         el.setAttribute('style', [
             el.getAttribute('style') || '',
@@ -90,11 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ============================================
-// 3. SPARK EFFECT
-// Moved sparks to use fixed positioning to avoid
-// layout reflow that caused scroll jitter
-// ============================================
+
 function createSparks(x, y) {
     for (let i = 0; i < 8; i++) {
         const s = document.createElement('div');
@@ -119,8 +91,7 @@ function createSparks(x, y) {
 
 document.addEventListener('click', (e) => createSparks(e.clientX, e.clientY));
 
-// ✅ FIX: Hover sparks used getBoundingClientRect which forces reflow.
-// Now we use mousemove center coords to avoid forced layout
+
 document.querySelectorAll(
     '.project-card, .skill-bubble, .social-card, .service-card, .blog-card, .preview-card, .blog-preview-card'
 ).forEach(c => {
@@ -130,9 +101,6 @@ document.querySelectorAll(
 });
 
 
-// ============================================
-// 4. DARK MODE TOGGLE
-// ============================================
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 const body = document.body;
@@ -157,9 +125,7 @@ if (themeToggle) {
 }
 
 
-// ============================================
-// 5. FLIP NAME ANIMATION
-// ============================================
+
 const flipName = document.getElementById('flipName');
 if (flipName) {
     flipName.addEventListener('click', (e) => {
@@ -169,9 +135,7 @@ if (flipName) {
 }
 
 
-// ============================================
-// 6. TYPING EFFECT
-// ============================================
+
 const typingElement = document.getElementById('typingName');
 if (typingElement) {
     const words = ['Sanskar', 'संस्कार'];
@@ -200,9 +164,6 @@ if (typingElement) {
 }
 
 
-// ============================================
-// 7. MORPH EFFECT (kept for future use)
-// ============================================
 const morphElement = document.getElementById('morphName');
 if (morphElement) {
     const morphWords = ['Sanskar', 'संस्कार'];
@@ -223,9 +184,6 @@ if (morphElement) {
 }
 
 
-// ============================================
-// 8. SWIPEABLE IMAGE
-// ============================================
 const swipeableShape = document.getElementById('swipeableShape');
 const image1 = document.getElementById('image1');
 const image2 = document.getElementById('image2');
@@ -256,9 +214,7 @@ if (swipeableShape && image1 && image2) {
 }
 
 
-// ============================================
-// 9. MUSIC PLAYER
-// ============================================
+
 const bgMusic = document.getElementById('bg-music');
 const musicIcon = document.getElementById('music-icon');
 const musicText = document.getElementById('music-text');

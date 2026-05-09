@@ -665,7 +665,25 @@
 
     <script src="js/main.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () { const currentPath = window.location.pathname; const currentPage = currentPath.split('/').pop() || '/'; document.querySelectorAll('.nav-links li a').forEach(link => { const linkHref = link.getAttribute('href').split('/').pop(); if (linkHref === currentPage) { link.classList.add('active'); link.setAttribute('aria-current', 'page'); } else { link.classList.remove('active'); link.removeAttribute('aria-current'); } }); });
+       document.addEventListener('DOMContentLoaded', function () {
+    const currentPath = window.location.pathname;
+    const currentPage = (currentPath === '/' || currentPath === '' || currentPath.endsWith('/index.html'))
+      ? '/'
+      : currentPath.split('/').pop();
+
+    document.querySelectorAll('.nav-links li a').forEach(link => {
+      const href = link.getAttribute('href');
+      const linkPage = (href === '/' || href === '' || href === 'index.html') ? '/' : href.split('/').pop();
+
+      if (linkPage === currentPage) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+      }
+    });
+  });
     </script>
 </body>
 
