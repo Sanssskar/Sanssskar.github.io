@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const animatedEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up');
 
-   
+
     animatedEls.forEach(el => {
         // Skip footer descendants entirely
         if (el.closest('footer') || el.closest('header')) {
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
- 
+
     document.querySelectorAll('footer, footer *').forEach(el => {
         el.setAttribute('style', [
             el.getAttribute('style') || '',
@@ -227,9 +227,27 @@ window.toggleMusic = function () {
         if (musicIcon) musicIcon.classList.replace('fa-pause', 'fa-play');
         if (musicText) musicText.textContent = 'Play';
     } else {
-        bgMusic.play().catch(() => {});
+        bgMusic.play().catch(() => { });
         if (musicIcon) musicIcon.classList.replace('fa-play', 'fa-pause');
         if (musicText) musicText.textContent = 'Pause';
     }
     isPlaying = !isPlaying;
 };
+// Dropdown toggle
+document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+
+    toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = dropdown.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+            toggle.setAttribute('aria-expanded', false);
+        }
+    });
+});
