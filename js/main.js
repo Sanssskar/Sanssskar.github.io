@@ -234,20 +234,52 @@ window.toggleMusic = function () {
     isPlaying = !isPlaying;
 };
 // Dropdown toggle
+// ── Dropdown Portal Fix ──
 document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
     const toggle = dropdown.querySelector('.dropdown-toggle');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    if (!toggle || !menu) return;
+
+    // Move menu to body so backdrop-filter stacking context can't trap it
+    document.body.appendChild(menu);
+    menu.style.position = 'fixed';
+
+    function positionMenu() {
+        const rect = toggle.getBoundingClientRect();
+        const menuWidth = menu.offsetWidth || 155;
+        let left = rect.left + rect.width / 2 - menuWidth / 2;
+        // keep inside viewport
+        if (left < 8) left = 8;
+        if (left + menuWidth > window.innerWidth - 8) left = window.innerWidth - menuWidth - 8;
+        menu.style.top = (rect.bottom + 8) + 'px';
+        menu.style.left = left + 'px';
+    }
 
     toggle.addEventListener('click', (e) => {
         e.preventDefault();
-        const isOpen = dropdown.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', isOpen);
+        e.stopPropagation();
+        const isOpen = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        if (isOpen) positionMenu();
     });
 
-    // Close when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!dropdown.contains(e.target)) {
-            dropdown.classList.remove('open');
-            toggle.setAttribute('aria-expanded', false);
+    // Reposition on scroll/resize
+    window.addEventListener('scroll', () => {
+        if (menu.classList.contains('open')) positionMenu();
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+        if (menu.classList.contains('open')) positionMenu();
+    });
+});
+
+// Close on outside click
+document.addEventListener('click', (e) => {
+    document.querySelectorAll('.dropdown-menu.open').forEach(menu => {
+        if (!menu.contains(e.target) && !e.target.closest('.nav-dropdown')) {
+            menu.classList.remove('open');
+            const toggle = document.querySelector('.dropdown-toggle[aria-expanded="true"]');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
         }
     });
 });
