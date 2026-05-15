@@ -586,7 +586,9 @@
     transform: translateX(3px)
 }
 
-@media(max-width:1024px) {
+/* ── Responsive ── */
+
+@media (max-width:1024px) {
     .hero {
         gap: 2rem
     }
@@ -621,7 +623,7 @@
     }
 }
 
-@media(max-width:768px) {
+@media (max-width:768px) {
     .hero {
         flex-direction: column-reverse;
         text-align: center;
@@ -667,11 +669,6 @@
     .hero-tagline {
         justify-content: center;
         font-size: 1.1rem
-    }
-
-    .btn {
-        padding: .6rem 1.2rem;
-        font-size: .85rem
     }
 
     .about-section {
@@ -788,7 +785,7 @@
     }
 }
 
-@media(max-width:550px) {
+@media (max-width:550px) {
     .about-highlights {
         grid-template-columns: 1fr;
         gap: .8rem
@@ -799,7 +796,7 @@
     }
 }
 
-@media(max-width:480px) {
+@media (max-width:480px) {
 
     .name-title,
     .flip-front,
@@ -817,15 +814,6 @@
         font-size: .85rem
     }
 
-    .btn {
-        padding: .5rem 1rem;
-        font-size: .8rem
-    }
-
-    .section-title {
-        font-size: 1.3rem
-    }
-
     .about-header h2 {
         font-size: 1.3rem
     }
@@ -833,28 +821,6 @@
     .about-text p {
         font-size: .85rem
     }
-
-    .quick-card {
-        padding: .7rem .8rem;
-        flex-direction: column;
-        text-align: center
-    }
-
-    .quick-icon {
-        width: 35px;
-        height: 35px;
-        margin-bottom: .5rem
-    }
-
-    .quick-info h3 {
-        font-size: .85rem
-    }
-
-    .quick-link {
-        font-size: .7rem;
-        margin-top: .5rem
-    }
-
     .preview-img {
         height: 140px
     }
