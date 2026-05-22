@@ -180,13 +180,22 @@
             margin-bottom: 1rem;
         }
 
+        /* ── UPDATED: Gradient background, white text, no border ── */
         .project-tag {
-            background: var(--bg-primary);
-            padding: 0.3rem 0.8rem;
+            background: var(--gradient-1);
+            color: #fff;
+            border: none;
+            padding: 0.25rem 0.8rem;
             border-radius: 50px;
             font-size: 0.75rem;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-light);
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .project-tag:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 12px rgba(46, 125, 50, 0.3);
         }
 
         /* Project Actions - Share Buttons */
@@ -538,7 +547,7 @@
             <p style="color: var(--text-secondary);">Crafting production-ready systems ⚔️</p>
         </div>
 
-        <!-- Projects Grid with Share Buttons -->A
+        <!-- Projects Grid with Share Buttons -->
         <div class="projects-grid">
 
             <!-- Project 1: Home Link Services -->
