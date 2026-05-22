@@ -927,4 +927,7 @@ button {
 .dropdown-menu li a.active {
     background: var(--gradient-1);
     color: #fff;
+}.btn-outline:has(.fa-file-arrow-down) {
+    border-color: var(--accent-1);
+    color: var(--accent-1);
 }
