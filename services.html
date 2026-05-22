@@ -375,17 +375,36 @@
             margin-right: 0.3rem;
         }
 
-        /* ── Design Credit ── */
+        /* ── Improved Design Credit ── */
+        .design-credit-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0 1rem;
+        }
+
         .design-credit {
-            text-align: center;
-            margin: 1.5rem 0 0.5rem;
-            font-size: 0.85rem;
-            color: var(--text-tertiary);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            border-left: 4px solid var(--accent-1);
+            border-radius: 1rem;
+            padding: 1rem 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: var(--card-shadow);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            max-width: 90%;
+        }
+
+        .design-credit i {
+            font-size: 1.5rem;
+            color: var(--accent-1);
         }
 
         .design-credit a {
             color: var(--accent-1);
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
             transition: color 0.2s;
         }
@@ -466,6 +485,11 @@
             .pricing-note {
                 padding: 1rem 1.2rem;
                 border-radius: 1rem;
+            }
+
+            .design-credit {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -611,12 +635,13 @@
                 business in one dashboard to handling thousands of users, I've got you covered.</p>
         </div>
 
+       
         <!-- ROW 1: Custom Admin Panels  -->
-      
+       
         <div class="service-row fade-up" id="admin-panels">
             <div class="poster-side">
                 <span class="poster-badge">Most Popular</span>
-                <img src="images/posters/custom.webp"
+                <img src="images/posters/customdash.webp"
                 alt="Custom Admin Panels by Sanskar Shrestha — Laravel & Filament PHP dashboards"
                 loading="lazy"
                 onerror="this.style.display='none';this.parentElement.style.background='var(--gradient-1)';this.parentElement.innerHTML+='<i class=\'fa-solid fa-chalkboard-user\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\'></i>';">
@@ -625,7 +650,7 @@
             <div class="content-side">
                 <span class="row-number">01</span>
                 <div class="category-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-                <h3>Custom Dashborad & Panels</h3>
+                <h3>Custom Admin Panels</h3>
                 <p class="service-desc">I build clean, powerful admin dashboards to manage your entire business — sales,
                     customers, inventory, and team — all in one place. My specialty.</p>
                 <ul class="feature-list">
@@ -647,7 +672,9 @@
 
         <hr class="row-divider fade-up">
 
-        <!-- ROW 2: Custom Web Applications -->
+       
+        <!-- ROW 2: Custom Web Applications-->
+       
         <div class="service-row alt fade-up" id="web-apps">
             <div class="poster-side">
                 <span class="poster-badge">High Value</span>
@@ -683,7 +710,9 @@
 
         <hr class="row-divider fade-up">
 
+       
         <!-- ROW 3: Full Stack Web Development  -->
+       
         <div class="service-row fade-up" id="fullstack">
             <div class="poster-side">
                 <span class="poster-badge">SEO Optimized</span>
@@ -719,8 +748,9 @@
 
         <hr class="row-divider fade-up">
 
-        
-        <!-- ROW 4: API Development -->
+       
+        <!-- ROW 4: API Development-->
+       
         <div class="service-row alt fade-up" id="api-dev">
             <div class="poster-side">
                 <span class="poster-badge">Backend Power</span>
@@ -753,9 +783,9 @@
 
         <hr class="row-divider fade-up">
 
-        
+       
         <!-- ROW 5: Auth & User Systems  -->
-        
+       
         <div class="service-row fade-up" id="auth-systems">
             <div class="poster-side">
                 <span class="poster-badge">Secure</span>
@@ -788,9 +818,9 @@
 
         <hr class="row-divider fade-up">
 
-        
-        <!-- ROW 6: CMS & Blog Systems -->
-        
+       
+        <!-- ROW 6: CMS & Blog Systems-->
+       
         <div class="service-row alt fade-up" id="cms-blog">
             <div class="poster-side">
                 <span class="poster-badge">Custom Built</span>
@@ -821,9 +851,9 @@
 
         <hr class="row-divider fade-up">
 
-        
+       
         <!-- ROW 7: Maintenance & Optimization  -->
-        
+       
         <div class="service-row fade-up" id="maintenance">
             <div class="poster-side">
                 <span class="poster-badge">Ongoing Support</span>
@@ -856,9 +886,9 @@
 
         <hr class="row-divider fade-up">
 
-        
-        <!-- ROW 8: SEO Optimization (formerly Database) -->
-        
+       
+        <!-- ROW 8: SEO Optimization-->
+       
         <div class="service-row alt fade-up" id="seo-optimization">
             <div class="poster-side">
                 <span class="poster-badge">Rank Higher</span>
@@ -896,9 +926,12 @@
                 class="btn btn-primary" style="padding: 0.55rem 1.3rem; font-size: 0.82rem;">Get a Quote →</a>
         </div>
 
-        <!-- DESIGN CREDIT -->
-        <div class="design-credit fade-up">
-            <p>🎨 Poster designs by <a href="https://sudamhub.com/services" target="_blank">SudamHub Team</a> — Need graphic design? Order at sudamhub.com/services</p>
+        <!-- DESIGN CREDIT (improved) -->
+        <div class="design-credit-wrapper fade-up">
+            <div class="design-credit">
+                <i class="fa-solid fa-paintbrush"></i>
+                <span>🎨 Poster designs by <a href="https://sudamhub.com/services" target="_blank">SudamHub Team</a> — Need graphic design? Order at sudamhub.com/services</span>
+            </div>
         </div>
 
         <!-- CONTACT SECTION -->
