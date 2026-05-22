@@ -29,7 +29,6 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://shresthasanskar.com.np">
 
-    <!-- ✅ NEW: Preload critical CSS for faster LCP -->
     <link rel="preload" href="css/style.css" as="style">
     <link rel="preload" href="css/index.css" as="style">
 
@@ -69,9 +68,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
 
-    <!-- ──────────────────────────────── -->
-    <!--  ADDED: Tag background to match site colors -->
-    <!-- ──────────────────────────────── -->
     <style>
         .preview-tag {
             background: var(--gradient-1);
@@ -87,6 +83,21 @@
         .preview-tag:hover {
             transform: translateY(-1px);
             box-shadow: 0 3px 12px rgba(46,125,50,0.3);
+        }
+
+        /* ── Service preview cards (same as project cards) ── */
+        .services-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .services-preview {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
         }
     </style>
 
@@ -218,7 +229,7 @@
 
     <div class="container" id="mainContent">
 
-              <div class="top-social-bar fade-up">
+        <div class="top-social-bar fade-up">
             <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -264,7 +275,6 @@
                 </button>
             </div>
         </div>
-
 
         <div class="hero">
             <div class="hero-content fade-left">
@@ -332,7 +342,6 @@
             </div>
         </div>
 
-
         <section id="about" aria-labelledby="about-heading">
             <div class="about-section scale-up">
                 <div class="about-header">
@@ -383,9 +392,8 @@
             </div>
         </section>
 
-
         <!-- ============================================
-             LATEST PROJECTS – ONLY HZN CAPITAL & PRASAR STUDIO
+             LATEST PROJECTS – HZN CAPITAL & PRASAR STUDIO
         ============================================ -->
         <section class="latest-projects fade-up" aria-labelledby="projects-heading">
             <h2 id="projects-heading" class="section-title">
@@ -435,6 +443,59 @@
             <div style="text-align: center; margin-top: 1rem;">
                 <a href="projects.html" class="btn btn-primary">
                     View All Projects <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SERVICES – Two cards same style as projects
+        ============================================ -->
+        <section id="services" class="fade-up" aria-labelledby="services-heading">
+            <h2 id="services-heading" class="section-title">
+                <i class="fa-solid fa-briefcase" aria-hidden="true"></i> Services I Offer ⚔️
+            </h2>
+            <div class="services-preview">
+
+                <!-- Fullstack Development -->
+                <article class="preview-card scale-up">
+                    <img class="preview-img" src="images/posters/fullstack.webp"
+                        alt="Fullstack Web Development — Laravel, Tailwind CSS, responsive websites" loading="lazy" width="400" height="180">
+                    <div class="preview-content">
+                        <h3 class="preview-title">Fullstack Development</h3>
+                        <p class="preview-desc">Complete web solutions from backend to frontend. Laravel-powered applications with responsive Tailwind CSS interfaces — fast, SEO-friendly, and built to scale.</p>
+                        <div class="preview-tags">
+                            <span class="preview-tag">Laravel</span>
+                            <span class="preview-tag">Tailwind CSS</span>
+                            <span class="preview-tag">SEO</span>
+                        </div>
+                        <a href="services.html" class="preview-link">
+                            Learn More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Custom Web Applications -->
+                <article class="preview-card scale-up">
+                    <img class="preview-img" src="images/posters/personalport.webp"
+                        alt="Custom Web Applications — Booking systems, LMS, SaaS platforms" loading="lazy" width="400" height="180">
+                    <div class="preview-content">
+                        <h3 class="preview-title">Custom Web Applications</h3>
+                        <p class="preview-desc">Tailor-made web apps built from scratch. Booking systems, e-learning platforms, job portals, SaaS products — if you can dream it, I can build it.</p>
+                        <div class="preview-tags">
+                            <span class="preview-tag">REST API</span>
+                            <span class="preview-tag">MySQL</span>
+                            <span class="preview-tag">Scalable</span>
+                        </div>
+                        <a href="services.html" class="preview-link">
+                            Learn More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="services.html" class="btn btn-primary">
+                    View All Services <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
             </div>
         </section>
@@ -494,37 +555,6 @@
             <div style="text-align: center; margin-top: 1rem;">
                 <a href="blog.html" class="btn btn-primary">
                     View All Articles <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
-        </section>
-
-        <!-- ============================================
-             SERVICES
-        ============================================ -->
-        <section id="services" aria-labelledby="services-heading">
-            <h2 id="services-heading" class="section-title fade-up">
-                <i class="fa-solid fa-briefcase" aria-hidden="true"></i> Services I Offer ⚔️
-            </h2>
-            <div class="services-grid">
-                <div class="service-card scale-up">
-                    <div class="service-icon" aria-hidden="true"><i class="fa-brands fa-laravel"></i></div>
-                    <h3>Laravel Web Applications</h3>
-                    <p>Custom, scalable web apps with full backend logic.</p>
-                </div>
-                <div class="service-card scale-up">
-                    <div class="service-icon" aria-hidden="true"><i class="fa-solid fa-table-columns"></i></div>
-                    <h3>Filament Admin Panels</h3>
-                    <p>Modern admin dashboards with custom resources.</p>
-                </div>
-                <div class="service-card scale-up">
-                    <div class="service-icon" aria-hidden="true"><i class="fa-solid fa-plug"></i></div>
-                    <h3>REST API Development</h3>
-                    <p>Clean, documented REST APIs for mobile apps.</p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 1rem;">
-                <a href="services.html" class="btn btn-primary">
-                    View All Services <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
             </div>
         </section>
