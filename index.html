@@ -69,6 +69,27 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
 
+    <!-- ──────────────────────────────── -->
+    <!--  ADDED: Tag background to match site colors -->
+    <!-- ──────────────────────────────── -->
+    <style>
+        .preview-tag {
+            background: var(--gradient-1);
+            color: #fff;
+            border: none;
+            padding: 0.25rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .preview-tag:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 12px rgba(46,125,50,0.3);
+        }
+    </style>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -363,47 +384,53 @@
         </section>
 
 
+        <!-- ============================================
+             LATEST PROJECTS – ONLY HZN CAPITAL & PRASAR STUDIO
+        ============================================ -->
         <section class="latest-projects fade-up" aria-labelledby="projects-heading">
             <h2 id="projects-heading" class="section-title">
                 <i class="fa-solid fa-star" aria-hidden="true"></i> Latest Projects ⚔️
             </h2>
             <div class="projects-preview">
+
+                <!-- Hzn Capital -->
                 <article class="preview-card scale-up">
-                    <img class="preview-img" src="images/sudamhub.png"
-                        alt="SudamHub team website built with Laravel Filament PHP and Tailwind CSS" loading="lazy"
-                        width="400" height="180">
+                    <img class="preview-img" src="images/hzn.png"
+                        alt="Hzn Capital shareholder portal and admin panel" loading="lazy" width="400"
+                        height="180">
                     <div class="preview-content">
-                        <h3 class="preview-title">SudamHub</h3>
-                        <p class="preview-desc">Dynamic team website featuring blogs, team profiles, and project
-                            showcases using Laravel Filament, HTML, Tailwind CSS, and JavaScript.</p>
+                        <h3 class="preview-title">Hzn Capital</h3>
+                        <p class="preview-desc">Built a complete shareholder portal and admin panel with a team. Every functionality for managing shareholders and operations was implemented.</p>
                         <div class="preview-tags">
                             <span class="preview-tag">Laravel</span>
                             <span class="preview-tag">Filament</span>
-                            <span class="preview-tag">Tailwind</span>
+                            <span class="preview-tag">Admin Panel</span>
                         </div>
-                        <a href="https://sudamhub.com/" target="_blank" rel="noopener noreferrer" class="preview-link">
+                        <a href="https://hzncapital.com/" target="_blank" rel="noopener noreferrer" class="preview-link">
                             View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </article>
+
+                <!-- Prasar Studio -->
                 <article class="preview-card scale-up">
-                    <img class="preview-img" src="images/studentport.png"
-                        alt="Student Portal API for CODE IT built with Laravel REST API" loading="lazy" width="400"
+                    <img class="preview-img" src="images/prasar.png"
+                        alt="Prasar Studio website design and development" loading="lazy" width="400"
                         height="180">
                     <div class="preview-content">
-                        <h3 class="preview-title">Student Portal API</h3>
-                        <p class="preview-desc">Student portal API for CODE IT allowing students to log in, access paid
-                            course videos, purchase courses, and receive certificates via email.</p>
+                        <h3 class="preview-title">Prasar Studio</h3>
+                        <p class="preview-desc">Designed and developed a clean, modern website for Prasar Studio with a focus on simplicity, aesthetics, and responsive design.</p>
                         <div class="preview-tags">
-                            <span class="preview-tag">Laravel</span>
-                            <span class="preview-tag">REST API</span>
-                            <span class="preview-tag">Postman</span>
+                            <span class="preview-tag">Tailwind CSS</span>
+                            <span class="preview-tag">JavaScript</span>
+                            <span class="preview-tag">Web Design</span>
                         </div>
-                        <a href="projects.html" class="preview-link">
+                        <a href="https://prasarstudio.com/" target="_blank" rel="noopener noreferrer" class="preview-link">
                             View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </article>
+
             </div>
             <div style="text-align: center; margin-top: 1rem;">
                 <a href="projects.html" class="btn btn-primary">
