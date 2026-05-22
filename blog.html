@@ -123,53 +123,175 @@
         <section class="seo-blog-index" aria-hidden="true">
             <h2>All Blog Articles by Sanskar Shrestha</h2>
             <ul>
-                <li><h3>PHP 8.4 + Laravel 13: What Property Hooks Mean for Your Eloquent Models</h3><p>PHP 8.4 property hooks are now usable in Laravel 13 projects. I refactored three client models and cut boilerplate by 40%. Here's a practical guide.</p></li>
-                <li><h3>Filament v5.3: What's New and Is It Worth Upgrading?</h3><p>Filament v5.3 shipped in May 2026 with inline relation managers, improved Repeater performance, and a new SpatieMediaLibrary v11 plugin. Full breakdown.</p></li>
-                <li><h3>How I Use Claude AI and GPT-4o Together in My Laravel Workflow</h3><p>I use Claude for architecture reviews and long-context reasoning, GPT-4o for quick code generation. Here's my exact dual-AI workflow as a solo Laravel developer.</p></li>
-                <li><h3>Getting Your First International Client as a Nepali Developer (2026 Guide)</h3><p>How I landed my first USD-paying client — the portfolio moves, the platforms, the rate negotiation, and what Nepali developers get wrong when pitching internationally.</p></li>
-                <li><h3>Laravel 13 Is Out: What Every Nepal Developer Needs to Know</h3><p>Laravel 13 dropped on March 17, 2026 with the AI SDK stable, passkeys, PHP 8.3 required, and zero breaking changes. Here's my full breakdown.</p></li>
-                <li><h3>Filament v5 vs v4: Should You Upgrade Your Admin Panels?</h3><p>Filament v5 launched January 16, 2026 with Livewire v4 support. No new features — but Livewire Islands and async actions make it worth upgrading.</p></li>
-                <li><h3>Filament v5.2: Callout Components, Stacked Tables & Deferred Filters</h3><p>Filament v5.2 shipped in February 2026 with a new Callout form component, mobile stacked table rows, and deferred chart filters. Here's how to use them.</p></li>
-                <li><h3>Using the Laravel 13 AI SDK: My First Real Project</h3><p>The Laravel AI SDK went stable with Laravel 13. I built an AI-powered student report generator using it. Here's the full breakdown — code, gotchas, and performance.</p></li>
-                <li><h3>Passkeys in Laravel 13: How to Replace Passwords in Your App</h3><p>Laravel 13 ships native passkey support via Fortify and starter kits. I integrated it into an existing client project. Here's how it went.</p></li>
-                <li><h3>AI-Powered Development in 2026: How I Use AI Tools in My Laravel Workflow</h3><p>My real workflow using AI models for code reviews, Filament resources, smoke tests, and DB schemas. What works and what still trips them up.</p></li>
-                <li><h3>How to Deploy Laravel on a VPS: Step-by-Step Guide for Nepali Developers</h3><p>Stop paying for expensive shared hosting. Learn to deploy Laravel on VPS with proper security, SSL, and performance optimization.</p></li>
-                <li><h3>Building a SaaS Product with Laravel: Lessons from Building 3 SaaS Platforms</h3><p>Real lessons on subscriptions, multi-tenancy, payment handling (eSewa/Khalti/Stripe), and scaling user growth from building 3 actual SaaS products.</p></li>
-                <li><h3>How to Price Your Web Development Services in Nepal (2026 Guide)</h3><p>Nepali clients are price-sensitive. Here's my pricing framework, negotiation tips, and payment structures.</p></li>
-                <li><h3>How I Built a Student Portal Using Laravel & Filament (Full Breakdown)</h3><p>From student registration to fee tracking and certificate generation — exactly how I built a complete student management system. Mistakes included.</p></li>
-                <li><h3>Why I Use Filament for Every Admin Panel (It Cut My Dev Time by 60%)</h3><p>Struggling with admin dashboards? Filament changed everything. Real examples from actual client projects.</p></li>
-                <li><h3>Laravel vs WordPress: Which One Should You Choose in 2026?</h3><p>Stop guessing. A practical guide on when to use Laravel and when WordPress makes sense. Based on real client projects.</p></li>
-                <li><h3>Step-by-Step Guide: Building an Admin Dashboard with Filament in 1 Hour</h3><p>No theory. A practical walkthrough of building a working admin dashboard with user management, roles, and permissions.</p></li>
-                <li><h3>Top 10 Laravel Tips That Actually Saved My Ass (Not Just Tutorial Stuff)</h3><p>Real tips from 2+ years of Laravel development — database optimization, queue handling, debugging tricks.</p></li>
-                <li><h3>5 UI Mistakes That Make Your Website Look Unprofessional</h3><p>I see these mistakes everywhere — even on sites built by agencies. Here's what makes people click away and how to fix it.</p></li>
-                <li><h3>How Good UI/UX Can Increase Your Business Sales (Real Examples)</h3><p>A clean, easy-to-use interface directly affects your bottom line. Here's how design impacts conversion rates.</p></li>
-                <li><h3>Why Simplicity Wins in Web Design (And Clients Love It)</h3><p>Overcomplicating things doesn't impress clients. Here's why simple, clean designs actually work better.</p></li>
-                <li><h3>How to Make Your Website Rank on Google (Beginner Guide)</h3><p>No SEO jargon. Practical steps you can take today to get your business website seen on Google.</p></li>
-                <li><h3>10 Simple SEO Tips for Small Business Websites</h3><p>You don't need to be an SEO expert. Here are 10 things you can do yourself that make a real difference.</p></li>
-                <li><h3>Why Your Website is Slow (And How to Fix It)</h3><p>Slow websites kill conversions. How I diagnose and fix performance issues in Laravel apps.</p></li>
-                <li><h3>Why Most Websites Fail (And How to Avoid It)</h3><p>So many websites look nice but don't actually do anything for the business. Here's what actually makes a website work.</p></li>
-                <li><h3>Common Mistakes I Made as a Developer (So You Don't Have To)</h3><p>From underquoting projects to overcomplicating solutions — lessons learned the hard way.</p></li>
-                <li><h3>What Every Business Needs Before Building a Website</h3><p>Before hiring a developer, here are 5 things you should figure out first. Saves time, money, and headaches later.</p></li>
-                <li><h3>Behind the Scenes: Building a Student Portal API from Scratch</h3><p>A detailed breakdown of building the Student Portal API — challenges, tech decisions, and what I'd do differently.</p></li>
-                <li><h3>How I Built SudamHub (Full Project Breakdown)</h3><p>From idea to deployment — building SudamHub using Laravel Filament.</p></li>
-                <li><h3>From Idea to Deployment: My Complete Web Development Process</h3><p>How I take a client from 'I have an idea' to a live, working application.</p></li>
+                <li>
+                    <h3>PHP 8.4 + Laravel 13: What Property Hooks Mean for Your Eloquent Models</h3>
+                    <p>PHP 8.4 property hooks are now usable in Laravel 13 projects. I refactored three client models
+                        and cut boilerplate by 40%. Here's a practical guide.</p>
+                </li>
+                <li>
+                    <h3>Filament v5.3: What's New and Is It Worth Upgrading?</h3>
+                    <p>Filament v5.3 shipped in May 2026 with inline relation managers, improved Repeater performance,
+                        and a new SpatieMediaLibrary v11 plugin. Full breakdown.</p>
+                </li>
+                <li>
+                    <h3>How I Use Claude AI and GPT-4o Together in My Laravel Workflow</h3>
+                    <p>I use Claude for architecture reviews and long-context reasoning, GPT-4o for quick code
+                        generation. Here's my exact dual-AI workflow as a solo Laravel developer.</p>
+                </li>
+                <li>
+                    <h3>Getting Your First International Client as a Nepali Developer (2026 Guide)</h3>
+                    <p>How I landed my first USD-paying client — the portfolio moves, the platforms, the rate
+                        negotiation, and what Nepali developers get wrong when pitching internationally.</p>
+                </li>
+                <li>
+                    <h3>Laravel 13 Is Out: What Every Nepal Developer Needs to Know</h3>
+                    <p>Laravel 13 dropped on March 17, 2026 with the AI SDK stable, passkeys, PHP 8.3 required, and zero
+                        breaking changes. Here's my full breakdown.</p>
+                </li>
+                <li>
+                    <h3>Filament v5 vs v4: Should You Upgrade Your Admin Panels?</h3>
+                    <p>Filament v5 launched January 16, 2026 with Livewire v4 support. No new features — but Livewire
+                        Islands and async actions make it worth upgrading.</p>
+                </li>
+                <li>
+                    <h3>Filament v5.2: Callout Components, Stacked Tables & Deferred Filters</h3>
+                    <p>Filament v5.2 shipped in February 2026 with a new Callout form component, mobile stacked table
+                        rows, and deferred chart filters. Here's how to use them.</p>
+                </li>
+                <li>
+                    <h3>Using the Laravel 13 AI SDK: My First Real Project</h3>
+                    <p>The Laravel AI SDK went stable with Laravel 13. I built an AI-powered student report generator
+                        using it. Here's the full breakdown — code, gotchas, and performance.</p>
+                </li>
+                <li>
+                    <h3>Passkeys in Laravel 13: How to Replace Passwords in Your App</h3>
+                    <p>Laravel 13 ships native passkey support via Fortify and starter kits. I integrated it into an
+                        existing client project. Here's how it went.</p>
+                </li>
+                <li>
+                    <h3>AI-Powered Development in 2026: How I Use AI Tools in My Laravel Workflow</h3>
+                    <p>My real workflow using AI models for code reviews, Filament resources, smoke tests, and DB
+                        schemas. What works and what still trips them up.</p>
+                </li>
+                <li>
+                    <h3>How to Deploy Laravel on a VPS: Step-by-Step Guide for Nepali Developers</h3>
+                    <p>Stop paying for expensive shared hosting. Learn to deploy Laravel on VPS with proper security,
+                        SSL, and performance optimization.</p>
+                </li>
+                <li>
+                    <h3>Building a SaaS Product with Laravel: Lessons from Building 3 SaaS Platforms</h3>
+                    <p>Real lessons on subscriptions, multi-tenancy, payment handling (eSewa/Khalti/Stripe), and scaling
+                        user growth from building 3 actual SaaS products.</p>
+                </li>
+                <li>
+                    <h3>How to Price Your Web Development Services in Nepal (2026 Guide)</h3>
+                    <p>Nepali clients are price-sensitive. Here's my pricing framework, negotiation tips, and payment
+                        structures.</p>
+                </li>
+                <li>
+                    <h3>How I Built a Student Portal Using Laravel & Filament (Full Breakdown)</h3>
+                    <p>From student registration to fee tracking and certificate generation — exactly how I built a
+                        complete student management system. Mistakes included.</p>
+                </li>
+                <li>
+                    <h3>Why I Use Filament for Every Admin Panel (It Cut My Dev Time by 60%)</h3>
+                    <p>Struggling with admin dashboards? Filament changed everything. Real examples from actual client
+                        projects.</p>
+                </li>
+                <li>
+                    <h3>Laravel vs WordPress: Which One Should You Choose in 2026?</h3>
+                    <p>Stop guessing. A practical guide on when to use Laravel and when WordPress makes sense. Based on
+                        real client projects.</p>
+                </li>
+                <li>
+                    <h3>Step-by-Step Guide: Building an Admin Dashboard with Filament in 1 Hour</h3>
+                    <p>No theory. A practical walkthrough of building a working admin dashboard with user management,
+                        roles, and permissions.</p>
+                </li>
+                <li>
+                    <h3>Top 10 Laravel Tips That Actually Saved My Ass (Not Just Tutorial Stuff)</h3>
+                    <p>Real tips from 2+ years of Laravel development — database optimization, queue handling, debugging
+                        tricks.</p>
+                </li>
+                <li>
+                    <h3>5 UI Mistakes That Make Your Website Look Unprofessional</h3>
+                    <p>I see these mistakes everywhere — even on sites built by agencies. Here's what makes people click
+                        away and how to fix it.</p>
+                </li>
+                <li>
+                    <h3>How Good UI/UX Can Increase Your Business Sales (Real Examples)</h3>
+                    <p>A clean, easy-to-use interface directly affects your bottom line. Here's how design impacts
+                        conversion rates.</p>
+                </li>
+                <li>
+                    <h3>Why Simplicity Wins in Web Design (And Clients Love It)</h3>
+                    <p>Overcomplicating things doesn't impress clients. Here's why simple, clean designs actually work
+                        better.</p>
+                </li>
+                <li>
+                    <h3>How to Make Your Website Rank on Google (Beginner Guide)</h3>
+                    <p>No SEO jargon. Practical steps you can take today to get your business website seen on Google.
+                    </p>
+                </li>
+                <li>
+                    <h3>10 Simple SEO Tips for Small Business Websites</h3>
+                    <p>You don't need to be an SEO expert. Here are 10 things you can do yourself that make a real
+                        difference.</p>
+                </li>
+                <li>
+                    <h3>Why Your Website is Slow (And How to Fix It)</h3>
+                    <p>Slow websites kill conversions. How I diagnose and fix performance issues in Laravel apps.</p>
+                </li>
+                <li>
+                    <h3>Why Most Websites Fail (And How to Avoid It)</h3>
+                    <p>So many websites look nice but don't actually do anything for the business. Here's what actually
+                        makes a website work.</p>
+                </li>
+                <li>
+                    <h3>Common Mistakes I Made as a Developer (So You Don't Have To)</h3>
+                    <p>From underquoting projects to overcomplicating solutions — lessons learned the hard way.</p>
+                </li>
+                <li>
+                    <h3>What Every Business Needs Before Building a Website</h3>
+                    <p>Before hiring a developer, here are 5 things you should figure out first. Saves time, money, and
+                        headaches later.</p>
+                </li>
+                <li>
+                    <h3>Behind the Scenes: Building a Student Portal API from Scratch</h3>
+                    <p>A detailed breakdown of building the Student Portal API — challenges, tech decisions, and what
+                        I'd do differently.</p>
+                </li>
+                <li>
+                    <h3>How I Built SudamHub (Full Project Breakdown)</h3>
+                    <p>From idea to deployment — building SudamHub using Laravel Filament.</p>
+                </li>
+                <li>
+                    <h3>From Idea to Deployment: My Complete Web Development Process</h3>
+                    <p>How I take a client from 'I have an idea' to a live, working application.</p>
+                </li>
             </ul>
         </section>
 
         <!-- TOP SOCIAL BAR -->
         <div class="top-social-bar fade-up">
-            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i class="fa-regular fa-envelope"></i></a>
+            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook"><i
+                    class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram"><i
+                    class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link"
+                title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub"><i
+                    class="fa-brands fa-github"></i></a>
+            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp"><i
+                    class="fa-brands fa-whatsapp"></i></a>
+            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email"><i
+                    class="fa-regular fa-envelope"></i></a>
         </div>
 
-       
-         <nav class="main-navbar fade-up" aria-label="Main navigation">
+
+        <nav class="main-navbar fade-up" aria-label="Main navigation">
             <ul class="nav-links">
-                <li><a href="/"  aria-current="page"><i class="fa-solid fa-house" aria-hidden="true"></i>
+                <li><a href="/" aria-current="page"><i class="fa-solid fa-house" aria-hidden="true"></i>
                         Home</a></li>
                 <li><a href="about.html"><i class="fa-solid fa-user" aria-hidden="true"></i> About</a></li>
                 <li><a href="services.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Services</a></li>
@@ -181,7 +303,8 @@
                         <i class="fa-solid fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="blog.html" class="active" role="menuitem"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i>
+                        <li><a href="blog.html" class="active" role="menuitem"><i class="fa-solid fa-pen-nib"
+                                    aria-hidden="true"></i>
                                 Blog</a></li>
                         <li><a href="games.html" role="menuitem"><i class="fa-solid fa-gamepad" aria-hidden="true"></i>
                                 Games</a></li>
@@ -195,7 +318,8 @@
                 <div class="logo">SanskarHub ⚔️</div>
             </a>
             <div class="nav-controls">
-                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i class="fa-solid fa-users"></i> Our Team</button></a>
+                <a href="https://sudamhub.com/" target="_blank"><button class="glass-btn team-btn"><i
+                            class="fa-solid fa-users"></i> Our Team</button></a>
                 <button class="glass-btn" id="themeToggle"><i class="fa-regular fa-moon" id="themeIcon"></i></button>
             </div>
         </div>
@@ -222,15 +346,24 @@
         <!-- Pagination -->
         <div class="pagination" id="pagination"></div>
 
-        <div style="text-align: center; margin: 2rem 0; padding: 1.5rem; background: var(--bg-secondary); border-radius: 1rem; border: 1px solid var(--border-light);">
-            <i class="fa-solid fa-newspaper" style="font-size: 1.5rem; color: var(--accent-1); margin-bottom: 0.5rem; display: block;"></i>
-            <p style="color: var(--text-secondary); font-size: 0.9rem;">📝 I publish new articles regularly. Follow me on <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" style="color: var(--accent-1); font-weight: 600;">LinkedIn</a> to stay updated!</p>
-            <p style="color: var(--text-tertiary); font-size: 0.8rem; margin-top: 0.5rem;">⚡ Need a custom dashboard or web app? <a href="contact.html" style="color: var(--accent-1);">Let's talk →</a></p>
+        <div
+            style="text-align: center; margin: 2rem 0; padding: 1.5rem; background: var(--bg-secondary); border-radius: 1rem; border: 1px solid var(--border-light);">
+            <i class="fa-solid fa-newspaper"
+                style="font-size: 1.5rem; color: var(--accent-1); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">📝 I publish new articles regularly. Follow me
+                on <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank"
+                    style="color: var(--accent-1); font-weight: 600;">LinkedIn</a> to stay updated!</p>
+            <p style="color: var(--text-tertiary); font-size: 0.8rem; margin-top: 0.5rem;">⚡ Need a custom dashboard or
+                web app? <a href="contact.html" style="color: var(--accent-1);">Let's talk →</a></p>
         </div>
 
         <footer class="footer">
             <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer | Laravel & Filament Expert ⚔️</div>
-            <nav><a href="/">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></nav>
+            <nav><a href="/">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a
+                    href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+                <a href="games.html">Games</a>
+
+            </nav>
             <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
         </footer>
     </div>
@@ -245,11 +378,15 @@
             <div class="modal-body" id="modalBody"></div>
             <div class="modal-footer">
                 <div class="share-buttons">
-                    <button class="share-btn" data-social="linkedin" onclick="shareOnLinkedIn()"><i class="fa-brands fa-linkedin-in"></i></button>
-                    <button class="share-btn" data-social="twitter" onclick="shareOnTwitter()"><i class="fa-brands fa-twitter"></i></button>
-                    <button class="share-btn" data-social="facebook" onclick="shareOnFacebook()"><i class="fa-brands fa-facebook-f"></i></button>
+                    <button class="share-btn" data-social="linkedin" onclick="shareOnLinkedIn()"><i
+                            class="fa-brands fa-linkedin-in"></i></button>
+                    <button class="share-btn" data-social="twitter" onclick="shareOnTwitter()"><i
+                            class="fa-brands fa-twitter"></i></button>
+                    <button class="share-btn" data-social="facebook" onclick="shareOnFacebook()"><i
+                            class="fa-brands fa-facebook-f"></i></button>
                 </div>
-                <a href="#" id="modalReadMoreLink" class="modal-action-btn" target="_blank">Follow for More.. <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#" id="modalReadMoreLink" class="modal-action-btn" target="_blank">Follow for More.. <i
+                        class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -616,7 +753,7 @@
             }
         }
 
-        document.getElementById('blogModal')?.addEventListener('click', function(e) {
+        document.getElementById('blogModal')?.addEventListener('click', function (e) {
             if (e.target === this) closeModal();
         });
 

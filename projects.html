@@ -811,6 +811,8 @@
                 <a href="projects.html">Projects</a>
                 <a href="blog.html">Blog</a>
                 <a href="contact.html">Contact</a>
+                <a href="games.html">Games</a>
+
             </nav>
             <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
         </footer>
@@ -883,18 +885,7 @@
             return 'just now';
         }
 
-        // ─────────────────────────────────────────────────────────
-        //  GITHUB STATS
-        //  Strategy:
-        //  1. Fetch user profile → public_repos count
-        //  2. Fetch ALL repos (paginated, 100 per page)
-        //  3. For each repo, use the Contributors API to find
-        //     Sanssskar's total commit count — this is the only
-        //     reliable way without authentication
-        //  4. Sum everything up
-        //  5. For "This Year" use the Events API (last 90 events)
-        //     and count PushEvents in 2026
-        // ─────────────────────────────────────────────────────────
+    
         async function fetchGitHubStats() {
             const username = 'Sanssskar';
             const headers  = { 'Accept': 'application/vnd.github.v3+json' };
