@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Services | Sanskar Shrestha | Website & Software Development Services in Nepal</title>
     <meta name="description"
         content="I offer custom admin panels, full-stack web development, REST APIs, CMS systems, and more. Specializing in Laravel and Filament PHP.">
@@ -44,7 +44,7 @@
     <style>
         .page-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .page-header h1 {
@@ -56,126 +56,310 @@
             color: transparent;
         }
 
-        /* Service Categories */
-        .service-category {
-            margin: 2.5rem 0 1.5rem;
+        .page-header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            letter-spacing: 0.5px;
         }
 
-        .category-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-medium);
-        }
-
-        .category-title i {
-            color: var(--accent-1);
-            font-size: 1.3rem;
-        }
-
-        .category-sub {
-            color: var(--text-tertiary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Enhanced Service Grid */
-        .services-grid-enhanced {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .service-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-medium);
-            border-radius: 1rem;
-            padding: 1.2rem;
-            transition: all 0.3s;
+        /* ── Hero Banner ── */
+        .services-hero {
+            background: var(--gradient-1);
+            border-radius: 1.5rem;
+            padding: 2.2rem 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: white;
             position: relative;
             overflow: hidden;
         }
 
-        .service-card::after {
+        .services-hero::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--gradient-1);
-            transition: width 0.3s;
+            top: -50%;
+            right: -20%;
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
-        .service-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-1);
+        .services-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
-        .service-card:hover::after {
-            width: 100%;
+        .services-hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .service-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-1);
-            border-radius: 12px;
+        .services-hero p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* ── Alternating Service Rows ── */
+        .service-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3.5rem;
+            padding: 1.5rem 0;
+            position: relative;
+        }
+
+        .service-row.alt .poster-side {
+            order: 2;
+        }
+
+        .service-row.alt .content-side {
+            order: 1;
+        }
+
+        /* Poster / Image Side */
+        .poster-side {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-medium);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
         }
 
-        .service-icon i {
-            font-size: 1.4rem;
+        .poster-side:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .poster-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .poster-side:hover img {
+            transform: scale(1.03);
+        }
+
+        .poster-side .poster-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gradient-1);
             color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            pointer-events: none;
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.35);
         }
 
-        .service-card h3 {
-            font-size: 1.1rem;
+        .poster-side .poster-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.45) 100%);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .poster-side:hover .poster-overlay {
+            opacity: 1;
+        }
+
+        /* Content Side */
+        .content-side {
+            position: relative;
+        }
+
+        .content-side .row-number {
+            display: inline-block;
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--border-medium);
+            position: absolute;
+            top: -2.5rem;
+            left: -0.5rem;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -2px;
+        }
+
+        .content-side .category-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: var(--gradient-1);
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.25);
+        }
+
+        .content-side h3 {
+            font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
+            position: relative;
+            z-index: 1;
+            color: var(--text-primary);
         }
 
-        .service-card p {
-            font-size: 0.8rem;
+        .content-side .service-desc {
+            font-size: 0.9rem;
             color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 0.8rem;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .service-tag {
+        .content-side .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.4rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-side .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.45rem 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .content-side .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .content-side .feature-list li i {
+            color: var(--accent-1);
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .content-side .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-side .tag-row .tag {
             display: inline-block;
             background: var(--bg-primary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.65rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
             color: var(--accent-1);
-            font-weight: 500;
+            font-weight: 600;
+            border: 1px solid var(--border-medium);
+            transition: all 0.3s;
+            letter-spacing: 0.3px;
         }
 
+        .content-side .tag-row .tag:hover {
+            background: var(--accent-1);
+            color: white;
+            border-color: var(--accent-1);
+        }
+
+        .content-side .cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+            color: var(--accent-1);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+            transition: gap 0.3s;
+        }
+
+        .content-side .cta-link:hover {
+            gap: 0.8rem;
+        }
+
+        .content-side .cta-link i {
+            transition: transform 0.3s;
+        }
+
+        .content-side .cta-link:hover i {
+            transform: translateX(4px);
+        }
+
+        /* ── Divider Between Rows ── */
+        .row-divider {
+            border: none;
+            border-top: 1px solid var(--border-light);
+            margin: 0 0 2rem 0;
+            opacity: 0.5;
+        }
+
+        /* ── Pricing Note ── */
         .pricing-note {
             background: var(--bg-primary);
-            border-radius: 1rem;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
+            border-radius: 1.2rem;
+            padding: 1.2rem 1.8rem;
+            margin: 2rem 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 1rem;
-            border-left: 4px solid var(--accent-1);
+            border-left: 5px solid var(--accent-1);
+            box-shadow: var(--card-shadow);
         }
 
         .pricing-note p {
             font-size: 0.85rem;
             color: var(--text-secondary);
+            margin: 0;
         }
 
         .pricing-note i {
@@ -183,83 +367,35 @@
             margin-right: 0.3rem;
         }
 
-        /* Hero Banner */
-        .services-hero {
-            background: var(--gradient-1);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: white;
-        }
-
-        .services-hero h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .services-hero p {
-            opacity: 0.9;
-            font-size: 0.95rem;
-        }
-
-        .top-social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            transition: all 0.3s;
-            font-size: 1.2rem;
-            text-decoration: none;
-            border: 1px solid var(--border-medium);
-        }
-
-        .top-social-link:hover {
-            transform: translateY(-3px);
-            border-color: transparent;
-        }
-
-        .top-social-link[title="Facebook"]:hover {
-            background: #1877f2;
-            color: white;
-        }
-
-        .top-social-link[title="Instagram"]:hover {
-            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
-            color: white;
-        }
-
-        .top-social-link[title="LinkedIn"]:hover {
-            background: #0077b5;
-            color: white;
-        }
-
-        .top-social-link[title="GitHub"]:hover {
-            background: #333;
-            color: white;
-        }
-
-        .top-social-link[title="WhatsApp"]:hover {
-            background: #25D366;
-            color: white;
-        }
-
-        .top-social-link[title="Email"]:hover {
-            background: #ea4335;
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            .services-grid-enhanced {
+        /* ── Responsive ── */
+        @media (max-width: 968px) {
+            .service-row {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-bottom: 2.5rem;
             }
 
-            .category-title {
-                font-size: 1.2rem;
+            .service-row.alt .poster-side {
+                order: 1;
+            }
+
+            .service-row.alt .content-side {
+                order: 2;
+            }
+
+            .poster-side {
+                aspect-ratio: 16/10;
+                max-height: 350px;
+            }
+
+            .content-side .row-number {
+                font-size: 3.5rem;
+                top: -2rem;
+                left: -0.3rem;
+            }
+
+            .content-side h3 {
+                font-size: 1.35rem;
             }
 
             .services-hero h2 {
@@ -270,82 +406,117 @@
                 font-size: 2rem;
             }
         }
+
+        @media (max-width: 480px) {
+            .poster-side {
+                aspect-ratio: 4/3;
+                max-height: 260px;
+                border-radius: 1rem;
+            }
+
+            .content-side .row-number {
+                font-size: 2.8rem;
+                top: -1.6rem;
+            }
+
+            .content-side h3 {
+                font-size: 1.2rem;
+            }
+
+            .content-side .service-desc {
+                font-size: 0.82rem;
+            }
+
+            .content-side .feature-list li {
+                font-size: 0.78rem;
+            }
+
+            .services-hero {
+                padding: 1.5rem 1.2rem;
+                border-radius: 1rem;
+            }
+
+            .pricing-note {
+                padding: 1rem 1.2rem;
+                border-radius: 1rem;
+            }
+        }
     </style>
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Laravel & Filament Web Development Services",
-  "provider": {
-    "@type": "Person",
-    "name": "Sanskar Shrestha",
-    "url": "https://shresthasanskar.com.np"
-  },
-  "areaServed": "Worldwide",
-  "description": "Custom admin panels, full-stack web apps, REST APIs, e-commerce, and LMS platforms built with Laravel and Filament PHP.",
-  "serviceType": ["Web Development", "Admin Panel Development", "REST API Development", "E-Commerce Development"]
-}
-</script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Sanskar Shrestha",
-      "url": "https://shresthasanskar.com.np",
-      "image": "https://shresthasanskar.com.np/images/sanskar.jpeg",
-      "jobTitle": "Full Stack Developer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freelance / CodeIT Nepal"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Dharan",
-        "addressRegion": "Province 1",
-        "addressCountry": "NP"
-      },
-      "description": "Full Stack Laravel & Filament PHP Developer from Dharan, Nepal with 2+ years of experience building web applications and admin panels.",
-      "sameAs": [
-        "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/",
-        "https://github.com/Sanssskar",
-        "https://www.instagram.com/_marimo_0/"
-      ],
-      "knowsAbout": ["Laravel", "Filament PHP", "Tailwind CSS", "PHP", "MySQL", "REST API Development"]
-    }
+        {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Laravel & Filament Web Development Services",
+            "provider": {
+                "@type": "Person",
+                "name": "Sanskar Shrestha",
+                "url": "https://shresthasanskar.com.np"
+            },
+            "areaServed": "Worldwide",
+            "description": "Custom admin panels, full-stack web apps, REST APIs, e-commerce, and LMS platforms built with Laravel and Filament PHP.",
+            "serviceType": ["Web Development", "Admin Panel Development", "REST API Development", "E-Commerce Development"]
+        }
     </script>
-        <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Sanskar Shrestha — Web Developer",
-  "@id": "https://shresthasanskar.com.np/",
-  "url": "https://shresthasanskar.com.np/",
-  "telephone": "+977-9814351861",
-  "email": "shresthasakar85@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Dharan-10",
-    "addressLocality": "Dharan",
-    "addressRegion": "Koshi Province",
-    "postalCode": "56700",
-    "addressCountry": "NP"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 26.8065,
-    "longitude": 87.2846
-  },
-  "areaServed": ["Dharan", "Sunsari", "Nepal", "Worldwide"],
-  "serviceType": ["Web Development", "Website Design", "Software Development", "App Development"],
-  "priceRange": "$$"
-}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Sanskar Shrestha",
+            "url": "https://shresthasanskar.com.np",
+            "image": "https://shresthasanskar.com.np/images/sanskar.jpeg",
+            "jobTitle": "Full Stack Developer",
+            "worksFor": {
+                "@type": "Organization",
+                "name": "Freelance / CodeIT Nepal"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Dharan",
+                "addressRegion": "Province 1",
+                "addressCountry": "NP"
+            },
+            "description": "Full Stack Laravel & Filament PHP Developer from Dharan, Nepal with 2+ years of experience building web applications and admin panels.",
+            "sameAs": [
+                "https://www.linkedin.com/in/sanskar-shrestha-a750933b1/",
+                "https://github.com/Sanssskar",
+                "https://www.instagram.com/_marimo_0/"
+            ],
+            "knowsAbout": ["Laravel", "Filament PHP", "Tailwind CSS", "PHP", "MySQL", "REST API Development"]
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Sanskar Shrestha — Web Developer",
+            "@id": "https://shresthasanskar.com.np/",
+            "url": "https://shresthasanskar.com.np/",
+            "telephone": "+977-9814351861",
+            "email": "shresthasakar85@gmail.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Dharan-10",
+                "addressLocality": "Dharan",
+                "addressRegion": "Koshi Province",
+                "postalCode": "56700",
+                "addressCountry": "NP"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 26.8065,
+                "longitude": 87.2846
+            },
+            "areaServed": ["Dharan", "Sunsari", "Nepal", "Worldwide"],
+            "serviceType": ["Web Development", "Website Design", "Software Development", "App Development"],
+            "priceRange": "$$"
+        }
     </script>
 </head>
 
 <body>
     <div class="loader-wrapper" id="loaderWrapper">
         <div class="loader">
-            <div class="loader-text">Loading Services⚔️</div>
+            <div class="loader-text">Loading Services ⚔️</div>
         </div>
     </div>
 
@@ -366,13 +537,12 @@
                     class="fa-regular fa-envelope"></i></a>
         </div>
 
-      
-         <nav class="main-navbar fade-up" aria-label="Main navigation">
+        <nav class="main-navbar fade-up" aria-label="Main navigation">
             <ul class="nav-links">
-                <li><a href="/" aria-current="page"><i class="fa-solid fa-house" aria-hidden="true"></i>
-                        Home</a></li>
+                <li><a href="/"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a></li>
                 <li><a href="about.html"><i class="fa-solid fa-user" aria-hidden="true"></i> About</a></li>
-                <li><a href="services.html" class="active" ><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Services</a></li>
+                <li><a href="services.html" class="active"><i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+                        Services</a></li>
                 <li><a href="projects.html"><i class="fa-solid fa-star" aria-hidden="true"></i> Projects</a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact</a></li>
                 <li class="nav-dropdown">
@@ -401,304 +571,314 @@
             </div>
         </div>
 
+        <!-- PAGE HEADER -->
         <div class="page-header fade-up">
             <h1>Website & Software Development Services in Nepal</h1>
-            <p style="color: var(--text-secondary);">Code, break, fix, repeat ⚔️</p>
+            <p class="subtitle">Code, break, fix, repeat ⚔️ — Dharan, Nepal</p>
         </div>
 
-        <!-- Hero Banner - Smart Positioning -->
+        <!-- HERO BANNER -->
         <div class="services-hero fade-up">
             <h2>⚡ Your Business Needs More Than Just Code</h2>
             <p>I build systems that solve real problems — not just websites that sit there. From managing your entire
                 business in one dashboard to handling thousands of users, I've got you covered.</p>
         </div>
 
-        <!-- 1. Custom Admin Panels (BIGGEST STRENGTH) -->
-        <div class="service-category fade-up">
-            <div class="category-title">
-                <i class="fa-solid fa-chalkboard-user"></i>
-                <span>Custom Admin Panels </span>
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ROW 1: Custom Admin Panels (Image Left) -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="service-row fade-up" id="admin-panels">
+            <div class="poster-side">
+                <span class="poster-badge">Most Popular</span>
+                <img src="images/posters/customdash.webp"
+                alt="Custom Admin Panels by Sanskar Shrestha — Laravel & Filament PHP dashboards"
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.style.background='var(--gradient-1)';this.parentElement.innerHTML+='<i class=\'fa-solid fa-chalkboard-user\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\'></i>';">
+                <div class="poster-overlay"></div>
             </div>
-            <div class="category-sub">"I build clean, powerful admin dashboards to manage your entire business."</div>
-            <div class="services-grid-enhanced">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3>Business Dashboards</h3>
-                    <p>See your business at a glance — sales, customers, inventory, all in one place.</p><span
-                        class="service-tag">Filament</span>
+            <div class="content-side">
+                <span class="row-number">01</span>
+                <div class="category-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                <h3>Custom Admin Panels</h3>
+                <p class="service-desc">I build clean, powerful admin dashboards to manage your entire business — sales,
+                    customers, inventory, and team — all in one place. My specialty.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Business dashboards with real-time analytics</li>
+                    <li><i class="fa-solid fa-circle-check"></i> CRM systems — manage customers & track interactions</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Inventory management with low-stock alerts</li>
+                    <li><i class="fa-solid fa-circle-check"></i> School & student portals — attendance, fees, results
+                    </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Role-based access control — admin, manager, user</li>
+                </ul>
+                <div class="tag-row">
+                    <span class="tag">Filament PHP</span><span class="tag">Laravel</span><span
+                        class="tag">Livewire</span><span class="tag">Tailwind CSS</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-users"></i></div>
-                    <h3>CRM Systems</h3>
-                    <p>Manage customers, track interactions, never lose a lead again.</p><span
-                        class="service-tag">Customer Management</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-boxes"></i></div>
-                    <h3>Inventory Management</h3>
-                    <p>Track stock, get low-stock alerts, manage suppliers — all from one dashboard.</p><span
-                        class="service-tag">Real-time Updates</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-school"></i></div>
-                    <h3>School / Student Portals</h3>
-                    <p>Student records, attendance, fees, results — everything organized.</p><span
-                        class="service-tag">Education</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-building"></i></div>
-                    <h3>Internal Company Tools</h3>
-                    <p>Custom tools that make your team's work 10x easier. Task tracking, approvals, you name it.</p>
-                    <span class="service-tag">Team Efficiency</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-shield-alt"></i></div>
-                    <h3>Role-Based Access</h3>
-                    <p>Admin, manager, user — different people see different things. Security built-in.</p><span
-                        class="service-tag">Permissions</span>
-                </div>
+                <a href="contact.html" class="cta-link">Discuss Your Admin Panel <i
+                        class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
-        <!-- 2. Custom Web Applications (Higher Value) -->
-        <div class="service-category fade-up">
-            <div class="category-title">
-                <i class="fa-solid fa-cube"></i>
-                <span>Custom Web Applications</span>
+        <hr class="row-divider fade-up">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ROW 2: Custom Web Applications (Image Right) -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="service-row alt fade-up" id="web-apps">
+            <div class="poster-side">
+                <span class="poster-badge">High Value</span>
+                <img src="images/posters/personalport.webp"
+                alt="Custom Web Applications — Booking systems, LMS, job portals by Sanskar Shrestha"
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.style.background='var(--gradient-2)';this.parentElement.innerHTML+='<i class=\'fa-solid fa-cube\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\'></i>';">
+                <div class="poster-overlay"></div>
             </div>
-            <div class="category-sub">Built from scratch, tailored to your exact needs.</div>
-            <div class="services-grid-enhanced">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-calendar-check"></i></div>
-                    <h3>Booking Systems</h3>
-                    <p>Hotels, doctor appointments, service bookings — let customers book online.</p><span
-                        class="service-tag">Real-time Availability</span>
+            <div class="content-side">
+                <span class="row-number">02</span>
+                <div class="category-icon"><i class="fa-solid fa-cube"></i></div>
+                <h3>Custom Web Applications</h3>
+                <p class="service-desc">Built from scratch, tailored to your exact needs. Booking systems, e-learning
+                    platforms, job portals — if you can dream it, I can build it.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Booking & appointment systems with real-time
+                        availability</li>
+                    <li><i class="fa-solid fa-circle-check"></i> E-Learning platforms — courses, progress, certificates
+                    </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Job portals — post jobs, apply, track applications</li>
+                    <li><i class="fa-solid fa-circle-check"></i> SaaS products with subscription & payment integration
+                    </li>
+                </ul>
+                <div class="tag-row">
+                    <span class="tag">Laravel</span><span class="tag">REST API</span><span
+                        class="tag">MySQL</span><span class="tag">Scalable</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                    <h3>E-Learning Platforms</h3>
-                    <p>Course management, student progress, certificates — complete LMS.</p><span
-                        class="service-tag">Laravel</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-briefcase"></i></div>
-                    <h3>Job Portals</h3>
-                    <p>Post jobs, apply, track applications — connect employers with talent.</p><span
-                        class="service-tag">Recruitment</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-crown"></i></div>
-                    <h3>SaaS Products</h3>
-                    <p>Subscription-based platforms with payment integration and user management.</p><span
-                        class="service-tag">Scalable</span>
-                </div>
+                <a href="contact.html" class="cta-link">Start Your Web App <i
+                        class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
-        <!-- 3. Full Stack Web Development -->
-        <div class="service-category fade-up">
-            <div class="category-title">
-                <i class="fa-solid fa-laptop-code"></i>
-                <span>Full Stack Web Development</span>
+        <hr class="row-divider fade-up">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ROW 3: Full Stack Web Development (Image Left) -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="service-row fade-up" id="fullstack">
+            <div class="poster-side">
+                <span class="poster-badge">SEO Optimized</span>
+                <img src="images/posters/fullstack.webp"
+                alt="Full Stack Web Development — Business websites, portfolios, blogs by Sanskar Shrestha"
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.style.background='var(--gradient-1)';this.parentElement.innerHTML+='<i class=\'fa-solid fa-laptop-code\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\'></i>';">
+                <div class="poster-overlay"></div>
             </div>
-            <div class="category-sub">Laravel backend + responsive frontend. SEO-optimized. Fast. Works on all devices.
-            </div>
-            <div class="services-grid-enhanced">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-store"></i></div>
-                    <h3>Business Websites</h3>
-                    <p>Showcase your business, attract customers, look professional.</p><span class="service-tag">SEO
-                        Ready</span>
+            <div class="content-side">
+                <span class="row-number">03</span>
+                <div class="category-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <h3>Full Stack Web Development</h3>
+                <p class="service-desc">Laravel backend + responsive frontend. SEO-optimized. Lightning fast. Works
+                    beautifully on every device — from mobile to desktop.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Business websites that attract customers & build trust
+                    </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Portfolio websites — stand out, show your work</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Company & corporate websites with professional presence
+                    </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Multi-author blog systems — SEO-friendly & easy to
+                        manage</li>
+                    <li><i class="fa-solid fa-circle-check"></i> High-conversion landing pages</li>
+                </ul>
+                <div class="tag-row">
+                    <span class="tag">Laravel</span><span class="tag">Tailwind CSS</span><span
+                        class="tag">SEO</span><span class="tag">Responsive</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-user"></i></div>
-                    <h3>Portfolio Websites</h3>
-                    <p>Stand out. Show your work. Get noticed.</p><span class="service-tag">Custom Design</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-building"></i></div>
-                    <h3>Company Websites</h3>
-                    <p>Corporate presence that builds trust and credibility.</p><span
-                        class="service-tag">Responsive</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-newspaper"></i></div>
-                    <h3>Blog Systems</h3>
-                    <p>Multi-author blogs, SEO-friendly, easy to manage.</p><span class="service-tag">Content
-                        Management</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-mobile-alt"></i></div>
-                    <h3>Landing Pages</h3>
-                    <p>Convert visitors into customers. Fast loading, beautiful design.</p><span
-                        class="service-tag">High Conversion</span>
-                </div>
+                <a href="contact.html" class="cta-link">Get Your Website <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
-        <!-- 4. API Development -->
-        <div class="service-category fade-up">
-            <div class="category-title">
-                <i class="fa-solid fa-plug"></i>
-                <span>API Development</span>
+        <hr class="row-divider fade-up">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ROW 4: API Development (Image Right) -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="service-row alt fade-up" id="api-dev">
+            <div class="poster-side">
+                <span class="poster-badge">Backend Power</span>
+                <img src="images/posters/apiinit.webp"
+                alt="REST API Development — Mobile backends, payment integrations by Sanskar Shrestha"
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.style.background='var(--gradient-2)';this.parentElement.innerHTML+='<i class=\'fa-solid fa-plug\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\'></i>';">
+                <div class="poster-overlay"></div>
             </div>
-            <div class="category-sub">Power mobile apps, React frontends, or third-party integrations.</div>
-            <div class="services-grid-enhanced">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-mobile-screen"></i></div>
-                    <h3>Mobile App Backend</h3>
-                    <p>REST APIs for Flutter, React Native, or iOS apps.</p><span class="service-tag">Scalable</span>
+            <div class="content-side">
+                <span class="row-number">04</span>
+                <div class="category-icon"><i class="fa-solid fa-plug"></i></div>
+                <h3>API Development & Integrations</h3>
+                <p class="service-desc">Power mobile apps, React frontends, or third-party services with clean,
+                    documented, and scalable REST APIs. Secure payment integrations included.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Mobile app backends for Flutter, React Native, iOS</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Clean REST APIs for React & Vue frontends</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Payment integrations — Khalti, eSewa, Stripe, PayPal
+                    </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Third-party integrations — SMS, email, WhatsApp</li>
+                </ul>
+                <div class="tag-row">
+                    <span class="tag">REST API</span><span class="tag">Sanctum</span><span
+                        class="tag">Payment</span><span class="tag">Automation</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-brands fa-react"></i></div>
-                    <h3>Backend for React Apps</h3>
-                    <p>Clean, documented APIs that your frontend team will love.</p><span class="service-tag">REST
-                        API</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-credit-card"></i></div>
-                    <h3>Payment Integrations</h3>
-                    <p>Khalti, eSewa, Stripe, PayPal — whatever you need.</p><span class="service-tag">Secure</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-envelope"></i></div>
-                    <h3>Third-Party Integrations</h3>
-                    <p>SMS, email, WhatsApp — connect your app to everything.</p><span
-                        class="service-tag">Automation</span>
-                </div>
+                <a href="contact.html" class="cta-link">Discuss API Needs <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
-        <!-- 5. Authentication & User Systems -->
-        <div class="service-category fade-up">
-            <div class="category-title">
-                <i class="fa-solid fa-lock"></i>
-                <span>Authentication & User Systems</span>
+        <hr class="row-divider fade-up">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ROW 5: Auth & User Systems (Image Left) -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="service-row fade-up" id="auth-systems">
+            <div class="poster-side">
+                <span class="poster-badge">Secure</span>
+                <img src="images/posters/auth.webp"
+                alt="Authentication & User Systems — Secure login, RBAC, social login by Sanskar Shrestha"
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.style.background='var(--gradient-1)';this.parentElement.innerHTML+='<i class=\'fa-solid fa-lock\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\'></i>';">
+                <div class="poster-overlay"></div>
             </div>
-            <div class="category-sub">Every app needs security. I build it right.</div>
-            <div class="services-grid-enhanced">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-right-to-bracket"></i></div>
-                    <h3>Login / Registration Systems</h3>
-                    <p>Secure, user-friendly, works every time.</p><span class="service-tag">Laravel Sanctum</span>
+            <div class="content-side">
+                <span class="row-number">05</span>
+                <div class="category-icon"><i class="fa-solid fa-lock"></i></div>
+                <h3>Authentication & User Systems</h3>
+                <p class="service-desc">Every app needs security. I build robust login, registration, and role-based
+                    access systems that keep your users safe and your data protected.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Secure login & registration with Laravel Sanctum</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Role-based access control — admin, editor, user
+                        permissions</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Social login — Google, Facebook OAuth integration</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Password reset & recovery with email notifications</li>
+                </ul>
+                <div class="tag-row">
+                    <span class="tag">Sanctum</span><span class="tag">OAuth</span><span
+                        class="tag">RBAC</span><span class="tag">Security</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-user-lock"></i></div>
-                    <h3>Role-Based Access Control</h3>
-                    <p>Admin, Editor, User — different permissions for different people.</p><span
-                        class="service-tag">RBAC</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-brands fa-google"></i></div>
-                    <h3>Social Login</h3>
-                    <p>Sign in with Google, Facebook — make it easy for users.</p><span class="service-tag">OAuth</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-key"></i></div>
-                    <h3>Password Reset & Recovery</h3>
-                    <p>Users lose passwords. Make sure they can get back in.</p><span class="service-tag">Email
-                        Notifications</span>
-                </div>
+                <a href="contact.html" class="cta-link">Secure Your App <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
-        <!-- 6. CMS & Blog Systems -->
-        <div class="service-category fade-up">
-            <div class="category-title">
-                <i class="fa-solid fa-pen-fancy"></i>
-                <span>CMS & Blog Systems</span>
+        <hr class="row-divider fade-up">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ROW 6: CMS & Blog Systems (Image Right) -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="service-row alt fade-up" id="cms-blog">
+            <div class="poster-side">
+                <span class="poster-badge">Custom Built</span>
+                <img src="images/posters/cms.webp"
+                alt="Custom CMS & Blog Systems — Better than WordPress, SEO-friendly by Sanskar Shrestha"
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.style.background='var(--gradient-2)';this.parentElement.innerHTML+='<i class=\'fa-solid fa-pen-fancy\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\'></i>';">
+                <div class="poster-overlay"></div>
             </div>
-            <div class="category-sub">Better than WordPress for clients who want something custom and manageable.</div>
-            <div class="services-grid-enhanced">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-blog"></i></div>
-                    <h3>Custom CMS</h3>
-                    <p>Control your content your way. No WordPress headaches.</p><span class="service-tag">Custom
-                        Built</span>
+            <div class="content-side">
+                <span class="row-number">06</span>
+                <div class="category-icon"><i class="fa-solid fa-pen-fancy"></i></div>
+                <h3>CMS & Blog Systems</h3>
+                <p class="service-desc">Better than WordPress for clients who want something custom and truly manageable.
+                    Control your content your way — no plugins, no bloat, no headaches.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Custom CMS — control every aspect of your content</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Multi-author blogs with approval workflows</li>
+                    <li><i class="fa-solid fa-circle-check"></i> SEO-friendly — meta tags, sitemaps, clean URLs</li>
+                </ul>
+                <div class="tag-row">
+                    <span class="tag">Filament CMS</span><span class="tag">SEO</span><span
+                        class="tag">Multi-Author</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-users"></i></div>
-                    <h3>Multi-Author Blog</h3>
-                    <p>Multiple writers, editors, approval workflows — full control.</p><span class="service-tag">Team
-                        Ready</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-chart-simple"></i></div>
-                    <h3>SEO-Friendly Systems</h3>
-                    <p>Meta tags, sitemaps, clean URLs — built to rank.</p><span class="service-tag">SEO
-                        Optimized</span>
-                </div>
+                <a href="contact.html" class="cta-link">Build Your CMS <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
-        <!-- 7. Website Maintenance & Optimization (Recurring Income) -->
-        <div class="service-category fade-up">
-            <div class="category-title">
-                <i class="fa-solid fa-gear"></i>
-                <span>Maintenance & Optimization</span>
+        <hr class="row-divider fade-up">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ROW 7: Maintenance & Optimization (Image Left) -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="service-row fade-up" id="maintenance">
+            <div class="poster-side">
+                <span class="poster-badge">Ongoing Support</span>
+                <img src="images/posters/systemmain.webp"
+                alt="Website Maintenance & Optimization — Bug fixing, performance, security by Sanskar Shrestha"
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.style.background='var(--gradient-1)';this.parentElement.innerHTML+='<i class=\'fa-solid fa-gear\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\'></i>';">
+                <div class="poster-overlay"></div>
             </div>
-            <div class="category-sub">Keep your site running fast, secure, and up-to-date.</div>
-            <div class="services-grid-enhanced">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-bug"></i></div>
-                    <h3>Bug Fixing</h3>
-                    <p>Something broken? I'll find it and fix it.</p><span class="service-tag">Quick Response</span>
+            <div class="content-side">
+                <span class="row-number">07</span>
+                <div class="category-icon"><i class="fa-solid fa-gear"></i></div>
+                <h3>Maintenance & Optimization</h3>
+                <p class="service-desc">Keep your site running fast, secure, and up-to-date. From bug fixes to
+                    performance tuning — I make sure your digital presence never lets you down.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Bug fixing — quick diagnosis and resolution</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Performance optimization — faster load times</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Security updates & Laravel patches</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Automated backup systems for peace of mind</li>
+                </ul>
+                <div class="tag-row">
+                    <span class="tag">Maintenance</span><span class="tag">Security</span><span
+                        class="tag">Performance</span><span class="tag">Backups</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-gauge-high"></i></div>
-                    <h3>Performance Optimization</h3>
-                    <p>Make your site load faster. Keep users happy.</p><span class="service-tag">Speed Matters</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-shield-haltered"></i></div>
-                    <h3>Security Updates</h3>
-                    <p>Laravel updates, security patches — sleep better.</p><span class="service-tag">Protected</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-database"></i></div>
-                    <h3>Backup Systems</h3>
-                    <p>Automated backups. If something goes wrong, you're safe.</p><span class="service-tag">Peace of
-                        Mind</span>
-                </div>
+                <a href="contact.html" class="cta-link">Keep Your Site Healthy <i
+                        class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
-        <!-- 8. Database Design & Backend Logic -->
-        <div class="service-category fade-up">
-            <div class="category-title">
-                <i class="fa-solid fa-database"></i>
-                <span>Database Design & Backend Logic</span>
+        <hr class="row-divider fade-up">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ROW 8: Database Design (Image Right) -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="service-row alt fade-up" id="database">
+            <div class="poster-side">
+                <span class="poster-badge">Foundation</span>
+                <img src="images/posters/seo.webp"
+                alt="Database Design & Backend Logic — Scalable architecture by Sanskar Shrestha"
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.style.background='var(--gradient-2)';this.parentElement.innerHTML+='<i class=\'fa-solid fa-database\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\'></i>';">
+                <div class="poster-overlay"></div>
             </div>
-            <div class="category-sub">The foundation of every great app. Get it right from the start.</div>
-            <div class="services-grid-enhanced">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                    <h3>Database Architecture</h3>
-                    <p>Clean structure, efficient queries — built to scale.</p><span
-                        class="service-tag">MySQL/PostgreSQL</span>
+            <div class="content-side">
+                <span class="row-number">08</span>
+                <div class="category-icon"><i class="fa-solid fa-database"></i></div>
+                <h3>Database Design & Backend Logic</h3>
+                <p class="service-desc">The foundation of every great app. I design clean, efficient database
+                    architectures and scalable backend logic — get it right from the start.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Database architecture — clean structure, efficient
+                        queries</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Query optimization — make slow queries lightning fast
+                    </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Scalable backend logic that handles growth gracefully
+                    </li>
+                </ul>
+                <div class="tag-row">
+                    <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span
+                        class="tag">Eloquent</span><span class="tag">Scalable</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3>Query Optimization</h3>
-                    <p>Slow queries? Let's make them fast.</p><span class="service-tag">Performance</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-brain"></i></div>
-                    <h3>Scalable Backend Logic</h3>
-                    <p>Business logic that handles growth without breaking.</p><span class="service-tag">Built to
-                        Last</span>
-                </div>
+                <a href="contact.html" class="cta-link">Design Your Database <i
+                        class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
-        <!-- Pricing Note -->
+        <!-- PRICING NOTE -->
         <div class="pricing-note fade-up">
             <div><i class="fa-solid fa-circle-info"></i> Every project is different — I'll give you a custom quote based
-                on your needs.</div>
-            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/?skipRedirect=true" target="_blank" class="btn btn-primary"
-                style="padding: 0.5rem 1.2rem; font-size: 0.8rem;">Get a Quote →</a>
+                on your needs. No templates, no shortcuts.</div>
+            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/?skipRedirect=true" target="_blank"
+                class="btn btn-primary" style="padding: 0.55rem 1.3rem; font-size: 0.82rem;">Get a Quote →</a>
         </div>
 
+        <!-- CONTACT SECTION -->
         <div class="contact-section scale-up" style="margin-top: 2rem;">
             <div class="contact-text">
                 <h2>Ready to Build Something?</h2>
@@ -718,14 +898,17 @@
             </div>
         </div>
 
+        <!-- FOOTER -->
         <footer class="footer">
-            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer⚔️</div>
+            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer ⚔️</div>
             <nav><a href="/">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a
                     href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
             </nav>
             <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
         </footer>
     </div>
+
+    <!-- BACKGROUND MUSIC -->
     <audio id="bg-music" loop style="display: none;">
         <source src="music/music.mpeg" type="audio/mpeg">
     </audio>
