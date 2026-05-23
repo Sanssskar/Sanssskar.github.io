@@ -214,25 +214,6 @@ if (swipeableShape && image1 && image2) {
 }
 
 
-
-const bgMusic = document.getElementById('bg-music');
-const musicIcon = document.getElementById('music-icon');
-const musicText = document.getElementById('music-text');
-let isPlaying = false;
-
-window.toggleMusic = function () {
-    if (!bgMusic) return;
-    if (isPlaying) {
-        bgMusic.pause();
-        if (musicIcon) musicIcon.classList.replace('fa-pause', 'fa-play');
-        if (musicText) musicText.textContent = 'Play';
-    } else {
-        bgMusic.play().catch(() => { });
-        if (musicIcon) musicIcon.classList.replace('fa-play', 'fa-pause');
-        if (musicText) musicText.textContent = 'Pause';
-    }
-    isPlaying = !isPlaying;
-};
 // Dropdown toggle
 // ── Dropdown Portal Fix ──
 document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
