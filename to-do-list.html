@@ -1,591 +1,737 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Little Corner 🌸</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --rose:    #e8867c;
-            --blush:   #f5c5be;
-            --cream:   #fdf6f0;
-            --sage:    #7aab8c;
-            --ink:     #2d2319;
-            --muted:   #a09080;
-            --card:    #fff9f5;
-            --shadow:  0 4px 24px rgba(45,35,25,.10);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little Corner</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose:    #c9605a;
+  --rose-lt: #f2d4d1;
+  --blush:   #f9ede9;
+  --cream:   #fdf8f4;
+  --petal:   #fff2ef;
+  --sage:    #6a9b7e;
+  --sage-lt: #d4ece0;
+  --ink:     #1e1510;
+  --ink2:    #4a3a30;
+  --muted:   #9b8678;
+  --border:  #ecddd7;
+  --card:    #fffbf8;
+  --gold:    #b8965a;
+}
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--cream);
-            min-height: 100vh;
-            color: var(--ink);
-            overflow-x: hidden;
-        }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  min-height: 100vh;
+  color: var(--ink);
+  overflow-x: hidden;
+}
 
-        /* ── BACKGROUND BLOBS ── */
-        body::before, body::after {
-            content: '';
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: .35;
-            pointer-events: none;
-            z-index: 0;
-        }
-        body::before {
-            width: 480px; height: 480px;
-            background: var(--blush);
-            top: -120px; right: -120px;
-        }
-        body::after {
-            width: 360px; height: 360px;
-            background: #c5dfc7;
-            bottom: -80px; left: -80px;
-        }
+/* DECORATIVE BG */
+.bg-deco {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+}
+.bg-deco::before {
+  content:'';
+  position: absolute;
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse, #f5d8d4 0%, transparent 70%);
+  top: -200px; right: -200px;
+  opacity: .55;
+}
+.bg-deco::after {
+  content:'';
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(ellipse, #d4eade 0%, transparent 70%);
+  bottom: -150px; left: -150px;
+  opacity: .45;
+}
+.bg-line {
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
+  opacity: .35;
+}
 
-        /* ── LOGIN ── */
-        #login-screen {
-            position: fixed; inset: 0;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 100;
-            background: var(--cream);
-            transition: opacity .5s, transform .5s;
-        }
-        #login-screen.hidden { opacity: 0; transform: scale(.96); pointer-events: none; }
+/* ── LOGIN ── */
+#login-screen {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200;
+  background: var(--cream);
+  transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+}
+#login-screen.hidden {
+  opacity: 0; transform: scale(.94) translateY(-12px); pointer-events: none;
+}
 
-        .login-card {
-            background: var(--card);
-            border: 1px solid #f0e0d8;
-            border-radius: 28px;
-            padding: 52px 48px 44px;
-            width: min(420px, 90vw);
-            box-shadow: var(--shadow), 0 0 0 8px rgba(232,134,124,.07);
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
+.login-wrap {
+  width: min(420px, 92vw);
+  position: relative; z-index: 1;
+}
 
-        .login-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.2rem;
-            color: var(--ink);
-            line-height: 1.15;
-            margin-bottom: 6px;
-        }
-        .login-sub {
-            color: var(--muted);
-            font-size: .92rem;
-            margin-bottom: 36px;
-            font-weight: 300;
-        }
+.login-ornament {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  letter-spacing: .35em;
+  color: var(--rose);
+  margin-bottom: 28px;
+  font-style: italic;
+}
 
-        .hearts { font-size: 1.6rem; letter-spacing: 6px; margin-bottom: 18px; }
+.login-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 48px 44px 40px;
+  box-shadow: 0 8px 48px rgba(30,21,16,.08), 0 0 0 8px rgba(201,96,90,.05);
+}
 
-        .field-wrap { position: relative; margin-bottom: 16px; text-align: left; }
-        .field-wrap label {
-            display: block;
-            font-size: .75rem;
-            font-weight: 500;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 7px;
-        }
-        .field-wrap input {
-            width: 100%;
-            background: var(--cream);
-            border: 1.5px solid #f0e0d8;
-            border-radius: 12px;
-            padding: 13px 16px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: .95rem;
-            color: var(--ink);
-            outline: none;
-            transition: border-color .2s, box-shadow .2s;
-        }
-        .field-wrap input:focus {
-            border-color: var(--rose);
-            box-shadow: 0 0 0 4px rgba(232,134,124,.15);
-        }
+.login-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 300;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.login-title em { font-style: italic; color: var(--rose); }
 
-        .login-btn {
-            width: 100%;
-            background: var(--rose);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            padding: 14px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            margin-top: 8px;
-            letter-spacing: .03em;
-            transition: background .2s, transform .1s, box-shadow .2s;
-        }
-        .login-btn:hover { background: #d9716b; box-shadow: 0 6px 20px rgba(232,134,124,.4); }
-        .login-btn:active { transform: scale(.98); }
+.login-sub {
+  text-align: center;
+  color: var(--muted);
+  font-size: .82rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 36px;
+}
 
-        .login-err {
-            background: #fde8e6;
-            border-radius: 8px;
-            padding: 10px 14px;
-            font-size: .85rem;
-            color: #b94040;
-            margin-bottom: 14px;
-            display: none;
-        }
-        .login-err.show { display: block; }
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 28px;
+}
+.divider::before, .divider::after {
+  content:''; flex: 1;
+  height: 1px; background: var(--border);
+}
+.divider span {
+  font-size: .7rem; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--muted);
+}
 
-        /* ── APP ── */
-        #app { position: relative; z-index: 1; min-height: 100vh; display: none; }
-        #app.show { display: block; }
+.field {
+  margin-bottom: 16px;
+}
+.field label {
+  display: block;
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px;
+}
+.field input {
+  width: 100%;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: .95rem; color: var(--ink);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field input:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 4px rgba(201,96,90,.12);
+}
+.field input::placeholder { color: #c8b5ac; }
 
-        header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 24px 32px 0;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+.login-btn {
+  width: 100%;
+  background: var(--rose);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-family: 'Jost', sans-serif;
+  font-size: .9rem; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background .2s, transform .12s, box-shadow .2s;
+}
+.login-btn:hover { background: #b8514b; box-shadow: 0 8px 24px rgba(201,96,90,.38); }
+.login-btn:active { transform: scale(.98); }
 
-        .app-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.9rem;
-            color: var(--ink);
-        }
-        .app-title span { color: var(--rose); }
+.login-err {
+  background: #fde8e6; border: 1px solid #f5c8c4;
+  border-radius: 10px; padding: 10px 14px;
+  font-size: .84rem; color: #9b3a38;
+  margin-bottom: 14px; display: none;
+}
+.login-err.show { display: block; }
 
-        .logout-btn {
-            background: none;
-            border: 1.5px solid #e8d0c8;
-            border-radius: 8px;
-            padding: 6px 14px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: .8rem;
-            color: var(--muted);
-            cursor: pointer;
-            transition: all .2s;
-        }
-        .logout-btn:hover { border-color: var(--rose); color: var(--rose); }
+/* ── APP ── */
+#app { position: relative; z-index: 1; min-height: 100vh; display: none; opacity: 0; transition: opacity .5s; }
+#app.show { display: block; }
+#app.visible { opacity: 1; }
 
-        /* ── ADD TASK ── */
-        .add-section {
-            max-width: 800px;
-            margin: 28px auto 0;
-            padding: 0 32px;
-        }
+/* HEADER */
+.app-header {
+  max-width: 760px; margin: 0 auto;
+  padding: 36px 32px 0;
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
 
-        .add-card {
-            background: var(--card);
-            border: 1px solid #f0e0d8;
-            border-radius: 20px;
-            padding: 20px 22px;
-            display: flex; gap: 10px; align-items: flex-end;
-            box-shadow: var(--shadow);
-        }
+.header-left {}
+.header-eyebrow {
+  font-size: .72rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--muted);
+  font-weight: 400; margin-bottom: 4px;
+}
+.header-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 300;
+  line-height: 1.1; color: var(--ink);
+}
+.header-title em { font-style: italic; color: var(--rose); }
 
-        .add-inputs { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.header-right { display: flex; align-items: center; gap: 10px; }
+.greeting-pill {
+  background: var(--petal); border: 1px solid var(--rose-lt);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: .8rem; color: var(--rose); font-weight: 500;
+}
+.logout-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-family: 'Jost', sans-serif;
+  font-size: .78rem; color: var(--muted);
+  cursor: pointer; transition: all .2s;
+}
+.logout-btn:hover { border-color: var(--rose); color: var(--rose); }
 
-        .add-inputs input, .add-inputs select {
-            background: var(--cream);
-            border: 1.5px solid #f0e0d8;
-            border-radius: 10px;
-            padding: 11px 14px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: .93rem;
-            color: var(--ink);
-            outline: none;
-            width: 100%;
-            transition: border-color .2s, box-shadow .2s;
-        }
-        .add-inputs input:focus, .add-inputs select:focus {
-            border-color: var(--rose);
-            box-shadow: 0 0 0 3px rgba(232,134,124,.13);
-        }
+/* PROGRESS BAR */
+.progress-wrap {
+  max-width: 760px; margin: 24px auto 0; padding: 0 32px;
+}
+.progress-bar-bg {
+  height: 3px; background: var(--rose-lt); border-radius: 3px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; background: var(--rose);
+  border-radius: 3px;
+  transition: width .5s cubic-bezier(.4,0,.2,1);
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  margin-top: 7px;
+  font-size: .75rem; color: var(--muted);
+}
 
-        .row2 { display: flex; gap: 10px; }
-        .row2 select { flex: 1; }
+/* ADD TASK */
+.add-section {
+  max-width: 760px; margin: 28px auto 0; padding: 0 32px;
+}
+.add-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px 22px 20px;
+  box-shadow: 0 4px 20px rgba(30,21,16,.06);
+}
+.add-row1 {
+  display: flex; gap: 10px; margin-bottom: 10px;
+}
+.add-row1 input {
+  flex: 1;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 11px;
+  padding: 11px 14px;
+  font-family: 'Jost', sans-serif;
+  font-size: .93rem; color: var(--ink);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.add-row1 input:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px rgba(201,96,90,.1);
+}
+.add-row1 input::placeholder { color: #c8b5ac; }
+.add-row2 { display: flex; gap: 10px; }
+.add-row2 select {
+  flex: 1;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 11px;
+  padding: 10px 12px;
+  font-family: 'Jost', sans-serif;
+  font-size: .86rem; color: var(--ink);
+  cursor: pointer; outline: none;
+  transition: border-color .2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239b8678' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 30px;
+}
+.add-row2 select:focus { border-color: var(--rose); }
+.add-submit-btn {
+  background: var(--rose); color: #fff;
+  border: none; border-radius: 11px;
+  width: 44px; height: 44px;
+  font-size: 1.3rem; cursor: pointer;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .1s, box-shadow .2s;
+  align-self: flex-end;
+}
+.add-submit-btn:hover { background: #b8514b; box-shadow: 0 6px 18px rgba(201,96,90,.35); }
+.add-submit-btn:active { transform: scale(.92); }
 
-        .add-task-btn {
-            background: var(--rose);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            width: 48px; height: 48px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: background .2s, transform .1s;
-            display: flex; align-items: center; justify-content: center;
-            align-self: flex-end;
-        }
-        .add-task-btn:hover { background: #d9716b; }
-        .add-task-btn:active { transform: scale(.92); }
+/* SYNC INDICATOR */
+.sync-bar {
+  max-width: 760px; margin: 14px auto 0; padding: 0 32px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sync-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--sage); flex-shrink: 0;
+  transition: background .3s;
+}
+.sync-dot.syncing { background: var(--gold); animation: pulse 1s infinite; }
+.sync-dot.error { background: var(--rose); }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+.sync-text {
+  font-size: .75rem; color: var(--muted);
+}
 
-        /* ── FILTERS ── */
-        .filters {
-            max-width: 800px;
-            margin: 22px auto 0;
-            padding: 0 32px;
-            display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
-        }
+/* FILTERS */
+.filters {
+  max-width: 760px; margin: 20px auto 0; padding: 0 32px;
+  display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
+}
+.filter-btn {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 6px 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: .78rem; font-weight: 500;
+  color: var(--muted); cursor: pointer; transition: all .2s;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--rose); border-color: var(--rose); color: #fff;
+}
 
-        .filter-btn {
-            background: var(--card);
-            border: 1.5px solid #eee0d8;
-            border-radius: 20px;
-            padding: 6px 16px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: .83rem;
-            font-weight: 500;
-            color: var(--muted);
-            cursor: pointer;
-            transition: all .2s;
-        }
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--rose);
-            border-color: var(--rose);
-            color: #fff;
-        }
+/* TASK LIST */
+.task-list {
+  max-width: 760px; margin: 16px auto 60px; padding: 0 32px;
+  display: flex; flex-direction: column; gap: 9px;
+}
 
-        .stats {
-            margin-left: auto;
-            font-size: .82rem;
-            color: var(--muted);
-        }
+/* TASK ITEM */
+.task-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 15px 16px;
+  display: flex; align-items: center; gap: 13px;
+  transition: box-shadow .2s, opacity .3s, transform .3s;
+  animation: slideIn .32s cubic-bezier(.4,0,.2,1);
+  position: relative;
+  overflow: hidden;
+}
+.task-item::before {
+  content:''; position: absolute;
+  left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--border); border-radius: 3px 0 0 3px;
+  transition: background .2s;
+}
+.task-item:hover { box-shadow: 0 6px 24px rgba(30,21,16,.09); }
+.task-item.done { opacity: .52; }
+.task-item.done .task-text { text-decoration: line-through; color: var(--muted); }
+.task-item[data-status="pending"]::before { background: #e8b96a; }
+.task-item[data-status="progress"]::before { background: #6ab0e8; }
+.task-item[data-status="done"]::before { background: var(--sage); }
 
-        /* ── TASK LIST ── */
-        .task-list {
-            max-width: 800px;
-            margin: 18px auto 40px;
-            padding: 0 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+@keyframes slideIn {
+  from { opacity:0; transform: translateY(-8px) scale(.98); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
 
-        .task-item {
-            background: var(--card);
-            border: 1px solid #f0e0d8;
-            border-radius: 16px;
-            padding: 16px 18px;
-            display: flex; align-items: center; gap: 14px;
-            box-shadow: 0 2px 10px rgba(45,35,25,.06);
-            transition: opacity .3s, transform .3s, box-shadow .2s;
-            animation: slideIn .3s ease;
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .task-item:hover { box-shadow: var(--shadow); }
-        .task-item.done { opacity: .55; }
-        .task-item.done .task-text { text-decoration: line-through; color: var(--muted); }
+/* checkbox */
+.task-check {
+  width: 20px; height: 20px;
+  border-radius: 5px;
+  border: 1.5px solid #d4c0b8;
+  flex-shrink: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; background: transparent;
+}
+.task-check.checked { background: var(--sage); border-color: var(--sage); }
+.task-check.checked::after { content:'✓'; color:#fff; font-size:.65rem; font-weight:700; }
 
-        /* custom checkbox */
-        .task-check {
-            width: 22px; height: 22px;
-            border-radius: 6px;
-            border: 2px solid #ddd0c8;
-            flex-shrink: 0;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: all .2s;
-            background: transparent;
-        }
-        .task-check.checked {
-            background: var(--sage);
-            border-color: var(--sage);
-        }
-        .task-check.checked::after { content: '✓'; color: #fff; font-size: .75rem; font-weight: 700; }
+.task-body { flex: 1; min-width: 0; }
+.task-text {
+  font-size: .92rem; font-weight: 400;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--ink);
+}
+.task-meta {
+  margin-top: 5px; display: flex; gap: 7px; align-items: center; flex-wrap: wrap;
+}
+.pill {
+  font-size: .7rem; border-radius: 20px; padding: 2px 8px; font-weight: 500;
+  white-space: nowrap;
+}
+.pill-who { background: var(--petal); color: var(--rose); border: 1px solid var(--rose-lt); }
+.pill-tag { background: var(--cream); color: var(--muted); border: 1px solid var(--border); }
+.pill-by  { color: var(--muted); font-size: .69rem; }
 
-        .task-body { flex: 1; min-width: 0; }
-        .task-text { font-size: .95rem; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .task-meta { margin-top: 4px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-        .task-who {
-            font-size: .75rem; font-weight: 500;
-            background: #fde8e6;
-            color: var(--rose);
-            border-radius: 20px;
-            padding: 2px 9px;
-        }
-        .task-tag {
-            font-size: .73rem;
-            color: var(--muted);
-            background: var(--cream);
-            border: 1px solid #edddd5;
-            border-radius: 20px;
-            padding: 2px 8px;
-        }
+/* status select inline */
+.task-status-sel {
+  background: var(--cream); border: 1px solid var(--border);
+  border-radius: 8px; padding: 4px 24px 4px 8px;
+  font-family: 'Jost', sans-serif;
+  font-size: .75rem; color: var(--ink);
+  cursor: pointer; outline: none; flex-shrink: 0;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239b8678' stroke-width='1.3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 8px center;
+  transition: border-color .2s;
+}
+.task-status-sel:focus { border-color: var(--rose); }
 
-        .status-badge {
-            font-size: .72rem; font-weight: 500;
-            border-radius: 20px;
-            padding: 3px 9px;
-            flex-shrink: 0;
-        }
-        .status-pending  { background: #fff3e0; color: #c07a20; }
-        .status-progress { background: #e3f2fd; color: #1a7abf; }
-        .status-done     { background: #e8f5e9; color: #2e7d32; }
+.del-btn {
+  background: none; border: none;
+  width: 28px; height: 28px; border-radius: 7px;
+  cursor: pointer; font-size: .85rem;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); flex-shrink: 0;
+  transition: background .2s, color .2s;
+}
+.del-btn:hover { background: #fde8e6; color: #b84040; }
 
-        .task-actions { display: flex; gap: 6px; flex-shrink: 0; }
-        .icon-btn {
-            background: none; border: none;
-            width: 30px; height: 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: .9rem;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--muted);
-            transition: background .2s, color .2s;
-        }
-        .icon-btn:hover { background: #f5e6e2; color: var(--rose); }
-        .icon-btn.del:hover { background: #fde8e6; color: #c04040; }
+/* EMPTY */
+.empty {
+  text-align: center; padding: 56px 20px;
+  color: var(--muted);
+}
+.empty-icon { font-size: 2.4rem; margin-bottom: 12px; opacity: .7; }
+.empty p { font-size: .9rem; font-style: italic; }
 
-        /* status select on task */
-        .status-select {
-            background: var(--cream);
-            border: 1px solid #edddd5;
-            border-radius: 8px;
-            padding: 4px 8px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: .78rem;
-            color: var(--ink);
-            cursor: pointer;
-            outline: none;
-        }
+/* SECTION HEADER */
+.section-label {
+  font-size: .7rem; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 4px 0 2px 2px; font-weight: 500;
+}
 
-        /* empty state */
-        .empty {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--muted);
-        }
-        .empty-emoji { font-size: 2.8rem; margin-bottom: 12px; }
-        .empty p { font-size: .95rem; }
-
-        @media (max-width: 560px) {
-            header { padding: 18px 18px 0; }
-            .add-section, .filters, .task-list { padding: 0 18px; }
-            .add-card { flex-direction: column; }
-            .add-task-btn { width: 100%; height: 44px; }
-            .row2 { flex-direction: column; }
-        }
-    </style>
+@media (max-width: 560px) {
+  .app-header, .add-section, .filters, .task-list, .progress-wrap, .sync-bar {
+    padding-left: 18px; padding-right: 18px;
+  }
+  .login-card { padding: 36px 26px 30px; }
+  .add-row2 { flex-direction: column; }
+  .header-title { font-size: 1.9rem; }
+}
+</style>
 </head>
 <body>
 
-<!-- ── LOGIN SCREEN ── -->
+<div class="bg-deco"><div class="bg-line"></div></div>
+
+<!-- LOGIN -->
 <div id="login-screen">
+  <div class="login-wrap">
+    <div class="login-ornament">✦ our little corner ✦</div>
     <div class="login-card">
-        <div class="hearts">🌸💑🌸</div>
-        <h1 class="login-title">Our Little Corner</h1>
-        <p class="login-sub">Just the two of us ✨</p>
-        <div class="login-err" id="login-err">Wrong password, sweetheart 🥺</div>
-        <div class="field-wrap">
-            <label>Who are you?</label>
-            <input type="text" id="login-name" placeholder="Your name…" autocomplete="off">
-        </div>
-        <div class="field-wrap">
-            <label>Password</label>
-            <input type="password" id="login-pass" placeholder="Our secret password…">
-        </div>
-        <button class="login-btn" onclick="tryLogin()">Enter our space 💕</button>
+      <h1 class="login-title">Welcome <em>home,</em><br>my love</h1>
+      <p class="login-sub">Just the two of us</p>
+      <div class="divider"><span>enter</span></div>
+      <div class="login-err" id="login-err"></div>
+      <div class="field">
+        <label>Your name</label>
+        <input type="text" id="login-name" placeholder="Sanskar or Nilam…" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="login-pass" placeholder="Our secret…">
+      </div>
+      <button class="login-btn" onclick="tryLogin()">Enter our space</button>
     </div>
+  </div>
 </div>
 
-<!-- ── APP ── -->
+<!-- APP -->
 <div id="app">
-    <header>
-        <h1 class="app-title">Our <span>To-Do</span> 🌿</h1>
-        <div style="display:flex;gap:10px;align-items:center">
-            <span id="greeting" style="font-size:.88rem;color:var(--muted)"></span>
-            <button class="logout-btn" onclick="logout()">Leave ↗</button>
-        </div>
-    </header>
-
-    <!-- Add task -->
-    <div class="add-section">
-        <div class="add-card">
-            <div class="add-inputs">
-                <input type="text" id="task-input" placeholder="Add something for us to do… 🌷" maxlength="120">
-                <div class="row2">
-                    <select id="task-who">
-                        <option value="Both">👫 Both of us</option>
-                        <option value="Me">🙋 Just me</option>
-                        <option value="Her">💗 For her</option>
-                        <option value="Him">💙 For him</option>
-                    </select>
-                    <select id="task-tag">
-                        <option value="🏠 Home">🏠 Home</option>
-                        <option value="🛒 Shopping">🛒 Shopping</option>
-                        <option value="💑 Date">💑 Date</option>
-                        <option value="💰 Finance">💰 Finance</option>
-                        <option value="✈️ Travel">✈️ Travel</option>
-                        <option value="🎉 Fun">🎉 Fun</option>
-                        <option value="📋 Other">📋 Other</option>
-                    </select>
-                </div>
-            </div>
-            <button class="add-task-btn" onclick="addTask()">＋</button>
-        </div>
+  <header class="app-header">
+    <div class="header-left">
+      <div class="header-eyebrow">our shared space</div>
+      <h1 class="header-title">Our <em>To-Do</em> 🌿</h1>
     </div>
-
-    <!-- Filters -->
-    <div class="filters">
-        <button class="filter-btn active" data-f="all"     onclick="setFilter(this,'all')">All</button>
-        <button class="filter-btn"         data-f="pending"  onclick="setFilter(this,'pending')">Pending</button>
-        <button class="filter-btn"         data-f="progress" onclick="setFilter(this,'progress')">In Progress</button>
-        <button class="filter-btn"         data-f="done"     onclick="setFilter(this,'done')">Done ✓</button>
-        <span class="stats" id="stats"></span>
+    <div class="header-right">
+      <span class="greeting-pill" id="greeting"></span>
+      <button class="logout-btn" onclick="logout()">Leave ↗</button>
     </div>
+  </header>
 
-    <!-- Task list -->
-    <div class="task-list" id="task-list"></div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <div class="progress-label">
+      <span id="progress-label-left">0 tasks</span>
+      <span id="progress-label-right">0% done</span>
+    </div>
+  </div>
+
+  <div class="add-section">
+    <div class="add-card">
+      <div class="add-row1">
+        <input type="text" id="task-input" placeholder="Add something for us to do… 🌷" maxlength="120">
+      </div>
+      <div class="add-row2">
+        <select id="task-who">
+          <option value="Both of us">👫 Both of us</option>
+          <option value="Sanskar">💙 Sanskar</option>
+          <option value="Nilam">💗 Nilam</option>
+        </select>
+        <select id="task-tag">
+          <option value="🏠 Home">🏠 Home</option>
+          <option value="🛒 Shopping">🛒 Shopping</option>
+          <option value="💑 Date">💑 Date</option>
+          <option value="💰 Finance">💰 Finance</option>
+          <option value="✈️ Travel">✈️ Travel</option>
+          <option value="🎉 Fun">🎉 Fun</option>
+          <option value="📋 Other">📋 Other</option>
+        </select>
+        <button class="add-submit-btn" onclick="addTask()" title="Add task">＋</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sync-bar">
+    <div class="sync-dot" id="sync-dot"></div>
+    <span class="sync-text" id="sync-text">Synced with Nilam</span>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
+    <button class="filter-btn" onclick="setFilter(this,'pending')">⏳ Pending</button>
+    <button class="filter-btn" onclick="setFilter(this,'progress')">🔄 In Progress</button>
+    <button class="filter-btn" onclick="setFilter(this,'done')">✅ Done</button>
+  </div>
+
+  <div class="task-list" id="task-list"></div>
 </div>
 
 <script>
-    // ── CONFIG ── change these to your real password & names ──
-    const PASSWORD  = "Sanskar@9814351861";   
-    const USER_A    = "Sanskar";       1
-    const USER_B    = "Nilam"; 
+const PASSWORD = "Sanskar@9814351861";
+const USER_A   = "Sanskar";
+const USER_B   = "Nilam";
+const STORAGE_KEY = "couple_tasks_v2";
 
-    let currentUser = "";
-    let currentFilter = "all";
+let currentUser = "";
+let currentFilter = "all";
+let syncInterval = null;
+let lastHash = "";
 
-    // ── STORAGE ──
-    function loadTasks() {
-        try { return JSON.parse(localStorage.getItem("couple_tasks") || "[]"); } catch { return []; }
-    }
-    function saveTasks(tasks) {
-        localStorage.setItem("couple_tasks", JSON.stringify(tasks));
-    }
+/* ── STORAGE (shared across both users via window.storage) ── */
+async function saveTasks(tasks) {
+  setSyncState("syncing");
+  try {
+    await window.storage.set(STORAGE_KEY, JSON.stringify(tasks), true);
+    setSyncState("ok");
+  } catch(e) {
+    setSyncState("error");
+    console.error("Save failed:", e);
+  }
+}
 
-    // ── AUTH ──
-    function tryLogin() {
-        const name = document.getElementById("login-name").value.trim();
-        const pass = document.getElementById("login-pass").value;
-        const err  = document.getElementById("login-err");
+async function loadTasks() {
+  try {
+    const res = await window.storage.get(STORAGE_KEY, true);
+    if (!res) return [];
+    return JSON.parse(res.value);
+  } catch(e) {
+    return [];
+  }
+}
 
-        if (!name) { err.textContent = "Tell me your name first 🥺"; err.classList.add("show"); return; }
-        if (pass !== PASSWORD) { err.textContent = "Wrong password, sweetheart 🥺"; err.classList.add("show"); return; }
+function setSyncState(state) {
+  const dot = document.getElementById("sync-dot");
+  const txt = document.getElementById("sync-text");
+  if (!dot) return;
+  const partner = currentUser === USER_A ? USER_B : USER_A;
+  dot.className = "sync-dot" + (state === "syncing" ? " syncing" : state === "error" ? " error" : "");
+  if (state === "syncing") txt.textContent = "Syncing…";
+  else if (state === "error") txt.textContent = "Sync failed – check connection";
+  else txt.textContent = `Synced · visible to ${partner}`;
+}
 
-        err.classList.remove("show");
-        currentUser = name;
-        document.getElementById("greeting").textContent = `Hi, ${name} 💕`;
-        document.getElementById("login-screen").classList.add("hidden");
-        document.getElementById("app").classList.add("show");
-        render();
-    }
-    document.getElementById("login-pass").addEventListener("keydown", e => { if (e.key==="Enter") tryLogin(); });
-    document.getElementById("login-name").addEventListener("keydown", e => { if (e.key==="Enter") document.getElementById("login-pass").focus(); });
+/* ── AUTH ── */
+function tryLogin() {
+  const name = document.getElementById("login-name").value.trim();
+  const pass = document.getElementById("login-pass").value;
+  const err  = document.getElementById("login-err");
+  if (!name) { showErr("Tell me your name first 🥺"); return; }
+  if (pass !== PASSWORD) { showErr("Wrong password, sweetheart 🥺"); return; }
+  err.classList.remove("show");
+  currentUser = name;
+  document.getElementById("greeting").textContent = "Hi, " + name + " 💕";
+  document.getElementById("login-screen").classList.add("hidden");
+  const app = document.getElementById("app");
+  app.classList.add("show");
+  setTimeout(() => app.classList.add("visible"), 20);
+  startSync();
+  renderAsync();
+}
 
-    function logout() {
-        currentUser = "";
-        document.getElementById("login-screen").classList.remove("hidden");
-        document.getElementById("app").classList.remove("show");
-        document.getElementById("login-pass").value = "";
-        document.getElementById("login-name").value = "";
-    }
+function showErr(msg) {
+  const err = document.getElementById("login-err");
+  err.textContent = msg;
+  err.classList.add("show");
+}
 
-    // ── ADD ──
-    function addTask() {
-        const input = document.getElementById("task-input");
-        const text  = input.value.trim();
-        if (!text) return;
+function logout() {
+  stopSync();
+  currentUser = "";
+  const app = document.getElementById("app");
+  app.classList.remove("visible");
+  setTimeout(() => app.classList.remove("show"), 500);
+  document.getElementById("login-screen").classList.remove("hidden");
+  document.getElementById("login-pass").value = "";
+  document.getElementById("login-name").value = "";
+  lastHash = "";
+}
 
-        const tasks = loadTasks();
-        tasks.unshift({
-            id:     Date.now(),
-            text,
-            who:    document.getElementById("task-who").value,
-            tag:    document.getElementById("task-tag").value,
-            status: "pending",
-            by:     currentUser,
-            date:   new Date().toLocaleDateString()
-        });
-        saveTasks(tasks);
-        input.value = "";
-        render();
-    }
-    document.getElementById("task-input")?.addEventListener("keydown", e => { if (e.key==="Enter") addTask(); });
+document.getElementById("login-pass").addEventListener("keydown", e => { if(e.key==="Enter") tryLogin(); });
+document.getElementById("login-name").addEventListener("keydown", e => { if(e.key==="Enter") document.getElementById("login-pass").focus(); });
 
-    // ── STATUS ──
-    function changeStatus(id, val) {
-        const tasks = loadTasks().map(t => t.id===id ? {...t, status: val} : t);
-        saveTasks(tasks);
-        render();
-    }
+/* ── SYNC POLLING ── */
+function startSync() {
+  syncInterval = setInterval(async () => {
+    const tasks = await loadTasks();
+    const h = JSON.stringify(tasks);
+    if (h !== lastHash) { lastHash = h; renderWith(tasks); }
+  }, 4000);
+}
+function stopSync() {
+  if (syncInterval) clearInterval(syncInterval);
+}
 
-    function toggleDone(id) {
-        const tasks = loadTasks().map(t => {
-            if (t.id!==id) return t;
-            return {...t, status: t.status==="done" ? "pending" : "done"};
-        });
-        saveTasks(tasks);
-        render();
-    }
+/* ── ADD ── */
+async function addTask() {
+  const input = document.getElementById("task-input");
+  const text  = input.value.trim();
+  if (!text) return;
+  const tasks = await loadTasks();
+  tasks.unshift({
+    id:     Date.now(),
+    text,
+    who:    document.getElementById("task-who").value,
+    tag:    document.getElementById("task-tag").value,
+    status: "pending",
+    by:     currentUser,
+    date:   new Date().toLocaleDateString("en-IN",{day:"numeric",month:"short"})
+  });
+  await saveTasks(tasks);
+  input.value = "";
+  renderWith(tasks);
+}
 
-    function deleteTask(id) {
-        saveTasks(loadTasks().filter(t => t.id!==id));
-        render();
-    }
+document.getElementById("task-input")?.addEventListener("keydown", e => { if(e.key==="Enter") addTask(); });
 
-    // ── FILTER ──
-    function setFilter(btn, f) {
-        currentFilter = f;
-        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        render();
-    }
+/* ── ACTIONS ── */
+async function changeStatus(id, val) {
+  const tasks = (await loadTasks()).map(t => t.id===id ? {...t, status:val} : t);
+  await saveTasks(tasks);
+  renderWith(tasks);
+}
 
-    // ── RENDER ──
-    function render() {
-        const all   = loadTasks();
-        const shown = currentFilter==="all" ? all : all.filter(t => t.status===currentFilter);
-        const done  = all.filter(t => t.status==="done").length;
+async function toggleDone(id) {
+  const tasks = (await loadTasks()).map(t => {
+    if (t.id!==id) return t;
+    return {...t, status: t.status==="done" ? "pending" : "done"};
+  });
+  await saveTasks(tasks);
+  renderWith(tasks);
+}
 
-        document.getElementById("stats").textContent = `${done}/${all.length} done`;
+async function deleteTask(id) {
+  const tasks = (await loadTasks()).filter(t => t.id!==id);
+  await saveTasks(tasks);
+  renderWith(tasks);
+}
 
-        const list = document.getElementById("task-list");
-        if (!shown.length) {
-            list.innerHTML = `<div class="empty"><div class="empty-emoji">${currentFilter==="done"?"🎉":"🌱"}</div><p>${currentFilter==="done"?"Nothing done yet — let's get started!":"All clear here!"}</p></div>`;
-            return;
-        }
+/* ── FILTER ── */
+function setFilter(btn, f) {
+  currentFilter = f;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderAsync();
+}
 
-        list.innerHTML = shown.map(t => {
-            const isDone = t.status==="done";
-            return `
-            <div class="task-item ${isDone?"done":""}" id="task-${t.id}">
-                <div class="task-check ${isDone?"checked":""}" onclick="toggleDone(${t.id})"></div>
-                <div class="task-body">
-                    <div class="task-text">${escHtml(t.text)}</div>
-                    <div class="task-meta">
-                        <span class="task-who">${escHtml(t.who)}</span>
-                        <span class="task-tag">${escHtml(t.tag)}</span>
-                        <span class="task-tag" style="color:var(--muted)">${escHtml(t.by)} · ${t.date}</span>
-                    </div>
-                </div>
-                <select class="status-select" onchange="changeStatus(${t.id},this.value)">
-                    <option value="pending"  ${t.status==="pending" ?"selected":""}>⏳ Pending</option>
-                    <option value="progress" ${t.status==="progress"?"selected":""}>🔄 In Progress</option>
-                    <option value="done"     ${t.status==="done"    ?"selected":""}>✅ Done</option>
-                </select>
-                <div class="task-actions">
-                    <button class="icon-btn del" onclick="deleteTask(${t.id})" title="Delete">🗑</button>
-                </div>
-            </div>`;
-        }).join("");
-    }
+async function renderAsync() {
+  const tasks = await loadTasks();
+  lastHash = JSON.stringify(tasks);
+  renderWith(tasks);
+}
 
-    function escHtml(s) {
-        return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-    }
+/* ── RENDER ── */
+function renderWith(all) {
+  const shown  = currentFilter === "all" ? all : all.filter(t => t.status === currentFilter);
+  const done   = all.filter(t => t.status === "done").length;
+  const pct    = all.length ? Math.round((done / all.length) * 100) : 0;
+
+  document.getElementById("progress-fill").style.width = pct + "%";
+  document.getElementById("progress-label-left").textContent = all.length + " task" + (all.length!==1?"s":"");
+  document.getElementById("progress-label-right").textContent = pct + "% complete";
+
+  const list = document.getElementById("task-list");
+  if (!shown.length) {
+    const icons = { all:"🌱", pending:"🌷", progress:"✨", done:"🎉" };
+    const msgs  = { all:"Nothing here yet — add your first task!", pending:"All tasks are in progress or done!", progress:"Nothing in progress right now.", done:"Nothing completed yet — let's get started!" };
+    list.innerHTML = `<div class="empty"><div class="empty-icon">${icons[currentFilter]}</div><p>${msgs[currentFilter]}</p></div>`;
+    return;
+  }
+
+  list.innerHTML = shown.map(t => {
+    const isDone = t.status === "done";
+    return `<div class="task-item${isDone?" done":""}" data-status="${t.status}" id="ti-${t.id}">
+      <div class="task-check${isDone?" checked":""}" onclick="toggleDone(${t.id})"></div>
+      <div class="task-body">
+        <div class="task-text">${esc(t.text)}</div>
+        <div class="task-meta">
+          <span class="pill pill-who">${esc(t.who)}</span>
+          <span class="pill pill-tag">${esc(t.tag)}</span>
+          <span class="pill-by">${esc(t.by)} · ${t.date}</span>
+        </div>
+      </div>
+      <select class="task-status-sel" onchange="changeStatus(${t.id},this.value)">
+        <option value="pending"  ${t.status==="pending" ?"selected":""}>⏳ Pending</option>
+        <option value="progress" ${t.status==="progress"?"selected":""}>🔄 Progress</option>
+        <option value="done"     ${t.status==="done"    ?"selected":""}>✅ Done</option>
+      </select>
+      <button class="del-btn" onclick="deleteTask(${t.id})" title="Delete">🗑</button>
+    </div>`;
+  }).join("");
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
 </script>
 </body>
 </html>
