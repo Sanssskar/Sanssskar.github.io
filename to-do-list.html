@@ -1,588 +1,1068 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Little Corner 🌿</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Little Corner 🌿</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
-<style>
-/* ═══════════════════════════════════════
+  <style>
+    /* ═══════════════════════════════════════
    TOKENS
 ═══════════════════════════════════════ */
-:root {
-  --rose:    #c9605a;
-  --rose-lt: #f2d4d1;
-  --rose-dk: #a84843;
-  --blush:   #f9ede9;
-  --cream:   #fdf8f4;
-  --petal:   #fff2ef;
-  --sage:    #6a9b7e;
-  --sage-lt: #d4ece0;
-  --ink:     #1e1510;
-  --ink2:    #4a3a30;
-  --muted:   #9b8678;
-  --border:  #ecddd7;
-  --card:    #fffbf8;
-  --gold:    #b8965a;
-  --shadow:  rgba(30,21,16,.08);
-}
+    :root {
+      --rose: #c9605a;
+      --rose-lt: #f2d4d1;
+      --rose-dk: #a84843;
+      --blush: #f9ede9;
+      --cream: #fdf8f4;
+      --petal: #fff2ef;
+      --sage: #6a9b7e;
+      --sage-lt: #d4ece0;
+      --ink: #1e1510;
+      --ink2: #4a3a30;
+      --muted: #9b8678;
+      --border: #ecddd7;
+      --card: #fffbf8;
+      --gold: #b8965a;
+      --shadow: rgba(30, 21, 16, .08);
+    }
 
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  font-family: 'Jost', sans-serif;
-  background: var(--cream);
-  min-height: 100vh;
-  color: var(--ink);
-  overflow-x: hidden;
-}
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      min-height: 100vh;
+      color: var(--ink);
+      overflow-x: hidden;
+    }
 
-/* ── DECORATIVE BG ── */
-.bg-deco {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
-}
-.bg-deco::before {
-  content: '';
-  position: absolute; width: 700px; height: 700px;
-  background: radial-gradient(ellipse, #f5d8d4 0%, transparent 70%);
-  top: -200px; right: -200px; opacity: .55;
-}
-.bg-deco::after {
-  content: '';
-  position: absolute; width: 500px; height: 500px;
-  background: radial-gradient(ellipse, #d4eade 0%, transparent 70%);
-  bottom: -150px; left: -150px; opacity: .45;
-}
-.bg-petals {
-  position: absolute; inset: 0;
-  background-image:
-    radial-gradient(circle, #f2d4d144 1px, transparent 1px),
-    radial-gradient(circle, #d4ece044 1px, transparent 1px);
-  background-size: 48px 48px, 72px 72px;
-  background-position: 0 0, 24px 24px;
-  opacity: .6;
-}
+    /* ── DECORATIVE BG ── */
+    .bg-deco {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
 
-/* ═══════════════════════════════════════
+    .bg-deco::before {
+      content: '';
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse, #f5d8d4 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      opacity: .55;
+    }
+
+    .bg-deco::after {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(ellipse, #d4eade 0%, transparent 70%);
+      bottom: -150px;
+      left: -150px;
+      opacity: .45;
+    }
+
+    .bg-petals {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, #f2d4d144 1px, transparent 1px),
+        radial-gradient(circle, #d4ece044 1px, transparent 1px);
+      background-size: 48px 48px, 72px 72px;
+      background-position: 0 0, 24px 24px;
+      opacity: .6;
+    }
+
+    /* ═══════════════════════════════════════
    LOGIN SCREEN
 ═══════════════════════════════════════ */
-#login-screen {
-  position: fixed; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  z-index: 200; background: var(--cream);
-  transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
-}
-#login-screen.hidden {
-  opacity: 0; transform: scale(.94) translateY(-14px); pointer-events: none;
-}
+    #login-screen {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      background: var(--cream);
+      transition: opacity .6s cubic-bezier(.4, 0, .2, 1), transform .6s cubic-bezier(.4, 0, .2, 1);
+    }
 
-.login-wrap { width: min(420px, 92vw); position: relative; z-index: 1; }
+    #login-screen.hidden {
+      opacity: 0;
+      transform: scale(.94) translateY(-14px);
+      pointer-events: none;
+    }
 
-.login-ornament {
-  text-align: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem; letter-spacing: .35em;
-  color: var(--rose); margin-bottom: 28px; font-style: italic;
-}
+    .login-wrap {
+      width: min(420px, 92vw);
+      position: relative;
+      z-index: 1;
+    }
 
-.login-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  padding: 48px 44px 40px;
-  box-shadow: 0 8px 48px var(--shadow), 0 0 0 8px rgba(201,96,90,.05);
-  position: relative; overflow: hidden;
-}
-.login-card::after {
-  content: '🌸';
-  position: absolute; right: 20px; top: 20px;
-  font-size: 1.4rem; opacity: .18;
-}
+    .login-ornament {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: .35em;
+      color: var(--rose);
+      margin-bottom: 28px;
+      font-style: italic;
+    }
 
-.login-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.6rem; font-weight: 300;
-  color: var(--ink); text-align: center;
-  line-height: 1.1; margin-bottom: 4px;
-}
-.login-title em { font-style: italic; color: var(--rose); }
+    .login-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 48px 44px 40px;
+      box-shadow: 0 8px 48px var(--shadow), 0 0 0 8px rgba(201, 96, 90, .05);
+      position: relative;
+      overflow: hidden;
+    }
 
-.login-sub {
-  text-align: center; color: var(--muted);
-  font-size: .82rem; letter-spacing: .12em;
-  text-transform: uppercase; font-weight: 400; margin-bottom: 36px;
-}
+    .login-card::after {
+      content: '🌸';
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 1.4rem;
+      opacity: .18;
+    }
 
-.divider {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
-}
-.divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
-.divider span { font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
+    .login-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
 
-.field { margin-bottom: 16px; }
-.field label {
-  display: block; font-size: .72rem; font-weight: 500;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 8px;
-}
-.field input {
-  width: 100%; background: var(--cream);
-  border: 1.5px solid var(--border); border-radius: 12px;
-  padding: 13px 16px; font-family: 'Jost', sans-serif;
-  font-size: .95rem; color: var(--ink); outline: none;
-  transition: border-color .2s, box-shadow .2s;
-}
-.field input:focus {
-  border-color: var(--rose);
-  box-shadow: 0 0 0 4px rgba(201,96,90,.12);
-}
-.field input::placeholder { color: #c8b5ac; }
+    .login-title em {
+      font-style: italic;
+      color: var(--rose);
+    }
 
-/* remember me */
-.remember-row {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
-}
-.remember-row input[type="checkbox"] {
-  width: 16px; height: 16px; accent-color: var(--rose); cursor: pointer; flex-shrink: 0;
-}
-.remember-row label {
-  font-size: .82rem; color: var(--muted); cursor: pointer; user-select: none;
-}
+    .login-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: .82rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 36px;
+    }
 
-.login-btn {
-  width: 100%; background: var(--rose); color: #fff; border: none;
-  border-radius: 12px; padding: 14px;
-  font-family: 'Jost', sans-serif; font-size: .9rem; font-weight: 500;
-  letter-spacing: .08em; text-transform: uppercase; cursor: pointer;
-  transition: background .2s, transform .12s, box-shadow .2s;
-}
-.login-btn:hover { background: var(--rose-dk); box-shadow: 0 8px 24px rgba(201,96,90,.38); }
-.login-btn:active { transform: scale(.98); }
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
 
-.login-err {
-  background: #fde8e6; border: 1px solid #f5c8c4;
-  border-radius: 10px; padding: 10px 14px;
-  font-size: .84rem; color: #9b3a38;
-  margin-bottom: 14px; display: none;
-}
-.login-err.show { display: block; }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
 
-/* ═══════════════════════════════════════
+    .divider span {
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .field input {
+      width: 100%;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-family: 'Jost', sans-serif;
+      font-size: .95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .field input:focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 4px rgba(201, 96, 90, .12);
+    }
+
+    .field input::placeholder {
+      color: #c8b5ac;
+    }
+
+    /* remember me */
+    .remember-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .remember-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--rose);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .remember-row label {
+      font-size: .82rem;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: var(--rose);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: .9rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s, transform .12s, box-shadow .2s;
+    }
+
+    .login-btn:hover {
+      background: var(--rose-dk);
+      box-shadow: 0 8px 24px rgba(201, 96, 90, .38);
+    }
+
+    .login-btn:active {
+      transform: scale(.98);
+    }
+
+    .login-err {
+      background: #fde8e6;
+      border: 1px solid #f5c8c4;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: .84rem;
+      color: #9b3a38;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .login-err.show {
+      display: block;
+    }
+
+    /* ═══════════════════════════════════════
    APP SHELL
 ═══════════════════════════════════════ */
-#app {
-  position: relative; z-index: 1;
-  min-height: 100vh; display: none; opacity: 0;
-  transition: opacity .5s;
-}
-#app.show    { display: block; }
-#app.visible { opacity: 1; }
+    #app {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: none;
+      opacity: 0;
+      transition: opacity .5s;
+    }
 
-/* HEADER */
-.app-header {
-  max-width: 760px; margin: 0 auto;
-  padding: 36px 32px 0;
-  display: flex; align-items: flex-end; justify-content: space-between;
-}
-.header-eyebrow {
-  font-size: .72rem; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--muted);
-  font-weight: 400; margin-bottom: 4px;
-}
-.header-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.4rem; font-weight: 300;
-  line-height: 1.1; color: var(--ink);
-}
-.header-title em { font-style: italic; color: var(--rose); }
-.header-right { display: flex; align-items: center; gap: 10px; }
-.greeting-pill {
-  background: var(--petal); border: 1px solid var(--rose-lt);
-  border-radius: 20px; padding: 5px 14px;
-  font-size: .8rem; color: var(--rose); font-weight: 500;
-}
-.logout-btn {
-  background: none; border: 1px solid var(--border);
-  border-radius: 8px; padding: 6px 14px;
-  font-family: 'Jost', sans-serif; font-size: .78rem; color: var(--muted);
-  cursor: pointer; transition: all .2s;
-}
-.logout-btn:hover { border-color: var(--rose); color: var(--rose); }
+    #app.show {
+      display: block;
+    }
 
-/* PROGRESS */
-.progress-wrap { max-width: 760px; margin: 24px auto 0; padding: 0 32px; }
-.progress-bar-bg { height: 3px; background: var(--rose-lt); border-radius: 3px; overflow: hidden; }
-.progress-bar-fill {
-  height: 100%; background: linear-gradient(90deg, var(--rose), var(--gold));
-  border-radius: 3px; transition: width .6s cubic-bezier(.4,0,.2,1);
-}
-.progress-label {
-  display: flex; justify-content: space-between;
-  margin-top: 7px; font-size: .75rem; color: var(--muted);
-}
+    #app.visible {
+      opacity: 1;
+    }
 
-/* ADD CARD */
-.add-section { max-width: 760px; margin: 28px auto 0; padding: 0 32px; }
-.add-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 20px; padding: 20px 22px;
-  box-shadow: 0 4px 20px var(--shadow);
-}
-.add-row1 { display: flex; gap: 10px; margin-bottom: 10px; }
-.add-row1 input {
-  flex: 1; background: var(--cream);
-  border: 1.5px solid var(--border); border-radius: 11px;
-  padding: 11px 14px; font-family: 'Jost', sans-serif;
-  font-size: .93rem; color: var(--ink); outline: none;
-  transition: border-color .2s, box-shadow .2s;
-}
-.add-row1 input:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(201,96,90,.1); }
-.add-row1 input::placeholder { color: #c8b5ac; }
-.add-row2 { display: flex; gap: 10px; }
-.add-row2 select {
-  flex: 1; background: var(--cream);
-  border: 1.5px solid var(--border); border-radius: 11px;
-  padding: 10px 12px; font-family: 'Jost', sans-serif;
-  font-size: .86rem; color: var(--ink);
-  cursor: pointer; outline: none; transition: border-color .2s;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239b8678' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px;
-}
-.add-row2 select:focus { border-color: var(--rose); }
-.add-submit-btn {
-  background: var(--rose); color: #fff;
-  border: none; border-radius: 11px;
-  width: 44px; height: 44px; font-size: 1.3rem;
-  cursor: pointer; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: background .2s, transform .1s, box-shadow .2s;
-  align-self: flex-end;
-}
-.add-submit-btn:hover { background: var(--rose-dk); box-shadow: 0 6px 18px rgba(201,96,90,.35); }
-.add-submit-btn:active { transform: scale(.92); }
+    /* HEADER */
+    .app-header {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 36px 32px 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
 
-/* SYNC STATUS BAR */
-.sync-bar {
-  max-width: 760px; margin: 14px auto 0; padding: 0 32px;
-  display: flex; align-items: center; gap: 8px;
-}
-.sync-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--sage); flex-shrink: 0; transition: background .3s;
-}
-.sync-dot.syncing { background: var(--gold); animation: blink 1s infinite; }
-.sync-dot.error   { background: var(--rose); }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
-.sync-text { font-size: .75rem; color: var(--muted); }
+    .header-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
 
-/* ONLINE INDICATOR */
-.online-wrap {
-  max-width: 760px; margin: 6px auto 0; padding: 0 32px;
-  display: flex; align-items: center; gap: 8px;
-}
-.online-badge {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: var(--sage-lt); border: 1px solid #b0d9c4;
-  border-radius: 20px; padding: 3px 10px;
-  font-size: .72rem; color: #3a7a58; font-weight: 500;
-}
-.online-badge .green-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--sage); animation: blink 2s infinite;
-}
+    .header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ink);
+    }
 
-/* FILTERS */
-.filters {
-  max-width: 760px; margin: 20px auto 0; padding: 0 32px;
-  display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
-}
-.filter-btn {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 20px; padding: 6px 16px;
-  font-family: 'Jost', sans-serif; font-size: .78rem; font-weight: 500;
-  color: var(--muted); cursor: pointer; transition: all .2s;
-}
-.filter-btn.active, .filter-btn:hover {
-  background: var(--rose); border-color: var(--rose); color: #fff;
-}
+    .header-title em {
+      font-style: italic;
+      color: var(--rose);
+    }
 
-/* TASK LIST */
-.task-list {
-  max-width: 760px; margin: 16px auto 60px; padding: 0 32px;
-  display: flex; flex-direction: column; gap: 9px;
-}
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-/* TASK ITEM */
-.task-item {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 15px 16px;
-  display: flex; align-items: center; gap: 13px;
-  transition: box-shadow .2s, opacity .3s, transform .25s;
-  animation: slideIn .3s cubic-bezier(.4,0,.2,1);
-  position: relative; overflow: hidden;
-}
-.task-item::before {
-  content: ''; position: absolute;
-  left: 0; top: 0; bottom: 0; width: 3px;
-  border-radius: 3px 0 0 3px; transition: background .25s;
-}
-.task-item:hover { box-shadow: 0 6px 24px rgba(30,21,16,.09); }
-.task-item.done { opacity: .52; }
-.task-item.done .task-text { text-decoration: line-through; color: var(--muted); }
-.task-item[data-status="pending"]::before  { background: #e8b96a; }
-.task-item[data-status="progress"]::before { background: #6ab0e8; }
-.task-item[data-status="done"]::before     { background: var(--sage); }
+    .greeting-pill {
+      background: var(--petal);
+      border: 1px solid var(--rose-lt);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: .8rem;
+      color: var(--rose);
+      font-weight: 500;
+    }
 
-@keyframes slideIn {
-  from { opacity:0; transform: translateY(-10px) scale(.98); }
-  to   { opacity:1; transform: translateY(0) scale(1); }
-}
+    .logout-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s;
+    }
 
-.task-check {
-  width: 20px; height: 20px; border-radius: 5px;
-  border: 1.5px solid #d4c0b8; flex-shrink: 0; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all .2s; background: transparent;
-}
-.task-check.checked { background: var(--sage); border-color: var(--sage); }
-.task-check.checked::after { content:'✓'; color:#fff; font-size:.65rem; font-weight:700; }
+    .logout-btn:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+    }
 
-.task-body { flex: 1; min-width: 0; }
-.task-text {
-  font-size: .92rem; font-weight: 400;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink);
-}
-.task-meta { margin-top: 5px; display: flex; gap: 7px; align-items: center; flex-wrap: wrap; }
-.pill { font-size: .7rem; border-radius: 20px; padding: 2px 8px; font-weight: 500; white-space: nowrap; }
-.pill-who { background: var(--petal); color: var(--rose); border: 1px solid var(--rose-lt); }
-.pill-tag { background: var(--cream); color: var(--muted); border: 1px solid var(--border); }
-.pill-by  { color: var(--muted); font-size: .69rem; }
+    /* PROGRESS */
+    .progress-wrap {
+      max-width: 760px;
+      margin: 24px auto 0;
+      padding: 0 32px;
+    }
 
-.task-status-sel {
-  background: var(--cream); border: 1px solid var(--border);
-  border-radius: 8px; padding: 4px 24px 4px 8px;
-  font-family: 'Jost', sans-serif; font-size: .75rem; color: var(--ink);
-  cursor: pointer; outline: none; flex-shrink: 0; appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239b8678' stroke-width='1.3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 8px center;
-  transition: border-color .2s;
-}
-.task-status-sel:focus { border-color: var(--rose); }
+    .progress-bar-bg {
+      height: 3px;
+      background: var(--rose-lt);
+      border-radius: 3px;
+      overflow: hidden;
+    }
 
-.del-btn {
-  background: none; border: none; width: 28px; height: 28px; border-radius: 7px;
-  cursor: pointer; font-size: .85rem;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--muted); flex-shrink: 0; transition: background .2s, color .2s;
-}
-.del-btn:hover { background: #fde8e6; color: #b84040; }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--rose), var(--gold));
+      border-radius: 3px;
+      transition: width .6s cubic-bezier(.4, 0, .2, 1);
+    }
 
-/* EMPTY */
-.empty { text-align: center; padding: 56px 20px; color: var(--muted); }
-.empty-icon { font-size: 2.4rem; margin-bottom: 12px; opacity: .7; }
-.empty p { font-size: .9rem; font-style: italic; }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 7px;
+      font-size: .75rem;
+      color: var(--muted);
+    }
 
-/* TOAST */
-.toast {
-  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
-  background: var(--ink); color: #fff;
-  padding: 10px 22px; border-radius: 24px;
-  font-size: .83rem; font-weight: 500; letter-spacing: .03em;
-  z-index: 999; pointer-events: none;
-  transition: transform .35s cubic-bezier(.34,1.56,.64,1), opacity .35s;
-  opacity: 0; white-space: nowrap;
-}
-.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    /* ADD CARD */
+    .add-section {
+      max-width: 760px;
+      margin: 28px auto 0;
+      padding: 0 32px;
+    }
 
-/* SETUP BANNER */
-.setup-banner {
-  max-width: 760px; margin: 16px auto 0; padding: 0 32px;
-}
-.setup-card {
-  background: #fff8e8; border: 1px solid #f0d890;
-  border-radius: 14px; padding: 14px 18px;
-  font-size: .82rem; color: #7a6020; line-height: 1.6;
-}
-.setup-card strong { color: #5a4010; }
-.setup-card code {
-  background: #fef3c7; border-radius: 4px;
-  padding: 1px 6px; font-size: .8rem; color: #92400e;
-}
+    .add-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 22px;
+      box-shadow: 0 4px 20px var(--shadow);
+    }
 
-/* RESPONSIVE */
-@media (max-width: 560px) {
-  .app-header, .add-section, .filters, .task-list,
-  .progress-wrap, .sync-bar, .online-wrap, .setup-banner { padding-left: 18px; padding-right: 18px; }
-  .login-card { padding: 36px 26px 30px; }
-  .add-row2   { flex-direction: column; }
-  .header-title { font-size: 1.9rem; }
-}
-</style>
+    .add-row1 {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .add-row1 input {
+      flex: 1;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: 11px;
+      padding: 11px 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: .93rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .add-row1 input:focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 3px rgba(201, 96, 90, .1);
+    }
+
+    .add-row1 input::placeholder {
+      color: #c8b5ac;
+    }
+
+    .add-row2 {
+      display: flex;
+      gap: 10px;
+    }
+
+    .add-row2 select {
+      flex: 1;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: 11px;
+      padding: 10px 12px;
+      font-family: 'Jost', sans-serif;
+      font-size: .86rem;
+      color: var(--ink);
+      cursor: pointer;
+      outline: none;
+      transition: border-color .2s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239b8678' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 30px;
+    }
+
+    .add-row2 select:focus {
+      border-color: var(--rose);
+    }
+
+    .add-submit-btn {
+      background: var(--rose);
+      color: #fff;
+      border: none;
+      border-radius: 11px;
+      width: 44px;
+      height: 44px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, transform .1s, box-shadow .2s;
+      align-self: flex-end;
+    }
+
+    .add-submit-btn:hover {
+      background: var(--rose-dk);
+      box-shadow: 0 6px 18px rgba(201, 96, 90, .35);
+    }
+
+    .add-submit-btn:active {
+      transform: scale(.92);
+    }
+
+    /* SYNC STATUS BAR */
+    .sync-bar {
+      max-width: 760px;
+      margin: 14px auto 0;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sync-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--sage);
+      flex-shrink: 0;
+      transition: background .3s;
+    }
+
+    .sync-dot.syncing {
+      background: var(--gold);
+      animation: blink 1s infinite;
+    }
+
+    .sync-dot.error {
+      background: var(--rose);
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .25
+      }
+    }
+
+    .sync-text {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    /* ONLINE INDICATOR */
+    .online-wrap {
+      max-width: 760px;
+      margin: 6px auto 0;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .online-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--sage-lt);
+      border: 1px solid #b0d9c4;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: .72rem;
+      color: #3a7a58;
+      font-weight: 500;
+    }
+
+    .online-badge .green-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sage);
+      animation: blink 2s infinite;
+    }
+
+    /* FILTERS */
+    .filters {
+      max-width: 760px;
+      margin: 20px auto 0;
+      padding: 0 32px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--rose);
+      border-color: var(--rose);
+      color: #fff;
+    }
+
+    /* TASK LIST */
+    .task-list {
+      max-width: 760px;
+      margin: 16px auto 60px;
+      padding: 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    /* TASK ITEM */
+    .task-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 15px 16px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      transition: box-shadow .2s, opacity .3s, transform .25s;
+      animation: slideIn .3s cubic-bezier(.4, 0, .2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .task-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      border-radius: 3px 0 0 3px;
+      transition: background .25s;
+    }
+
+    .task-item:hover {
+      box-shadow: 0 6px 24px rgba(30, 21, 16, .09);
+    }
+
+    .task-item.done {
+      opacity: .52;
+    }
+
+    .task-item.done .task-text {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .task-item[data-status="pending"]::before {
+      background: #e8b96a;
+    }
+
+    .task-item[data-status="progress"]::before {
+      background: #6ab0e8;
+    }
+
+    .task-item[data-status="done"]::before {
+      background: var(--sage);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px) scale(.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .task-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 1.5px solid #d4c0b8;
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      background: transparent;
+    }
+
+    .task-check.checked {
+      background: var(--sage);
+      border-color: var(--sage);
+    }
+
+    .task-check.checked::after {
+      content: '✓';
+      color: #fff;
+      font-size: .65rem;
+      font-weight: 700;
+    }
+
+    .task-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task-text {
+      font-size: .92rem;
+      font-weight: 400;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--ink);
+    }
+
+    .task-meta {
+      margin-top: 5px;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: .7rem;
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .pill-who {
+      background: var(--petal);
+      color: var(--rose);
+      border: 1px solid var(--rose-lt);
+    }
+
+    .pill-tag {
+      background: var(--cream);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .pill-by {
+      color: var(--muted);
+      font-size: .69rem;
+    }
+
+    .task-status-sel {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 24px 4px 8px;
+      font-family: 'Jost', sans-serif;
+      font-size: .75rem;
+      color: var(--ink);
+      cursor: pointer;
+      outline: none;
+      flex-shrink: 0;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239b8678' stroke-width='1.3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      transition: border-color .2s;
+    }
+
+    .task-status-sel:focus {
+      border-color: var(--rose);
+    }
+
+    .del-btn {
+      background: none;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: background .2s, color .2s;
+    }
+
+    .del-btn:hover {
+      background: #fde8e6;
+      color: #b84040;
+    }
+
+    /* EMPTY */
+    .empty {
+      text-align: center;
+      padding: 56px 20px;
+      color: var(--muted);
+    }
+
+    .empty-icon {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+      opacity: .7;
+    }
+
+    .empty p {
+      font-size: .9rem;
+      font-style: italic;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-size: .83rem;
+      font-weight: 500;
+      letter-spacing: .03em;
+      z-index: 999;
+      pointer-events: none;
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), opacity .35s;
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* SETUP BANNER */
+    .setup-banner {
+      max-width: 760px;
+      margin: 16px auto 0;
+      padding: 0 32px;
+    }
+
+    .setup-card {
+      background: #fff8e8;
+      border: 1px solid #f0d890;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-size: .82rem;
+      color: #7a6020;
+      line-height: 1.6;
+    }
+
+    .setup-card strong {
+      color: #5a4010;
+    }
+
+    .setup-card code {
+      background: #fef3c7;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: .8rem;
+      color: #92400e;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 560px) {
+
+      .app-header,
+      .add-section,
+      .filters,
+      .task-list,
+      .progress-wrap,
+      .sync-bar,
+      .online-wrap,
+      .setup-banner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .login-card {
+        padding: 36px 26px 30px;
+      }
+
+      .add-row2 {
+        flex-direction: column;
+      }
+
+      .header-title {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="bg-deco"><div class="bg-petals"></div></div>
-<div class="toast" id="toast"></div>
-
-<!-- ═══════ LOGIN ═══════ -->
-<div id="login-screen">
-  <div class="login-wrap">
-    <div class="login-ornament">✦ our little corner ✦</div>
-    <div class="login-card">
-      <h1 class="login-title">Welcome <em>home,</em><br>my love</h1>
-      <p class="login-sub">Just the two of us</p>
-      <div class="divider"><span>enter</span></div>
-      <div class="login-err" id="login-err"></div>
-      <div class="field">
-        <label>Your name</label>
-        <input type="text" id="login-name" placeholder="Sanskar or Nilam…" autocomplete="off">
-      </div>
-      <div class="field">
-        <label>Password</label>
-        <input type="password" id="login-pass" placeholder="Our secret…">
-      </div>
-      <div class="remember-row">
-        <input type="checkbox" id="remember-me">
-        <label for="remember-me">Remember me on this device 💕</label>
-      </div>
-      <button class="login-btn" onclick="tryLogin()">Enter our space</button>
-    </div>
+  <div class="bg-deco">
+    <div class="bg-petals"></div>
   </div>
-</div>
+  <div class="toast" id="toast"></div>
 
-<!-- ═══════ APP ═══════ -->
-<div id="app">
-  <header class="app-header">
-    <div class="header-left">
-      <div class="header-eyebrow">our shared space</div>
-      <h1 class="header-title">Our <em>To-Do</em> 🌿</h1>
-    </div>
-    <div class="header-right">
-      <span class="greeting-pill" id="greeting"></span>
-      <button class="logout-btn" onclick="logout()">Leave ↗</button>
-    </div>
-  </header>
-
-  <div class="progress-wrap">
-    <div class="progress-bar-bg">
-      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
-    </div>
-    <div class="progress-label">
-      <span id="progress-label-left">0 tasks</span>
-      <span id="progress-label-right">0% done</span>
-    </div>
-  </div>
-
-  <div id="setup-banner-wrap"></div>
-
-  <div class="add-section">
-    <div class="add-card">
-      <div class="add-row1">
-        <input type="text" id="task-input" placeholder="Add something for us to do… 🌷" maxlength="120">
-      </div>
-      <div class="add-row2">
-        <select id="task-who">
-          <option value="Both of us">👫 Both of us</option>
-          <option value="Sanskar">💙 Sanskar</option>
-          <option value="Nilam">💗 Nilam</option>
-        </select>
-        <select id="task-tag">
-          <option value="🏠 Home">🏠 Home</option>
-          <option value="🛒 Shopping">🛒 Shopping</option>
-          <option value="💑 Date">💑 Date</option>
-          <option value="💰 Finance">💰 Finance</option>
-          <option value="✈️ Travel">✈️ Travel</option>
-          <option value="🎉 Fun">🎉 Fun</option>
-          <option value="📋 Other">📋 Other</option>
-        </select>
-        <button class="add-submit-btn" onclick="addTask()" title="Add task">＋</button>
+  <!-- ═══════ LOGIN ═══════ -->
+  <div id="login-screen">
+    <div class="login-wrap">
+      <div class="login-ornament">✦ our little corner ✦</div>
+      <div class="login-card">
+        <h1 class="login-title">Welcome <em>home,</em><br>my love</h1>
+        <p class="login-sub">Just the two of us</p>
+        <div class="divider"><span>enter</span></div>
+        <div class="login-err" id="login-err"></div>
+        <div class="field">
+          <label>Your name</label>
+          <input type="text" id="login-name" placeholder="Sanskar or Nilam…" autocomplete="off">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="login-pass" placeholder="Our secret…">
+        </div>
+        <div class="remember-row">
+          <input type="checkbox" id="remember-me">
+          <label for="remember-me">Remember me on this device 💕</label>
+        </div>
+        <button class="login-btn" onclick="tryLogin()">Enter our space</button>
       </div>
     </div>
   </div>
 
-  <div class="sync-bar">
-    <div class="sync-dot" id="sync-dot"></div>
-    <span class="sync-text" id="sync-text">Connecting…</span>
+  <!-- ═══════ APP ═══════ -->
+  <div id="app">
+    <header class="app-header">
+      <div class="header-left">
+        <div class="header-eyebrow">our shared space</div>
+        <h1 class="header-title">Our <em>To-Do</em> 🌿</h1>
+      </div>
+      <div class="header-right">
+        <span class="greeting-pill" id="greeting"></span>
+        <button class="logout-btn" onclick="logout()">Leave ↗</button>
+      </div>
+    </header>
+
+    <div class="progress-wrap">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="progress-label">
+        <span id="progress-label-left">0 tasks</span>
+        <span id="progress-label-right">0% done</span>
+      </div>
+    </div>
+
+    <div id="setup-banner-wrap"></div>
+
+    <div class="add-section">
+      <div class="add-card">
+        <div class="add-row1">
+          <input type="text" id="task-input" placeholder="Add something for us to do… 🌷" maxlength="120">
+        </div>
+        <div class="add-row2">
+          <select id="task-who">
+            <option value="Both of us">👫 Both of us</option>
+            <option value="Sanskar">💙 Sanskar</option>
+            <option value="Nilam">💗 Nilam</option>
+          </select>
+          <select id="task-tag">
+            <option value="🏠 Home">🏠 Home</option>
+            <option value="🛒 Shopping">🛒 Shopping</option>
+            <option value="💑 Date">💑 Date</option>
+            <option value="💰 Finance">💰 Finance</option>
+            <option value="✈️ Travel">✈️ Travel</option>
+            <option value="🎉 Fun">🎉 Fun</option>
+            <option value="📋 Other">📋 Other</option>
+          </select>
+          <button class="add-submit-btn" onclick="addTask()" title="Add task">＋</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sync-bar">
+      <div class="sync-dot" id="sync-dot"></div>
+      <span class="sync-text" id="sync-text">Connecting…</span>
+    </div>
+
+    <div class="online-wrap" id="online-wrap"></div>
+
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
+      <button class="filter-btn" onclick="setFilter(this,'pending')">⏳ Pending</button>
+      <button class="filter-btn" onclick="setFilter(this,'progress')">🔄 In Progress</button>
+      <button class="filter-btn" onclick="setFilter(this,'done')">✅ Done</button>
+    </div>
+
+    <div class="task-list" id="task-list"></div>
   </div>
 
-  <div class="online-wrap" id="online-wrap"></div>
+  <script>
+    /* ═══════════════════════════════════════════════════════
+       CONFIG — replace with your Firebase project values
+       Steps:
+       1. Go to https://console.firebase.google.com
+       2. Create a project → Add web app
+       3. Copy firebaseConfig values below
+       4. In Firebase console → Realtime Database → Create database
+       5. In Rules tab paste: { "rules": { ".read": true, ".write": true } }
+    ═══════════════════════════════════════════════════════ */
+    const FIREBASE_CONFIG = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
 
-  <div class="filters">
-    <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
-    <button class="filter-btn" onclick="setFilter(this,'pending')">⏳ Pending</button>
-    <button class="filter-btn" onclick="setFilter(this,'progress')">🔄 In Progress</button>
-    <button class="filter-btn" onclick="setFilter(this,'done')">✅ Done</button>
-  </div>
+    const PASSWORD = "Sanskar@9814351861";
+    const USER_A = "Sanskar";
+    const USER_B = "Nilam";
+    const DB_PATH = "couple_tasks";
+    const PRESENCE_PATH = "couple_presence";
+    const REMEMBER_KEY = "olc_remember";
+    const SESSION_KEY = "olc_session";
 
-  <div class="task-list" id="task-list"></div>
-</div>
+    let currentUser = "";
+    let currentFilter = "all";
+    let db = null;
+    let tasksRef = null;
+    let presenceRef = null;
+    let firebaseReady = false;
 
-<script>
-/* ═══════════════════════════════════════════════════════
-   CONFIG — replace with your Firebase project values
-   Steps:
-   1. Go to https://console.firebase.google.com
-   2. Create a project → Add web app
-   3. Copy firebaseConfig values below
-   4. In Firebase console → Realtime Database → Create database
-   5. In Rules tab paste: { "rules": { ".read": true, ".write": true } }
-═══════════════════════════════════════════════════════ */
-const FIREBASE_CONFIG = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT.firebaseapp.com",
-  databaseURL:       "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId:             "YOUR_APP_ID"
-};
+    /* ─── FIREBASE INIT ─── */
+    function initFirebase() {
+      try {
+        if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+        db = firebase.database();
+        tasksRef = db.ref(DB_PATH);
+        firebaseReady = true;
+        showSetupBanner(false);
+        return true;
+      } catch (e) {
+        firebaseReady = false;
+        showSetupBanner(true);
+        setSyncState("error");
+        return false;
+      }
+    }
 
-const PASSWORD    = "Sanskar@9814351861";
-const USER_A      = "Sanskar";
-const USER_B      = "Nilam";
-const DB_PATH     = "couple_tasks";
-const PRESENCE_PATH = "couple_presence";
-const REMEMBER_KEY  = "olc_remember";
-const SESSION_KEY   = "olc_session";
+    function isConfigured() {
+      return FIREBASE_CONFIG.apiKey !== "YOUR_API_KEY";
+    }
 
-let currentUser   = "";
-let currentFilter = "all";
-let db            = null;
-let tasksRef      = null;
-let presenceRef   = null;
-let firebaseReady = false;
-
-/* ─── FIREBASE INIT ─── */
-function initFirebase() {
-  try {
-    if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
-    db        = firebase.database();
-    tasksRef  = db.ref(DB_PATH);
-    firebaseReady = true;
-    showSetupBanner(false);
-    return true;
-  } catch(e) {
-    firebaseReady = false;
-    showSetupBanner(true);
-    setSyncState("error");
-    return false;
-  }
-}
-
-function isConfigured() {
-  return FIREBASE_CONFIG.apiKey !== "YOUR_API_KEY";
-}
-
-function showSetupBanner(show) {
-  const wrap = document.getElementById("setup-banner-wrap");
-  if (!show) { wrap.innerHTML = ""; return; }
-  wrap.innerHTML = `
+    function showSetupBanner(show) {
+      const wrap = document.getElementById("setup-banner-wrap");
+      if (!show) { wrap.innerHTML = ""; return; }
+      wrap.innerHTML = `
     <div class="setup-banner">
       <div class="setup-card">
         <strong>⚙️ Firebase setup needed for cross-device sync</strong><br>
@@ -592,212 +1072,212 @@ function showSetupBanner(show) {
         <br><em>Until then, tasks are saved locally in this browser only.</em>
       </div>
     </div>`;
-}
-
-/* ─── LOCAL FALLBACK STORAGE ─── */
-const LOCAL_KEY = "olc_tasks_local";
-function localSave(tasks) {
-  try { localStorage.setItem(LOCAL_KEY, JSON.stringify(tasks)); } catch(e) {}
-}
-function localLoad() {
-  try { return JSON.parse(localStorage.getItem(LOCAL_KEY)) || []; } catch(e) { return []; }
-}
-
-/* ─── SYNC STATE UI ─── */
-function setSyncState(state, extra) {
-  const dot = document.getElementById("sync-dot");
-  const txt = document.getElementById("sync-text");
-  if (!dot) return;
-  const partner = currentUser === USER_A ? USER_B : USER_A;
-  dot.className = "sync-dot" + (state==="syncing"?" syncing":state==="error"?" error":"");
-  if      (state==="syncing") txt.textContent = "Syncing…";
-  else if (state==="error")   txt.textContent = extra || "Offline — changes saved locally";
-  else                         txt.textContent = `Live sync active · ${partner} sees changes instantly`;
-}
-
-/* ─── PRESENCE ─── */
-function setupPresence() {
-  if (!firebaseReady || !db) return;
-  const presRef = db.ref(`${PRESENCE_PATH}/${currentUser}`);
-  presRef.set({ online: true, lastSeen: Date.now() });
-  presRef.onDisconnect().set({ online: false, lastSeen: Date.now() });
-
-  db.ref(PRESENCE_PATH).on("value", snap => {
-    const data = snap.val() || {};
-    const partner = currentUser === USER_A ? USER_B : USER_A;
-    const partnerData = data[partner];
-    const wrap = document.getElementById("online-wrap");
-    if (partnerData && partnerData.online) {
-      wrap.innerHTML = `<span class="online-badge"><span class="green-dot"></span>${partner} is online right now 💕</span>`;
-    } else {
-      wrap.innerHTML = "";
     }
-  });
-}
 
-/* ─── AUTH ─── */
-function tryLogin() {
-  const name     = document.getElementById("login-name").value.trim();
-  const pass     = document.getElementById("login-pass").value;
-  const remember = document.getElementById("remember-me").checked;
-  if (!name) { showErr("Tell me your name first 🥺"); return; }
-  if (pass !== PASSWORD) { showErr("Wrong password, sweetheart 🥺"); return; }
-  document.getElementById("login-err").classList.remove("show");
-  currentUser = name;
-  try {
-    sessionStorage.setItem(SESSION_KEY, name);
-    if (remember) localStorage.setItem(REMEMBER_KEY, name);
-    else          localStorage.removeItem(REMEMBER_KEY);
-  } catch(e) {}
-  enterApp();
-}
+    /* ─── LOCAL FALLBACK STORAGE ─── */
+    const LOCAL_KEY = "olc_tasks_local";
+    function localSave(tasks) {
+      try { localStorage.setItem(LOCAL_KEY, JSON.stringify(tasks)); } catch (e) { }
+    }
+    function localLoad() {
+      try { return JSON.parse(localStorage.getItem(LOCAL_KEY)) || []; } catch (e) { return []; }
+    }
 
-function showErr(msg) {
-  const e = document.getElementById("login-err");
-  e.textContent = msg; e.classList.add("show");
-}
+    /* ─── SYNC STATE UI ─── */
+    function setSyncState(state, extra) {
+      const dot = document.getElementById("sync-dot");
+      const txt = document.getElementById("sync-text");
+      if (!dot) return;
+      const partner = currentUser === USER_A ? USER_B : USER_A;
+      dot.className = "sync-dot" + (state === "syncing" ? " syncing" : state === "error" ? " error" : "");
+      if (state === "syncing") txt.textContent = "Syncing…";
+      else if (state === "error") txt.textContent = extra || "Offline — changes saved locally";
+      else txt.textContent = `Live sync active · ${partner} sees changes instantly`;
+    }
 
-function enterApp() {
-  document.getElementById("greeting").textContent = "Hi, " + currentUser + " 💕";
-  document.getElementById("login-screen").classList.add("hidden");
-  const app = document.getElementById("app");
-  app.classList.add("show");
-  setTimeout(() => app.classList.add("visible"), 20);
+    /* ─── PRESENCE ─── */
+    function setupPresence() {
+      if (!firebaseReady || !db) return;
+      const presRef = db.ref(`${PRESENCE_PATH}/${currentUser}`);
+      presRef.set({ online: true, lastSeen: Date.now() });
+      presRef.onDisconnect().set({ online: false, lastSeen: Date.now() });
 
-  if (isConfigured() && initFirebase()) {
-    startFirebaseSync();
-    setupPresence();
-  } else {
-    showSetupBanner(!isConfigured());
-    setSyncState("error", "Local only — set up Firebase for cross-device sync");
-    renderWith(localLoad());
-  }
-}
+      db.ref(PRESENCE_PATH).on("value", snap => {
+        const data = snap.val() || {};
+        const partner = currentUser === USER_A ? USER_B : USER_A;
+        const partnerData = data[partner];
+        const wrap = document.getElementById("online-wrap");
+        if (partnerData && partnerData.online) {
+          wrap.innerHTML = `<span class="online-badge"><span class="green-dot"></span>${partner} is online right now 💕</span>`;
+        } else {
+          wrap.innerHTML = "";
+        }
+      });
+    }
 
-function logout() {
-  if (firebaseReady && db) {
-    db.ref(`${PRESENCE_PATH}/${currentUser}`).set({ online: false, lastSeen: Date.now() });
-    if (tasksRef) tasksRef.off();
-    db.ref(PRESENCE_PATH).off();
-  }
-  try {
-    sessionStorage.removeItem(SESSION_KEY);
-    localStorage.removeItem(REMEMBER_KEY);
-  } catch(e) {}
-  currentUser = "";
-  firebaseReady = false;
-  const app = document.getElementById("app");
-  app.classList.remove("visible");
-  setTimeout(() => app.classList.remove("show"), 500);
-  document.getElementById("login-screen").classList.remove("hidden");
-  document.getElementById("login-pass").value = "";
-  document.getElementById("login-name").value = "";
-  document.getElementById("remember-me").checked = false;
-  document.getElementById("online-wrap").innerHTML = "";
-}
+    /* ─── AUTH ─── */
+    function tryLogin() {
+      const name = document.getElementById("login-name").value.trim();
+      const pass = document.getElementById("login-pass").value;
+      const remember = document.getElementById("remember-me").checked;
+      if (!name) { showErr("Tell me your name first 🥺"); return; }
+      if (pass !== PASSWORD) { showErr("Wrong password, sweetheart 🥺"); return; }
+      document.getElementById("login-err").classList.remove("show");
+      currentUser = name;
+      try {
+        sessionStorage.setItem(SESSION_KEY, name);
+        if (remember) localStorage.setItem(REMEMBER_KEY, name);
+        else localStorage.removeItem(REMEMBER_KEY);
+      } catch (e) { }
+      enterApp();
+    }
 
-/* ─── FIREBASE REAL-TIME LISTENER ─── */
-function startFirebaseSync() {
-  setSyncState("syncing");
-  tasksRef.on("value", snap => {
-    const raw = snap.val();
-    const tasks = raw ? Object.values(raw).sort((a,b) => b.id - a.id) : [];
-    localSave(tasks);
-    renderWith(tasks);
-    setSyncState("ok");
-  }, err => {
-    setSyncState("error");
-    renderWith(localLoad());
-  });
-}
+    function showErr(msg) {
+      const e = document.getElementById("login-err");
+      e.textContent = msg; e.classList.add("show");
+    }
 
-/* ─── TASK CRUD ─── */
-async function addTask() {
-  const input = document.getElementById("task-input");
-  const text  = input.value.trim();
-  if (!text) return;
-  const task = {
-    id:     Date.now(),
-    text,
-    who:    document.getElementById("task-who").value,
-    tag:    document.getElementById("task-tag").value,
-    status: "pending",
-    by:     currentUser,
-    date:   new Date().toLocaleDateString("en-IN", { day:"numeric", month:"short" })
-  };
-  input.value = "";
-  if (firebaseReady && tasksRef) {
-    setSyncState("syncing");
-    try { await tasksRef.child(String(task.id)).set(task); }
-    catch(e) { setSyncState("error"); }
-  } else {
-    const tasks = localLoad();
-    tasks.unshift(task);
-    localSave(tasks);
-    renderWith(tasks);
-  }
-}
+    function enterApp() {
+      document.getElementById("greeting").textContent = "Hi, " + currentUser + " 💕";
+      document.getElementById("login-screen").classList.add("hidden");
+      const app = document.getElementById("app");
+      app.classList.add("show");
+      setTimeout(() => app.classList.add("visible"), 20);
 
-async function changeStatus(id, val) {
-  if (firebaseReady && tasksRef) {
-    try { await tasksRef.child(String(id)).update({ status: val }); }
-    catch(e) { setSyncState("error"); }
-  } else {
-    const tasks = localLoad().map(t => t.id===id ? {...t, status:val} : t);
-    localSave(tasks); renderWith(tasks);
-  }
-}
+      if (isConfigured() && initFirebase()) {
+        startFirebaseSync();
+        setupPresence();
+      } else {
+        showSetupBanner(!isConfigured());
+        setSyncState("error", "Local only — set up Firebase for cross-device sync");
+        renderWith(localLoad());
+      }
+    }
 
-async function toggleDone(id) {
-  if (firebaseReady && tasksRef) {
-    try {
-      const snap = await tasksRef.child(String(id)).get();
-      const t = snap.val();
-      if (t) await tasksRef.child(String(id)).update({ status: t.status==="done" ? "pending" : "done" });
-    } catch(e) { setSyncState("error"); }
-  } else {
-    const tasks = localLoad().map(t => t.id===id ? {...t, status:t.status==="done"?"pending":"done"} : t);
-    localSave(tasks); renderWith(tasks);
-  }
-}
+    function logout() {
+      if (firebaseReady && db) {
+        db.ref(`${PRESENCE_PATH}/${currentUser}`).set({ online: false, lastSeen: Date.now() });
+        if (tasksRef) tasksRef.off();
+        db.ref(PRESENCE_PATH).off();
+      }
+      try {
+        sessionStorage.removeItem(SESSION_KEY);
+        localStorage.removeItem(REMEMBER_KEY);
+      } catch (e) { }
+      currentUser = "";
+      firebaseReady = false;
+      const app = document.getElementById("app");
+      app.classList.remove("visible");
+      setTimeout(() => app.classList.remove("show"), 500);
+      document.getElementById("login-screen").classList.remove("hidden");
+      document.getElementById("login-pass").value = "";
+      document.getElementById("login-name").value = "";
+      document.getElementById("remember-me").checked = false;
+      document.getElementById("online-wrap").innerHTML = "";
+    }
 
-async function deleteTask(id) {
-  if (firebaseReady && tasksRef) {
-    try { await tasksRef.child(String(id)).remove(); }
-    catch(e) { setSyncState("error"); }
-  } else {
-    const tasks = localLoad().filter(t => t.id!==id);
-    localSave(tasks); renderWith(tasks);
-  }
-}
+    /* ─── FIREBASE REAL-TIME LISTENER ─── */
+    function startFirebaseSync() {
+      setSyncState("syncing");
+      tasksRef.on("value", snap => {
+        const raw = snap.val();
+        const tasks = raw ? Object.values(raw).sort((a, b) => b.id - a.id) : [];
+        localSave(tasks);
+        renderWith(tasks);
+        setSyncState("ok");
+      }, err => {
+        setSyncState("error");
+        renderWith(localLoad());
+      });
+    }
 
-/* ─── FILTER ─── */
-function setFilter(btn, f) {
-  currentFilter = f;
-  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  renderWith(localLoad());
-}
+    /* ─── TASK CRUD ─── */
+    async function addTask() {
+      const input = document.getElementById("task-input");
+      const text = input.value.trim();
+      if (!text) return;
+      const task = {
+        id: Date.now(),
+        text,
+        who: document.getElementById("task-who").value,
+        tag: document.getElementById("task-tag").value,
+        status: "pending",
+        by: currentUser,
+        date: new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short" })
+      };
+      input.value = "";
+      if (firebaseReady && tasksRef) {
+        setSyncState("syncing");
+        try { await tasksRef.child(String(task.id)).set(task); }
+        catch (e) { setSyncState("error"); }
+      } else {
+        const tasks = localLoad();
+        tasks.unshift(task);
+        localSave(tasks);
+        renderWith(tasks);
+      }
+    }
 
-/* ─── RENDER ─── */
-function renderWith(all) {
-  const shown = currentFilter==="all" ? all : all.filter(t => t.status===currentFilter);
-  const done  = all.filter(t => t.status==="done").length;
-  const pct   = all.length ? Math.round((done/all.length)*100) : 0;
-  document.getElementById("progress-fill").style.width = pct+"%";
-  document.getElementById("progress-label-left").textContent  = all.length+" task"+(all.length!==1?"s":"");
-  document.getElementById("progress-label-right").textContent = pct+"% complete";
-  const list = document.getElementById("task-list");
-  if (!shown.length) {
-    const icons={all:"🌱",pending:"🌷",progress:"✨",done:"🎉"};
-    const msgs ={all:"Nothing here yet — add your first task!",pending:"All caught up! 🥳",progress:"Nothing in progress right now.",done:"Nothing completed yet — let's get started!"};
-    list.innerHTML=`<div class="empty"><div class="empty-icon">${icons[currentFilter]}</div><p>${msgs[currentFilter]}</p></div>`;
-    return;
-  }
-  list.innerHTML = shown.map(t => {
-    const isDone = t.status==="done";
-    return `<div class="task-item${isDone?" done":""}" data-status="${t.status}">
-      <div class="task-check${isDone?" checked":""}" onclick="toggleDone(${t.id})"></div>
+    async function changeStatus(id, val) {
+      if (firebaseReady && tasksRef) {
+        try { await tasksRef.child(String(id)).update({ status: val }); }
+        catch (e) { setSyncState("error"); }
+      } else {
+        const tasks = localLoad().map(t => t.id === id ? { ...t, status: val } : t);
+        localSave(tasks); renderWith(tasks);
+      }
+    }
+
+    async function toggleDone(id) {
+      if (firebaseReady && tasksRef) {
+        try {
+          const snap = await tasksRef.child(String(id)).get();
+          const t = snap.val();
+          if (t) await tasksRef.child(String(id)).update({ status: t.status === "done" ? "pending" : "done" });
+        } catch (e) { setSyncState("error"); }
+      } else {
+        const tasks = localLoad().map(t => t.id === id ? { ...t, status: t.status === "done" ? "pending" : "done" } : t);
+        localSave(tasks); renderWith(tasks);
+      }
+    }
+
+    async function deleteTask(id) {
+      if (firebaseReady && tasksRef) {
+        try { await tasksRef.child(String(id)).remove(); }
+        catch (e) { setSyncState("error"); }
+      } else {
+        const tasks = localLoad().filter(t => t.id !== id);
+        localSave(tasks); renderWith(tasks);
+      }
+    }
+
+    /* ─── FILTER ─── */
+    function setFilter(btn, f) {
+      currentFilter = f;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderWith(localLoad());
+    }
+
+    /* ─── RENDER ─── */
+    function renderWith(all) {
+      const shown = currentFilter === "all" ? all : all.filter(t => t.status === currentFilter);
+      const done = all.filter(t => t.status === "done").length;
+      const pct = all.length ? Math.round((done / all.length) * 100) : 0;
+      document.getElementById("progress-fill").style.width = pct + "%";
+      document.getElementById("progress-label-left").textContent = all.length + " task" + (all.length !== 1 ? "s" : "");
+      document.getElementById("progress-label-right").textContent = pct + "% complete";
+      const list = document.getElementById("task-list");
+      if (!shown.length) {
+        const icons = { all: "🌱", pending: "🌷", progress: "✨", done: "🎉" };
+        const msgs = { all: "Nothing here yet — add your first task!", pending: "All caught up! 🥳", progress: "Nothing in progress right now.", done: "Nothing completed yet — let's get started!" };
+        list.innerHTML = `<div class="empty"><div class="empty-icon">${icons[currentFilter]}</div><p>${msgs[currentFilter]}</p></div>`;
+        return;
+      }
+      list.innerHTML = shown.map(t => {
+        const isDone = t.status === "done";
+        return `<div class="task-item${isDone ? " done" : ""}" data-status="${t.status}">
+      <div class="task-check${isDone ? " checked" : ""}" onclick="toggleDone(${t.id})"></div>
       <div class="task-body">
         <div class="task-text">${esc(t.text)}</div>
         <div class="task-meta">
@@ -807,58 +1287,59 @@ function renderWith(all) {
         </div>
       </div>
       <select class="task-status-sel" onchange="changeStatus(${t.id},this.value)">
-        <option value="pending"  ${t.status==="pending" ?"selected":""}>⏳ Pending</option>
-        <option value="progress" ${t.status==="progress"?"selected":""}>🔄 Progress</option>
-        <option value="done"     ${t.status==="done"    ?"selected":""}>✅ Done</option>
+        <option value="pending"  ${t.status === "pending" ? "selected" : ""}>⏳ Pending</option>
+        <option value="progress" ${t.status === "progress" ? "selected" : ""}>🔄 Progress</option>
+        <option value="done"     ${t.status === "done" ? "selected" : ""}>✅ Done</option>
       </select>
       <button class="del-btn" onclick="deleteTask(${t.id})" title="Delete">🗑</button>
     </div>`;
-  }).join("");
-}
-
-/* ─── TOAST ─── */
-function toast(msg) {
-  const el = document.getElementById("toast");
-  el.textContent = msg; el.classList.add("show");
-  setTimeout(() => el.classList.remove("show"), 2600);
-}
-
-function esc(s) {
-  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
-
-/* ─── BOOT ─── */
-window.addEventListener("DOMContentLoaded", () => {
-  // Auto-login
-  try {
-    const remembered = localStorage.getItem(REMEMBER_KEY);
-    const sessioned  = sessionStorage.getItem(SESSION_KEY);
-    if (remembered) {
-      currentUser = remembered;
-      document.getElementById("login-name").value = remembered;
-      document.getElementById("remember-me").checked = true;
-      enterApp();
-      return;
+      }).join("");
     }
-    if (sessioned) {
-      currentUser = sessioned;
-      enterApp();
-      return;
+
+    /* ─── TOAST ─── */
+    function toast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg; el.classList.add("show");
+      setTimeout(() => el.classList.remove("show"), 2600);
     }
-    // Pre-fill name if remembered before
-    const last = localStorage.getItem(REMEMBER_KEY);
-    if (last) document.getElementById("login-name").value = last;
-  } catch(e) {}
 
-  // Key bindings
-  document.getElementById("login-pass").addEventListener("keydown", e => { if(e.key==="Enter") tryLogin(); });
-  document.getElementById("login-name").addEventListener("keydown", e => { if(e.key==="Enter") document.getElementById("login-pass").focus(); });
-});
+    function esc(s) {
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const ti = document.getElementById("task-input");
-  if (ti) ti.addEventListener("keydown", e => { if(e.key==="Enter") addTask(); });
-});
-</script>
+    /* ─── BOOT ─── */
+    window.addEventListener("DOMContentLoaded", () => {
+      // Auto-login
+      try {
+        const remembered = localStorage.getItem(REMEMBER_KEY);
+        const sessioned = sessionStorage.getItem(SESSION_KEY);
+        if (remembered) {
+          currentUser = remembered;
+          document.getElementById("login-name").value = remembered;
+          document.getElementById("remember-me").checked = true;
+          enterApp();
+          return;
+        }
+        if (sessioned) {
+          currentUser = sessioned;
+          enterApp();
+          return;
+        }
+        // Pre-fill name if remembered before
+        const last = localStorage.getItem(REMEMBER_KEY);
+        if (last) document.getElementById("login-name").value = last;
+      } catch (e) { }
+
+      // Key bindings
+      document.getElementById("login-pass").addEventListener("keydown", e => { if (e.key === "Enter") tryLogin(); });
+      document.getElementById("login-name").addEventListener("keydown", e => { if (e.key === "Enter") document.getElementById("login-pass").focus(); });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const ti = document.getElementById("task-input");
+      if (ti) ti.addEventListener("keydown", e => { if (e.key === "Enter") addTask(); });
+    });
+  </script>
 </body>
+
 </html>
