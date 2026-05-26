@@ -1,25 +1,5 @@
 
-        .page-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .page-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .page-header .subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-        }
-
-        /* ── Hero Banner ── */
+/* ── Hero Banner ── */
         .services-hero {
             background: var(--gradient-1);
             border-radius: 1.5rem;
@@ -404,11 +384,7 @@
             .services-hero h2 {
                 font-size: 1.3rem;
             }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-        }
+}
 
         @media (max-width: 480px) {
             .poster-side {
