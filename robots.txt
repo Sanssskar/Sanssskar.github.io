@@ -3,6 +3,7 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
+Disallow: /index.html
  
 # Block AI training bots specifically
 User-agent: GPTBot

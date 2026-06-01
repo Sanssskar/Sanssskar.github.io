@@ -1,36 +1,37 @@
 Options -Indexes
 RewriteEngine On
 
-# ─────────────────────────────────────────────────────────────────────
-# STEP 1: Force HTTPS (redirect HTTP → HTTPS)
-# ─────────────────────────────────────────────────────────────────────
-RewriteCond %{HTTPS} off
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# ─────────────────────────────────────────────────────────────────────
-# STEP 2: Remove www (redirect www → non-www)
-# ─────────────────────────────────────────────────────────────────────
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+# =====================================================================
+# STEP 1: Force HTTPS + remove www in ONE single redirect (no double-hop)
+# Handles all 4 cases in one pass:
+#   http://www.domain/  -> https://domain/
+#   http://domain/      -> https://domain/
+#   https://www.domain/ -> https://domain/
+#   https://domain/     -> (already canonical, no redirect)
+# =====================================================================
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
-# ─────────────────────────────────────────────────────────────────────
-# STEP 3: Remove /index.html from URL
-# Fixes: https://shresthasanskar.com.np/index.html → /
-# ─────────────────────────────────────────────────────────────────────
-RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
-RewriteRule ^index\.html$ https://shresthasanskar.com.np/ [L,R=301]
+# =====================================================================
+# STEP 2: Remove /index.html from URL
+# https://shresthasanskar.com.np/index.html -> /
+# =====================================================================
+RewriteCond %{THE_REQUEST} \s/+index\.html [NC]
+RewriteRule ^index\.html$ https://shresthasanskar.com.np/ [L,R=301,QSD]
 
-# ─────────────────────────────────────────────────────────────────────
-# STEP 4: Remove trailing slash from non-root pages (optional, tidy URLs)
-# e.g. /about.html/ → /about.html
-# ─────────────────────────────────────────────────────────────────────
+# =====================================================================
+# STEP 3: Remove trailing slash from non-root pages
+# e.g. /about.html/ -> /about.html
+# =====================================================================
 RewriteCond %{REQUEST_URI} !^/$
 RewriteCond %{REQUEST_URI} /$
 RewriteRule ^(.+)/$ https://shresthasanskar.com.np/$1 [L,R=301]
 
-# ─────────────────────────────────────────────────────────────────────
+# =====================================================================
 # Security Headers
-# ─────────────────────────────────────────────────────────────────────
+# =====================================================================
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "SAMEORIGIN"
@@ -39,9 +40,9 @@ RewriteRule ^(.+)/$ https://shresthasanskar.com.np/$1 [L,R=301]
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
 
-# ─────────────────────────────────────────────────────────────────────
+# =====================================================================
 # Browser Caching (improves Core Web Vitals / LCP)
-# ─────────────────────────────────────────────────────────────────────
+# =====================================================================
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType image/jpeg "access plus 1 year"
@@ -56,16 +57,16 @@ RewriteRule ^(.+)/$ https://shresthasanskar.com.np/$1 [L,R=301]
     ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
 
-# ─────────────────────────────────────────────────────────────────────
+# =====================================================================
 # GZIP Compression (faster page loads)
-# ─────────────────────────────────────────────────────────────────────
+# =====================================================================
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/css text/javascript
     AddOutputFilterByType DEFLATE application/javascript application/json
     AddOutputFilterByType DEFLATE image/svg+xml font/woff2
 </IfModule>
 
-# ─────────────────────────────────────────────────────────────────────
-# Custom 404 Page (optional but good for SEO)
-# ─────────────────────────────────────────────────────────────────────
+# =====================================================================
+# Custom 404 Page
+# =====================================================================
 ErrorDocument 404 /index.html
