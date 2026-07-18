@@ -71,7 +71,7 @@ document.addEventListener('click', (e) => createSparks(e.clientX, e.clientY));
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(
-        '.project-card, .skill-bubble, .social-card, .service-card, .blog-card, .preview-card, .blog-preview-card'
+        '.project-card, .skill-bubble, .social-card, .service-card, .preview-card'
     ).forEach(c => {
         c.addEventListener('mouseenter', (e) => createSparks(e.clientX, e.clientY));
     });
