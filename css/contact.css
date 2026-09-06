@@ -120,6 +120,11 @@ a.contact-method:hover {
     white-space: nowrap;
 }
 
+.reminder-tag i {
+    color: var(--accent-1);
+    margin-right: 0.35rem;
+}
+
 .social-icons-row {
     display: flex;
     gap: 0.8rem;
