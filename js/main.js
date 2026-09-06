@@ -67,7 +67,13 @@ function createSparks(x, y) {
     }
 }
 
-document.addEventListener('click', (e) => createSparks(e.clientX, e.clientY));
+// Scoped to interactive elements only (was previously firing on every click
+// anywhere on the page, including empty whitespace).
+document.addEventListener('click', (e) => {
+    if (e.target.closest('a, button, .project-card, .skill-bubble, .social-card, .service-card, .preview-card')) {
+        createSparks(e.clientX, e.clientY);
+    }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(
@@ -204,6 +210,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         isImage1Active = !isImage1Active;
         createSparks(e.clientX, e.clientY);
+    });
+});
+
+
+// ── Active nav link ───────────────────────────────────────────────────────────
+// Single canonical version, shared by every page (was previously duplicated,
+// with slightly different logic, inline on index/about/contact/projects).
+document.addEventListener('DOMContentLoaded', () => {
+    const normalize = (path) => {
+        if (path === '/' || path === '' || path.endsWith('/index.html')) return '/';
+        return path.split('/').pop();
+    };
+    const currentPage = normalize(window.location.pathname);
+
+    document.querySelectorAll('.nav-links li a').forEach(link => {
+        const href = link.getAttribute('href') || '';
+        const linkPage = normalize(href);
+
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
+        } else {
+            link.classList.remove('active');
+            link.removeAttribute('aria-current');
+        }
     });
 });
 

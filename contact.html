@@ -22,6 +22,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shresthasanskar.com.np/contact.html">
     <meta property="og:image" content="https://shresthasanskar.com.np/images/sanskar.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Contact Sanskar Shrestha | Laravel Developer Nepal">
@@ -242,24 +244,6 @@
     </div>
 
     <script src="js/main.js"></script>
-    <script>
-        // ==================== FIXED NAV ACTIVE LOGIC ====================
-        document.addEventListener('DOMContentLoaded', function () {
-            const currentPath = window.location.pathname;
-            const currentFile = currentPath.split('/').pop() || 'contact.html';
-
-            document.querySelectorAll('.nav-links li a').forEach(link => {
-                const linkHref = link.getAttribute('href');
-                const linkFile = linkHref.split('/').pop() || '/';
-
-                link.classList.remove('active');   // Clear all first
-
-                if (linkFile === currentFile) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

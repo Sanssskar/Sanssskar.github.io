@@ -391,7 +391,7 @@
 
                 <!-- Hzn Capital -->
                 <article class="preview-card scale-up">
-                    <img class="preview-img" src="images/hzn.png"
+                    <img class="preview-img" src="images/hzn.jpg"
                         alt="Hzn Capital shareholder portal and admin panel" loading="lazy" width="400"
                         height="180">
                     <div class="preview-content">
@@ -410,7 +410,7 @@
 
                 <!-- Prasar Studio -->
                 <article class="preview-card scale-up">
-                    <img class="preview-img" src="images/prasar.png"
+                    <img class="preview-img" src="images/prasar.jpg"
                         alt="Prasar Studio website design and development" loading="lazy" width="400"
                         height="180">
                     <div class="preview-content">
@@ -542,27 +542,6 @@
 
 
     <script src="js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const currentPath = window.location.pathname;
-            const currentPage = (currentPath === '/' || currentPath === '' || currentPath.endsWith('/index.html'))
-                ? '/'
-                : currentPath.split('/').pop();
-
-            document.querySelectorAll('.nav-links li a').forEach(link => {
-                const href = link.getAttribute('href');
-                const linkPage = (href === '/' || href === '' || href === 'index.html') ? '/' : href.split('/').pop();
-
-                if (linkPage === currentPage) {
-                    link.classList.add('active');
-                    link.setAttribute('aria-current', 'page');
-                } else {
-                    link.classList.remove('active');
-                    link.removeAttribute('aria-current');
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

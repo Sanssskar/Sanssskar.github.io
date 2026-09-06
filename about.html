@@ -22,6 +22,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shresthasanskar.com.np/about.html">
     <meta property="og:image" content="https://shresthasanskar.com.np/images/sanskar.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -337,22 +339,6 @@
     </div>
 
     <script src="js/main.js"></script>
-    <script>
-        // Set active class based on current page URL
-        document.addEventListener('DOMContentLoaded', function () {
-            const currentPath = window.location.pathname;
-            const currentPage = currentPath.split('/').pop() || 'about.html';
-
-            document.querySelectorAll('.nav-links li a').forEach(link => {
-                const linkHref = link.getAttribute('href').split('/').pop();
-                if (linkHref === currentPage) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>
