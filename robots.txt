@@ -1,8 +1,6 @@
 # Allow all crawlers full access
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /private/
  
 # Block AI training bots specifically
 User-agent: GPTBot
