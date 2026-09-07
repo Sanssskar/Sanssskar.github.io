@@ -1,4 +1,3 @@
-// ── Loader ──────────────────────────────────────────────────────────────────
 window.addEventListener('load', () => {
     const loader = document.getElementById('loaderWrapper');
     if (!loader) return;
@@ -9,7 +8,6 @@ window.addEventListener('load', () => {
 });
 
 
-// ── Scroll / Intersection animations ────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
 
     const animatedEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up');
@@ -42,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Force footer elements fully visible
     document.querySelectorAll('footer, footer *').forEach(el => {
         const existing = el.getAttribute('style') || '';
         el.setAttribute('style', [existing, 'opacity:1', 'transform:none', 'transition:none', 'animation:none']
@@ -67,8 +64,7 @@ function createSparks(x, y) {
     }
 }
 
-// Scoped to interactive elements only (was previously firing on every click
-// anywhere on the page, including empty whitespace).
+
 document.addEventListener('click', (e) => {
     if (e.target.closest('a, button, .project-card, .skill-bubble, .social-card, .service-card, .preview-card')) {
         createSparks(e.clientX, e.clientY);
