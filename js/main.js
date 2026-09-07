@@ -110,18 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ── Name flip (3-D card) ─────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-    const flipName = document.getElementById('flipName');
-    if (flipName) {
-        flipName.addEventListener('click', (e) => {
-            e.stopPropagation();
-            flipName.classList.toggle('flip');
-        });
-    }
-});
-
-
 // ── Typing effect ────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     const typingElement = document.getElementById('typingName');
@@ -161,8 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const morphWords = ['Sanskar', 'संस्कार'];
     let morphIndex = 0;
 
-    // FIX: wait 500 ms (matching the CSS `transition: all .5s` on .morph-text)
-    // so the old word is fully faded out before the new one appears.
+    
     function morphEffect() {
         morphElement.style.opacity = '0';
         morphElement.style.transform = 'scale(0.8)';
@@ -210,9 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ── Active nav link ───────────────────────────────────────────────────────────
-// Single canonical version, shared by every page (was previously duplicated,
-// with slightly different logic, inline on index/about/contact/projects).
+
 document.addEventListener('DOMContentLoaded', () => {
     const normalize = (path) => {
         if (path === '/' || path === '' || path.endsWith('/index.html')) return '/';
