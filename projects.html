@@ -308,6 +308,7 @@
             margin: 3rem 0;
             border: 1px solid var(--border-medium);
             transition: all 0.3s;
+            overflow: hidden;
         }
 
         .github-section:hover {
@@ -329,7 +330,11 @@
             font-weight: 700;
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
             gap: 0.8rem;
+            min-width: 0;
+            max-width: 100%;
+            overflow-wrap: break-word;
         }
 
         .github-header h2 i {
@@ -337,6 +342,9 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            flex-shrink: 0;
+            width: 1em;
+            text-align: center;
         }
 
         .github-stats {

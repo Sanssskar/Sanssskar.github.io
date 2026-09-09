@@ -63,6 +63,11 @@ body.dark-mode {
   --blur-bg: rgba(26, 27, 32, 0.7);
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   font-family: "Space Grotesk", sans-serif;
   background-color: var(--bg-primary);
