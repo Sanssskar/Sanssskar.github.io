@@ -7,7 +7,6 @@ window.addEventListener('load', () => {
     }, 800);
 });
 
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const animatedEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up');
@@ -47,8 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-// ── Spark effect ─────────────────────────────────────────────────────────────
 function createSparks(x, y) {
     for (let i = 0; i < 8; i++) {
         const s = document.createElement('div');
@@ -64,7 +61,6 @@ function createSparks(x, y) {
     }
 }
 
-
 document.addEventListener('click', (e) => {
     if (e.target.closest('a, button, .project-card, .skill-bubble, .social-card, .service-card, .preview-card')) {
         createSparks(e.clientX, e.clientY);
@@ -79,9 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-// ── Theme toggle ─────────────────────────────────────────────────────────────
-// Applied synchronously to avoid flash-of-wrong-theme
 if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
 }
@@ -90,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon   = document.getElementById('themeIcon');
 
-    // Sync icon with saved theme
     if (themeIcon && document.body.classList.contains('dark-mode')) {
         themeIcon.classList.replace('fa-moon', 'fa-sun');
     }
@@ -109,8 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
-// ── Typing effect ────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     const typingElement = document.getElementById('typingName');
     if (!typingElement) return;
@@ -140,8 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(typeEffect, 500);
 });
 
-
-// ── Morph effect ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     const morphElement = document.getElementById('morphName');
     if (!morphElement) return;
@@ -158,14 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
             morphElement.textContent = morphWords[morphIndex];
             morphElement.style.opacity = '1';
             morphElement.style.transform = 'scale(1)';
-        }, 500); // was 300 ms — now matches the 0.5 s CSS transition
+        }, 500);
         setTimeout(morphEffect, 3000);
     }
     setTimeout(morphEffect, 1000);
 });
 
-
-// ── Hero image swipe ──────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     const swipeableShape = document.getElementById('swipeableShape');
     const image1         = document.getElementById('image1');
@@ -196,8 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const normalize = (path) => {
         if (path === '/' || path === '' || path.endsWith('/index.html')) return '/';
@@ -219,15 +203,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-// ── Dropdown portal ───────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
         const toggle = dropdown.querySelector('.dropdown-toggle');
         const menu   = dropdown.querySelector('.dropdown-menu');
         if (!toggle || !menu) return;
 
-        // Move menu to <body> so backdrop-filter stacking context can't clip it
         document.body.appendChild(menu);
         menu.style.position = 'fixed';
 
@@ -258,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Close on outside click
     document.addEventListener('click', (e) => {
         document.querySelectorAll('.dropdown-menu.open').forEach(menu => {
             if (!menu.contains(e.target) && !e.target.closest('.nav-dropdown')) {
