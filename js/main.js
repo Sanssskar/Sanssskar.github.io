@@ -102,35 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const typingElement = document.getElementById('typingName');
-    if (!typingElement) return;
-
-    const words = ['Sanskar', 'संस्कार'];
-    let wordIndex = 0, charIndex = 0, isDeleting = false;
-
-    function typeEffect() {
-        const w = words[wordIndex];
-        typingElement.textContent = isDeleting
-            ? w.substring(0, charIndex - 1)
-            : w.substring(0, charIndex + 1);
-
-        isDeleting ? charIndex-- : charIndex++;
-
-        if (!isDeleting && charIndex === w.length) {
-            isDeleting = true;
-            setTimeout(typeEffect, 2000);
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            setTimeout(typeEffect, 500);
-        } else {
-            setTimeout(typeEffect, isDeleting ? 100 : 200);
-        }
-    }
-    setTimeout(typeEffect, 500);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
     const morphElement = document.getElementById('morphName');
     if (!morphElement) return;
 
@@ -160,26 +131,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!swipeableShape || !image1 || !image2) return;
 
-    let isImage1Active = true;
-
     document.querySelectorAll('.swipe-image').forEach(img => {
         if (img.complete) img.classList.add('loaded');
         else img.addEventListener('load', () => img.classList.add('loaded'));
     });
 
-    swipeableShape.addEventListener('click', (e) => {
-        if (isImage1Active) {
-            image1.classList.remove('active-image');
-            image2.classList.add('active-image');
-            if (imageCounter) imageCounter.textContent = '2/2';
-        } else {
-            image2.classList.remove('active-image');
-            image1.classList.add('active-image');
-            if (imageCounter) imageCounter.textContent = '1/2';
-        }
-        isImage1Active = !isImage1Active;
-        createSparks(e.clientX, e.clientY);
-    });
+    function showImage(second) {
+        image1.classList.toggle('active-image', !second);
+        image2.classList.toggle('active-image', second);
+        if (imageCounter) imageCounter.textContent = second ? '2/2' : '1/2';
+    }
+
+    // Listen on the static wrapper: the blob itself floats, which would make hover flicker at its edges
+    const hoverArea = swipeableShape.closest('.hero-visual') || swipeableShape;
+
+    if (window.matchMedia('(hover: hover)').matches) {
+        hoverArea.addEventListener('mouseenter', (e) => {
+            showImage(true);
+            createSparks(e.clientX, e.clientY);
+        });
+        hoverArea.addEventListener('mouseleave', () => showImage(false));
+    } else {
+        // touch screens have no hover, so tap toggles instead
+        let second = false;
+        swipeableShape.addEventListener('click', (e) => {
+            second = !second;
+            showImage(second);
+            createSparks(e.clientX, e.clientY);
+        });
+    }
 });
 
 document.addEventListener('DOMContentLoaded', () => {

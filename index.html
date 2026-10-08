@@ -63,6 +63,8 @@
             rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/terminal.css">
+        <link rel="stylesheet" href="css/code-bg.css">
 
         <style>
             .preview-tag {
@@ -318,7 +320,7 @@
             </div>
 
             <section id="about" aria-labelledby="about-heading">
-                <div class="about-section scale-up">
+                <div class="about-section scale-up" data-code-bg="about">
                     <div class="about-header">
                         <i class="fa-solid fa-user-astronaut" aria-hidden="true"></i>
                         <h2 id="about-heading">Web Developer from Dharan, Nepal ⚔️</h2>
@@ -361,7 +363,7 @@
                 </div>
             </section>
 
-            <section class="latest-projects fade-up" aria-labelledby="projects-heading">
+            <section class="latest-projects fade-up" aria-labelledby="projects-heading" data-code-bg="projects">
                 <h2 id="projects-heading" class="section-title">
                     <i class="fa-solid fa-star" aria-hidden="true"></i> Latest Projects ⚔️
                 </h2>
@@ -411,7 +413,7 @@
                 </div>
             </section>
 
-            <section id="services" class="fade-up" aria-labelledby="services-heading">
+            <section id="services" class="fade-up" aria-labelledby="services-heading" data-code-bg="services">
                 <h2 id="services-heading" class="section-title">
                     <i class="fa-solid fa-briefcase" aria-hidden="true"></i> Services I Offer ⚔️
                 </h2>
@@ -459,7 +461,7 @@
                 </div>
             </section>
 
-            <section aria-labelledby="skills-heading">
+            <section aria-labelledby="skills-heading" data-code-bg="skills">
                 <h2 id="skills-heading" class="section-title fade-up">
                     <i class="fa-solid fa-code" aria-hidden="true"></i> Tech Stack &amp; Core Skills ⚔️
                 </h2>
@@ -492,6 +494,16 @@
                     <li class="tech-item"><img src="images/tech/flutter.svg" alt="" width="52" height="52" loading="lazy" decoding="async" /><span>Flutter</span></li>
                     </ul>
                   </div>
+                </div>
+            </section>
+
+            <section class="term-section fade-up" aria-hidden="true" data-nosnippet>
+                <div class="term" id="terminal">
+                    <div class="term-bar">
+                        <span class="term-dots"><i></i><i></i><i></i></span>
+                        <span class="term-title">sanskar@dev: ~</span>
+                    </div>
+                    <div class="term-body" id="termBody"><div class="tl"><span class="t-user">sanskar</span><span class="t-dim">@</span><span class="t-user">dev</span><span class="t-dim">:</span><span class="t-path">~</span><span class="t-dim">$ </span><span class="t-cursor"></span></div></div>
                 </div>
             </section>
 
@@ -530,6 +542,8 @@
         </div>
 
         <script src="js/main.js"></script>
+        <script src="js/terminal.js"></script>
+        <script src="js/code-bg.js"></script>
     </body>
 
     </html>

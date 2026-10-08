@@ -1,0 +1,49 @@
+/* ===== Dev stage: editor + side terminals (decorative, JS-filled, no indexable text) ===== */
+:root{--w-bg:#fbfdf9;--w-bar:#eaf3e6;--w-tx:#26372b;--w-dim:#8a9a8e;--w-k:#cf222e;--w-s:#0a7a4b;--w-f:#8250df;--w-v:#0550ae;--w-c:#7d8b80;--w-t:#b45309;--teal:#00a896;--coral:#ff6b6b;--amber:#f5a524}
+body.dark-mode{--w-bg:#161c19;--w-bar:#1f2823;--w-tx:#d5e3d8;--w-dim:#6f8076;--w-k:#ff7b72;--w-s:#7ee2a8;--w-f:#d2a8ff;--w-v:#79c0ff;--w-c:#7d8b80;--w-t:#ffb86b}
+
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.55fr) minmax(0,1fr);gap:1rem;margin:0 0 3.5rem;align-items:stretch}
+.win{display:flex;flex-direction:column;height:300px;border-radius:14px;overflow:hidden;background:var(--w-bg);color:var(--w-tx);border:1px solid var(--border-medium);box-shadow:var(--card-shadow);font:.74rem/1.55 'JetBrains Mono','Fira Code',ui-monospace,Menlo,Consolas,monospace;text-align:left;transition:transform .35s,box-shadow .35s,border-color .35s}
+.win:hover{transform:translateY(-5px) rotate(-.4deg);box-shadow:var(--hover-shadow);border-color:var(--accent-1)}
+.win-side:last-child:hover{transform:translateY(-5px) rotate(.4deg)}
+.win-bar{display:flex;align-items:center;gap:.6rem;padding:.5rem .8rem;background:var(--w-bar);border-bottom:1px solid var(--border-light)}
+.win-dots{display:flex;gap:5px}.win-dots i{width:9px;height:9px;border-radius:50%;background:var(--coral)}
+.win-dots i:nth-child(2){background:var(--amber)}.win-dots i:nth-child(3){background:var(--accent-2)}
+.win-title{flex:1;text-align:center;color:var(--w-dim);font-size:.68rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:36px}
+.win-body{flex:1;overflow:hidden;padding:.7rem .9rem;white-space:pre-wrap;word-break:break-word}
+.win-body.sc{overflow-y:auto;scrollbar-width:thin}
+.ln{min-height:1.55em;white-space:pre}
+.ln::before{counter-increment:l;content:counter(l);display:inline-block;width:2ch;margin-right:1.4ch;text-align:right;color:var(--w-dim);opacity:.6}
+#editorBody{counter-reset:l}
+.c-k{color:var(--w-k)}.c-s{color:var(--w-s)}.c-f{color:var(--w-f)}.c-v{color:var(--w-v)}.c-c{color:var(--w-c);font-style:italic}.c-t{color:var(--w-t)}
+.t-ok{color:var(--w-s)}.t-w{color:var(--w-t)}.t-d{color:var(--w-dim)}.t-b{color:var(--w-v)}
+.cur{display:inline-block;width:.55em;height:1.05em;vertical-align:text-bottom;background:var(--accent-1);animation:curBlink 1s steps(1) infinite}
+@keyframes curBlink{50%{opacity:0}}
+.sh-row{display:flex;align-items:center;gap:.4rem;border-top:1px dashed var(--border-medium);padding:.45rem .9rem;background:var(--w-bar)}
+.sh-row span{color:var(--accent-1);font-weight:700}
+.sh-row input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--w-tx);font:inherit}
+.sh-row input::placeholder{color:var(--w-dim)}
+.sh-out a{color:var(--w-v)}
+
+/* ===== Hero: code rain, floating chips, glitch name ===== */
+.hero{position:relative;isolation:isolate}
+#codeRain{position:absolute;inset:-1.5rem -3rem;width:calc(100% + 6rem);height:calc(100% + 3rem);z-index:-1;pointer-events:none}
+.chip{position:absolute;z-index:3;padding:.25rem .65rem;border-radius:50px;font:600 .72rem 'JetBrains Mono',ui-monospace,Menlo,monospace;background:var(--bg-secondary);color:var(--accent-1);border:1px solid var(--border-medium);box-shadow:var(--card-shadow);pointer-events:none;animation:chipBob var(--t,5s) ease-in-out infinite;animation-delay:var(--d,0s)}
+.chip::before{content:attr(data-text)}
+@keyframes chipBob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-12px) rotate(var(--r,0deg))}}
+.typing-text{position:relative;display:inline-block}
+.typing-text::before,.typing-text::after{content:attr(data-text);position:absolute;inset:0;opacity:0;background:none;pointer-events:none}
+.typing-text::before{color:var(--teal);-webkit-text-fill-color:var(--teal)}
+.typing-text::after{color:var(--coral);-webkit-text-fill-color:var(--coral)}
+.typing-text:hover::before,.typing-text.glitching::before{opacity:.85;animation:gl1 .5s steps(2) 2}
+.typing-text:hover::after,.typing-text.glitching::after{opacity:.85;animation:gl2 .5s steps(2) 2}
+@keyframes gl1{0%{clip-path:inset(10% 0 60% 0);transform:translate(-4px,1px)}50%{clip-path:inset(55% 0 12% 0);transform:translate(3px,-1px)}100%{clip-path:inset(30% 0 35% 0);transform:translate(-2px,0)}}
+@keyframes gl2{0%{clip-path:inset(60% 0 8% 0);transform:translate(4px,0)}50%{clip-path:inset(15% 0 55% 0);transform:translate(-3px,1px)}100%{clip-path:inset(40% 0 30% 0);transform:translate(2px,-1px)}}
+
+/* ===== Cursor trail + konami toast ===== */
+.trail,.confetti{position:fixed;left:0;top:0;z-index:9998;pointer-events:none;font:700 .8rem 'JetBrains Mono',ui-monospace,monospace;color:var(--accent-1);will-change:transform,opacity}
+.toast{position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%);z-index:10001;padding:.7rem 1.2rem;border-radius:50px;background:var(--gradient-1);color:#fff;font-weight:600;box-shadow:var(--hover-shadow)}
+
+@media (max-width:1024px){.stage{grid-template-columns:1fr 1fr}.win-main{grid-column:1/-1;order:-1}.win-log{display:none}.stage .win-side{grid-column:1/-1}}
+@media (max-width:768px){.win{height:250px;font-size:.68rem}.chip{display:none}#codeRain{inset:-1rem -1rem;width:calc(100% + 2rem)}}
+@media (prefers-reduced-motion:reduce){.chip,.cur{animation:none}.typing-text.glitching::before,.typing-text.glitching::after{animation:none;opacity:0}}

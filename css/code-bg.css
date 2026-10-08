@@ -1,0 +1,32 @@
+/* ===== Floating code lines behind sections (decorative) ===== */
+[data-code-bg]{position:relative;isolation:isolate}
+.about-section[data-code-bg]{overflow:hidden}
+
+.code-bg{
+  --o:.15;
+  position:absolute;inset:0;overflow:hidden;z-index:-1;
+  pointer-events:none;user-select:none;-webkit-user-select:none;
+}
+body.dark-mode .code-bg{--o:.22}
+
+.code-line{
+  position:absolute;top:0;left:var(--x,5%);
+  white-space:nowrap;font-size:.78rem;line-height:1;
+  font-family:'JetBrains Mono','Fira Code',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--accent-1);opacity:0;
+  animation:codeFloat var(--t,30s) linear var(--d,0s) infinite;
+  will-change:transform,opacity;
+}
+.code-line:nth-child(3n){color:var(--text-tertiary)}
+/* text comes from a data attribute, so it is never part of the page's indexed text */
+.code-line::before{content:attr(data-text)}
+
+.code-bg.is-idle .code-line{animation-play-state:paused}
+
+@keyframes codeFloat{
+  0%{transform:translate3d(0,var(--h,400px),0);opacity:0}
+  8%{opacity:var(--o)}
+  92%{opacity:var(--o)}
+  100%{transform:translate3d(0,-2rem,0);opacity:0}
+}
+@media (prefers-reduced-motion:reduce){.code-bg{display:none}}
