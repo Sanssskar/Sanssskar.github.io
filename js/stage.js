@@ -1,190 +1,141 @@
-/* Decorative dev-stage. Everything is built here with JS/canvas, so none of it is in the page's HTML text (SEO-safe). */
+/* Decorative only: name glitch + three katanas striking the photo, which flickers into code.
+   Everything is built here with SVG/JS, so none of it is in the page's HTML text (SEO-safe). */
 (() => {
   'use strict';
-  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const FINE = matchMedia('(hover:hover) and (pointer:fine)').matches;
-  const $ = (id) => document.getElementById(id);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const rnd = (a) => a[Math.floor(Math.random() * a.length)];
-  const cssVar = (n, f) => getComputedStyle(document.body).getPropertyValue(n).trim() || f;
-  const watch = (el, cb) => { const o = new IntersectionObserver((e) => cb(e[0].isIntersecting), { rootMargin: '80px' }); o.observe(el); };
 
-  /* ---------- 1. Code rain behind the hero ---------- */
-  const cv = $('codeRain');
-  let boost = 1;
-  if (cv && !RM) {
-    const ctx = cv.getContext('2d');
-    const G = ['0', '1', '{', '}', '<', '>', '/', '$', ';', '=', '->', '::', '()', '[]', '?>', 'fn'];
-    let cols = [], W = 0, H = 0, on = true, step = 24, last = 0, accent = '46,125,50';
-    const size = () => {
-      const d = Math.min(devicePixelRatio || 1, 2), r = cv.getBoundingClientRect();
-      W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
-      step = W < 700 ? 30 : 24;
-      cols = Array.from({ length: Math.floor(W / step) }, () => ({ y: Math.random() * -H, v: 0.6 + Math.random() * 1.1 }));
-    };
-    const tone = () => { accent = document.body.classList.contains('dark-mode') ? '76,175,80' : '46,125,50'; };
-    const draw = (t) => {
-      requestAnimationFrame(draw);
-      if (!on || document.hidden || t - last < 50) return;
-      last = t; ctx.clearRect(0, 0, W, H); ctx.font = '12px "JetBrains Mono",monospace';
-      cols.forEach((c, i) => {
-        for (let k = 0; k < 7; k++) {
-          const y = c.y - k * 16; if (y < 0 || y > H) continue;
-          ctx.fillStyle = `rgba(${accent},${(0.2 - k * 0.026) * Math.min(boost, 2.5)})`;
-          ctx.fillText(G[(i * 7 + k + Math.floor(c.y / 40)) % G.length], i * step, y);
-        }
-        c.y += c.v * 5 * boost; if (c.y - 110 > H) { c.y = Math.random() * -160; c.v = 0.6 + Math.random() * 1.1; }
-      });
-    };
-    size(); tone(); addEventListener('resize', size);
-    new MutationObserver(tone).observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    watch(cv, (v) => { on = v; }); requestAnimationFrame(draw);
-  }
+  /* ---- Name glitch: every 2 seconds ---- */
+  const nm = document.getElementById('typingName');
+  if (nm) (function g() {
+    setTimeout(() => {
+      if (!document.hidden) { nm.classList.add('glitching'); setTimeout(() => nm.classList.remove('glitching'), 600); }
+      g();
+    }, 2000);
+  })();
 
-  /* ---------- 2. Floating chips around the photo ---------- */
-  const vis = document.querySelector('.hero-visual');
-  if (vis) [['<Laravel/>', '-4%', '8%', '-6deg'], ['artisan serve', '62%', '-3%', '4deg'], ['{ filament }', '-8%', '78%', '5deg'], ['git push ✓', '66%', '88%', '-4deg']].forEach((c, i) => {
-    const s = document.createElement('span');
-    s.className = 'chip'; s.dataset.text = c[0]; s.setAttribute('aria-hidden', 'true');
-    s.style.cssText = `left:${c[1]};top:${c[2]};--r:${c[3]};--d:${-i * 1.3}s;--t:${4.5 + i * 0.7}s`;
-    vis.append(s);
+  /* ---- Katanas ---- */
+  const hero = document.querySelector('.hero'), shape = document.getElementById('swipeableShape'), vis = document.querySelector('.hero-visual');
+  if (!hero || !shape || !vis || !('animate' in Element.prototype)) return;
+
+  const NS = 'http://www.w3.org/2000/svg', LEN = 198;
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('class', 'sword-fx'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('data-nosnippet', '');
+  const katana = (grip) => `<path d="M44 -3.2L178 -3.2Q192 -2.6 198 1.8L178 3.4L44 3.4Z" fill="#e8eef0" stroke="#78909c"/><path d="M50 1L176 1" stroke="#b0bec5" fill="none"/><ellipse cx="42" cy="0" rx="3.5" ry="10" fill="#c9a227" stroke="#7a5c00"/><rect x="0" y="-4" width="38" height="8" rx="2" fill="${grip}"/><path d="M6 -4L12 4M14 -4L20 4M22 -4L28 4M30 -4L36 4" stroke="#0006"/><circle r="4.4" fill="#c9a227"/>`;
+  const GRIPS = ['#f4f4f0', '#263238', '#1b5e20'];
+  const blades = GRIPS.map((c) => {
+    const g = document.createElementNS(NS, 'g');
+    g.innerHTML = katana(c); g.style.opacity = '0'; g.style.transformOrigin = '0 0'; g.style.filter = 'drop-shadow(0 2px 3px rgba(0,0,0,.25))';
+    svg.append(g); return g;
   });
+  hero.append(svg);
 
-  /* ---------- 3. Glitch the name now and then ---------- */
-  const nm = $('typingName');
-  if (nm && !RM) (function g() { setTimeout(() => { nm.classList.add('glitching'); setTimeout(() => nm.classList.remove('glitching'), 1100); g(); }, 6000 + Math.random() * 5000); })();
-
-  /* ---------- 4. Live code editor ---------- */
-  const ed = $('editorBody');
-  const FILES = [
-    ['app/Filament/Resources/ProjectResource.php', [
-      '<?php', '', 'namespace App\\Filament\\Resources;', '', 'class ProjectResource extends Resource', '{',
-      '    public static function form(Form $form): Form', '    {', '        return $form->schema([',
-      "            TextInput::make('title')->required(),", "            Select::make('stack')->multiple(),",
-      "            FileUpload::make('cover')->image(),", '        ]);', '    }', '}']],
-    ['routes/web.php', [
-      '// ship it, then sleep', "Route::get('/projects', function () {", '    return Project::query()',
-      "        ->where('status', 'live')", '        ->latest()', '        ->get();', '});', '',
-      "Route::view('/hire-me', 'contact');"]],
-    ['resources/views/hero.blade.php', [
-      '<section class="grid place-items-center">', '    <h1 class="text-5xl font-bold">',
-      '        {{ $dev->name }}', '    </h1>', '    @foreach ($dev->stack as $tech)',
-      '        <x-chip :label="$tech" />', '    @endforeach', '</section>']],
-  ];
-  const TOK = /(\/\/.*)|('[^']*')|(\$\w+)|\b(namespace|class|extends|public|static|function|return|use|new|fn|foreach|as)\b|\b([A-Z]\w*)\b|(\w+)(?=\()/g;
-  const CL = ['', 'c-c', 'c-s', 'c-v', 'c-k', 'c-t', 'c-f'];
-  const seg = (line) => {
-    const out = []; let i = 0, m; TOK.lastIndex = 0;
-    while ((m = TOK.exec(line))) {
-      if (m.index > i) out.push([line.slice(i, m.index), '']);
-      out.push([m[0], CL[m.slice(1).findIndex(Boolean) + 1]]); i = TOK.lastIndex;
+  /* photo swap: zoro on impact, pixel-sharpens back into me */
+  const me = document.getElementById('image1'), wrap = shape.querySelector('.image-wrapper');
+  me.classList.add('loaded');
+  let zoroOK = false;
+  const zoro = new Image(); zoro.onload = () => { zoroOK = true; };
+  const loadZoro = () => { if (!zoro.src) zoro.src = 'images/zoro.jpg'; };
+  const cv = document.createElement('canvas'), ctx = cv.getContext('2d'), tc = document.createElement('canvas'), tcx = tc.getContext('2d');
+  cv.className = 'pix-layer'; cv.setAttribute('aria-hidden', 'true'); if (wrap) wrap.append(cv);
+  let cs = 0;
+  const paint = (src, px, glitch) => {
+    const S = Math.round(wrap.clientWidth * Math.min(devicePixelRatio || 1, 2));
+    if (cs !== S) { cs = S; cv.width = S; cv.height = S; }
+    const iw = src.naturalWidth, ih = src.naturalHeight, side = Math.min(iw, ih), sx = (iw - side) / 2, sy = (ih - side) / 2;
+    if (px <= 1) { ctx.imageSmoothingEnabled = true; ctx.drawImage(src, sx, sy, side, side, 0, 0, S, S); }
+    else {
+      const n = Math.max(2, Math.ceil(wrap.clientWidth / px)); tc.width = n; tc.height = n;
+      tcx.drawImage(src, sx, sy, side, side, 0, 0, n, n);
+      ctx.imageSmoothingEnabled = false; ctx.drawImage(tc, 0, 0, n, n, 0, 0, S, S);
     }
-    if (i < line.length) out.push([line.slice(i), '']);
-    return out;
+    for (let k = 0; k < glitch; k++) {
+      const y = Math.random() * S, h = S * (0.03 + Math.random() * 0.09), dx = (Math.random() - 0.5) * S * 0.2;
+      ctx.drawImage(cv, 0, y, S, h, dx, y, S, h);
+    }
   };
-  if (ed) {
-    let seen = false; const bar = $('editorTitle');
-    watch(ed, (v) => { seen = v; });
-    const still = async () => { while (!seen || document.hidden) await sleep(400); };
-    (async () => {
-      for (let f = 0; ; f = (f + 1) % FILES.length) {
-        ed.textContent = ''; if (bar) bar.textContent = FILES[f][0];
-        const cur = Object.assign(document.createElement('span'), { className: 'cur' });
-        for (const line of FILES[f][1]) {
-          const row = document.createElement('div'); row.className = 'ln'; ed.append(row);
-          for (const [txt, cls] of seg(line)) {
-            const s = document.createElement('span'); s.className = cls; row.append(s);
-            for (const ch of txt) {
-              s.textContent += ch; row.append(cur);
-              if (RM) continue;
-              await still(); await sleep(ch === ' ' ? 12 : 22 + Math.random() * 38);
-            }
-          }
-          row.append(cur); if (!RM) await sleep(140);
-        }
-        await sleep(RM ? 60000 : 3200);
-      }
-    })();
+  async function swap() {
+    if (!wrap || !zoroOK || !me.naturalWidth) return;
+    cv.style.opacity = '1';
+    for (const px of [24, 10, 1]) { paint(zoro, px, 4); await sleep(70); }
+    for (let i = 0; i < 20; i++) { paint(zoro, 1, i % 5 === 4 ? 3 : 0); await sleep(100); }  // ~2s hold
+    for (const px of [4, 10, 20, 30]) { paint(zoro, px, 3); await sleep(80); }
+    const steps = [40, 30, 22, 16, 12, 9, 6, 4, 3, 2];  // 10 x 300ms = ~3s
+    for (let i = 0; i < steps.length; i++) { paint(me, steps[i], Math.max(0, 4 - (i >> 1))); await sleep(300); }
+    paint(me, 1, 0); await sleep(60); cv.style.opacity = '0';
   }
 
-  /* ---------- 5. Left terminal: server log ---------- */
-  const lg = $('logBody');
-  if (lg) {
-    let seen = false; watch(lg, (v) => { seen = v; });
-    const P = ['/', '/about', '/services', '/projects', '/contact', '/api/projects', '/sitemap.xml'];
-    const add = (html) => { const d = document.createElement('div'); d.innerHTML = html; lg.append(d); while (lg.children.length > 14) lg.firstChild.remove(); };
-    add('<span class="t-d">$</span> php artisan serve');
-    add('<span class="t-b">INFO</span>  Server running on [127.0.0.1:8000]');
-    (async () => {
-      for (;;) {
-        while (!seen || document.hidden) await sleep(500);
-        const ms = 4 + Math.floor(Math.random() * 90), p = rnd(P);
-        add(`<span class="t-d">${new Date().toTimeString().slice(0, 8)}</span> <span class="t-ok">200</span> GET ${p} <span class="t-d">${ms}ms</span>`);
-        if (Math.random() < 0.12) add('<span class="t-w">WARN</span>  cache cleared, coffee low');
-        await sleep(RM ? 60000 : 700 + Math.random() * 1300);
-      }
-    })();
-  }
+  let running = false, timer = 0, last = 0;
+  const T = (x, y, a, s) => `translate(${x}px,${y}px) rotate(${a}deg) scale(${s})`;
 
-  /* ---------- 6. Right terminal: type commands (easter eggs) ---------- */
-  const sh = $('shellBody'), inp = $('shellInput');
-  if (sh && inp) {
-    const say = (html) => { const d = document.createElement('div'); d.className = 'sh-out'; d.innerHTML = html; sh.append(d); sh.scrollTop = sh.scrollHeight; };
-    const CMD = {
-      help: () => 'try: <span class="t-b">whoami</span> <span class="t-b">stack</span> <span class="t-b">projects</span> <span class="t-b">hire</span> <span class="t-b">matrix</span> <span class="t-b">glitch</span> <span class="t-b">theme</span> <span class="t-b">clear</span>',
-      whoami: () => 'sanskar, full stack dev, Dharan, Nepal. runs on chiya and Laravel.',
-      stack: () => 'Laravel · Filament · PHP · MySQL · Tailwind · JS · Flutter',
-      projects: () => 'CodeIT AppsWare, SKK UK, SudamHub, Hzn Capital, Prasar Studio, KSS... <a href="projects.html">open projects</a>',
-      hire: () => '<span class="t-ok">✔</span> permission granted. <a href="https://wa.me/9779814351861" target="_blank" rel="noopener noreferrer">message Sanskar</a>',
-      'sudo hire sanskar': () => '<span class="t-ok">[sudo]</span> password accepted. offer letter generating… <a href="contact.html">contact</a>',
-      matrix: () => { boost = 4; setTimeout(() => { boost = 1; }, 7000); return 'wake up, developer…'; },
-      glitch: () => { nm && nm.classList.add('glitching'); setTimeout(() => nm && nm.classList.remove('glitching'), 1100); return 'reality.exe has stopped responding'; },
-      theme: () => { const b = $('themeToggle'); b && b.click(); return 'theme toggled'; },
-      konami: () => 'old school. ↑ ↑ ↓ ↓ ← → ← → B A',
-      'rm -rf /': () => '<span class="t-w">nice try.</span> backups exist.',
-      clear: () => { sh.textContent = ''; return null; },
-    };
-    say('<span class="t-d">zsh 5.9</span> · type <span class="t-b">help</span>');
-    inp.addEventListener('keydown', (e) => {
-      if (e.key !== 'Enter') return;
-      const v = inp.value.trim().toLowerCase(); inp.value = ''; if (!v) return;
-      const row = document.createElement('div'); row.textContent = '$ ' + v; row.className = 't-d'; sh.append(row);
-      const fn = CMD[v]; const r = fn ? fn() : `zsh: command not found: ${v.replace(/[<>&]/g, '')}`;
-      if (r) say(r); sh.scrollTop = sh.scrollHeight;
+  async function play() {
+    if (running || document.hidden) return;
+    running = true; schedule(15000);
+    const hr = hero.getBoundingClientRect(), pr = shape.getBoundingClientRect();
+    const tx = pr.left - hr.left + pr.width / 2, ty = pr.top - hr.top + pr.height / 2;
+    const s = Math.max(0.55, Math.min(1, hr.width / 760)), L = LEN * s;
+
+    blades.forEach((g, i) => {
+      const o = i - 1, yo = o * 34 * s, a = Math.atan2(-yo, L) * 180 / Math.PI;
+      const sx = -L - 60, sy = ty + o * 150 * s, sa = [-38, 22, -14][i];
+      const ax = tx - L - 190 * s, strikeX = tx - L * Math.cos(a * Math.PI / 180) + 10 * s;
+      /* ~3.95s: fly in slowly (1.3s) -> hover in place (2s) -> pull back -> strike -> fade */
+      g.animate([
+        { transform: T(sx, sy, sa, s), opacity: 0, offset: 0 },
+        { opacity: 1, offset: 0.04 },
+        { transform: T(ax, ty + yo, 0, s), opacity: 1, offset: 0.329, easing: 'ease-in-out' },
+        { transform: T(ax, ty + yo - 4 * s, 0, s), opacity: 1, offset: 0.54, easing: 'ease-in-out' },
+        { transform: T(ax, ty + yo, 0, s), opacity: 1, offset: 0.7468, easing: 'ease-in-out' },
+        { transform: T(ax - 22 * s, ty + yo, 0, s), opacity: 1, offset: 0.8354, easing: 'cubic-bezier(.6,0,1,.6)' },
+        { transform: T(strikeX, ty + yo, a, s), opacity: 1, offset: 0.8987 },
+        { transform: T(strikeX, ty + yo, a, s), opacity: 1, offset: 0.9367 },
+        { transform: T(strikeX, ty + yo, a, s), opacity: 0, offset: 1 },
+      ], { duration: 3950, delay: i * 70, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
     });
+
+    await sleep(3550 + 70);
+    impact(tx, ty, s);
+    swap().then(() => { running = false; });
+    await sleep(600);
+    blades.forEach((g) => { g.getAnimations().forEach((an) => an.cancel()); g.style.opacity = '0'; });
   }
 
-  /* ---------- 7. Cursor trail ---------- */
-  if (FINE && !RM) {
-    const GL = ['{', '}', '<>', '/', ';', '$', '=>', '::'], tone = ['var(--accent-1)', 'var(--teal)', 'var(--amber)', 'var(--coral)'];
-    let px = 0, py = 0, busy = false, lx = 0, ly = 0;
-    addEventListener('mousemove', (e) => {
-      px = e.clientX; py = e.clientY;
-      if (busy || Math.hypot(px - lx, py - ly) < 28) return; busy = true;
-      requestAnimationFrame(() => {
-        busy = false; lx = px; ly = py;
-        const s = document.createElement('span'); s.className = 'trail'; s.textContent = rnd(GL); s.style.color = rnd(tone);
-        document.body.append(s);
-        s.animate([{ transform: `translate(${px + 8}px,${py + 8}px) scale(1)`, opacity: 0.9 }, { transform: `translate(${px + 8}px,${py + 36}px) scale(.4)`, opacity: 0 }], { duration: 700, easing: 'ease-out' }).onfinish = () => s.remove();
-      });
-    }, { passive: true });
-  }
+  function impact(tx, ty, s) {
+    const R = 120 * s, accent = ['#2e7d32', '#00a896', '#ff6b6b'];
+    [-28, 0, 28].forEach((deg, i) => {
+      const d = deg * Math.PI / 180, dx = Math.cos(d) * R, dy = Math.sin(d) * R;
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', `M${tx - dx} ${ty - dy}L${tx + dx} ${ty + dy}`); p.setAttribute('pathLength', '1');
+      p.setAttribute('stroke', accent[i]); p.setAttribute('stroke-width', '3'); p.setAttribute('stroke-linecap', 'round');
+      p.style.strokeDasharray = '1'; svg.append(p);
+      p.animate([{ strokeDashoffset: 1, opacity: 1 }, { strokeDashoffset: 0, opacity: 1, offset: 0.35 }, { strokeDashoffset: 0, opacity: 0 }], { duration: 520, delay: i * 60, easing: 'ease-out' }).onfinish = () => p.remove();
+    });
+    const ring = document.createElementNS(NS, 'circle');
+    ring.setAttribute('cx', tx); ring.setAttribute('cy', ty); ring.setAttribute('r', 60 * s);
+    ring.setAttribute('fill', 'none'); ring.setAttribute('stroke', '#4caf50'); ring.setAttribute('stroke-width', '3');
+    ring.style.transformBox = 'fill-box'; ring.style.transformOrigin = 'center'; svg.append(ring);
+    ring.animate([{ transform: 'scale(.2)', opacity: 0.9 }, { transform: 'scale(2.2)', opacity: 0 }], { duration: 650, easing: 'ease-out' }).onfinish = () => ring.remove();
 
-  /* ---------- 8. Konami code ---------- */
-  const KON = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-  let ki = 0;
-  addEventListener('keydown', (e) => {
-    if (/INPUT|TEXTAREA/.test(e.target.tagName)) return;
-    ki = (e.key.length === 1 ? e.key.toLowerCase() : e.key) === KON[ki] ? ki + 1 : 0;
-    if (ki < KON.length) return; ki = 0;
-    boost = 4; setTimeout(() => { boost = 1; }, 8000);
-    const t = document.createElement('div'); t.className = 'toast'; t.textContent = '🎮 +30 lives. Sanskar approves.'; document.body.append(t); setTimeout(() => t.remove(), 3500);
-    if (RM) return;
-    for (let i = 0; i < 36; i++) {
-      const c = document.createElement('span'); c.className = 'confetti'; c.textContent = rnd(['{ }', '</>', '$', '::', ';', '=>']);
-      document.body.append(c);
-      const x = Math.random() * innerWidth, dx = (Math.random() - 0.5) * 240;
-      c.animate([{ transform: `translate(${x}px,-20px) rotate(0)`, opacity: 1 }, { transform: `translate(${x + dx}px,${innerHeight + 20}px) rotate(${dx * 3}deg)`, opacity: 0.2 }], { duration: 1800 + Math.random() * 1600, easing: 'cubic-bezier(.3,.6,.5,1)' }).onfinish = () => c.remove();
+    for (let i = 0; i < 16; i++) {
+      const t = document.createElementNS(NS, 'text'), a = Math.random() * 6.283, d = (70 + Math.random() * 110) * s;
+      t.textContent = rnd(['{', '}', '</>', '$', '::', ';', '=>', '01']);
+      t.setAttribute('x', tx); t.setAttribute('y', ty); t.setAttribute('fill', rnd(accent)); svg.append(t);
+      t.animate([{ transform: 'translate(0,0)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d}px)`, opacity: 0 }], { duration: 650 + Math.random() * 350, easing: 'ease-out' }).onfinish = () => t.remove();
     }
-  });
+
+    if (wrap) wrap.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-6px,3px)' }, { transform: 'translate(5px,-3px)' }, { transform: 'translate(-3px,2px)' }, { transform: 'translate(0,0)' }], { duration: 320 });
+  }
+
+  function schedule(ms) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const r = hero.getBoundingClientRect();
+      if (document.hidden || running || r.bottom < 0 || r.top > innerHeight) return schedule(1000);
+      play();
+    }, ms);
+  }
+  const boot = () => { loadZoro(); schedule(1600); };
+  addEventListener('load', boot);
+  if (document.readyState === 'complete') boot();
 })();
