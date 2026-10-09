@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark-mode')}catch(e){}</script>
 
-    <title>Web Development Projects | Sanskar Shrestha | Developer in Dharan Nepal</title>
+    <title>Web Development Projects | Sanskar Shrestha, Dharan Nepal</title>
     <meta name="description"
         content="View featured projects by Sanskar Shrestha including e-commerce platforms, LMS, REST APIs, and Filament admin panels.">
     <meta name="author" content="Sanskar Shrestha">
@@ -17,7 +18,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://shresthasanskar.com.np">
 
     <meta property="og:title" content="Projects | Sanskar Shrestha | Laravel & Filament Portfolio">
     <meta property="og:description"
@@ -25,8 +25,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shresthasanskar.com.np/projects.html">
     <meta property="og:image" content="https://shresthasanskar.com.np/images/sanskar.jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:width" content="789">
+    <meta property="og:image:height" content="707">
     <meta property="og:image:alt" content="Sanskar Shrestha - Laravel Full Stack Developer Nepal">
     <meta property="og:site_name" content="Sanskar Shrestha — Full Stack Developer">
     <meta property="og:locale" content="en_US">
@@ -37,7 +37,7 @@
         content="E-commerce, REST APIs, student portals, and admin panels built with Laravel & Filament by a developer from Dharan, Nepal.">
     <meta name="twitter:image" content="https://shresthasanskar.com.np/images/sanskar.jpeg">
 
-    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
@@ -118,420 +118,28 @@
     </script>
 
     <noscript>
-        <style>.fade-left,.fade-right,.fade-up,.scale-up{opacity:1 !important;transform:none !important;}</style>
+        <style>.fade-left,.fade-right,.fade-up,.scale-up{opacity:1 !important;transform:none !important}.loader-wrapper{display:none}</style>
     </noscript>
-
-    <style>
-        .page-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .page-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .project-card {
-            background: var(--bg-secondary);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            border: 1px solid var(--border-medium);
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-1);
-            transform: translateX(-100%);
-            transition: transform 0.4s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .project-card:hover::before {
-            transform: translateX(0);
-        }
-
-        .project-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .project-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tag {
-            background: var(--gradient-1);
-            color: #fff;
-            border: none;
-            padding: 0.25rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .project-tag:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 3px 12px rgba(46, 125, 50, 0.3);
-        }
-
-        .project-actions {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .project-link {
-            color: var(--accent-1);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .project-link:hover {
-            gap: 0.8rem;
-            color: var(--accent-2);
-        }
-
-        .share-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .share-btn {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-medium);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            text-decoration: none;
-        }
-
-        .share-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .share-btn[data-social="linkedin"]:hover {
-            background: #0077b5;
-            color: white;
-            border-color: transparent;
-        }
-
-        .share-btn[data-social="twitter"]:hover {
-            background: #1DA1F2;
-            color: white;
-            border-color: transparent;
-        }
-
-        .share-btn[data-social="facebook"]:hover {
-            background: #1877f2;
-            color: white;
-            border-color: transparent;
-        }
-
-        .share-btn[data-social="whatsapp"]:hover {
-            background: #25D366;
-            color: white;
-            border-color: transparent;
-        }
-
-        .github-section {
-            background: var(--bg-secondary);
-            border-radius: 2rem;
-            padding: 2rem;
-            margin: 3rem 0;
-            border: 1px solid var(--border-medium);
-            transition: all 0.3s;
-            overflow: hidden;
-        }
-
-        .github-section:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .github-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .github-header h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            min-width: 0;
-            max-width: 100%;
-            overflow-wrap: break-word;
-        }
-
-        .github-header h2 i {
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            flex-shrink: 0;
-            width: 1em;
-            text-align: center;
-        }
-
-        .github-stats {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .github-stat {
-            text-align: center;
-            padding: 0.5rem 1rem;
-            background: var(--bg-primary);
-            border-radius: 1rem;
-        }
-
-        .github-stat .number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-1);
-        }
-
-        .github-stat .label {
-            font-size: 0.7rem;
-            color: var(--text-tertiary);
-        }
-
-        .github-calendar {
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-
-        .github-calendar img {
-            max-width: 100%;
-            border-radius: 1rem;
-        }
-
-        .github-activity {
-            margin-top: 1.5rem;
-        }
-
-        .activity-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.8rem;
-            background: var(--bg-primary);
-            border-radius: 0.8rem;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .activity-item:hover {
-            transform: translateX(5px);
-            background: var(--gradient-1);
-            color: white;
-        }
-
-        .activity-item:hover .activity-text,
-        .activity-item:hover .activity-date {
-            color: white;
-        }
-
-        .activity-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--gradient-1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .activity-content {
-            flex: 1;
-        }
-
-        .activity-text {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .activity-date {
-            font-size: 0.7rem;
-            color: var(--text-tertiary);
-        }
-
-        .github-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            padding: 0.8rem 1.5rem;
-            background: var(--gradient-1);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .github-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
-            gap: 0.8rem;
-        }
-
-        .toast-notification {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--accent-1);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            z-index: 10000;
-            opacity: 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            pointer-events: none;
-        }
-
-        .toast-notification.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        .top-social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            transition: all 0.3s;
-            font-size: 1.2rem;
-            text-decoration: none;
-            border: 1px solid var(--border-medium);
-        }
-
-        .top-social-link:hover {
-            transform: translateY(-3px);
-            border-color: transparent;
-        }
-
-        .top-social-link[title="Facebook"]:hover { background: #1877f2; color: white; }
-        .top-social-link[title="Instagram"]:hover { background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5); color: white; }
-        .top-social-link[title="LinkedIn"]:hover { background: #0077b5; color: white; }
-        .top-social-link[title="GitHub"]:hover { background: #333; color: white; }
-        .top-social-link[title="WhatsApp"]:hover { background: #25D366; color: white; }
-        .top-social-link[title="Email"]:hover { background: #ea4335; color: white; }
-
-        @media (max-width: 768px) {
-            .projects-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .project-card h3 { font-size: 1.3rem; }
-            .page-header h1 { font-size: 2rem; }
-            .project-actions { flex-direction: column; align-items: stretch; }
-            .share-buttons { justify-content: flex-start; }
-            .github-header { flex-direction: column; text-align: center; }
-            .github-stats { justify-content: center; }
-        }
-
-        @media (max-width: 480px) {
-            .project-img { height: 160px; }
-            .project-card { padding: 1rem; }
-            .page-header h1 { font-size: 1.8rem; }
-            .github-section { padding: 1rem; }
-            .github-header h2 { font-size: 1.3rem; }
-        }
-
-    </style>
 </head>
 
 <body>
-    <div class="loader-wrapper" id="loaderWrapper">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div class="loader-wrapper" id="loaderWrapper" aria-hidden="true">
         <div class="loader">
-            <div class="loader-text">Loading Projects⚔️</div>
+            <div class="loader-text">Loading Projects<span aria-hidden="true">⚔️</span></div>
         </div>
     </div>
 
     <div class="container">
 
+        <header>
         <div class="top-social-bar fade-up">
-            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+            <a href="https://www.facebook.com/davis.nephop" target="_blank" class="top-social-link" title="Facebook" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/_marimo_0/" target="_blank" class="top-social-link" title="Instagram" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/" target="_blank" class="top-social-link" title="LinkedIn" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+            <a href="https://github.com/Sanssskar" target="_blank" class="top-social-link" title="GitHub" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+            <a href="https://wa.me/9779814351861" target="_blank" class="top-social-link" title="WhatsApp" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="mailto:shresthasakar85@gmail.com" class="top-social-link" title="Email" aria-label="Email"><i class="fa-regular fa-envelope" aria-hidden="true"></i></a>
         </div>
 
          <nav class="main-navbar fade-up" aria-label="Main navigation">
@@ -540,26 +148,30 @@
                         Home</a></li>
                 <li><a href="about.html"><i class="fa-solid fa-user" aria-hidden="true"></i> About</a></li>
                 <li><a href="services.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Services</a></li>
-                <li><a href="projects.html"><i class="fa-solid fa-star" aria-hidden="true"></i> Projects</a></li>
+                <li><a href="projects.html" class="active" aria-current="page"><i class="fa-solid fa-star" aria-hidden="true"></i> Projects</a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact</a></li>
             </ul>
         </nav>
 
         <div class="nav-bar fade-up">
-          <a style="text-decoration: none;" href="/" aria-label="SanskarHub Home">
+          <a href="/" aria-label="SanskarHub Home">
                 <img src="/images/SanskarHub.png" alt="" class="logo" width="207" height="50">
             </a>
             <div class="nav-controls">
-                <a href="https://sudamhub.com/" target="_blank" rel="noopener noreferrer"><button class="glass-btn team-btn"><i class="fa-solid fa-users"></i> Our Team</button></a>
-                <button class="glass-btn" id="themeToggle"><i class="fa-regular fa-moon" id="themeIcon"></i></button>
+                <a class="glass-btn team-btn" href="https://sudamhub.com/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-users" aria-hidden="true"></i> Our Team</a>
+                <button type="button" class="glass-btn" id="themeToggle" aria-label="Toggle dark/light theme" aria-pressed="false"><i class="fa-regular fa-moon" aria-hidden="true" id="themeIcon"></i></button>
             </div>
         </div>
+    </header>
+
+    <main id="main" tabindex="-1">
 
         <div class="page-header fade-up">
             <h1>Web Development Projects in Nepal</h1>
-            <p style="color: var(--text-secondary);">Crafting production-ready systems ⚔️</p>
+            <p style="color: var(--text-secondary);">Crafting production-ready systems <span aria-hidden="true">⚔️</span></p>
         </div>
 
+        <h2 class="sr-only">Featured projects</h2>
         <div class="projects-grid">
 
             <div class="project-card" data-project="Code It Appsware" data-url="https://codeitappsware.com/">
@@ -577,13 +189,13 @@
                 </div>
                 <div class="project-actions">
                     <a href="https://codeitappsware.com/" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                        <i class="fa-solid fa-external-link" aria-hidden="true"></i> <span>View Project <span aria-hidden="true">⚔️</span></span>
                     </a>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Code It Appsware on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Code It Appsware on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Code It Appsware on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Code It Appsware on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -603,13 +215,13 @@
                 </div>
                 <div class="project-actions">
                     <a href="https://homelinkservice.com/" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                        <i class="fa-solid fa-external-link" aria-hidden="true"></i> <span>View Project <span aria-hidden="true">⚔️</span></span>
                     </a>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Home Link Services Pvt.Ltd on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Home Link Services Pvt.Ltd on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Home Link Services Pvt.Ltd on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Home Link Services Pvt.Ltd on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -629,13 +241,13 @@
                 </div>
                 <div class="project-actions">
                     <a href="https://www.koselixpress.com.np/" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                        <i class="fa-solid fa-external-link" aria-hidden="true"></i> <span>View Project <span aria-hidden="true">⚔️</span></span>
                     </a>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Koseli Express on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Koseli Express on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Koseli Express on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Koseli Express on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -653,14 +265,14 @@
                     <span class="project-tag">Sanctum</span>
                 </div>
                 <div class="project-actions">
-                    <a href="#" class="project-link" onclick="event.preventDefault(); showToast('This project is locally hosted and not available online.')">
-                        <i class="fa-solid fa-code"></i> Local Project ⚔️
-                    </a>
+                    <button type="button" class="project-link" data-toast="This project is locally hosted and not available online.">
+                        <i class="fa-solid fa-code" aria-hidden="true"></i> <span>Local Project <span aria-hidden="true">⚔️</span></span>
+                    </button>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Product REST API on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Product REST API on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Product REST API on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Product REST API on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -678,14 +290,14 @@
                     <span class="project-tag">Mail Integration</span>
                 </div>
                 <div class="project-actions">
-                    <a href="#" class="project-link" onclick="event.preventDefault(); showToast('This project is locally hosted and not available online.')">
-                        <i class="fa-solid fa-code"></i> Local Project ⚔️
-                    </a>
+                    <button type="button" class="project-link" data-toast="This project is locally hosted and not available online.">
+                        <i class="fa-solid fa-code" aria-hidden="true"></i> <span>Local Project <span aria-hidden="true">⚔️</span></span>
+                    </button>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Student Portal API on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Student Portal API on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Student Portal API on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Student Portal API on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -705,13 +317,13 @@
                 </div>
                 <div class="project-actions">
                     <a href="https://sudamhub.com/" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                        <i class="fa-solid fa-external-link" aria-hidden="true"></i> <span>View Project <span aria-hidden="true">⚔️</span></span>
                     </a>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share SudamHub on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share SudamHub on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share SudamHub on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share SudamHub on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -731,13 +343,13 @@
                 </div>
                 <div class="project-actions">
                     <a href="https://hzncapital.com/" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                        <i class="fa-solid fa-external-link" aria-hidden="true"></i> <span>View Project <span aria-hidden="true">⚔️</span></span>
                     </a>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Hzn Capital Shareholder Portal on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Hzn Capital Shareholder Portal on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Hzn Capital Shareholder Portal on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Hzn Capital Shareholder Portal on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -757,13 +369,13 @@
                 </div>
                 <div class="project-actions">
                     <a href="https://prasarstudio.com/" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                        <i class="fa-solid fa-external-link" aria-hidden="true"></i> <span>View Project <span aria-hidden="true">⚔️</span></span>
                     </a>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Prasar Studio Website on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Prasar Studio Website on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Prasar Studio Website on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Prasar Studio Website on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -783,13 +395,13 @@
                 </div>
                 <div class="project-actions">
                     <a href="https://sapkotakalyankendra.uk/" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                        <i class="fa-solid fa-external-link" aria-hidden="true"></i> <span>View Project <span aria-hidden="true">⚔️</span></span>
                     </a>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Sapkota Kalyan Kendra UK on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Sapkota Kalyan Kendra UK on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Sapkota Kalyan Kendra UK on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Sapkota Kalyan Kendra UK on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -808,13 +420,13 @@
                 </div>
                 <div class="project-actions">
                     <a href="https://kumarisarsafaisewa.com/" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <i class="fa-solid fa-external-link"></i> View Project ⚔️
+                        <i class="fa-solid fa-external-link" aria-hidden="true"></i> <span>View Project <span aria-hidden="true">⚔️</span></span>
                     </a>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Kumari Sarsafai Sewa on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Kumari Sarsafai Sewa on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Kumari Sarsafai Sewa on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Kumari Sarsafai Sewa on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -832,14 +444,14 @@
                     <span class="project-tag">Filament</span>
                 </div>
                 <div class="project-actions">
-                    <a href="#" class="project-link" onclick="event.preventDefault(); showToast('This project is locally hosted and not available online.')">
-                        <i class="fa-solid fa-code"></i> Local Project ⚔️
-                    </a>
+                    <button type="button" class="project-link" data-toast="This project is locally hosted and not available online.">
+                        <i class="fa-solid fa-code" aria-hidden="true"></i> <span>Local Project <span aria-hidden="true">⚔️</span></span>
+                    </button>
                     <div class="share-buttons">
-                        <button class="share-btn" data-social="linkedin" onclick="shareProject(this)"><i class="fa-brands fa-linkedin-in"></i></button>
-                        <button class="share-btn" data-social="twitter" onclick="shareProject(this)"><i class="fa-brands fa-twitter"></i></button>
-                        <button class="share-btn" data-social="facebook" onclick="shareProject(this)"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="share-btn" data-social="whatsapp" onclick="shareProject(this)"><i class="fa-brands fa-whatsapp"></i></button>
+                        <button type="button" class="share-btn" data-social="linkedin" aria-label="Share Elite Fitness Studio on LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="twitter" aria-label="Share Elite Fitness Studio on X (Twitter)"><i class="fa-brands fa-twitter" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="facebook" aria-label="Share Elite Fitness Studio on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></button>
+                        <button type="button" class="share-btn" data-social="whatsapp" aria-label="Share Elite Fitness Studio on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -849,8 +461,8 @@
         <div class="github-section fade-up">
             <div class="github-header">
                 <h2>
-                    <i class="fa-brands fa-github"></i>
-                    GitHub Contributions 2026
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    GitHub Contributions <span id="ghYear">2026</span>
                 </h2>
                 <div class="github-stats" id="githubStats">
                     <div class="github-stat">
@@ -876,11 +488,11 @@
 
             <div class="github-activity">
                 <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fa-solid fa-clock"></i> Recent GitHub Activity
+                    <i class="fa-solid fa-clock" aria-hidden="true"></i> Recent GitHub Activity
                 </h3>
                 <div id="activityFeed">
                     <div class="activity-item">
-                        <div class="activity-icon"><i class="fa-solid fa-spinner fa-pulse"></i></div>
+                        <div class="activity-icon"><i class="fa-solid fa-spinner fa-pulse" aria-hidden="true"></i></div>
                         <div class="activity-content">
                             <div class="activity-text">Loading recent activity...</div>
                             <div class="activity-date">Please wait</div>
@@ -891,15 +503,17 @@
 
             <div style="text-align: center;">
                 <a href="https://github.com/Sanssskar" target="_blank" class="github-link" rel="noopener noreferrer">
-                    <i class="fa-brands fa-github"></i> View Full GitHub Profile
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-brands fa-github" aria-hidden="true"></i> View Full GitHub Profile
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
 
-        <footer class="footer">
-            <div>© 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer ⚔️</div>
-            <nav>
+        </main>
+
+            <footer class="footer">
+            <div>© 2025–2026 <strong>Sanskar Shrestha</strong> — Full Stack Developer <span aria-hidden="true">⚔️</span></div>
+            <nav aria-label="Footer navigation">
                 <a href="/">Home</a>
                 <a href="about.html">About</a>
                 <a href="services.html">Services</a>
@@ -907,161 +521,14 @@
                 <a href="contact.html">Contact</a>
 
             </nav>
-            <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
+            <div><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Dharan, Nepal</div>
         </footer>
     </div>
 
-    <div id="toastNotification" class="toast-notification">
-        <i class="fa-solid fa-share-alt"></i> Link copied to clipboard!
-    </div>
+    <div id="toastNotification" class="toast-notification" role="status" aria-live="polite"></div>
 
     <script src="js/main.js"></script>
-  <script>
-        function shareProject(button) {
-            const card       = button.closest('.project-card');
-            const projectName = card.getAttribute('data-project');
-            const projectUrl  = card.getAttribute('data-url');
-            const social      = button.getAttribute('data-social');
-
-            const text    = `Check out this amazing project: ${projectName} by Sanskar Shrestha, a Full Stack Laravel Developer from Nepal.`;
-            const fullUrl = encodeURIComponent(projectUrl);
-            const fullTxt = encodeURIComponent(text);
-
-            const urls = {
-                linkedin : `https://www.linkedin.com/sharing/share-offsite/?url=${fullUrl}`,
-                twitter  : `https://twitter.com/intent/tweet?text=${fullTxt}&url=${fullUrl}`,
-                facebook : `https://www.facebook.com/sharer/sharer.php?u=${fullUrl}`,
-                whatsapp : `https://wa.me/?text=${fullTxt}%20${fullUrl}`
-            };
-
-            if (urls[social]) window.open(urls[social], '_blank', 'width=600,height=500');
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toastNotification');
-            toast.innerHTML = `<i class="fa-solid fa-check-circle"></i> ${message}`;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        function getTimeAgo(date) {
-            const seconds = Math.floor((new Date() - date) / 1000);
-            const intervals = {
-                year: 31536000, month: 2592000, week: 604800,
-                day: 86400, hour: 3600, minute: 60
-            };
-            for (const [unit, s] of Object.entries(intervals)) {
-                const n = Math.floor(seconds / s);
-                if (n >= 1) return `${n} ${unit}${n === 1 ? '' : 's'} ago`;
-            }
-            return 'just now';
-        }
-
-        async function fetchGitHubStats() {
-            const username = 'Sanssskar';
-            const headers  = { 'Accept': 'application/vnd.github.v3+json' };
-
-            try {
-                const userRes  = await fetch(`https://api.github.com/users/${username}`, { headers });
-                const userData = await userRes.json();
-                document.getElementById('reposCount').innerText = userData.public_repos ?? '--';
-                document.getElementById('followersCount').innerText = userData.followers ?? '--';
-
-                const currentYear = new Date().getFullYear();
-                const eventsRes = await fetch(
-                    `https://api.github.com/users/${username}/events/public?per_page=100`,
-                    { headers }
-                );
-                const events = await eventsRes.json();
-                const eventList = Array.isArray(events) ? events : [];
-
-                let thisYearCommits = 0;
-                eventList.forEach(e => {
-                    if (
-                        e.type === 'PushEvent' &&
-                        new Date(e.created_at).getFullYear() === currentYear
-                    ) {
-                        thisYearCommits += e.payload?.commits?.length ?? 1;
-                    }
-                });
-
-                document.getElementById('thisYearCommits').innerText =
-                    thisYearCommits > 0 ? `${thisYearCommits}+` : 'N/A';
-
-                const feed = document.getElementById('activityFeed');
-                {
-                    const events2 = eventList;
-                    if (events2.length > 0) {
-                        feed.innerHTML = events2.slice(0, 5).map(event => {
-                            let icon = 'fa-code-branch', text = '';
-
-                            switch (event.type) {
-                                case 'PushEvent':
-                                    icon = 'fa-code-commit';
-                                    text = `Pushed ${event.payload.commits?.length ?? 1} commit(s) to <strong>${event.repo.name.split('/')[1]}</strong>`;
-                                    break;
-                                case 'CreateEvent':
-                                    icon = 'fa-plus-circle';
-                                    text = `Created ${event.payload.ref_type} in <strong>${event.repo.name.split('/')[1]}</strong>`;
-                                    break;
-                                case 'WatchEvent':
-                                    icon = 'fa-star';
-                                    text = `Starred <strong>${event.repo.name.split('/')[1]}</strong>`;
-                                    break;
-                                case 'IssuesEvent':
-                                    icon = 'fa-exclamation-circle';
-                                    text = `${event.payload.action} issue in <strong>${event.repo.name.split('/')[1]}</strong>`;
-                                    break;
-                                case 'PullRequestEvent':
-                                    icon = 'fa-code-pull-request';
-                                    text = `${event.payload.action} pull request in <strong>${event.repo.name.split('/')[1]}</strong>`;
-                                    break;
-                                default:
-                                    icon = 'fa-code-branch';
-                                    text = `Activity in <strong>${event.repo.name.split('/')[1]}</strong>`;
-                            }
-
-                            return `
-                                <div class="activity-item">
-                                    <div class="activity-icon"><i class="fa-solid ${icon}"></i></div>
-                                    <div class="activity-content">
-                                        <div class="activity-text">${text}</div>
-                                        <div class="activity-date">${getTimeAgo(new Date(event.created_at))}</div>
-                                    </div>
-                                </div>`;
-                        }).join('');
-                    } else {
-                        feed.innerHTML = `
-                            <div class="activity-item">
-                                <div class="activity-icon"><i class="fa-solid fa-info-circle"></i></div>
-                                <div class="activity-content">
-                                    <div class="activity-text">No recent public activity found</div>
-                                    <div class="activity-date">Check back later</div>
-                                </div>
-                            </div>`;
-                    }
-                }
-
-            } catch (error) {
-                console.error('GitHub fetch error:', error);
-                ['followersCount','thisYearCommits','reposCount'].forEach(id => {
-                    document.getElementById(id).innerText = '--';
-                });
-                document.getElementById('activityFeed').innerHTML = `
-                    <div class="activity-item">
-                        <div class="activity-icon"><i class="fa-solid fa-exclamation-triangle"></i></div>
-                        <div class="activity-content">
-                            <div class="activity-text">Unable to load GitHub activity</div>
-                            <div class="activity-date">Visit GitHub profile directly</div>
-                        </div>
-                    </div>`;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            fetchGitHubStats();
-        });
-    </script>
+    <script src="js/projects.js"></script>
 </body>
 
 </html>

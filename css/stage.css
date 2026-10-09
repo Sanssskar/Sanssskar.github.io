@@ -1,7 +1,6 @@
 /* Name glitch (text animation only) */
 :root{--teal:#00a896;--coral:#ff6b6b}
-.typing-text{border-right:0;animation:none;position:relative;display:inline-block}
-@media (hover:hover){.floating-shape{cursor:default}}
+.typing-text{position:relative;display:inline-block}
 .typing-text::before,.typing-text::after{content:attr(data-text);position:absolute;inset:0;opacity:0;background:none;pointer-events:none}
 .typing-text::before{color:var(--teal);-webkit-text-fill-color:var(--teal)}
 .typing-text::after{color:var(--coral);-webkit-text-fill-color:var(--coral)}
@@ -18,5 +17,3 @@
 .pix-layer{position:absolute;inset:0;width:100%;height:100%;z-index:4;opacity:0;pointer-events:none;border-radius:inherit}
 @media (prefers-reduced-motion:reduce){.sword-fx,.pix-layer{display:none}}
 
-/* keep the photo sharp (main.js no longer marks it loaded now the 2nd image is gone) */
-#image1{filter:none}

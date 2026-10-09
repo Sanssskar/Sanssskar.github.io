@@ -33,7 +33,6 @@
 
   /* photo swap: zoro on impact, pixel-sharpens back into me */
   const me = document.getElementById('image1'), wrap = shape.querySelector('.image-wrapper');
-  me.classList.add('loaded');
   let zoroOK = false;
   const zoro = new Image(); zoro.onload = () => { zoroOK = true; };
   const loadZoro = () => { if (!zoro.src) zoro.src = 'images/zoro.jpg'; };

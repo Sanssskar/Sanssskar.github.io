@@ -7,7 +7,7 @@
   position:absolute;inset:0;overflow:hidden;z-index:-1;
   pointer-events:none;user-select:none;-webkit-user-select:none;
 }
-body.dark-mode .code-bg{--o:.22}
+html.dark-mode .code-bg{--o:.22}
 
 .code-line{
   position:absolute;top:0;left:var(--x,5%);

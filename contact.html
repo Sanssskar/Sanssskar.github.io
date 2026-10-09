@@ -6,13 +6,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=yes"
     />
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark-mode')}catch(e){}</script>
 
-    <title>
-      Hire a Web Developer in Dharan Nepal | Sanskar Shrestha | Get a Quote
-    </title>
+    <title>Hire a Web Developer in Dharan, Nepal | Sanskar Shrestha</title>
     <meta
       name="description"
-      content="Get in touch with Sanskar Shrestha for Laravel development, Filament admin panels, REST APIs, and freelance web development projects. Typical response within 24 hours."
+      content="Contact Sanskar Shrestha for Laravel development, Filament admin panels, REST APIs and freelance web projects. Typical response within 24 hours."
     />
     <meta name="author" content="Sanskar Shrestha" />
     <meta
@@ -26,7 +25,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-    <link rel="dns-prefetch" href="https://shresthasanskar.com.np" />
 
     <meta
       property="og:title"
@@ -45,8 +43,8 @@
       property="og:image"
       content="https://shresthasanskar.com.np/images/sanskar.jpeg"
     />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content="789" />
+    <meta property="og:image:height" content="707" />
     <meta
       property="og:image:alt"
       content="Sanskar Shrestha - Laravel Full Stack Developer Nepal"
@@ -73,7 +71,7 @@
     <link
       rel="icon"
       type="image/png"
-      href="favicon/favicon-96x96.png"
+      href="/favicon/favicon-96x96.png"
       sizes="96x96"
     />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
@@ -203,72 +201,60 @@
       }
     </script>
     <noscript>
-      <style>
-        .fade-left,
-        .fade-right,
-        .fade-up,
-        .scale-up {
-          opacity: 1 !important;
-          transform: none !important;
-        }
-      </style>
+        <style>.fade-left,.fade-right,.fade-up,.scale-up{opacity:1 !important;transform:none !important}.loader-wrapper{display:none}</style>
     </noscript>
   </head>
 
   <body>
-    <div class="loader-wrapper" id="loaderWrapper">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div class="loader-wrapper" id="loaderWrapper" aria-hidden="true">
       <div class="loader">
-        <div class="loader-text">Loading Contact⚔️</div>
+        <div class="loader-text">Loading Contact<span aria-hidden="true">⚔️</span></div>
       </div>
     </div>
 
     <div class="container">
-      <div class="top-social-bar fade-up">
+      <header>
+        <div class="top-social-bar fade-up">
         <a
           href="https://www.facebook.com/davis.nephop"
           target="_blank"
           class="top-social-link"
           title="Facebook"
-          rel="noopener noreferrer"
-          ><i class="fa-brands fa-facebook-f"></i
+          rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
         ></a>
         <a
           href="https://www.instagram.com/_marimo_0/"
           target="_blank"
           class="top-social-link"
           title="Instagram"
-          rel="noopener noreferrer"
-          ><i class="fa-brands fa-instagram"></i
+          rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i
         ></a>
         <a
           href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/"
           target="_blank"
           class="top-social-link"
           title="LinkedIn"
-          rel="noopener noreferrer"
-          ><i class="fa-brands fa-linkedin-in"></i
+          rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i
         ></a>
         <a
           href="https://github.com/Sanssskar"
           target="_blank"
           class="top-social-link"
           title="GitHub"
-          rel="noopener noreferrer"
-          ><i class="fa-brands fa-github"></i
+          rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i
         ></a>
         <a
           href="https://wa.me/9779814351861"
           target="_blank"
           class="top-social-link"
           title="WhatsApp"
-          rel="noopener noreferrer"
-          ><i class="fa-brands fa-whatsapp"></i
+          rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i
         ></a>
         <a
           href="mailto:shresthasakar85@gmail.com"
           class="top-social-link"
-          title="Email"
-          ><i class="fa-regular fa-envelope"></i
+          title="Email" aria-label="Email"><i class="fa-regular fa-envelope" aria-hidden="true"></i
         ></a>
       </div>
 
@@ -296,7 +282,7 @@
             >
           </li>
           <li>
-            <a href="contact.html"
+            <a href="contact.html" class="active" aria-current="page"
               ><i class="fa-solid fa-envelope" aria-hidden="true"></i>
               Contact</a
             >
@@ -305,7 +291,7 @@
       </nav>
 
       <div class="nav-bar fade-up">
-        <a style="text-decoration: none" href="/" aria-label="SanskarHub Home">
+        <a href="/" aria-label="SanskarHub Home">
           <img
             src="/images/SanskarHub.png"
             alt=""
@@ -315,24 +301,22 @@
           />
         </a>
         <div class="nav-controls">
-          <a
-            href="https://sudamhub.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><button class="glass-btn team-btn">
-              <i class="fa-solid fa-users"></i> Our Team
-            </button></a
-          >
-          <button class="glass-btn" id="themeToggle">
-            <i class="fa-regular fa-moon" id="themeIcon"></i>
+          <a class="glass-btn team-btn" href="https://sudamhub.com/" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-users" aria-hidden="true"></i> Our Team
+            </a>
+          <button type="button" class="glass-btn" id="themeToggle" aria-label="Toggle dark/light theme" aria-pressed="false">
+            <i class="fa-regular fa-moon" aria-hidden="true" id="themeIcon"></i>
           </button>
         </div>
       </div>
+    </header>
+
+    <main id="main" tabindex="-1">
 
       <div class="page-header fade-up" style="text-align: center">
         <h1>Hire a Web Developer in Dharan, Nepal</h1>
         <p style="color: var(--text-secondary)">
-          From idea to impact — let's build it ⚔️
+          From idea to impact — let's build it <span aria-hidden="true">⚔️</span>
         </p>
       </div>
 
@@ -341,15 +325,15 @@
           <h2 class="sr-only">Ways to Reach Sanskar Shrestha</h2>
           <div class="welcome-text">
             <div class="response-badge">
-              <i class="fa-solid fa-bolt"></i> Quick response — within 24 hours
+              <i class="fa-solid fa-bolt" aria-hidden="true"></i> Quick response — within 24 hours
             </div>
           </div>
 
           <div class="direct-contact">
-            <h3><i class="fa-solid fa-address-card"></i> Direct Contact</h3>
+            <h3><i class="fa-solid fa-address-card" aria-hidden="true"></i> Direct Contact</h3>
             <div class="contact-methods">
               <a href="mailto:shresthasakar85@gmail.com" class="contact-method">
-                <i class="fa-regular fa-envelope"></i>
+                <i class="fa-regular fa-envelope" aria-hidden="true"></i>
                 <div>
                   <h4>Email</h4>
                   <p>shresthasakar85@gmail.com</p>
@@ -361,14 +345,14 @@
                 class="contact-method"
                 rel="noopener noreferrer"
               >
-                <i class="fa-brands fa-whatsapp"></i>
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                 <div>
                   <h4>WhatsApp</h4>
                   <p>+977 9814351861</p>
                 </div>
               </a>
               <div class="contact-method">
-                <i class="fa-solid fa-location-dot"></i>
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                 <div>
                   <h4>Location</h4>
                   <p>Dharan, Nepal (Remote Worldwide)</p>
@@ -378,7 +362,7 @@
           </div>
 
           <div class="services-reminder">
-            <h3><i class="fa-solid fa-bolt"></i> What I work on:</h3>
+            <h3><i class="fa-solid fa-bolt" aria-hidden="true"></i> What I work on:</h3>
             <div class="reminder-tags">
               <span class="reminder-tag"
                 ><i class="fa-solid fa-code" aria-hidden="true"></i> Full Stack
@@ -411,62 +395,60 @@
           </div>
 
           <div class="social-links-section">
-            <h3><i class="fa-solid fa-share-alt"></i> Connect with me</h3>
+            <h3><i class="fa-solid fa-share-alt" aria-hidden="true"></i> Connect with me</h3>
             <div class="social-icons-row">
               <a
                 href="https://github.com/Sanssskar"
                 target="_blank"
                 class="social-icon-link"
                 title="GitHub"
-                rel="noopener noreferrer"
-                ><i class="fa-brands fa-github"></i
+                rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i
               ></a>
               <a
                 href="https://www.linkedin.com/in/sanskar-shrestha-a750933b1/"
                 target="_blank"
                 class="social-icon-link"
                 title="LinkedIn"
-                rel="noopener noreferrer"
-                ><i class="fa-brands fa-linkedin-in"></i
+                rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i
               ></a>
               <a
                 href="https://www.instagram.com/_marimo_0/"
                 target="_blank"
                 class="social-icon-link"
                 title="Instagram"
-                rel="noopener noreferrer"
-                ><i class="fa-brands fa-instagram"></i
+                rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i
               ></a>
               <a
                 href="https://www.facebook.com/davis.nephop"
                 target="_blank"
                 class="social-icon-link"
                 title="Facebook"
-                rel="noopener noreferrer"
-                ><i class="fa-brands fa-facebook-f"></i
+                rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
               ></a>
             </div>
           </div>
 
           <div class="response-note">
-            <i class="fa-solid fa-lock"></i> For the fastest response, contact
+            <i class="fa-solid fa-lock" aria-hidden="true"></i> For the fastest response, contact
             directly via WhatsApp or email.
           </div>
         </div>
       </div>
 
-      <footer class="footer">
+      </main>
+
+            <footer class="footer">
         <div>
-          © 2025 <strong>Sanskar Shrestha</strong> — Full Stack Developer |
-          Laravel & Filament Expert ⚔️
+          © 2025–2026 <strong>Sanskar Shrestha</strong> — Full Stack Developer |
+          Laravel & Filament Expert <span aria-hidden="true">⚔️</span>
         </div>
-        <nav>
+        <nav aria-label="Footer navigation">
           <a href="/">Home</a><a href="about.html">About</a
           ><a href="services.html">Services</a
           ><a href="projects.html">Projects</a
           ><a href="contact.html">Contact</a>
         </nav>
-        <div><i class="fa-solid fa-location-dot"></i> Dharan, Nepal</div>
+        <div><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Dharan, Nepal</div>
       </footer>
     </div>
 
