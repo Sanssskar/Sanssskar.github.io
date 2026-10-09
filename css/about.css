@@ -1,1 +1,74 @@
-.education-section,.work-section{background:var(--bg-secondary)}.education-section{border-radius:1.5rem;padding:1.8rem;margin:2rem 0;border:1px solid var(--border-medium)}.education-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem}.education-header i{font-size:1.8rem;color:var(--accent-1)}.education-header h3{font-size:1.3rem;font-weight:700}.education-detail{padding-left:2rem;border-left:3px solid var(--accent-1)}.education-detail h4{font-size:1.1rem;font-weight:600;margin-bottom:.3rem}.education-detail .institution{color:var(--accent-1);font-weight:500;margin-bottom:.5rem}.work-section{border-radius:1.5rem;padding:1.8rem;margin:2rem 0;border:1px solid var(--border-medium);position:relative;overflow:hidden}.company-logo,.role-badge,.work-section::before{background:var(--gradient-1)}.work-section::before{content:'';position:absolute;top:0;right:0;width:150px;height:150px;opacity:.05;border-radius:50%;transform:translate(50%,-50%)}.current-role{display:flex;align-items:flex-start;gap:1.5rem;flex-wrap:wrap}.role-badge{padding:.5rem 1.2rem;border-radius:50px;display:inline-flex;align-items:center;gap:.6rem;color:#fff;font-weight:600;font-size:.85rem;margin-bottom:1rem}.company-name,.role-badge i{font-size:1rem}.company-logo{width:80px;height:80px;border-radius:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}.company-logo i{font-size:2.5rem;color:#fff}.role-details{flex:1}.role-details h4{font-size:1.3rem;font-weight:700;margin-bottom:.3rem;color:var(--text-primary)}.company-name{color:var(--accent-1);font-weight:600;margin-bottom:.5rem;display:inline-block;text-decoration:none}.company-name:hover{text-decoration:underline}.role-period{font-size:.8rem;color:var(--text-tertiary);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}.role-description{font-size:.9rem;color:var(--text-secondary);line-height:1.6;margin-top:.5rem}.work-highlights{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.2rem}.work-highlight{background:var(--bg-primary);padding:.4rem 1rem;border-radius:50px;font-size:.75rem;color:var(--text-secondary);display:flex;align-items:center;gap:.5rem}.work-highlight i{color:var(--accent-1);font-size:.7rem}.freelance-journey{background:var(--bg-primary);border-radius:1rem;padding:1.2rem;margin:1rem 0}.journey-item{display:flex;gap:1rem;margin-bottom:1rem;padding:.8rem;border-radius:.8rem;transition:.3s}.journey-item:hover{background:var(--bg-secondary);transform:translateX(5px)}.journey-icon{width:40px;height:40px;background:var(--gradient-1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.journey-icon i{font-size:1.2rem;color:#fff}.journey-content h4{font-size:1rem;font-weight:600;margin-bottom:.2rem}.journey-content p{font-size:.85rem;color:var(--text-secondary);line-height:1.5}.about-cover-img{display:block;width:100%;height:auto;border-radius:20px;object-fit:cover;transition:transform 0.5s ease,filter 0.4s;filter:brightness(0.95) contrast(1.05)}.about-image-wrapper:hover .about-cover-img{transform:scale(1.02);filter:brightness(1.05) contrast(1.1)}@media (max-width:768px){.current-role{text-align:center}.role-period,.work-highlights{justify-content:center}.about-content,.current-role{flex-direction:column}.about-text{order:1}.about-highlights{order:2;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:.8rem}.highlight-item{width:auto;min-width:140px}.current-role{align-items:center}.company-logo,.journey-icon{margin-bottom:.5rem}.role-badge{display:inline-flex}.education-detail{padding-left:1rem}.journey-item{flex-direction:column;align-items:flex-start;text-align:left}.about-section{padding:1.5rem;margin:2rem 0}.about-header{justify-content:center;text-align:center;flex-direction:column}.about-header h2{font-size:1.5rem}.about-text{text-align:center}.about-text p{font-size:.9rem}.about-highlights{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}.highlight-item{padding:.8rem;justify-content:center}.highlight-item i{font-size:1.2rem}.highlight-item span{font-size:.85rem}}@media (max-width:480px){.education-detail,.journey-content,.journey-item{text-align:center}.about-highlights{flex-direction:column;align-items:stretch}.highlight-item,.work-highlight{width:100%;justify-content:center}.work-highlights{flex-direction:column;align-items:center}.journey-item{align-items:center}.education-detail{border-left:none;padding-left:0}.education-detail .institution{text-align:center;display:block}}
+/* ===== About page ===== */
+
+/* Intro: photo + bio */
+.about-intro{
+  display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:3.5rem;align-items:center;
+  padding:2.75rem;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:1.5rem;
+}
+.about-photo{position:relative;margin:0;max-width:420px;width:100%;justify-self:center}
+.about-photo::before{
+  content:"";position:absolute;inset:16px -16px -16px 16px;border:2px solid var(--accent-3);border-radius:1.1rem;z-index:0;
+}
+.about-photo img{position:relative;z-index:1;display:block;width:100%;height:auto;border-radius:1rem;border:1px solid var(--border-medium);background:var(--bg-primary)}
+
+.about-copy h2{font-size:1.9rem;line-height:1.25;margin-bottom:1rem;max-width:22em}
+.about-copy p{color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;max-width:62ch}
+.about-copy p strong{color:var(--text-primary);font-weight:600}
+
+.about-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 1.75rem;margin:1.5rem 0 1.75rem}
+.about-facts div{padding:.75rem 0;border-top:1px solid var(--border-medium)}
+.about-facts dt{font-size:.78rem;color:var(--text-tertiary);margin-bottom:.15rem}
+.about-facts dd{font-size:.92rem;font-weight:500;color:var(--text-primary);line-height:1.45}
+
+.about-actions{display:flex;flex-wrap:wrap;gap:.9rem}
+
+/* Terminal section spacing is in terminal.css */
+.term-noscript{max-width:640px;margin:1rem auto 0;text-align:center;color:var(--text-secondary);font-size:.9rem}
+.term-noscript a{color:var(--accent-1)}
+
+/* Experience & education timeline */
+.about-journey{margin-top:1rem}
+.about-journey .section-title,.about-skills .section-title{justify-content:center;text-align:center}
+.timeline{list-style:none;position:relative;max-width:900px;margin:0 auto 3rem;padding:0 0 0 2rem}
+.timeline::before{content:"";position:absolute;left:.4rem;top:1.6rem;bottom:1.6rem;width:2px;background:var(--border-medium)}
+.tl-item{position:relative;margin-bottom:1.25rem}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-2rem;top:1.65rem;width:.95rem;height:.95rem;border-radius:50%;background:var(--bg-primary);border:3px solid var(--accent-1)}
+.tl-item:first-child .tl-dot{background:var(--accent-1);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent-1) 18%,transparent)}
+.tl-card{background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:1.25rem;padding:1.4rem 1.6rem;transition:border-color .5s,box-shadow .5s}
+.tl-card:hover{border-color:var(--accent-3);box-shadow:var(--card-shadow)}
+.tl-when{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;font-size:.82rem;color:var(--text-tertiary);margin-bottom:.35rem}
+.tl-badge{padding:.1rem .65rem;border-radius:50px;background:var(--gradient-1);color:#fff;font-size:.72rem;font-weight:600}
+.tl-card h3{font-size:1.15rem;font-weight:700;line-height:1.35;margin-bottom:.5rem;color:var(--text-primary)}
+.tl-card h3 a{color:var(--accent-1);text-decoration:none}
+.tl-card h3 a:hover{text-decoration:underline}
+.tl-card p:not(.tl-when){font-size:.92rem;color:var(--text-secondary);line-height:1.7;max-width:68ch}
+.tl-tags{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 0;padding:0}
+.tl-tags li{padding:.2rem .7rem;border:1px solid var(--border-medium);border-radius:6px;font-size:.75rem;font-weight:500;color:var(--text-secondary)}
+
+/* Closing call to action */
+.about-cta{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.25rem;
+  margin:3rem 0 1rem;padding:1.6rem 2rem;background:var(--bg-secondary);
+  border:1px solid var(--border-medium);border-left:4px solid var(--accent-1);border-radius:1rem;
+}
+.about-cta h2{font-size:1.4rem;margin-bottom:.25rem}
+.about-cta p{color:var(--text-secondary);font-size:.92rem}
+
+@media (max-width:968px){
+  .about-intro{grid-template-columns:1fr;gap:2.5rem;padding:1.75rem}
+  .about-photo{max-width:340px}
+}
+@media (max-width:768px){
+  .about-copy h2{font-size:1.5rem}
+  .timeline{padding-left:1.6rem}
+  .tl-dot{left:-1.6rem}
+  .tl-card{padding:1.15rem 1.2rem}
+  .about-cta{padding:1.3rem 1.4rem}
+  .about-cta .btn{width:100%;justify-content:center}
+}
+@media (max-width:480px){
+  .about-intro{padding:1.25rem;border-radius:1.25rem}
+  .about-photo::before{inset:10px -10px -10px 10px}
+  .about-actions .btn{flex:1 1 100%;justify-content:center}
+}

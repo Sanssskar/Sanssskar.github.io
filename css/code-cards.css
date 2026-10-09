@@ -1,0 +1,68 @@
+/* ===== Services cards: typing code snippet + floating symbols (decorative) ===== */
+@font-face{font-family:'Cascadia Code';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/cascadia-code-latin-400-normal.woff2') format('woff2')}
+
+.code-media{position:relative;overflow:hidden;line-height:0}
+.code-media>img{display:block}
+
+.code-fx{
+  position:absolute;inset:0;z-index:3;overflow:hidden;pointer-events:none;
+  background:rgba(7,12,9,.88);opacity:0;visibility:hidden;
+  transition:opacity .6s ease,visibility 0s linear .6s;
+}
+[data-code].is-coding .code-fx{opacity:1;visibility:visible;transition:opacity .6s ease,visibility 0s}
+
+/* floating symbols */
+.code-sym{
+  position:absolute;z-index:2;left:var(--x,10%);bottom:0;
+  font-family:'Cascadia Code',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:var(--s,1rem);line-height:1;color:var(--accent-3);opacity:0;
+  text-shadow:0 0 10px rgba(76,175,80,.55);will-change:transform,opacity;
+}
+[data-code].is-coding .code-sym{animation:codeSymRise var(--t,5s) ease-in var(--d,0s) infinite}
+@keyframes codeSymRise{
+  0%{transform:translate3d(0,0,0);opacity:0}
+  15%{opacity:.55}
+  80%{opacity:.3}
+  100%{transform:translate3d(var(--dx,0),calc(var(--rise,220px) * -1),0);opacity:0}
+}
+
+/* editor window */
+.code-win{
+  position:absolute;z-index:1;inset:12px;display:flex;flex-direction:column;overflow:hidden;
+  border-radius:10px;background:rgba(13,17,23,.92);border:1px solid rgba(255,255,255,.1);
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+  box-shadow:0 12px 30px -10px rgba(0,0,0,.6);line-height:normal;
+}
+.code-win-bar{display:flex;align-items:center;gap:6px;padding:.4rem .7rem;background:rgba(22,27,34,.95);border-bottom:1px solid rgba(255,255,255,.06)}
+.code-win-bar i{width:8px;height:8px;border-radius:50%;background:#ff5f56;flex-shrink:0}
+.code-win-bar i:nth-child(2){background:#ffbd2e}
+.code-win-bar i:nth-child(3){background:#27c93f}
+.code-file{margin-left:.5rem;font-family:'Cascadia Code',ui-monospace,Menlo,Consolas,monospace;font-size:.66rem;color:#8b949e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.code-pre{
+  flex:1;margin:0;padding:.65rem .8rem;overflow:hidden;white-space:pre;
+  font-family:'Cascadia Code',ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  font-size:.72rem;line-height:1.55;color:#c9d1d9;text-align:left;font-variant-ligatures:none;
+}
+.code-pre .c-kw{color:#ff7b72}
+.code-pre .c-str{color:#a5d6a7}
+.code-pre .c-var{color:#79c0ff}
+.code-pre .c-tag{color:#7ee787}
+.code-pre .c-com{color:#6e7681;font-style:italic}
+.code-pre .c-cls{color:#d2a8ff}
+.code-pre .c-op{color:#8b949e}
+.code-pre .c-prm{color:#4caf50}
+.code-pre .c-ok{color:#3fb950}
+.code-cursor{display:inline-block;width:.55em;height:1.05em;margin-left:1px;vertical-align:text-bottom;background:#4caf50;animation:codeBlink 1s steps(1) infinite}
+@keyframes codeBlink{50%{opacity:0}}
+
+@media (max-width:480px){
+  .code-win{inset:8px}
+  .code-pre{font-size:.66rem;padding:.5rem .6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .code-fx,[data-code].is-coding .code-fx{transition:none}
+  .code-sym{display:none}
+  .code-cursor{animation:none}
+}
+@media print{.code-fx{display:none}}

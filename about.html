@@ -81,6 +81,8 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/terminal.css" />
+    <link rel="preload" href="fonts/cascadia-code-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -275,239 +277,146 @@
         </p>
       </div>
 
-      <div class="about-section scale-up" style="margin-top: 0">
-        <div class="about-content">
-          <div class="about-text">
-            <p>
-              <i class="fa-solid fa-hand" aria-hidden="true"></i> I'm
-              <strong>Sanskar Shrestha</strong>, a web developer from
-              <strong>Dharan, Nepal</strong> with a
-              <strong>Bachelor's in Information Management (BIM)</strong>. I
-              specialize in Laravel and Filament, building robust web
-              applications and REST APIs.
-            </p>
+      <section class="about-intro scale-up" aria-labelledby="intro-heading">
+        <figure class="about-photo">
+          <img src="images/sanskar.webp"
+            alt="Sanskar Shrestha, web developer from Dharan, Nepal"
+            width="700" height="627" decoding="async" />
+        </figure>
 
-            <p>
-              <i class="fa-solid fa-laptop-code" aria-hidden="true"></i> With
-              extensive hands‑on experience, I have delivered projects ranging
-              from e‑commerce platforms to student portals. My focus is on clean
-              code, clear communication, and meeting client requirements.
-            </p>
+        <div class="about-copy">
+          <h2 id="intro-heading">Hi, I'm Sanskar. I build Laravel apps that people actually use.</h2>
+          <p>
+            I'm a web developer from <strong>Dharan, Nepal</strong>. I build
+            websites, admin panels and REST APIs with Laravel and Filament, and
+            over the past couple of years I've delivered everything from
+            e&#8209;commerce platforms to student portals.
+          </p>
+          <p>
+            Before I write any code, I want to understand what you're trying to
+            achieve and who will use the result. My Bachelor's in Information
+            Management taught me to think about the business side as well as
+            the technical one, so I can explain not only how something is
+            built, but why it matters.
+          </p>
+          <p>
+            Away from the keyboard you'll usually find me walking in the hills
+            around Dharan. Right now I'm learning Vue.js and Laravel Forge so I
+            can offer more complete solutions.
+          </p>
 
-            <p>
-              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-              <strong>Education:</strong> My BIM degree provided a strong
-              foundation in both technology and business, enabling me to
-              understand not just how to build software, but why it matters for
-              end users.
-            </p>
+          <dl class="about-facts">
+            <div><dt>Based in</dt><dd>Dharan, Nepal</dd></div>
+            <div><dt>Working at</dt><dd>CodeIT Nepal, since 2026</dd></div>
+            <div><dt>Freelancing</dt><dd>Since 2022, with clients in Nepal and abroad</dd></div>
+            <div><dt>Education</dt><dd>BIM, Sunsari Technical College (2025)</dd></div>
+            <div><dt>Delivered</dt><dd>10+ projects</dd></div>
+          </dl>
 
-            <p>
-              <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-              <strong>Freelance experience:</strong> Since 2022, I have worked
-              as a freelance developer, collaborating with clients in Nepal and
-              internationally. I prioritize understanding project goals before
-              writing a single line of code.
-            </p>
-
-            <p>
-              <i class="fa-solid fa-bullseye" aria-hidden="true"></i>
-              <strong>Work approach:</strong> I believe in solving real
-              problems, not just building features. Before starting any project,
-              I invest time in clarifying objectives and ensuring the solution
-              aligns with client needs.
-            </p>
-
-            <p>
-              <span aria-hidden="true">⚔️</span> <strong>Outside of coding:</strong> I enjoy exploring the hills
-              around Dharan and staying updated with the latest web
-              technologies.
-            </p>
-
-            <p>
-              <i class="fa-solid fa-seedling" aria-hidden="true"></i>
-              <strong>Next steps:</strong> Currently expanding my skill set with
-              Vue.js and Laravel Forge to offer even more comprehensive
-              solutions.
-            </p>
-          </div>
-          <div class="about-highlights">
-            <div class="highlight-item">
-              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i
-              ><span>BIM Graduate</span>
-            </div>
-            <div class="highlight-item">
-              <i class="fa-solid fa-briefcase" aria-hidden="true"></i
-              ><span>Freelance Developer</span>
-            </div>
-            <div class="highlight-item">
-              <i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Dharan, Nepal</span>
-            </div>
-            <div class="highlight-item">
-              <i class="fa-solid fa-calendar-alt" aria-hidden="true"></i
-              ><span>2+ Years Experience</span>
-            </div>
-            <div class="highlight-item">
-              <i class="fa-solid fa-rocket" aria-hidden="true"></i
-              ><span>10+ Projects Delivered</span>
-            </div>
-            <div class="highlight-item">
-              <i class="fa-solid fa-code-branch" aria-hidden="true"></i
-              ><span>Full Stack Developer</span>
-            </div>
-            <div class="highlight-item">
-              <i class="fa-solid fa-heart" aria-hidden="true"></i
-              ><span>Laravel & Filament Expert</span>
-            </div>
+          <div class="about-actions">
+            <a class="btn btn-primary" href="contact.html">Work with me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <a class="btn btn-outline" href="projects.html">See my projects</a>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="about-image-wrapper fade-up">
-        <img width="1600" height="400" src="/images/coverabout.webp"
-          alt="Sanskar Shrestha Web Developer Dharan Nepal"
-          class="about-cover-img"
-          loading="lazy"
-        />
-      </div>
-
-      <h2 class="sr-only">Experience, education and freelancing journey</h2>
-      <div class="work-section fade-up">
-        <div class="education-header">
-          <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-          <h3>Current Work</h3>
-        </div>
-        <div class="current-role">
-          <div class="company-logo">
-            <i class="fa-solid fa-code" aria-hidden="true"></i>
-          </div>
-          <div class="role-details">
-            <div class="role-badge">
-              <i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Active
-            </div>
-            <h4>Full Stack Developer</h4>
-            <a
-              href="https://codeit.com.np/"
-              target="_blank"
-              style="text-decoration: none"
-              rel="noopener noreferrer"
-            >
-              <span class="company-name">CodeIT Nepal</span>
-            </a>
-            <div class="role-period">
-              <i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026 – Present
-              <i class="fa-solid fa-location-dot" aria-hidden="true"
-                style="margin-left: 0.5rem"
-              ></i>
-              Dharan / Nepal
-            </div>
-            <p class="role-description">
-              Working with the team at CodeIT Nepal, building web applications
-              using Laravel and Filament. Collaborating on client projects,
-              helping with code reviews, and learning from experienced
-              developers. It's been a great place to grow — working on real
-              projects that people actually use.
-            </p>
-            <div class="work-highlights">
-              <span class="work-highlight"
-                ><i class="fa-solid fa-check" aria-hidden="true"></i> Laravel Development</span
-              >
-              <span class="work-highlight"
-                ><i class="fa-solid fa-check" aria-hidden="true"></i> Filament Admin Panels</span
-              >
-              <span class="work-highlight"
-                ><i class="fa-solid fa-check" aria-hidden="true"></i> REST API Integration</span
-              >
-              <span class="work-highlight"
-                ><i class="fa-solid fa-check" aria-hidden="true"></i> Client Collaboration</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="education-section fade-up">
-        <div class="education-header">
-          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-          <h3>Education & Qualifications</h3>
-        </div>
-        <div class="education-detail">
-          <h4>Bachelor in Information Management (BIM)</h4>
-          <div class="institution">
-            Sunsari Technical College, Dharan, Nepal
-          </div>
-          <p
-            style="
-              color: var(--text-secondary);
-              font-size: 0.9rem;
-              margin-bottom: 0.5rem;
-            "
-          >
-            Graduated: 2025
+      <section class="term-section fade-up" aria-labelledby="term-heading">
+        <div class="term-intro">
+          <h2 id="term-heading">Ask my terminal</h2>
+          <p>
+            Prefer a quicker way to get to know me? Type a command or tap one
+            below. If you get stuck, <code>help</code> lists everything.
           </p>
         </div>
-      </div>
-
-      <div class="education-section fade-up">
-        <div class="education-header">
-          <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
-          <h3>My Freelancing Journey</h3>
+        <div class="term" id="terminal">
+          <div class="term-bar">
+            <div class="term-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="term-title">sanskar@dev: ~</div>
+          </div>
+          <div class="term-body" id="termBody" role="log" aria-live="polite" aria-label="Terminal output"></div>
+          <form class="term-input-row" id="termForm" autocomplete="off">
+            <label class="term-prompt" for="termInput">
+              <span class="term-host">sanskar@dev<span class="t-dim">:</span></span><span class="t-path">~</span><span class="t-dim">$</span>
+              <span class="sr-only">Type a command</span>
+            </label>
+            <input class="term-input" id="termInput" type="text" name="command"
+              placeholder="type a command, e.g. skills" autocomplete="off"
+              autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="send" />
+          </form>
         </div>
-        <div class="freelance-journey">
-          <div class="journey-item">
-            <div class="journey-icon"><i class="fa-solid fa-rocket" aria-hidden="true"></i></div>
-            <div class="journey-content">
-              <h4>How It Started</h4>
-              <p>
-                During my BIM studies, a friend introduced me to Laravel. I
-                built my first full‑stack project with his guidance and
-                discovered a genuine passion for web development.
-              </p>
-            </div>
-          </div>
-          <div class="journey-item">
-            <div class="journey-icon">
-              <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
-            </div>
-            <div class="journey-content">
-              <h4>Building Experience</h4>
-              <p>
-                I began assisting friends with small websites and bug fixes.
-                Each success deepened my interest and commitment to mastering
-                modern web technologies.
-              </p>
-            </div>
-          </div>
-          <div class="journey-item">
-            <div class="journey-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
-            <div class="journey-content">
-              <h4>Professional Growth</h4>
-              <p>
-                Joining CodeIT Nepal exposed me to industry workflows, version
-                control, and structured project architecture. Mentorship there
-                significantly improved my coding standards.
-              </p>
-            </div>
-          </div>
-          <div class="journey-item">
-            <div class="journey-icon"><i class="fa-solid fa-trophy" aria-hidden="true"></i></div>
-            <div class="journey-content">
-              <h4>Current Focus</h4>
-              <p>
-                Today I freelance full‑time, specialising in Laravel and
-                Filament. I’ve delivered projects like Home Link Services,
-                Koseli Express, and Student Portal API, and I’m always looking
-                for new challenges.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+        <div class="term-chips" id="termChips" role="group" aria-label="Suggested commands"></div>
+        <noscript><p class="term-noscript">The terminal needs JavaScript. You can find the same details on the <a href="contact.html">contact</a> and <a href="projects.html">projects</a> pages.</p></noscript>
+      </section>
 
-      <section aria-labelledby="skills-heading">
+      <section class="about-journey" aria-labelledby="journey-heading">
+        <h2 id="journey-heading" class="section-title fade-up">
+          <i class="fa-solid fa-route" aria-hidden="true"></i> <span>Experience &amp; education</span>
+        </h2>
+        <ol class="timeline">
+          <li class="tl-item fade-up">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <p class="tl-when">2026 – Present <span class="tl-badge">Current</span></p>
+              <h3>Full Stack Developer at <a href="https://codeit.com.np/" target="_blank" rel="noopener noreferrer">CodeIT Nepal</a></h3>
+              <p>
+                I work with the team at CodeIT Nepal building web applications
+                with Laravel and Filament: collaborating on client projects,
+                helping with code reviews and learning from more experienced
+                developers. It has introduced me to industry workflows, version
+                control and structured project architecture, and the mentorship
+                has raised my coding standards.
+              </p>
+              <ul class="tl-tags">
+                <li>Laravel</li><li>Filament admin panels</li><li>REST API integration</li><li>Client collaboration</li>
+              </ul>
+            </div>
+          </li>
+          <li class="tl-item fade-up">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <p class="tl-when">2025</p>
+              <h3>Bachelor in Information Management (BIM)</h3>
+              <p>
+                Sunsari Technical College, Dharan, Nepal. The degree gave me a
+                solid grounding in both technology and business.
+              </p>
+            </div>
+          </li>
+          <li class="tl-item fade-up">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <p class="tl-when">2022 – Present</p>
+              <h3>Freelance developer</h3>
+              <p>
+                I started freelancing in 2022, working with clients in Nepal and
+                internationally, and I always clarify a project's goals before
+                writing a line of code. Projects include Home Link Services,
+                Koseli Express and the Student Portal API.
+              </p>
+              <ul class="tl-tags">
+                <li>Laravel</li><li>Filament</li><li>REST APIs</li><li>Tailwind CSS</li>
+              </ul>
+            </div>
+          </li>
+          <li class="tl-item fade-up">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <p class="tl-when">During my studies</p>
+              <h3>Where it started</h3>
+              <p>
+                A friend introduced me to Laravel while I was studying. I built
+                my first full&#8209;stack project with his guidance, then began
+                helping friends with small websites and bug fixes. Each one made
+                me want to get better at it.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="about-skills" aria-labelledby="skills-heading">
         <h2 id="skills-heading" class="section-title fade-up">
-          <i class="fa-solid fa-code" aria-hidden="true"></i> <span>Tech Stack &amp;
-          Core Skills <span aria-hidden="true">⚔️</span></span>
+          <i class="fa-solid fa-code" aria-hidden="true"></i> <span>Tech stack</span>
         </h2>
         <div class="tech-marquee fade-up" role="group" aria-label="Technology skills">
           <div class="tech-track">
@@ -541,6 +450,14 @@
         </div>
       </section>
 
+      <section class="about-cta fade-up" aria-labelledby="cta-heading">
+        <div>
+          <h2 id="cta-heading">Have a project in mind?</h2>
+          <p>Tell me what you're trying to build and I'll tell you honestly how I'd approach it.</p>
+        </div>
+        <a class="btn btn-primary" href="contact.html">Get in touch <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+      </section>
+
       </main>
 
             <footer class="footer">
@@ -558,5 +475,6 @@
     </div>
 
     <script src="js/main.js"></script>
+    <script src="js/terminal.js" defer></script>
   </body>
 </html>
