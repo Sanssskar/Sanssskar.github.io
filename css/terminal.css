@@ -76,3 +76,6 @@ a.t-link:hover,a.t-link:focus-visible{text-decoration:underline}
   .term-prompt .term-host{display:none}
 }
 @media (prefers-reduced-motion:reduce){.t-cursor{animation:none}}
+
+.term-input{pointer-events:none;caret-color:transparent;user-select:none}
+.term-prompt{cursor:default}

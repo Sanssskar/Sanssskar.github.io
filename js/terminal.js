@@ -5,10 +5,8 @@
 
   const root = document.getElementById('terminal');
   const body = document.getElementById('termBody');
-  const form = document.getElementById('termForm');
   const input = document.getElementById('termInput');
-  const chipsBox = document.getElementById('termChips');
-  if (!root || !body || !form || !input) return;
+  if (!root || !body || !input) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -32,14 +30,6 @@
     ['email', 'shresthasakar85@gmail.com', 'mailto:shresthasakar85@gmail.com'],
     ['web', 'shresthasanskar.com.np', 'https://shresthasanskar.com.np'],
   ];
-  const JOKES = [
-    'There are 10 kinds of people: those who understand binary and those who don\'t.',
-    'A SQL query walks into a bar, walks up to two tables and asks: "Can I join you?"',
-    'I would tell you a UDP joke, but you might not get it.',
-    '"It works on my machine." Every developer, right before the deploy.',
-    '!false: it\'s funny because it\'s true.',
-  ];
-  const CHIPS = ['whoami', 'skills', 'projects', 'experience', 'education', 'contact', 'neofetch', 'joke'];
 
   /* ---------- Helpers ---------- */
   const sleep = (ms) => (reduceMotion ? Promise.resolve() : new Promise((r) => setTimeout(r, ms)));
@@ -76,8 +66,6 @@
   const PROMPT = [['sanskar', 't-user'], ['@', 't-dim'], ['dev', 't-user'], [':', 't-dim'], ['~', 't-path'], ['$ ', 't-dim']];
 
   /* ---------- Commands ---------- */
-  const years = Math.max(2, new Date().getFullYear() - 2022);
-
   const whoami = () => [
     [[pad('name', 11), 't-key'], 'Sanskar Shrestha'],
     [[pad('role', 11), 't-key'], 'Full Stack Developer'],
@@ -88,27 +76,7 @@
   ];
 
   const COMMANDS = {
-    help: {
-      desc: 'list the commands',
-      run: () => [
-        [['Available commands', 't-dim']],
-        ...[
-          ['whoami', 'who I am (alias: about)'],
-          ['skills', 'my tech stack'],
-          ['projects', 'things I have built'],
-          ['experience', 'where I have worked'],
-          ['education', 'where I studied'],
-          ['contact', 'ways to reach me'],
-          ['neofetch', 'system info'],
-          ['joke', 'a developer joke'],
-          ['matrix', 'take the red pill'],
-          ['clear', 'clear the screen'],
-        ].map(([c, d]) => ['  ', [pad(c, 12), 't-acc'], [d, 't-dim']]),
-        [['Tip: Tab completes a command, ↑ and ↓ browse history.', 't-dim']],
-      ],
-    },
     whoami: { desc: 'who I am', run: whoami },
-    about: { desc: 'alias of whoami', run: whoami },
     skills: {
       desc: 'tech stack',
       run: () => [
@@ -125,7 +93,7 @@
       desc: 'projects',
       run: () => [
         ...PROJECTS.map((name) => [['  ▸ ', 't-acc'], name]),
-        [['Details and screenshots: ', 't-dim'], ['projects.html', 't-link', 'projects.html']],
+        [['Full list on the ', 't-dim'], ['projects page', 't-link', 'projects.html']],
       ],
     },
     experience: {
@@ -149,81 +117,14 @@
       desc: 'contact links',
       run: () => CONTACT.map(([key, label, href]) => [[pad(key, 11), 't-key'], [label, 't-link', href]]),
     },
-    neofetch: {
-      desc: 'system info',
-      run: () => {
-        const art = [' ____  ', '/ ___| ', '\\___ \\ ', ' ___) |', '|____/ ', '       '];
-        const info = [
-          [['sanskar', 't-user'], ['@', 't-dim'], ['dev', 't-user']],
-          [['-----------', 't-dim']],
-          [['role      ', 't-key'], 'Full Stack Developer'],
-          [['location  ', 't-key'], 'Dharan, Nepal'],
-          [['stack     ', 't-key'], 'Laravel, Filament, Tailwind'],
-          [['experience', 't-key'], ` ${years}+ years`],
-        ];
-        return art.map((a, i) => [[a + '   ', 't-acc'], ...(info[i] || [])]);
-      },
-    },
-    joke: {
-      desc: 'joke',
-      run: () => [[JOKES[Math.floor(Math.random() * JOKES.length)], 't-str']],
-    },
   };
 
-  async function runMatrix() {
-    const glyphs = '01{}<>/$;=:+*#&%';
-    const cols = Math.max(20, Math.min(60, Math.floor((body.clientWidth - 32) / 8.5)));
-    const rows = reduceMotion ? 4 : 18;
-    for (let i = 0; i < rows; i++) {
-      let line = '';
-      for (let c = 0; c < cols; c++) line += Math.random() < 0.18 ? glyphs[Math.floor(Math.random() * glyphs.length)] : ' ';
-      print([[line, 't-matrix']]);
-      await sleep(90);
-    }
-    print([['Wake up, Neo... just kidding, type "help" to continue.', 't-ok']]);
-  }
-
-  /* ---------- Running a command ---------- */
-  const history = [];
-  let historyIndex = 0;
+  /* ---------- Running a command (typed into a read-only prompt) ---------- */
   let busy = false;
 
-  function setBusy(v) { busy = v; input.readOnly = v; }
-
-  async function execute(raw) {
-    const line = raw.trim();
-    print([...PROMPT, [raw, 't-cmd']]);
-    if (!line) return;
-
-    if (history[history.length - 1] !== line) history.push(line);
-    historyIndex = history.length;
-
-    const [name, ...args] = line.split(/\s+/);
-    const cmd = name.toLowerCase();
-
-    if (cmd === 'clear') { body.textContent = ''; return; }
-    if (cmd === 'matrix') { await runMatrix(); return; }
-    if (cmd === 'sudo') {
-      print([[args.length ? 'sanskar is not in the sudoers file. This incident will be reported.' : 'usage: sudo <command>', 't-err']]);
-      return;
-    }
-    if (Object.prototype.hasOwnProperty.call(COMMANDS, cmd)) {
-      await out(COMMANDS[cmd].run());
-      return;
-    }
-    print([[`command not found: ${name}`, 't-err'], ['  (try "help")', 't-dim']]);
-  }
-
-  async function submit(raw) {
-    if (busy) return;
-    setBusy(true);
-    try { await execute(raw); } finally { setBusy(false); }
-  }
-
-  // Types a command into the input like a person would, then runs it (used by chips and autoplay)
   async function runTyped(text) {
     if (busy) return;
-    setBusy(true);
+    busy = true;
     input.value = '';
     for (let i = 1; i <= text.length && !reduceMotion; i++) {
       input.value = text.slice(0, i);
@@ -232,65 +133,26 @@
     input.value = text;
     await sleep(180);
     input.value = '';
-    try { await execute(text); } finally { setBusy(false); }
+    print([...PROMPT, [text, 't-cmd']]);
+    await out(COMMANDS[text].run());
+    busy = false;
   }
 
-  /* ---------- Input handling ---------- */
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const raw = input.value;
-    input.value = '';
-    submit(raw);
-  });
+  /* ---------- Autoplay: no typing allowed, it just keeps looping ---------- */
+  const SCRIPT = ['whoami', 'skills', 'projects', 'experience', 'education', 'contact'];
 
-  input.addEventListener('keydown', (e) => {
-    if (busy) return;
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (historyIndex > 0) input.value = history[--historyIndex];
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      historyIndex = Math.min(historyIndex + 1, history.length);
-      input.value = history[historyIndex] || '';
-    } else if (e.key === 'Tab') {
-      const v = input.value.trim().toLowerCase();
-      if (!v) return;
-      e.preventDefault();
-      const names = [...Object.keys(COMMANDS), 'clear', 'matrix', 'sudo'];
-      const hits = names.filter((n) => n.startsWith(v));
-      if (hits.length === 1) input.value = hits[0];
-      else if (hits.length > 1) print([[hits.join('   '), 't-dim']]);
-    } else if (e.key === 'l' && e.ctrlKey) {
-      e.preventDefault();
-      body.textContent = '';
-    }
-  });
-
-  // Clicking anywhere on the terminal focuses the input (unless selecting text or following a link)
-  root.addEventListener('click', (e) => {
-    if (e.target.closest('a')) return;
-    const sel = window.getSelection();
-    if (sel && String(sel).length) return;
-    input.focus({ preventScroll: true });
-  });
-
-  /* ---------- Suggestion chips ---------- */
-  if (chipsBox) {
-    CHIPS.forEach((c) => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'term-chip';
-      b.textContent = c;
-      b.addEventListener('click', () => runTyped(c));
-      chipsBox.append(b);
-    });
-  }
-
-  /* ---------- First view: a short welcome, then it runs "whoami" once ---------- */
   async function boot() {
-    print([['Welcome. Type a command below, or tap one of the buttons under the terminal.', 't-dim']]);
-    await sleep(250);
-    await runTyped('whoami');
+    if (reduceMotion) { await runTyped('whoami'); return; }
+    for (;;) {
+      for (const cmd of SCRIPT) {
+        while (document.hidden) await new Promise((r) => setTimeout(r, 400));
+        await runTyped(cmd);
+        await sleep(1400);
+      }
+      await sleep(3500);
+      body.textContent = '';
+      await sleep(500);
+    }
   }
 
   let started = false;

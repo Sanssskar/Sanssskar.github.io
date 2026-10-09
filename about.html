@@ -322,10 +322,9 @@
 
       <section class="term-section fade-up" aria-labelledby="term-heading">
         <div class="term-intro">
-          <h2 id="term-heading">Ask my terminal</h2>
+          <h2 id="term-heading">My terminal</h2>
           <p>
-            Prefer a quicker way to get to know me? Type a command or tap one
-            below. If you get stuck, <code>help</code> lists everything.
+            The short version of me, on a loop. Sit back and watch it go.
           </p>
         </div>
         <div class="term" id="terminal">
@@ -334,18 +333,15 @@
             <div class="term-title">sanskar@dev: ~</div>
           </div>
           <div class="term-body" id="termBody" role="log" aria-live="polite" aria-label="Terminal output"></div>
-          <form class="term-input-row" id="termForm" autocomplete="off">
-            <label class="term-prompt" for="termInput">
+          <div class="term-input-row" id="termForm" aria-hidden="true">
+            <span class="term-prompt">
               <span class="term-host">sanskar@dev<span class="t-dim">:</span></span><span class="t-path">~</span><span class="t-dim">$</span>
-              <span class="sr-only">Type a command</span>
-            </label>
-            <input class="term-input" id="termInput" type="text" name="command"
-              placeholder="type a command, e.g. skills" autocomplete="off"
-              autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="send" />
-          </form>
+              
+            </span>
+            <input class="term-input" id="termInput" type="text" readonly tabindex="-1" aria-hidden="true" />
+          </div>
         </div>
-        <div class="term-chips" id="termChips" role="group" aria-label="Suggested commands"></div>
-        <noscript><p class="term-noscript">The terminal needs JavaScript. You can find the same details on the <a href="contact.html">contact</a> and <a href="projects.html">projects</a> pages.</p></noscript>
+        <noscript><p class="term-noscript">The terminal needs JavaScript. The same details are on the <a href="contact.html">contact</a> and <a href="projects.html">projects</a> pages.</p></noscript>
       </section>
 
       <section class="about-journey" aria-labelledby="journey-heading">
@@ -475,6 +471,7 @@
     </div>
 
     <script src="js/main.js"></script>
+    <script src="js/about-swords.js" defer></script>
     <script src="js/terminal.js" defer></script>
   </body>
 </html>

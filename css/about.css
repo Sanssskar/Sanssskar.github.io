@@ -3,13 +3,10 @@
 /* Intro: photo + bio */
 .about-intro{
   display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:3.5rem;align-items:center;
-  padding:2.75rem;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:1.5rem;
+  padding:2.75rem;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:1.5rem;position:relative;
 }
-.about-photo{position:relative;margin:0;max-width:420px;width:100%;justify-self:center}
-.about-photo::before{
-  content:"";position:absolute;inset:16px -16px -16px 16px;border:2px solid var(--accent-3);border-radius:1.1rem;z-index:0;
-}
-.about-photo img{position:relative;z-index:1;display:block;width:100%;height:auto;border-radius:1rem;border:1px solid var(--border-medium);background:var(--bg-primary)}
+.about-photo{position:relative;margin:0;max-width:420px;width:100%;justify-self:center;border-radius:1rem;overflow:hidden}
+.about-photo img{display:block;width:100%;height:auto;border-radius:1rem;background:var(--bg-primary)}
 
 .about-copy h2{font-size:1.9rem;line-height:1.25;margin-bottom:1rem;max-width:22em}
 .about-copy p{color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;max-width:62ch}
@@ -69,6 +66,11 @@
 }
 @media (max-width:480px){
   .about-intro{padding:1.25rem;border-radius:1.25rem}
-  .about-photo::before{inset:10px -10px -10px 10px}
   .about-actions .btn{flex:1 1 100%;justify-content:center}
 }
+
+/* Sword strike on the photo (decorative, built by js/about-swords.js) */
+.sword-fx{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:6}
+.sword-fx text{font:700 13px 'JetBrains Mono',ui-monospace,Menlo,monospace}
+.pix-layer{position:absolute;inset:0;width:100%;height:100%;z-index:4;opacity:0;pointer-events:none;border-radius:inherit}
+@media (prefers-reduced-motion:reduce){.sword-fx,.pix-layer{display:none}}

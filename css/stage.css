@@ -10,10 +10,4 @@
 @keyframes gl2{0%{clip-path:inset(60% 0 8% 0);transform:translate(4px,0)}50%{clip-path:inset(15% 0 55% 0);transform:translate(-3px,1px)}100%{clip-path:inset(40% 0 30% 0);transform:translate(2px,-1px)}}
 @media (prefers-reduced-motion:reduce){.typing-text:hover::before,.typing-text:hover::after,.typing-text.glitching::before,.typing-text.glitching::after{animation:none;opacity:0}}
 
-/* Sword strike (decorative, built by JS) */
 .hero{position:relative}
-.sword-fx{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:6}
-.sword-fx text{font:700 13px 'JetBrains Mono',ui-monospace,Menlo,monospace}
-.pix-layer{position:absolute;inset:0;width:100%;height:100%;z-index:4;opacity:0;pointer-events:none;border-radius:inherit}
-@media (prefers-reduced-motion:reduce){.sword-fx,.pix-layer{display:none}}
-
