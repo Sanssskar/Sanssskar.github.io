@@ -91,3 +91,4 @@ button.project-link{background:none;border:0;padding:0;font-family:inherit;font-
 .project-card:hover .project-img{transform:none}
 .category-badge{top:.5rem;left:.5rem}
 .category-badge{position:static;align-self:flex-start;backdrop-filter:none;background:var(--bg-primary);font-size:.68rem;margin-bottom:-.15rem}
+.stats-strip{grid-template-columns:repeat(2,1fr)}@media (max-width:600px){.stats-strip{grid-template-columns:1fr}}
