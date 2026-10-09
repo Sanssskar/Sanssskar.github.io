@@ -4,25 +4,6 @@
     const GITHUB_USER = 'Sanssskar';
     const API = 'https://api.github.com';
 
-    /* ---------- Share buttons ---------- */
-    function shareProject(button) {
-        const card = button.closest('.project-card');
-        if (!card) return;
-        const name = card.dataset.project || '';
-        const url = encodeURIComponent(card.dataset.url || '');
-        const text = encodeURIComponent(
-            `Check out this amazing project: ${name} by Sanskar Shrestha, a Full Stack Laravel Developer from Nepal.`
-        );
-        const targets = {
-            linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-            twitter: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
-            facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-            whatsapp: `https://wa.me/?text=${text}%20${url}`
-        };
-        const target = targets[button.dataset.social];
-        if (target) window.open(target, '_blank', 'noopener,noreferrer,width=600,height=500');
-    }
-
     /* ---------- Toast ---------- */
     let toastTimer;
     function showToast(message) {
@@ -37,12 +18,106 @@
         toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
+    /* ---------- Share (native share sheet, falls back to copy link) ---------- */
+    async function shareProject(button) {
+        const card = button.closest('[data-project]');
+        if (!card) return;
+        const name = card.dataset.project || '';
+        const url = card.dataset.url || '';
+        const text = `${name} by Sanskar Shrestha, a Full Stack Laravel Developer from Nepal.`;
+        if (navigator.share) {
+            try { await navigator.share({ title: name, text, url }); return; }
+            catch (err) { if (err && err.name === 'AbortError') return; }
+        }
+        try {
+            await navigator.clipboard.writeText(url);
+            showToast('Project link copied');
+        } catch (err) {
+            showToast('Copy this link: ' + url);
+        }
+    }
+
     document.addEventListener('click', (e) => {
         const share = e.target.closest('.share-btn');
         if (share) return shareProject(share);
         const toastBtn = e.target.closest('[data-toast]');
         if (toastBtn) showToast(toastBtn.dataset.toast);
     });
+
+    /* ---------- Developer window: reveal + terminal typing ---------- */
+    function initDevWindows() {
+        const wins = document.querySelectorAll('.dev-window');
+        if (!wins.length) return;
+        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce || !('IntersectionObserver' in window)) return; // static content already in the HTML
+
+        const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+        async function play(win) {
+            const term = win.querySelector('.dw-term');
+            let lines = [];
+            try { lines = JSON.parse(term.dataset.lines || '[]'); } catch (e) { return; }
+            win.classList.add('is-live');
+            await sleep(500);
+            const cursor = el('span', 't-cursor');
+            for (const [kind, text] of lines) {
+                const row = el('div', `t-line t-${kind}`);
+                term.append(row);
+                const full = (kind === 'cmd' ? '$ ' : '\u2713 ') + text;
+                const delay = kind === 'cmd' ? 32 : 14;
+                row.append(cursor);
+                for (let i = 1; i <= full.length; i++) {
+                    row.textContent = full.slice(0, i);
+                    row.append(cursor);
+                    await sleep(delay);
+                }
+                await sleep(kind === 'cmd' ? 350 : 120);
+            }
+        }
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                io.unobserve(entry.target);
+                play(entry.target);
+            });
+        }, { threshold: 0.45 });
+
+        wins.forEach(win => {
+            win.querySelector('.dw-term').replaceChildren(); // clear static fallback, retype on view
+            win.classList.add('armed');
+            io.observe(win);
+        });
+    }
+
+    /* ---------- Category filter ---------- */
+    function initFilters() {
+        const buttons = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('#projectsGrid .project-card');
+        const status = document.getElementById('filterStatus');
+        if (!buttons.length) return;
+        buttons.forEach(btn => {
+            const key = btn.dataset.filter;
+            const n = key === 'all' ? cards.length : [...cards].filter(c => c.dataset.category === key).length;
+            const count = el('span', 'filter-count', ` ${n}`);
+            count.style.opacity = '.7';
+            btn.append(count);
+            btn.addEventListener('click', () => {
+                let shown = 0;
+                buttons.forEach(b => {
+                    const on = b === btn;
+                    b.classList.toggle('active', on);
+                    b.setAttribute('aria-pressed', String(on));
+                });
+                cards.forEach(c => {
+                    const match = key === 'all' || c.dataset.category === key;
+                    c.hidden = !match;
+                    if (match) shown++;
+                });
+                if (status) status.textContent = `Showing ${shown} project${shown === 1 ? '' : 's'}`;
+            });
+        });
+    }
 
     /* ---------- GitHub stats ---------- */
     function getTimeAgo(date) {
@@ -155,6 +230,8 @@
     }
 
     function init() {
+        initFilters();
+        initDevWindows();
         setText('ghYear', new Date().getFullYear());
         loadGitHub();
     }
