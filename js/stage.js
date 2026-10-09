@@ -24,11 +24,50 @@
   svg.setAttribute('class', 'sword-fx'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('data-nosnippet', '');
   const katana = (grip) => `<path d="M44 -3.2L178 -3.2Q192 -2.6 198 1.8L178 3.4L44 3.4Z" fill="#e8eef0" stroke="#78909c"/><path d="M50 1L176 1" stroke="#b0bec5" fill="none"/><ellipse cx="42" cy="0" rx="3.5" ry="10" fill="#c9a227" stroke="#7a5c00"/><rect x="0" y="-4" width="38" height="8" rx="2" fill="${grip}"/><path d="M6 -4L12 4M14 -4L20 4M22 -4L28 4M30 -4L36 4" stroke="#0006"/><circle r="4.4" fill="#c9a227"/>`;
   const GRIPS = ['#f4f4f0', '#263238', '#1b5e20'];
+
+  /* ---- Conqueror's Haki: black-red lightning (dark underlay + thin red core) ---- */
+  const HAKI_RED = '#ff1a1a', HAKI_DARK = '#0b0b0f';
+  const bolt = (x0, y0, ang, len, jit, segs) => {            // one jagged polyline
+    let x = x0, y = y0, d = `M${x.toFixed(1)} ${y.toFixed(1)}`;
+    const st = len / segs;
+    for (let i = 0; i < segs; i++) {
+      const a = ang + (Math.random() - 0.5) * jit;
+      x += Math.cos(a) * st; y += Math.sin(a) * st;
+      d += `L${x.toFixed(1)} ${y.toFixed(1)}`;
+    }
+    return d;
+  };
+  const hakiLayer = (glow) => {                               // returns { g, dark, red }
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('fill', 'none'); g.setAttribute('stroke-linecap', 'round'); g.setAttribute('stroke-linejoin', 'round');
+    if (glow) g.style.filter = `drop-shadow(0 0 ${glow}px ${HAKI_RED})`;
+    const mk = (c, w) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('stroke', c); p.setAttribute('stroke-width', w); g.append(p); return p; };
+    const dark = mk(HAKI_DARK, 3.4), red = mk(HAKI_RED, 1.3);
+    return { g, dark, red };
+  };
   const blades = GRIPS.map((c) => {
     const g = document.createElementNS(NS, 'g');
     g.innerHTML = katana(c); g.style.opacity = '0'; g.style.transformOrigin = '0 0'; g.style.filter = 'drop-shadow(0 2px 3px rgba(0,0,0,.25))';
+    const hk = hakiLayer(2); g.append(hk.g); g._haki = hk;     // arcs live in blade-local coords, so they ride along with the sword
     svg.append(g); return g;
   });
+  let hakiTimer = 0;
+  const hakiTick = () => {
+    blades.forEach((g) => {
+      const h = g._haki;
+      if (Math.random() < 0.18) { h.g.style.opacity = '0'; return; }          // brief dropout = crackle
+      let d = '';
+      for (let i = 0, n = 3 + Math.floor(Math.random() * 3); i < n; i++) {    // bolts leaping off the blade
+        const side = Math.random() < 0.5 ? -1 : 1;
+        d += bolt(46 + Math.random() * 148, side * 3, side * Math.PI / 2 + (Math.random() - 0.5) * 0.9, 14 + Math.random() * 20, 1.6, 4);
+      }
+      if (Math.random() < 0.6) d += bolt(196, 1, (Math.random() - 0.5) * 1.2, 20 + Math.random() * 14, 1.4, 4);  // arc off the tip
+      h.dark.setAttribute('d', d); h.red.setAttribute('d', d);
+      h.g.style.opacity = String(0.65 + Math.random() * 0.35);
+    });
+  };
+  const startHaki = () => { clearInterval(hakiTimer); hakiTick(); hakiTimer = setInterval(hakiTick, 65); };
+  const stopHaki = () => { clearInterval(hakiTimer); blades.forEach((g) => { g._haki.dark.setAttribute('d', ''); g._haki.red.setAttribute('d', ''); }); };
   hero.append(svg);
 
   /* photo swap: zoro on impact, pixel-sharpens back into me */
@@ -95,8 +134,10 @@
 
     await sleep(3550 + 70);
     impact(tx, ty, s);
+    startHaki();                                              // blade lightning starts only on impact
     swap().then(() => { running = false; });
     await sleep(600);
+    stopHaki();
     blades.forEach((g) => { g.getAnimations().forEach((an) => an.cancel()); g.style.opacity = '0'; });
   }
 
@@ -122,6 +163,18 @@
       t.setAttribute('x', tx); t.setAttribute('y', ty); t.setAttribute('fill', rnd(accent)); svg.append(t);
       t.animate([{ transform: 'translate(0,0)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d}px)`, opacity: 0 }], { duration: 650 + Math.random() * 350, easing: 'ease-out' }).onfinish = () => t.remove();
     }
+
+    /* Haki burst: thin black-red bolts radiating from the hit point, flickering ~0.4s */
+    const hb = hakiLayer(4); svg.append(hb.g);
+    const rays = 7; let frames = 0;
+    const burst = () => {
+      let d = '';
+      for (let i = 0; i < rays; i++) d += bolt(tx, ty, (i / rays) * 6.283 + Math.random() * 0.6, R * (0.8 + Math.random() * 0.5), 1.1, 7);
+      hb.dark.setAttribute('d', d); hb.red.setAttribute('d', d);
+      if (++frames > 6) { clearInterval(iv); hb.g.remove(); }
+    };
+    const iv = setInterval(burst, 55); burst();
+    hb.g.animate([{ opacity: 1 }, { opacity: 1, offset: 0.6 }, { opacity: 0 }], { duration: 400 });
 
     if (wrap) wrap.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(-6px,3px)' }, { transform: 'translate(5px,-3px)' }, { transform: 'translate(-3px,2px)' }, { transform: 'translate(0,0)' }], { duration: 320 });
   }
