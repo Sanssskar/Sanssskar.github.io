@@ -61,7 +61,7 @@
 }
 @media (max-width:768px){
   .about-banner{border-radius:1.1rem}
-  .about-banner img{height:190px;object-fit:cover;object-position:100% 50%}
+  .about-banner img{height:auto;object-fit:contain}
   .timeline{padding-left:1.6rem}
   .tl-dot{left:-1.6rem}
   .tl-card{padding:1.15rem 1.2rem}
