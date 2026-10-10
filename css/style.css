@@ -68,3 +68,7 @@ html.dark-mode a:focus-visible,html.dark-mode button:focus-visible{outline-color
 @media (max-width:900px){.smart-bar{justify-content:center;padding:.4rem .6rem}.smart-bar>a{display:none}}
 @media (max-width:600px){.smart-bar{gap:.5rem;padding:.35rem .5rem}.smart-bar .nav-links{gap:.8rem}.smart-bar .nav-links li a{font-size:0;gap:0;padding:.5rem .15rem}.smart-bar .nav-links li a i{font-size:1.05rem}.smart-bar .glass-btn{padding:.5rem .8rem;font-size:0;gap:0}.smart-bar .glass-btn i{font-size:.95rem}.smart-controls{gap:.4rem}}
 @media (prefers-reduced-motion:reduce){.smart-bar,.smart-bar.is-visible{transition:none}}
+
+/* ===== Home About: titles-only highlight cards ===== */
+.about-highlights--grid{flex:1 1 100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.about-highlights--grid .highlight-item{padding:1rem 1.1rem}
