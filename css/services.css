@@ -1,12 +1,6 @@
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-/* intro */
-.services-intro{text-align:center;max-width:760px;margin:0 auto 1.75rem}
-.eyebrow{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--accent-1);margin-bottom:.5rem}
-.services-intro h2{font-size:1.9rem;line-height:1.25;margin-bottom:.6rem}
-.services-intro p{color:var(--text-secondary);line-height:1.7}
-
 /* sticky jump menu */
 .jump-nav{position:sticky;top:.75rem;z-index:50;margin:0 auto 2.5rem;max-width:fit-content;background:color-mix(in srgb,var(--bg-secondary) 94%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border-medium);border-radius:999px;padding:.35rem;box-shadow:var(--card-shadow)}
 .jump-nav ul{list-style:none;display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
@@ -31,7 +25,6 @@ html{scroll-behavior:smooth}
 .content-side .category-icon{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;background:var(--bg-primary);border:1px solid var(--border-medium);color:var(--accent-1);font-size:1.25rem;margin-bottom:.9rem;transition:background .3s,color .3s,transform .3s}
 .service-row:hover .category-icon{background:var(--gradient-1);color:#fff;border-color:transparent;transform:rotate(-6deg)}
 .content-side h3{font-size:1.6rem;font-weight:700;margin-bottom:.6rem;color:var(--text-primary)}
-.content-side .service-desc{font-size:.95rem;color:var(--text-secondary);line-height:1.7;margin-bottom:1.1rem}
 .content-side .feature-list{list-style:none;padding:0;margin:0 0 1.3rem}
 .content-side .feature-list li{display:flex;align-items:flex-start;gap:.6rem;padding:.45rem 0;font-size:.88rem;color:var(--text-secondary);border-bottom:1px solid var(--border-light)}
 .content-side .feature-list li:last-child{border-bottom:none}
@@ -61,7 +54,6 @@ html{scroll-behavior:smooth}
   .jump-nav{max-width:100%;border-radius:1rem}
 }
 @media (max-width:480px){
-  .services-intro h2{font-size:1.4rem}
   .service-row{padding:1.1rem;border-radius:1rem}
   .jump-nav a{padding:.45rem .85rem;font-size:.8rem}
   .design-credit{padding:.8rem 1.2rem;font-size:.8rem}

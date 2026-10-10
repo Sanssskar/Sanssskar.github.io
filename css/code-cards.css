@@ -11,21 +11,6 @@
 }
 [data-code].is-coding .code-fx{opacity:1;visibility:visible;transition:opacity .6s ease,visibility 0s}
 
-/* floating symbols */
-.code-sym{
-  position:absolute;z-index:2;left:var(--x,10%);bottom:0;
-  font-family:'Cascadia Code',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:var(--s,1rem);line-height:1;color:var(--accent-3);opacity:0;
-  text-shadow:0 0 10px rgba(76,175,80,.55);will-change:transform,opacity;
-}
-[data-code].is-coding .code-sym{animation:codeSymRise var(--t,5s) ease-in var(--d,0s) infinite}
-@keyframes codeSymRise{
-  0%{transform:translate3d(0,0,0);opacity:0}
-  15%{opacity:.55}
-  80%{opacity:.3}
-  100%{transform:translate3d(var(--dx,0),calc(var(--rise,220px) * -1),0);opacity:0}
-}
-
 /* editor window */
 .code-win{
   position:absolute;z-index:1;inset:12px;display:flex;flex-direction:column;overflow:hidden;
@@ -62,14 +47,12 @@
 }
 @media (prefers-reduced-motion:reduce){
   .code-fx,[data-code].is-coding .code-fx{transition:none}
-  .code-sym{display:none}
   .code-cursor{animation:none}
 }
 @media print{.code-fx{display:none}}
 
 /* ===== Service scenes: animated visual on top, code window peeking below ===== */
 .code-fx{container-type:size}
-.code-sym{display:none}
 .code-scene{position:absolute;z-index:2;left:12px;right:12px;top:12px;bottom:calc(34% + 20px);font-size:clamp(.5rem,2.5cqw,.78rem);line-height:1.2}
 .code-win{inset:auto 12px 12px 12px;height:34%;transform:translateY(55%);transition:transform .6s cubic-bezier(.2,.8,.2,1) .15s}
 [data-code].is-coding .code-win{transform:none}
