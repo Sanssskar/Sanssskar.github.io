@@ -112,9 +112,94 @@
         });
     }
 
+    /* ---------- Smart header: hides on scroll down, returns on scroll up ---------- */
+    function initSmartHeader() {
+        const header = document.querySelector('header');
+        const navItems = document.querySelectorAll('.main-navbar .nav-links li');
+        const logoLink = document.querySelector('.nav-bar > a');
+        const teamBtn = document.querySelector('.team-btn');
+        const themeBtn = document.getElementById('themeToggle');
+        if (!header || !navItems.length) return;
+
+        const bar = document.createElement('div');
+        bar.className = 'smart-bar';
+        bar.setAttribute('aria-hidden', 'true');
+
+        if (logoLink) bar.appendChild(logoLink.cloneNode(true));
+
+        const nav = document.createElement('nav');
+        nav.className = 'smart-nav';
+        nav.setAttribute('aria-label', 'Quick navigation');
+        const ul = document.createElement('ul');
+        ul.className = 'nav-links';
+        navItems.forEach(li => ul.appendChild(li.cloneNode(true)));
+        nav.appendChild(ul);
+        bar.appendChild(nav);
+
+        const controls = document.createElement('div');
+        controls.className = 'smart-controls';
+        if (teamBtn) controls.appendChild(teamBtn.cloneNode(true));
+
+        let themeClone = null;
+        if (themeBtn) {
+            themeClone = document.createElement('button');
+            themeClone.type = 'button';
+            themeClone.className = 'glass-btn';
+            themeClone.setAttribute('aria-label', 'Toggle dark/light theme');
+            themeClone.innerHTML = '<i class="fa-regular fa-moon" aria-hidden="true"></i>';
+            const syncIcon = () => {
+                const isDark = root.classList.contains('dark-mode');
+                const i = themeClone.querySelector('i');
+                i.classList.toggle('fa-sun', isDark);
+                i.classList.toggle('fa-moon', !isDark);
+                themeClone.setAttribute('aria-pressed', String(isDark));
+            };
+            syncIcon();
+            // reuse the original toggle so theme + localStorage logic stays in one place
+            themeClone.addEventListener('click', () => { themeBtn.click(); syncIcon(); });
+            themeBtn.addEventListener('click', syncIcon);
+            controls.appendChild(themeClone);
+        }
+        bar.appendChild(controls);
+        document.body.appendChild(bar);
+
+        const DELTA = 8;
+        let lastY = window.scrollY;
+        let shown = false;
+        let ticking = false;
+
+        const setShown = (v) => {
+            if (v === shown) return;
+            shown = v;
+            bar.classList.toggle('is-visible', v);
+            bar.setAttribute('aria-hidden', String(!v));
+        };
+
+        const update = () => {
+            ticking = false;
+            const y = Math.max(window.scrollY, 0);
+            if (y <= header.offsetHeight) {   // original header is still in view
+                setShown(false);
+                lastY = y;
+                return;
+            }
+            if (Math.abs(y - lastY) < DELTA) return;
+            setShown(y < lastY);              // scrolling up -> show, down -> hide
+            lastY = y;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        }, { passive: true });
+    }
+
     function init() {
         initReveal();
         initTheme();
+        initSmartHeader();
     }
 
     if (document.readyState === 'loading') {

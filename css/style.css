@@ -56,3 +56,15 @@ main:focus{outline:none}
 a:focus-visible,button:focus-visible{outline:3px solid var(--accent-1);outline-offset:3px}
 html.dark-mode a:focus-visible,html.dark-mode button:focus-visible{outline-color:var(--accent-2)}
 .nav-bar>a{text-decoration:none}
+
+/* ===== Smart header (hide on scroll down, show on scroll up) ===== */
+.smart-bar{position:fixed;top:.75rem;left:50%;z-index:900;width:min(1100px,calc(100% - 1.5rem));display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.4rem .5rem .4rem 1.2rem;background:var(--blur-bg);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border-medium);border-radius:60px;box-shadow:var(--card-shadow);transform:translate(-50%,-160%);opacity:0;visibility:hidden;transition:transform .35s ease,opacity .35s ease,visibility 0s linear .35s}
+.smart-bar.is-visible{transform:translate(-50%,0);opacity:1;visibility:visible;transition:transform .35s ease,opacity .35s ease,visibility 0s}
+.smart-bar .logo{height:34px}
+.smart-bar .nav-links{flex-wrap:nowrap;gap:1.5rem}
+.smart-bar .nav-links li a{padding:.4rem 0;font-size:.95rem;white-space:nowrap}
+.smart-controls{display:flex;align-items:center;gap:.6rem}
+.smart-bar .glass-btn{padding:.55rem 1.1rem;white-space:nowrap}
+@media (max-width:900px){.smart-bar{justify-content:center;padding:.4rem .6rem}.smart-bar>a{display:none}}
+@media (max-width:600px){.smart-bar{gap:.5rem;padding:.35rem .5rem}.smart-bar .nav-links{gap:.8rem}.smart-bar .nav-links li a{font-size:0;gap:0;padding:.5rem .15rem}.smart-bar .nav-links li a i{font-size:1.05rem}.smart-bar .glass-btn{padding:.5rem .8rem;font-size:0;gap:0}.smart-bar .glass-btn i{font-size:.95rem}.smart-controls{gap:.4rem}}
+@media (prefers-reduced-motion:reduce){.smart-bar,.smart-bar.is-visible{transition:none}}
