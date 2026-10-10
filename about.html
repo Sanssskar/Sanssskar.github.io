@@ -270,14 +270,20 @@
 
     <main id="main" tabindex="-1">
 
-      <div class="page-header fade-up">
+      <figure class="about-banner fade-up">
+        <img src="images/coverabout.webp"
+          alt="Sanskar Shrestha, full stack developer working with HTML, CSS, JavaScript, Laravel and Filament"
+          width="1600" height="400" fetchpriority="high" decoding="async" />
+      </figure>
+
+      <div class="page-header about-title fade-up">
         <h1>Web Developer from Dharan, Nepal <span aria-hidden="true">⚔️</span></h1>
         <p style="color: var(--text-secondary)">
           Full Stack Developer | Freelancer <span aria-hidden="true">⚔️</span>
         </p>
       </div>
 
-      <section class="about-intro scale-up" aria-labelledby="intro-heading">
+      <section class="about-intro scale-up" aria-label="About Sanskar">
         <figure class="about-photo">
           <img src="images/sanskar.webp"
             alt="Sanskar Shrestha, web developer from Dharan, Nepal"
@@ -285,25 +291,6 @@
         </figure>
 
         <div class="about-copy">
-          <h2 id="intro-heading">Hi, I'm Sanskar. I build Laravel apps that people actually use.</h2>
-          <p>
-            I'm a web developer from <strong>Dharan, Nepal</strong>. I build
-            websites, admin panels and REST APIs with Laravel and Filament, and
-            over the past couple of years I've delivered everything from
-            e&#8209;commerce platforms to student portals.
-          </p>
-          <p>
-            Before I write any code, I want to understand what you're trying to
-            achieve and who will use the result. My Bachelor's in Information
-            Management taught me to think about the business side as well as
-            the technical one, so I can explain not only how something is
-            built, but why it matters.
-          </p>
-          <p>
-            Away from the keyboard you'll usually find me walking in the hills
-            around Dharan. Right now I'm learning Vue.js and Laravel Forge so I
-            can offer more complete solutions.
-          </p>
 
           <dl class="about-facts">
             <div><dt>Based in</dt><dd>Dharan, Nepal</dd></div>
@@ -323,9 +310,6 @@
       <section class="term-section fade-up" aria-labelledby="term-heading">
         <div class="term-intro">
           <h2 id="term-heading">My terminal</h2>
-          <p>
-            The short version of me, on a loop. Sit back and watch it go.
-          </p>
         </div>
         <div class="term" id="terminal">
           <div class="term-bar">
@@ -354,14 +338,6 @@
             <div class="tl-card">
               <p class="tl-when">2026 – Present <span class="tl-badge">Current</span></p>
               <h3>Full Stack Developer at <a href="https://codeit.com.np/" target="_blank" rel="noopener noreferrer">CodeIT Nepal</a></h3>
-              <p>
-                I work with the team at CodeIT Nepal building web applications
-                with Laravel and Filament: collaborating on client projects,
-                helping with code reviews and learning from more experienced
-                developers. It has introduced me to industry workflows, version
-                control and structured project architecture, and the mentorship
-                has raised my coding standards.
-              </p>
               <ul class="tl-tags">
                 <li>Laravel</li><li>Filament admin panels</li><li>REST API integration</li><li>Client collaboration</li>
               </ul>
@@ -372,10 +348,9 @@
             <div class="tl-card">
               <p class="tl-when">2025</p>
               <h3>Bachelor in Information Management (BIM)</h3>
-              <p>
-                Sunsari Technical College, Dharan, Nepal. The degree gave me a
-                solid grounding in both technology and business.
-              </p>
+              <ul class="tl-tags">
+                <li>Sunsari Technical College</li><li>Dharan, Nepal</li><li>Tech + business</li>
+              </ul>
             </div>
           </li>
           <li class="tl-item fade-up">
@@ -383,14 +358,8 @@
             <div class="tl-card">
               <p class="tl-when">2022 – Present</p>
               <h3>Freelance developer</h3>
-              <p>
-                I started freelancing in 2022, working with clients in Nepal and
-                internationally, and I always clarify a project's goals before
-                writing a line of code. Projects include Home Link Services,
-                Koseli Express and the Student Portal API.
-              </p>
               <ul class="tl-tags">
-                <li>Laravel</li><li>Filament</li><li>REST APIs</li><li>Tailwind CSS</li>
+                <li>Laravel</li><li>Filament</li><li>REST APIs</li><li>Tailwind CSS</li><li>Nepal &amp; international clients</li>
               </ul>
             </div>
           </li>
@@ -399,12 +368,9 @@
             <div class="tl-card">
               <p class="tl-when">During my studies</p>
               <h3>Where it started</h3>
-              <p>
-                A friend introduced me to Laravel while I was studying. I built
-                my first full&#8209;stack project with his guidance, then began
-                helping friends with small websites and bug fixes. Each one made
-                me want to get better at it.
-              </p>
+              <ul class="tl-tags">
+                <li>Discovered Laravel</li><li>First full&#8209;stack project</li><li>Helped friends with sites</li>
+              </ul>
             </div>
           </li>
         </ol>
@@ -449,7 +415,6 @@
       <section class="about-cta fade-up" aria-labelledby="cta-heading">
         <div>
           <h2 id="cta-heading">Have a project in mind?</h2>
-          <p>Tell me what you're trying to build and I'll tell you honestly how I'd approach it.</p>
         </div>
         <a class="btn btn-primary" href="contact.html">Get in touch <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
       </section>
@@ -471,7 +436,6 @@
     </div>
 
     <script src="js/main.js"></script>
-    <script src="js/about-swords.js" defer></script>
     <script src="js/terminal.js" defer></script>
   </body>
 </html>

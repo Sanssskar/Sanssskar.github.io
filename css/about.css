@@ -1,21 +1,22 @@
 /* ===== About page ===== */
 
-/* Intro: photo + bio */
+/* Banner */
+.about-banner{margin:0 0 1.5rem;border:1px solid var(--border-medium);border-radius:1.5rem;overflow:hidden;background:#fff;line-height:0}
+.about-banner img{display:block;width:100%;height:auto}
+.about-title{margin-bottom:2rem}
+
+/* Intro: photo + quick facts */
 .about-intro{
-  display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:3.5rem;align-items:center;
-  padding:2.75rem;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:1.5rem;position:relative;
+  display:grid;grid-template-columns:260px minmax(0,1fr);gap:2.5rem;align-items:center;
+  padding:2rem;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:1.5rem;
 }
-.about-photo{position:relative;margin:0;max-width:420px;width:100%;justify-self:center;border-radius:1rem;overflow:hidden}
-.about-photo img{display:block;width:100%;height:auto;border-radius:1rem;background:var(--bg-primary)}
+.about-photo{margin:0;width:100%;max-width:260px;justify-self:center;border-radius:1.25rem;overflow:hidden}
+.about-photo img{display:block;width:100%;height:auto;background:var(--bg-primary)}
 
-.about-copy h2{font-size:1.9rem;line-height:1.25;margin-bottom:1rem;max-width:22em}
-.about-copy p{color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;max-width:62ch}
-.about-copy p strong{color:var(--text-primary);font-weight:600}
-
-.about-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 1.75rem;margin:1.5rem 0 1.75rem}
-.about-facts div{padding:.75rem 0;border-top:1px solid var(--border-medium)}
-.about-facts dt{font-size:.78rem;color:var(--text-tertiary);margin-bottom:.15rem}
-.about-facts dd{font-size:.92rem;font-weight:500;color:var(--text-primary);line-height:1.45}
+.about-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.9rem;margin:0 0 1.75rem}
+.about-facts div{padding:.85rem 1rem;background:var(--bg-primary);border:1px solid var(--border-medium);border-radius:.9rem}
+.about-facts dt{font-size:.75rem;color:var(--text-tertiary);margin-bottom:.15rem;text-transform:uppercase;letter-spacing:.04em}
+.about-facts dd{font-size:.92rem;font-weight:600;color:var(--text-primary);line-height:1.4}
 
 .about-actions{display:flex;flex-wrap:wrap;gap:.9rem}
 
@@ -24,7 +25,8 @@
 .term-noscript a{color:var(--accent-1)}
 
 /* Experience & education timeline */
-.about-journey{margin-top:1rem}
+.about-journey{margin-top:3.5rem}
+.about-skills{margin-top:3rem}
 .about-journey .section-title,.about-skills .section-title{justify-content:center;text-align:center}
 .timeline{list-style:none;position:relative;max-width:900px;margin:0 auto 3rem;padding:0 0 0 2rem}
 .timeline::before{content:"";position:absolute;left:.4rem;top:1.6rem;bottom:1.6rem;width:2px;background:var(--border-medium)}
@@ -53,11 +55,13 @@
 .about-cta p{color:var(--text-secondary);font-size:.92rem}
 
 @media (max-width:968px){
-  .about-intro{grid-template-columns:1fr;gap:2.5rem;padding:1.75rem}
-  .about-photo{max-width:340px}
+  .about-intro{grid-template-columns:1fr;gap:1.75rem;padding:1.5rem}
+  .about-photo{max-width:240px}
+  .about-actions{justify-content:flex-start}
 }
 @media (max-width:768px){
-  .about-copy h2{font-size:1.5rem}
+  .about-banner{border-radius:1.1rem}
+  .about-banner img{height:190px;object-fit:cover;object-position:100% 50%}
   .timeline{padding-left:1.6rem}
   .tl-dot{left:-1.6rem}
   .tl-card{padding:1.15rem 1.2rem}
@@ -68,9 +72,3 @@
   .about-intro{padding:1.25rem;border-radius:1.25rem}
   .about-actions .btn{flex:1 1 100%;justify-content:center}
 }
-
-/* Sword strike on the photo (decorative, built by js/about-swords.js) */
-.sword-fx{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:6}
-.sword-fx text{font:700 13px 'JetBrains Mono',ui-monospace,Menlo,monospace}
-.pix-layer{position:absolute;inset:0;width:100%;height:100%;z-index:4;opacity:0;pointer-events:none;border-radius:inherit}
-@media (prefers-reduced-motion:reduce){.sword-fx,.pix-layer{display:none}}
