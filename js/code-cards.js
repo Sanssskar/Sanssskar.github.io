@@ -101,8 +101,6 @@
     },
   };
 
-  const SYMBOLS = ['{ }', '</>', '=>', ';', '$', '::', '[ ]', '( )', '//', '->', '&&', '0x'];
-
   /* ---------- Tiny syntax highlighter ---------- */
   const RULES = [
     ['com', /^\/\/.*/],
@@ -139,9 +137,105 @@
     return tokens;
   }
 
+  /* ---------- Visual scenes: one animated mini-scene per service (decorative). ----------
+     Styled and animated in css/code-cards.css; they only run while the card is .is-coding. */
+  const rep = (n, fn) => Array.from({ length: n }, (_, i) => fn(i)).join('');
+
+  const SCENES = {
+    // Dashboards: stat cards pop in, bars grow, table rows slide in
+    'admin-panels': `<div class="sc sc-dash">
+      <div class="d-side">${rep(4, () => '<i></i>')}</div>
+      <div class="d-main">
+        <div class="d-stats">${rep(3, (i) => `<b style="--i:${i};--w:${[62, 48, 74][i]}%"></b>`)}</div>
+        <div class="d-grid">
+          <div class="d-chart">${rep(7, (i) => `<i style="--i:${i};--h:${[38, 58, 46, 74, 62, 88, 96][i]}%"></i>`)}</div>
+          <div class="d-rows">${rep(4, (i) => `<i style="--i:${i}"></i>`)}</div>
+        </div>
+      </div>
+    </div>`,
+
+    // Web apps: a booking calendar where a slot gets picked and confirmed
+    'web-apps': `<div class="sc sc-book">
+      <div class="b-cal">
+        <div class="b-head"><i></i><b></b></div>
+        <div class="b-grid">${rep(21, (i) => i === 11
+          ? `<i class="b-pick" style="--i:${i}"><em class="fa-solid fa-arrow-pointer"></em></i>`
+          : `<i${[2, 3, 8, 13, 17].includes(i) ? ' class="b-taken"' : ''} style="--i:${i}"></i>`)}</div>
+      </div>
+      <div class="b-toast"><i class="fa-solid fa-circle-check"></i><span>Booking confirmed</span></div>
+    </div>`,
+
+    // Full stack: a website assembles itself inside a browser window
+    'fullstack': `<div class="sc sc-web">
+      <div class="w-bar"><i></i><i></i><i></i><span class="w-url"></span></div>
+      <div class="w-page">
+        <div class="w-nav" style="--i:0"><b></b><i></i><i></i><i></i></div>
+        <div class="w-hero">
+          <div class="w-copy"><i style="--i:1"></i><i style="--i:2"></i><em style="--i:3"></em><b style="--i:4"></b></div>
+          <div class="w-img" style="--i:3"></div>
+        </div>
+        <div class="w-cards">${rep(3, (i) => `<i style="--i:${5 + i}"></i>`)}</div>
+      </div>
+    </div>`,
+
+    // APIs: request flies to the server, JSON comes back
+    'api-dev': `<div class="sc sc-api">
+      <div class="a-node a-client"><i class="fa-solid fa-mobile-screen"></i><span>App</span></div>
+      <div class="a-mid">
+        <div class="a-lane"><span class="a-l1">GET /products</span><em></em><b class="a-pk a-go"></b></div>
+        <div class="a-lane"><span class="a-l2">200 OK</span><em></em><b class="a-pk a-back"></b></div>
+      </div>
+      <div class="a-node a-server"><i class="fa-solid fa-server"></i><span>API</span></div>
+      <div class="a-json"><span><u>{</u> "status": <q>"ok"</q>,</span><span>&nbsp; "items": <q>24</q> <u>}</u></span></div>
+    </div>`,
+
+    // Auth: credentials get typed, lock opens
+    'auth-systems': `<div class="sc sc-auth">
+      <div class="u-card">
+        <div class="u-av"><i class="fa-solid fa-user"></i></div>
+        <div class="u-field"><i></i></div>
+        <div class="u-field u-pw">${rep(6, (i) => `<b style="--i:${i}"></b>`)}</div>
+        <div class="u-btn">Sign in</div>
+      </div>
+      <div class="u-ok"><i class="fa-solid fa-lock-open"></i><span>Welcome back</span></div>
+    </div>`,
+
+    // CMS & blog: a post is written, then published
+    'cms-blog': `<div class="sc sc-cms">
+      <div class="c-edit">
+        <div class="c-tool"><i class="fa-solid fa-bold"></i><i class="fa-solid fa-italic"></i><i class="fa-solid fa-link"></i><i class="fa-regular fa-image"></i></div>
+        <div class="c-title"><i></i></div>
+        <div class="c-lines">${rep(4, (i) => `<i style="--i:${i};--w:${[96, 88, 94, 60][i]}%"></i>`)}</div>
+      </div>
+      <div class="c-side">
+        <div class="c-chips"><span class="c-draft">Draft</span><span class="c-pub">Published</span></div>
+        <div class="c-btn">Publish</div>
+        <div class="c-views"><i class="fa-solid fa-eye"></i> 1.2k</div>
+      </div>
+    </div>`,
+
+    // Maintenance: speed score climbs while tasks tick off
+    'maintenance': `<div class="sc sc-mt">
+      <div class="m-gauge">
+        <svg viewBox="0 0 100 58" aria-hidden="true"><path class="m-bg" d="M10 54 A40 40 0 0 1 90 54" pathLength="100"/><path class="m-arc" d="M10 54 A40 40 0 0 1 90 54" pathLength="100"/></svg>
+        <span class="m-score"></span><em>Speed</em>
+      </div>
+      <div class="m-tasks">${['Updates', 'Backups', 'Security', 'Speed'].map((t, i) =>
+        `<div class="m-task" style="--i:${i}"><i class="fa-solid fa-circle-notch m-spin"></i><i class="fa-solid fa-circle-check m-ck"></i><span>${t}</span></div>`).join('')}</div>
+    </div>`,
+
+    // SEO: our result climbs from #4 to #1
+    'seo-optimization': `<div class="sc sc-seo">
+      <div class="s-search"><i class="fa-solid fa-magnifying-glass"></i><b></b></div>
+      <div class="s-list">
+        <div class="s-row s-me" style="--k:0"><div class="s-in"><span class="s-rank">#1</span><i></i><em class="fa-solid fa-arrow-trend-up"></em></div></div>
+        ${rep(3, (i) => `<div class="s-row s-o" style="--k:${i + 1}"><div class="s-in"><span class="s-rank">#${i + 2}</span><i></i></div></div>`)}
+      </div>
+    </div>`,
+  };
+
   /* ---------- Build the overlay for each card ---------- */
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-  const small = window.matchMedia('(max-width: 600px)').matches;
 
   function build(card) {
     const data = SNIPPETS[card.dataset.code];
@@ -153,17 +247,12 @@
     fx.setAttribute('aria-hidden', 'true');
     fx.setAttribute('data-nosnippet', '');
 
-    const count = small ? 7 : SYMBOLS.length;
-    for (let i = 0; i < count; i++) {
-      const s = document.createElement('span');
-      s.className = 'code-sym';
-      s.textContent = SYMBOLS[i];
-      s.style.setProperty('--x', 4 + ((i * 29) % 88) + '%');
-      s.style.setProperty('--s', (0.8 + ((i * 7) % 6) / 8).toFixed(2) + 'rem');
-      s.style.setProperty('--t', (4 + ((i * 5) % 4) * 0.7).toFixed(1) + 's');
-      s.style.setProperty('--d', ((i * 0.55) % 3.2).toFixed(2) + 's');
-      s.style.setProperty('--dx', (i % 2 ? 1 : -1) * (10 + ((i * 13) % 30)) + 'px');
-      fx.append(s);
+    const sceneHtml = SCENES[card.dataset.code];
+    if (sceneHtml) {
+      const scene = document.createElement('div');
+      scene.className = 'code-scene';
+      scene.innerHTML = sceneHtml;      // static, trusted markup defined above
+      fx.append(scene);
     }
 
     const win = document.createElement('div');
