@@ -25,10 +25,10 @@
 .term-noscript a{color:var(--accent-1)}
 
 /* Experience & education timeline */
-.about-journey{margin-top:3.5rem}
-.about-skills{margin-top:3rem}
+.about-journey{margin-top:0}
+.about-skills{margin-top:0}
 .about-journey .section-title,.about-skills .section-title{justify-content:center;text-align:center}
-.timeline{list-style:none;position:relative;max-width:900px;margin:0 auto 3rem;padding:0 0 0 2rem}
+.timeline{list-style:none;position:relative;max-width:900px;margin:var(--block-gap) auto 0;padding:0 0 0 2rem}
 .timeline::before{content:"";position:absolute;left:.4rem;top:1.6rem;bottom:1.6rem;width:2px;background:var(--border-medium)}
 .tl-item{position:relative;margin-bottom:1.25rem}
 .tl-item:last-child{margin-bottom:0}
@@ -48,7 +48,7 @@
 /* Closing call to action */
 .about-cta{
   display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.25rem;
-  margin:3rem 0 1rem;padding:1.6rem 2rem;background:var(--bg-secondary);
+  margin:0 0 var(--section-gap);padding:1.6rem 2rem;background:var(--bg-secondary);
   border:1px solid var(--border-medium);border-left:4px solid var(--accent-1);border-radius:1rem;
 }
 .about-cta h2{font-size:1.4rem;margin-bottom:.25rem}

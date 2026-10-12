@@ -10,7 +10,7 @@ html{scroll-behavior:smooth}
 .jump-nav a.active{background:var(--accent-1);color:#fff}
 
 /* service rows */
-.service-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem;align-items:center;margin-bottom:1.75rem;padding:2rem;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:1.25rem;scroll-margin-top:5.5rem;transition:border-color .3s,box-shadow .3s}
+.service-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem;align-items:center;margin-bottom:1.5rem;padding:2rem;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:1.25rem;scroll-margin-top:5.5rem;transition:border-color .3s,box-shadow .3s}
 .service-row:hover{border-color:var(--accent-3);box-shadow:var(--card-shadow)}
 .service-row.alt .poster-side{order:2}
 .service-row.alt .content-side{order:1}
@@ -36,10 +36,10 @@ html{scroll-behavior:smooth}
 .content-side .cta-link:hover{gap:.9rem;border-bottom-color:var(--accent-1)}
 
 /* closing blocks */
-.pricing-note{background:var(--bg-secondary);border:1px solid var(--border-medium);border-left:4px solid var(--accent-1);border-radius:1rem;padding:1.2rem 1.6rem;margin:2.5rem 0 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.pricing-note{background:var(--bg-secondary);border:1px solid var(--border-medium);border-left:4px solid var(--accent-1);border-radius:1rem;padding:1.2rem 1.6rem;margin:var(--block-gap) 0 var(--section-gap);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .pricing-note p,.pricing-note div{font-size:.9rem;color:var(--text-secondary);margin:0}
 .pricing-note i{color:var(--accent-1);margin-right:.4rem}
-.design-credit-wrapper{display:flex;justify-content:center;margin:2rem 0 1rem}
+.design-credit-wrapper{display:flex;justify-content:center;margin:0 0 var(--section-gap)}
 .design-credit{background:var(--bg-secondary);border:1px solid var(--border-medium);border-left:4px solid var(--accent-1);border-radius:1rem;padding:1rem 1.8rem;display:inline-flex;align-items:center;gap:.8rem;font-size:.9rem;color:var(--text-secondary);max-width:90%}
 .design-credit i{font-size:1.4rem;color:var(--accent-1)}
 .design-credit a{color:var(--accent-1);font-weight:700;text-decoration:none}

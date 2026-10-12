@@ -1,7 +1,7 @@
 /* Contact page: clean / corporate */
-.contact-wrap{max-width:1100px;margin:0 auto 2rem}
-.section-heading{font-size:1.6rem;font-weight:700;margin:3rem 0 1.5rem;padding-left:.9rem;border-left:4px solid var(--accent-1);line-height:1.2}
-.response-strip{display:flex;align-items:center;justify-content:center;gap:.6rem;width:fit-content;margin:0 auto 1rem;padding:.5rem 1.2rem;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:999px;font-size:.85rem;font-weight:600;color:var(--text-secondary)}
+.contact-wrap{max-width:1100px;margin:0 auto}
+.section-heading{font-size:1.6rem;font-weight:700;margin:0 0 var(--block-gap);padding-left:.9rem;border-left:4px solid var(--accent-1);line-height:1.2}
+.response-strip{display:flex;align-items:center;justify-content:center;gap:.6rem;width:fit-content;margin:0 auto var(--section-gap);padding:.5rem 1.2rem;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:999px;font-size:.85rem;font-weight:600;color:var(--text-secondary)}
 .status-dot{width:9px;height:9px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 0 rgba(76,175,80,.55);animation:statusPulse 2s ease-out infinite}
 @keyframes statusPulse{0%{box-shadow:0 0 0 0 rgba(76,175,80,.55)}70%,100%{box-shadow:0 0 0 10px rgba(76,175,80,0)}}
 
@@ -37,14 +37,14 @@
 .service-chip:hover{transform:translateY(-3px);border-color:var(--accent-1);color:var(--text-primary);box-shadow:var(--card-shadow)}
 .service-chip:hover i{transform:scale(1.2)}
 
-.cta-band{margin-top:3.5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;background:var(--bg-secondary);border:1px solid var(--border-medium);border-left:4px solid var(--accent-1);border-radius:1rem;padding:2rem}
+.cta-band{margin-top:0;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;background:var(--bg-secondary);border:1px solid var(--border-medium);border-left:4px solid var(--accent-1);border-radius:1rem;padding:2rem}
 .cta-text h2{font-size:1.6rem;margin-bottom:.3rem}
 .cta-text p{color:var(--text-secondary);margin-bottom:1.2rem}
 .cta-actions{display:flex;gap:.8rem;flex-wrap:wrap}
 .social-icons-row{display:flex;gap:.7rem;flex-wrap:wrap}
 .social-icon-link{display:flex;align-items:center;justify-content:center;width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid var(--border-medium);color:var(--text-primary);font-size:1.05rem;text-decoration:none;transition:.25s}
 .social-icon-link:hover{background:var(--gradient-1);color:#fff;border-color:transparent;transform:translateY(-3px)}
-.response-note{display:flex;align-items:center;gap:.5rem;justify-content:center;text-align:center;font-size:.85rem;color:var(--text-tertiary);margin-top:2rem}
+.response-note{display:flex;align-items:center;gap:.5rem;justify-content:center;text-align:center;font-size:.85rem;color:var(--text-tertiary);margin-top:0}
 
 /* staggered entrance: children animate once their .fade-up parent becomes visible */
 .fade-up.visible .stagger{animation:staggerIn .6s var(--d,0s) ease-out backwards}

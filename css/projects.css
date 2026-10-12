@@ -2,12 +2,12 @@
 button.project-link{background:none;border:0;padding:0;font-family:inherit;font-size:inherit;line-height:inherit;cursor:pointer}
 
 /* ===== Showcase redesign: clean / corporate ===== */
-.stats-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-medium);border:1px solid var(--border-medium);border-radius:1rem;overflow:hidden;margin:0 0 3rem}
+.stats-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-medium);border:1px solid var(--border-medium);border-radius:1rem;overflow:hidden;margin:0 0 var(--section-gap)}
 .stats-strip>div{background:var(--bg-secondary);padding:1.1rem 1rem;text-align:center;display:flex;flex-direction:column;gap:.15rem}
 .stats-strip strong{font-size:1.25rem;font-weight:700;color:var(--text-primary)}
 .stats-strip span{font-size:.8rem;color:var(--text-tertiary);letter-spacing:.3px}
 .section-heading{font-size:1.6rem;font-weight:700;margin-bottom:1.5rem;padding-left:.9rem;border-left:4px solid var(--accent-1);line-height:1.2}
-.featured-list{display:flex;flex-direction:column;gap:1.75rem;margin-bottom:4rem}
+.featured-list{display:flex;flex-direction:column;gap:1.5rem;margin-bottom:0}
 .featured-card{display:grid;grid-template-columns:1.15fr 1fr;background:var(--bg-secondary);border:1px solid var(--border-medium);border-radius:1.25rem;overflow:hidden;transition:box-shadow .3s,border-color .3s}
 .featured-card:hover{box-shadow:var(--card-shadow);border-color:var(--accent-3)}
 .featured-card.reverse .featured-media{order:2}
@@ -30,7 +30,7 @@ button.project-link{background:none;border:0;padding:0;font-family:inherit;font-
 .filter-btn{font-family:inherit;font-size:.85rem;font-weight:500;padding:.5rem 1.1rem;border-radius:999px;border:1px solid var(--border-medium);background:var(--bg-secondary);color:var(--text-secondary);transition:.25s}
 .filter-btn:hover{border-color:var(--accent-1);color:var(--accent-1)}
 .filter-btn.active{background:var(--accent-1);border-color:var(--accent-1);color:#fff}
-.projects-grid{margin:0 0 3.5rem;gap:1.5rem}
+.projects-grid{margin:0;gap:1.5rem}
 .projects-grid .project-card{padding:0;border-radius:1rem;display:flex;flex-direction:column;overflow:hidden}
 .projects-grid .project-card::before{display:none}
 .projects-grid .project-card:hover{transform:translateY(-4px);box-shadow:var(--card-shadow);border-color:var(--accent-3)}
@@ -47,7 +47,7 @@ button.project-link{background:none;border:0;padding:0;font-family:inherit;font-
 .btn.is-muted{background:var(--bg-primary);border:1px solid var(--border-medium);box-shadow:none}
 .share-btn{width:36px;height:36px;background:transparent;border:1px solid var(--border-medium);border-radius:8px;color:var(--text-secondary);cursor:pointer}
 .share-btn:hover{border-color:var(--accent-1);color:var(--accent-1);background:transparent}
-.cta-band{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;background:var(--bg-secondary);border:1px solid var(--border-medium);border-left:4px solid var(--accent-1);border-radius:1rem;padding:1.75rem 2rem;margin:0 0 3rem}
+.cta-band{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;background:var(--bg-secondary);border:1px solid var(--border-medium);border-left:4px solid var(--accent-1);border-radius:1rem;padding:1.75rem 2rem;margin:0 0 var(--section-gap)}
 .cta-band h2{font-size:1.5rem;margin-bottom:.25rem}
 .cta-band p{color:var(--text-secondary);max-width:560px}
 @media (max-width:900px){.featured-card,.featured-card.reverse{grid-template-columns:1fr}.featured-card.reverse .featured-media{order:0}.featured-media,.featured-media .project-img{min-height:220px}.featured-body{padding:1.5rem}.featured-body h3{font-size:1.5rem}}
@@ -92,3 +92,6 @@ button.project-link{background:none;border:0;padding:0;font-family:inherit;font-
 .category-badge{top:.5rem;left:.5rem}
 .category-badge{position:static;align-self:flex-start;backdrop-filter:none;background:var(--bg-primary);font-size:.68rem;margin-bottom:-.15rem}
 .stats-strip{grid-template-columns:repeat(2,1fr)}@media (max-width:600px){.stats-strip{grid-template-columns:1fr}}
+/* GitHub block spacing (uses shared scale) */
+.github-section{margin:0 0 var(--section-gap)}
+.github-header,.github-calendar,.github-activity{margin-bottom:var(--block-gap)}
